@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/bmm</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">mulin458267139</property>
+        <mapping class="bmm.entity.AdminbaseEntity"/>
+        <mapping resource="bmm/entity/AdminbaseEntity.hbm.xml"/>
+        <mapping class="bmm.entity.BalanceEntity"/>
+        <mapping resource="bmm/entity/BalanceEntity.hbm.xml"/>
+        <mapping resource="bmm/entity/BillbaseEntity.hbm.xml"/>
+        <mapping class="bmm.entity.BillbaseEntity"/>
+        <mapping resource="bmm/entity/CategorizationEntity.hbm.xml"/>
+        <mapping class="bmm.entity.CategorizationEntity"/>
+        <mapping class="bmm.entity.GoodsbaseEntity"/>
+        <mapping resource="bmm/entity/GoodsbaseEntity.hbm.xml"/>
+        <mapping class="bmm.entity.GoodspicarrayEntity"/>
+        <mapping resource="bmm/entity/GoodspicarrayEntity.hbm.xml"/>
+        <mapping class="bmm.entity.LogisticbaseEntity"/>
+        <mapping resource="bmm/entity/LogisticbaseEntity.hbm.xml"/>
+        <mapping class="bmm.entity.UserinfoEntity"/>
+        <mapping resource="bmm/entity/UserinfoEntity.hbm.xml"/>
+        <mapping class="bmm.entity.UserloginEntity"/>
+        <mapping resource="bmm/entity/UserloginEntity.hbm.xml"/>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

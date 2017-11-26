@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="MySQL">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../Resources/lib/mysql-connector-java-5.1.44/mysql-connector-java-5.1.44-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../Resources/lib/hibernate-release-4.2.21.Final/lib/optional/c3p0/c3p0-0.9.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../Resources/lib/hibernate-release-4.2.21.Final/lib/optional/c3p0/mchange-commons-java-0.2.3.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

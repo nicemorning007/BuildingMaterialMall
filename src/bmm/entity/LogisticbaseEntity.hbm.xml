@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="bmm.entity.LogisticbaseEntity" table="logisticbase" schema="bmm">
+        <id name="id" column="id"/>
+        <property name="goodsId" column="goodsId"/>
+        <property name="userId" column="userId"/>
+        <property name="billId" column="billId"/>
+        <property name="logState" column="logState"/>
+        <property name="sendTime" column="sendTime"/>
+        <property name="receiveTime" column="receiveTime"/>
+        <property name="express" column="express"/>
+    </class>
+</hibernate-mapping>

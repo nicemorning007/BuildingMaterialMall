@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.objectFactory" value="struts"/>
+    <package name="sturts2" extends="struts-default" namespace="/">
+        <!--用户层-->
+        <!--登陆注册-->
+        <action name="codingAction" class="bmm.action.LoginControlAction" method="singup">
+            <result name="success">/index.jsp</result>
+        </action>
+        <action name="loginAction" class="bmm.action.LoginControlAction" method="login">
+            <result name="success">/index.jsp</result>
+        </action>
+        <!--登陆注册结束-->
+
+        <!--用户层结束-->
+    </package>
+</struts>

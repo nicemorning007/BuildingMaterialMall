@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="bmm.entity.GoodspicarrayEntity" table="goodspicarray" schema="bmm">
+        <id name="id" column="id"/>
+        <property name="goodsId" column="goodsId"/>
+        <property name="pic1" column="pic1"/>
+        <property name="pic2" column="pic2"/>
+        <property name="pic3" column="pic3"/>
+        <property name="pic4" column="pic4"/>
+        <property name="pic5" column="pic5"/>
+        <property name="pic6" column="pic6"/>
+    </class>
+</hibernate-mapping>
