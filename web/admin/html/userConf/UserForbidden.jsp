@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -31,73 +32,35 @@
                         <i class="fa fa-bars icon"></i>
                     </button>
                     <ol class="breadcrumb navbar-breadcrumb">
-                        <li>Table</li>
-                        <li class="active">Static Table</li>
+                        <li class="active">建材商城</li>
                     </ol>
                     <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                         <i class="fa fa-th icon"></i>
                     </button>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
-                        <i class="fa fa-times icon"></i>
-                    </button>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-comments-o"></i></a>
-                        <ul class="dropdown-menu animated fadeInDown">
-                            <li class="title">
-                                Notification <span class="badge pull-right">0</span>
-                            </li>
-                            <li class="message">
-                                No new notification
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown danger">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
-                        <ul class="dropdown-menu danger  animated fadeInDown">
-                            <li class="title">
-                                Notification <span class="badge pull-right">4</span>
-                            </li>
-                            <li>
-                                <ul class="list-group notifications">
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> new registration
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge success">1</span> <i class="fa fa-check icon"></i> new orders
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> customers messages
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item message">
-                                            view all
-                                        </li>
-                                    </a>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="dropdown profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <%--todo:显示管理员名字--%>
+                            占位
+                            <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
                                 <img src="../../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                             </li>
                             <li>
                                 <div class="profile-info">
-                                    <h4 class="username">Emily Hart</h4>
-                                    <p>emily_hart@email.com</p>
+                                    <h4 class="username">
+                                        <%--todo:显示管理员名字--%>
+                                        占位
+                                    </h4>
+                                    <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
-                                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</button>
+                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>安全设置
+                                        </button>
+                                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
+                                            注销
+                                        </button>
                                     </div>
                                 </div>
                             </li>
@@ -111,63 +74,56 @@
                 <div class="side-menu-container">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">
-                            <div class="icon fa fa-paper-plane"></div>
-                            <div class="title">Flat Admin V.2</div>
+                            <div class="icon fa fa-wrench"></div>
+                            <div class="title">后台管理系统</div>
                         </a>
                         <button type="button" class="navbar-expand-toggle pull-right visible-xs">
                             <i class="fa fa-times icon"></i>
                         </button>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li>
+                        <li class="active">
                             <a href="../index.jsp">
-                                <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
+                                <span class="icon fa fa-calendar"></span><span class="title">统计</span>
                             </a>
                         </li>
                         <li class="panel panel-default dropdown">
                             <a data-toggle="collapse" href="#dropdown-element">
-                                <span class="icon fa fa-desktop"></span><span class="title">UI Kits</span>
+                                <span class="fa fa-user icon"></span><span class="title">用户管理</span>
                             </a>
                             <!-- Dropdown level 1 -->
                             <div id="dropdown-element" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../ui-kits/grid.jsp">Grid</a></li>
-                                        <li><a href="../ui-kits/theming.jsp">Theming</a></li>
+                                        <li><a href="../userConf/UserForbidden.jsp">用户注销</a>
                                         </li>
-                                        <li><a href="../ui-kits/button.jsp">Buttons</a>
+                                        <li><a href="../userConf/lossReporting.jsp">挂失与解挂</a>
                                         </li>
-                                        <li><a href="../ui-kits/card.jsp">Cards</a>
+                                        <li><a href="../userConf/passwordReset.jsp">重置密码</a>
                                         </li>
-                                        <li><a href="../ui-kits/list.jsp">Lists</a>
-                                        </li>
-                                        <li><a href="../ui-kits/modal.jsp">Modals</a>
-                                        </li>
-                                        <li><a href="../ui-kits/alert.jsp">Alerts & Toasts</a>
-                                        </li>
-                                        <li><a href="../ui-kits/panel.jsp">Panels</a>
-                                        </li>
-                                        <li><a href="../ui-kits/loader.jsp">Loaders</a>
-                                        </li>
-                                        <li><a href="../ui-kits/step.jsp">Tabs & Steps</a>
-                                        </li>
-                                        <li><a href="../ui-kits/other.jsp">Other</a>
+                                        <li><a href="../userConf/findUser.jsp">用户查询</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </li>
-                        <li class="active panel panel-default dropdown">
+                        <li class="panel panel-default dropdown">
                             <a data-toggle="collapse" href="#dropdown-table">
-                                <span class="icon fa fa-table"></span><span class="title">Table</span>
+                                <span class="icon fa fa-gift"></span><span class="title">商品管理</span>
                             </a>
                             <!-- Dropdown level 1 -->
                             <div id="dropdown-table" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../table/table.jsp">Table</a>
+                                        <li><a href="../goods/categorization.jsp">分类管理</a>
                                         </li>
-                                        <li><a href="../table/datatable.jsp">Datatable</a>
+                                        <li><a href="../goods/attribute.jsp">属性设置</a>
+                                        </li>
+                                        <li><a href="../goods/addGoods.jsp">新增商品</a>
+                                        </li>
+                                        <li><a href="../goods/removeGoods.jsp">移除商品</a>
+                                        </li>
+                                        <li><a href="../goods/findGoods.jsp">商品查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -175,75 +131,20 @@
                         </li>
                         <li class="panel panel-default dropdown">
                             <a data-toggle="collapse" href="#dropdown-form">
-                                <span class="icon fa fa-file-text-o"></span><span class="title">Form</span>
+                                <span class="icon fa fa-lock"></span><span class="title">安全设置</span>
                             </a>
                             <!-- Dropdown level 1 -->
                             <div id="dropdown-form" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../form/ui-kits.jsp">Form UI Kits</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Dropdown-->
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#component-example">
-                                <span class="icon fa fa-cubes"></span><span class="title">Components</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="component-example" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="../components/pricing-table.jsp">Pricing Table</a>
-                                        </li>
-                                        <li><a href="../components/chartjs.jsp">Chart.JS</a>
+                                        <li><a href="../security/profile.jsp">
+                                            <%--todo:show administrator`s name--%>
+                                            占位
+                                        </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        </li>
-                        <!-- Dropdown-->
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-example">
-                                <span class="icon fa fa-slack"></span><span class="title">Page Example</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="dropdown-example" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="../pages/login.jsp">Login</a>
-                                        </li>
-
-                                        <li><a href="../pages/index.jsp">Landing Page</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Dropdown-->
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-icon">
-                                <span class="icon fa fa-archive"></span><span class="title">Icons</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="dropdown-icon" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="../icons/glyphicons.jsp">Glyphicons</a>
-                                        </li>
-                                        <li><a href="../icons/font-awesome.jsp">Font Awesomes</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="../license.jsp">
-                                <span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -258,15 +159,28 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <div class="title">Panel with Table</div>
+                                    <div class="title">用户管理</div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="panel panel-default">
                                     <!-- Default panel contents -->
-                                    <div class="panel-heading">Panel heading</div>
+                                    <div class="panel-heading">用户注销</div>
                                     <div class="panel-body">
-                                        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                        <%--todo:--%>
+                                        <table width="40%" align="right">
+                                            <tr>
+                                                <td width="23%" align="right">
+                                                    输入用户名以查找:
+                                                </td>
+                                                <td width="50%" align="center">
+                                                    <input width="100%" type="text" name="username"/>
+                                                </td>
+                                                <td width="7%" align="left">
+                                                    <input width="100%" type="submit"/>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                     <!-- Table -->
                                     <table class="table">
@@ -312,22 +226,22 @@
             <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
         </div>
     </footer>
-    </div>
-        <!-- Javascript Libs -->
-        <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
-        <script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
-        <script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
+</div>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
 
-        <script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
-        <script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
-        <script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
-        <script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
-        <script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
-        <!-- Javascript -->
-        <script type="text/javascript" src="../../js/app.js"></script>
+<script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
+<!-- Javascript -->
+<script type="text/javascript" src="../../js/app.js"></script>
 </body>
 
 </html>

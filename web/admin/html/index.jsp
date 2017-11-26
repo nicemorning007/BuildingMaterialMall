@@ -244,6 +244,7 @@
                                 <ul class="message-list">
                                     <a href="#">
                                         <li>
+                                            <%--todo:添加到下面的for循环中--%>
                                             <img src="../img/profile/profile-1.jpg" class="profile-img pull-left">
                                             <div class="message-block">
                                                 <div><span class="username">
