@@ -15,7 +15,13 @@
             <result name="success">/index.jsp</result>
         </action>
         <!--登陆注册结束-->
-
         <!--用户层结束-->
+
+        <!--管理层-->
+        <action name="checkboxCheckAction" class="test.CheckboxValueTest">
+            <result name="success">/showResult.jsp</result>
+        </action>
+        <!--管理层结束-->
+
     </package>
 </struts>

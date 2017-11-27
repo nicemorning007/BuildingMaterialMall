@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -168,52 +168,70 @@
                                     <div class="panel-heading">用户注销</div>
                                     <div class="panel-body">
                                         <%--todo:--%>
-                                        <table width="40%" align="right">
-                                            <tr>
-                                                <td width="23%" align="right">
-                                                    输入用户名以查找:
-                                                </td>
-                                                <td width="50%" align="center">
-                                                    <input width="100%" type="text" name="username"/>
-                                                </td>
-                                                <td width="7%" align="left">
-                                                    <input width="100%" type="submit"/>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <%--<ul class="fr">--%>
+                                        <%--<li>sjsojsoj</li>--%>
+                                        <%--<li><input type="text"></li>--%>
+                                        <%--<li><button>asd</button></li>--%>
+                                        <%--</ul>--%>
+                                        <label class="panel-showright">输入用户名以查找：
+                                            <input type="text"/>
+                                            <input type="submit"/>
+                                        </label>
                                     </div>
-                                    <!-- Table -->
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
+                                <!-- Table -->
+                                <table class="table table-checkbox">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>用户名</th>
+                                        <th>昵称</th>
+                                        <th>最后登录时间</th>
+                                        <th>注销？</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%--todo:show detail--%>
+                                    <s:form name="test" action="checkboxCheckAction" theme="simple">
+                                        <%--todo:分页显示用户--%>
+                                        <%
+                                            for (int i = 0; i < 6; i++) {
+                                        %>
+                                        <tr>
+
+                                            <th scope="row">1</th>
+                                            <td>
+                                                    <%--todo:show username--%>
+                                                <%="username" + i%>
+                                            </td>
+                                            <td>
+                                                    <%--todo:show nickname--%>
+                                                <%="nickname" + i%>
+                                            </td>
+                                            <td>
+                                                    <%--todo:show last login time--%>
+                                                <%="lastlogintime" + i%>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="forb" value="<%="forb"+i%>">
+                                            </td>
+                                        </tr>
+
+                                        <%
+                                            }
+                                        %>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <s:submit value="注销"/>
+                                            </td>
+                                        </tr>
+                                    </s:form>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -221,11 +239,12 @@
             </div>
         </div>
     </div>
-    <footer class="app-footer">
-        <div class="wrapper">
-            <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
-        </div>
-    </footer>
+</div>
+<footer class="app-footer">
+    <div class="wrapper">
+        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
+    </div>
+</footer>
 </div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
