@@ -167,16 +167,13 @@
                                     <!-- Default panel contents -->
                                     <div class="panel-heading">用户注销</div>
                                     <div class="panel-body">
-                                        <%--todo:--%>
-                                        <%--<ul class="fr">--%>
-                                        <%--<li>sjsojsoj</li>--%>
-                                        <%--<li><input type="text"></li>--%>
-                                        <%--<li><button>asd</button></li>--%>
-                                        <%--</ul>--%>
-                                        <label class="panel-showright">输入用户名以查找：
-                                            <input type="text"/>
-                                            <input type="submit"/>
-                                        </label>
+                                        <form action="" method="post">
+                                            <label class="panel-showright">输入用户名以查找：
+                                                <%--todo:edit action--%>
+                                                <input type="text"/>
+                                                <input type="submit"/>
+                                            </label>
+                                        </form>
                                     </div>
                                 </div>
                                 <!-- Table -->
@@ -193,7 +190,7 @@
                                     <tbody>
                                     <%--todo:show detail--%>
                                     <s:form name="test" action="checkboxCheckAction" theme="simple">
-                                        <%--todo:分页显示用户--%>
+                                        <%--todo:分页显示用户 get获取page值--%>
                                         <%
                                             for (int i = 0; i < 6; i++) {
                                         %>
@@ -221,10 +218,40 @@
                                             }
                                         %>
                                         <tr>
+                                            <%
+                                                int i;
+                                                if (request.getParameter("page") != null) {
+                                                    String nowPage = request.getParameter("page");
+                                                    i = Integer.parseInt(nowPage);
+                                                } else {
+                                                    i=1;
+                                                }
+                                            %>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>
+                                                <div align="right">
+                                                    <%
+                                                        if (i > 1) {
+                                                    %>
+                                                    <a href="UserForbidden.jsp?page=<%=i-1%>">上一页</a>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div align="center">
+                                                    <%--todo:show all pages--%>
+                                                    1 2 3 4 5 6 7 8 9
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div align="left">
+                                                    <a href="./UserForbidden.jsp?page=<%=i+1%>">
+                                                        下一页
+                                                    </a>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <s:submit value="注销"/>
                                             </td>
