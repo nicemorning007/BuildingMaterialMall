@@ -250,7 +250,7 @@
                                             </td>
                                             <td>
                                                 <div align="left">
-                                                    <a href="./UserForbidden.jsp?page=<%=i+1%>">
+                                                    <a href="UserForbidden.jsp?page=<%=i+1%>">
                                                         下一页
                                                     </a>
                                                 </div>

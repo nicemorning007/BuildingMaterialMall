@@ -237,7 +237,7 @@
                                                     <%
                                                         if (i > 1) {
                                                     %>
-                                                    <a href="passwordReset.jsp.jsp?page=<%=i-1%>">上一页</a>
+                                                    <a href="passwordReset.jsp?page=<%=i-1%>">上一页</a>
                                                     <%
                                                         }
                                                     %>
