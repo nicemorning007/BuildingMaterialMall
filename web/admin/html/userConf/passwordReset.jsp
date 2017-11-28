@@ -171,8 +171,8 @@
                                         <form action="" method="post">
                                             <label class="panel-showright">输入用户名以查找：
                                                 <%--todo:edit action--%>
-                                                <input type="text"/>
-                                                <input type="submit"/>
+                                                <input type="text" class="form-control" style="width: 50%;display: inline-block"/>
+                                                <input type="submit" class="btn btn-sm btn-default"/>
                                             </label>
                                         </form>
                                     </div>
@@ -257,7 +257,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <s:submit value="重置"/>
+                                                <s:submit value="重置" cssClass="btn btn-sm btn-default"/>
                                             </td>
                                         </tr>
                                     </s:form>

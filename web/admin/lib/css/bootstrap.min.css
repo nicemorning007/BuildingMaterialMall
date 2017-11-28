@@ -2107,6 +2107,11 @@ pre code {
         width: 50%
     }
 
+    .col-sm-80 {
+        margin:0 auto;
+        width: 80%;
+    }
+
     .col-sm-5 {
         width: 41.66666667%
     }

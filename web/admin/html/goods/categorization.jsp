@@ -167,110 +167,45 @@
                                     <!-- Default panel contents -->
                                     <div class="panel-heading">分类管理</div>
                                     <div class="panel-body">
-                                        <form action="" method="post">
-                                            <label class="panel-showright">输入用户名以查找：
-                                                <%--todo:edit action--%>
-                                                <input type="text"/>
-                                                <input type="submit"/>
-                                            </label>
-                                        </form>
+                                        目前商品所有分类
                                     </div>
                                 </div>
                                 <!-- Table -->
-                                <table class="table table-checkbox">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>用户名</th>
-                                        <th>昵称</th>
-                                        <th>最后登录时间</th>
-                                        <th>挂失？</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%--todo:show detail--%>
-                                    <s:form name="test" action="checkboxCheckAction" theme="simple">
-                                        <%--todo:分页显示用户 get获取page值--%>
+                                <div class="col-sm-80">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>分类名</th>
+                                            <th width="40%">修改为</th>
+                                            <th>操作？</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%--todo:show tabels--%>
                                         <%
-                                            String state;
-                                            int i = 0;
-                                            for (; i < 6; i++){
-                                                state = "";
-                                                if (i % 2 == 0) {
-                                                    state = "checked='checked'";
-                                                } else {
-                                                    state = "";
-                                                }
+                                            for (int i = 0; i < 6; i++) {
                                         %>
                                         <tr>
+                                            <s:form method="POST" action="checkboxCheckAction" theme="simple">
 
-                                            <th scope="row">
-                                                    <%--todo:show id--%>
-                                                id
+                                            <th scope="row"><%=i%>
                                             </th>
+                                            <td>Mark<%=i%></td>
                                             <td>
-                                                    <%--todo:show username--%>
-                                                <%="username" + i%>
+                                                <s:textfield cssClass="form-control"/>
                                             </td>
                                             <td>
-                                                    <%--todo:show nickname--%>
-                                                <%="nickname" + i%>
+                                                <s:submit name="修改" cssClass="btn btn-sm btn-default"/>
                                             </td>
-                                            <td>
-                                                    <%--todo:show last login time--%>
-                                                <%="lastlogintime" + i%>
-                                            </td>
-                                            <td>
-                                                    <%--todo:check loss if--%>
-                                                <input type="checkbox" name="forb" value="<%="forb"+i%>" <%=state%>>
-                                            </td>
+                                            </s:form>
                                         </tr>
-
                                         <%
                                             }
                                         %>
-                                        <tr>
-                                            <%
-                                                int i2;
-                                                if (request.getParameter("page") != null) {
-                                                    String nowPage = request.getParameter("page");
-                                                    i2 = Integer.parseInt(nowPage);
-                                                } else {
-                                                    i2=1;
-                                                }
-                                            %>
-                                            <td></td>
-                                            <td>
-                                                <div align="right">
-                                                    <%
-                                                        if (i2 > 1) {
-                                                    %>
-                                                    <a href="lossReporting.jsp?page=<%=i2-1%>">上一页</a>
-                                                    <%
-                                                        }
-                                                    %>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div align="center">
-                                                        <%--todo:show all pages--%>
-                                                    1 2 3 4 5 6 7 8 9
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div align="left">
-                                                    <a href="./lossReporting.jsp?page=<%=i2+1%>">
-                                                        下一页
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <s:submit value="操作"/>
-                                            </td>
-                                        </tr>
-                                    </s:form>
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
