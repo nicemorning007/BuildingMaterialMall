@@ -196,7 +196,10 @@
                                         %>
                                         <tr>
 
-                                            <th scope="row">1</th>
+                                            <th scope="row">
+                                                <%--todo:show id--%>
+                                                id
+                                            </th>
                                             <td>
                                                     <%--todo:show username--%>
                                                 <%="username" + i%>
