@@ -1,8 +1,9 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -158,48 +159,110 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <div class="title">Panel with Table</div>
+                                    <div class="title">用户管理</div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="panel panel-default">
                                     <!-- Default panel contents -->
-                                    <div class="panel-heading">Panel heading</div>
+                                    <div class="panel-heading">重置密码</div>
                                     <div class="panel-body">
-                                        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                        用户密码将被重置为默认密码（aaa123）。
+                                        <form action="" method="post">
+                                            <label class="panel-showright">输入用户名以查找：
+                                                <%--todo:edit action--%>
+                                                <input type="text"/>
+                                                <input type="submit"/>
+                                            </label>
+                                        </form>
                                     </div>
-                                    <!-- Table -->
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
+                                <!-- Table -->
+                                <table class="table table-checkbox">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>用户名</th>
+                                        <th>昵称</th>
+                                        <th>最后登录时间</th>
+                                        <th>重置？</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%--todo:show detail--%>
+                                    <s:form name="test" action="checkboxCheckAction" theme="simple">
+                                        <%--todo:分页显示用户 get获取page值--%>
+                                        <%
+                                            for (int i = 0; i < 6; i++) {
+                                        %>
+                                        <tr>
+
+                                            <th scope="row">
+                                                    <%--todo:show id--%>
+                                                id
+                                            </th>
+                                            <td>
+                                                    <%--todo:show username--%>
+                                                <%="username" + i%>
+                                            </td>
+                                            <td>
+                                                    <%--todo:show nickname--%>
+                                                <%="nickname" + i%>
+                                            </td>
+                                            <td>
+                                                    <%--todo:show last login time--%>
+                                                <%="lastlogintime" + i%>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="forb" value="<%="forb"+i%>">
+                                            </td>
+                                        </tr>
+
+                                        <%
+                                            }
+                                        %>
+                                        <tr>
+                                            <%
+                                                int i;
+                                                if (request.getParameter("page") != null) {
+                                                    String nowPage = request.getParameter("page");
+                                                    i = Integer.parseInt(nowPage);
+                                                } else {
+                                                    i=1;
+                                                }
+                                            %>
+                                            <td></td>
+                                            <td>
+                                                <div align="right">
+                                                    <%
+                                                        if (i > 1) {
+                                                    %>
+                                                    <a href="passwordReset.jsp.jsp?page=<%=i-1%>">上一页</a>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div align="center">
+                                                        <%--todo:show all pages--%>
+                                                    1 2 3 4 5 6 7 8 9
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div align="left">
+                                                    <a href="./passwordReset.jsp?page=<%=i+1%>">
+                                                        下一页
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <s:submit value="重置"/>
+                                            </td>
+                                        </tr>
+                                    </s:form>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -207,11 +270,12 @@
             </div>
         </div>
     </div>
-    <footer class="app-footer">
-        <div class="wrapper">
-            <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
-        </div>
-    </footer>
+</div>
+<footer class="app-footer">
+    <div class="wrapper">
+        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
+    </div>
+</footer>
 </div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>

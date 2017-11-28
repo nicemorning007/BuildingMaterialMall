@@ -245,7 +245,7 @@
                                                     <%
                                                         if (i2 > 1) {
                                                     %>
-                                                    <a href="UserForbidden.jsp?page=<%=i2-1%>">上一页</a>
+                                                    <a href="lossReporting.jsp?page=<%=i2-1%>">上一页</a>
                                                     <%
                                                         }
                                                     %>
@@ -259,7 +259,7 @@
                                             </td>
                                             <td>
                                                 <div align="left">
-                                                    <a href="./UserForbidden.jsp?page=<%=i2+1%>">
+                                                    <a href="./lossReporting.jsp?page=<%=i2+1%>">
                                                         下一页
                                                     </a>
                                                 </div>
