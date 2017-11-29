@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -55,10 +55,11 @@
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>安全设置
+                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
+                                            <a href="#">安全设置</a>
                                         </button>
                                         <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            注销
+                                            <a href="./logout.jsp">注销</a>
                                         </button>
                                     </div>
                                 </div>
@@ -158,47 +159,171 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <div class="title">Panel with Table</div>
+                                    <div class="title">安全设置</div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="panel panel-default">
-                                    <!-- Default panel contents -->
-                                    <div class="panel-heading">Panel heading</div>
-                                    <div class="panel-body">
-                                        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <div class="col-sm-4">
+                                    <div class="alert fresh-color alert-warning" role="alert" style="margin-bottom: 0">
+                                        <strong>
+                                            <%--todo:show admin name--%>
+                                            Admin
+                                        </strong> 这项设置只影响当前用户的安全性。
                                     </div>
-                                    <!-- Table -->
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="panel fresh-color panel-warning">
+                                        <div class="panel-heading">修改管理员密码</div>
+                                        <div class="panel-body" style="padding: 0;">
+                                            <div class="card-body">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label for="password1"
+                                                               class="col-sm-2 control-label">密码</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="password" class="form-control" id="password1"
+                                                                   placeholder="密码">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password2" class="col-sm-2 control-label">确认密码</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="password" class="form-control"
+                                                                   id="password2" placeholder="确认密码">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-2 col-sm-10">
+                                                            <button type="submit" class="btn btn-default"
+                                                                    style="width: 150px;float: left">确认
+                                                            </button>
+                                                            <button type="reset" class="btn btn-default"
+                                                                    style="width: 150px;float: right">重置
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="alert fresh-color alert-danger" role="alert" style="margin-bottom: 0">
+                                        <strong>
+                                            <%--todo:show admin name--%>
+                                            Admin
+                                        </strong> 这项设置会影响到整站。切勿随意操作。(仅最高管理员可用)
+                                    </div>
+                                    <div class="panel fresh-color panel-danger">
+                                        <div class="panel-heading">全站操作</div>
+                                        <%
+                                            if (true) {
+                                        %>
+                                        <div class="panel-body" style="padding: 0">
+                                            <%--todo:--%>
+                                            <div class="pricing-table red">
+                                                <div class="pt-header">
+                                                    <div class="plan-pricing">
+                                                        <div class="pricing">
+                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                                                            </span>
+                                                        </div>
+                                                        <div class="pricing-type"><strong>不可用</strong></div>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-body">
+                                                    <h4><strong>当前用户不可使用此功能</strong></h4>
+                                                    <ul class="plan-detail">
+                                                        <li>请联系最高管理员</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%
+                                        } else {
+                                        %>
+                                        <div class="panel-body">
+                                            <form class="form-horizontal">
+                                                <%--todo:--%>
+                                                <div align="center">
+                                                    <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
+                                                        <input type="checkbox" id="checkbox-fa-light-1">
+                                                        <label for="checkbox-fa-light-1">
+                                                            <strong>清除所有用户</strong>
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
+                                                        <input type="checkbox" id="checkbox-fa-light-2">
+                                                        <label for="checkbox-fa-light-2">
+                                                            <strong>清除所有商品</strong>
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
+                                                        <input type="checkbox" id="checkbox-fa-light-3">
+                                                        <label for="checkbox-fa-light-3">
+                                                            <strong>清除所有数据</strong>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-inline" style="padding-top: 20px">
+                                                    <input type="password" class="form-control" id="password3"
+                                                           placeholder="管理员密码" style="width: 80%"/>
+                                                    <button type="button" class="btn btn-danger" style="width:auto;">
+                                                        确认
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="alert alert-danger" role="alert" style="margin-bottom: 0">
+                                        <strong>
+                                            <%--todo:show admin name--%>
+                                            Admin
+                                        </strong> 这项设置涉及到安全性，请确认后操作。
+                                    </div>
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading">新增管理员</div>
+                                        <div class="panel-body">
+                                            <%--todo:新增管理员--%>
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label for="username" class="col-sm-2 control-label">用户名</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" id="username"
+                                                               placeholder="用户名">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password4" class="col-sm-2 control-label">密码</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" class="form-control" id="password4"
+                                                               placeholder="密码">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="confirmPassword"
+                                                           class="col-sm-2 control-label">确认密码</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" class="form-control" id="confirmPassword"
+                                                               placeholder="确认密码">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-default"
+                                                                style="width: 150px;float: left">注册
+                                                        </button>
+                                                        <button type="reset" class="btn btn-default"
+                                                                style="width: 150px;float: right">重置
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +334,6 @@
     </div>
     <footer class="app-footer">
         <div class="wrapper">
-            <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
         </div>
     </footer>
 </div>
