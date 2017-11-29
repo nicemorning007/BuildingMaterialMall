@@ -15,6 +15,7 @@ public class GoodsbaseEntity {
     private String info;
     private String tag;
     private int cate;
+    private String unit;
 
     @Id
     @Column(name = "id")
@@ -102,6 +103,10 @@ public class GoodsbaseEntity {
         return producing;
     }
 
+    public void setProducing(String producing) {
+        this.producing = producing;
+    }
+
     @Basic
     @Column(name = "manufacturer")
     public String getManufacturer() {
@@ -112,8 +117,14 @@ public class GoodsbaseEntity {
         this.manufacturer = manufacturer;
     }
 
-    public void setProducing(String producing) {
-        this.producing = producing;
+    @Basic
+    @Column(name = "unit")
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override

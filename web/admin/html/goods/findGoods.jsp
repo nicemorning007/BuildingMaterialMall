@@ -129,6 +129,22 @@
                             </div>
                         </li>
                         <li class="panel panel-default dropdown">
+                            <a data-toggle="collapse" href="#component-example">
+                                <span class="icon fa fa-cubes"></span><span class="title">订单管理</span>
+                            </a>
+                            <!-- Dropdown level 1 -->
+                            <div id="component-example" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="../bill/billManagement.jsp">订单管理</a>
+                                        </li>
+                                        <li><a href="../bill/findBill.jsp">订单查询</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="panel panel-default dropdown">
                             <a data-toggle="collapse" href="#dropdown-form">
                                 <span class="icon fa fa-lock"></span><span class="title">安全设置</span>
                             </a>
@@ -168,11 +184,12 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="datatable table table-striped" cellspacing="0" width="100%">
+                            <table class="datatable table table-striped" cellspacing="0" width="100%"
+                                   style="table-layout: fixed;word-wrap:break-word;word-break:break-all;">
                                 <thead>
                                 <tr>
                                     <th>商品名称</th>
-                                    <th>预览图</th>
+                                    <th style="width: 170px">预览图</th>
                                     <th>产地</th>
                                     <th>单价</th>
                                     <th>销量</th>
@@ -182,7 +199,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>商品名称</th>
-                                    <th>预览图</th>
+                                    <th style="width: 170px">预览图</th>
                                     <th>产地</th>
                                     <th>单价</th>
                                     <th>销量</th>
@@ -199,10 +216,14 @@
                                     <td>
                                         <%--todo:跳转到指定商品页--%>
                                         <a href="">
-                                            Name<%=i%>
+                                            asfgsadgjksahfgjksdfhgjkdfkhfdgjkfhjasghdfjaghjsgdjhaskdjhasdjhaksldfghjagsdhjfjasgdhgask<%=i%>
                                         </a>
                                     </td>
-                                    <td>Image<%=i%>
+                                    <td>
+                                        <div style="width: 170px;height: 180px">
+                                            <img src="../../img/profile/picjumbo.com_HNCK4153_resize.jpg"
+                                                 style="width: 100%;height: 100%">
+                                        </div>
                                     </td>
                                     <td>Producing<%=i%>
                                     </td>

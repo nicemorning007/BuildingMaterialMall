@@ -166,87 +166,102 @@
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        <!-- Main Content -->
-        <div class="container-fluid">
-            <div class="side-body">
-                <div class="page-title">
-                    <span class="title">用户管理</span>
-                    <div class="description">
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="card">
-                                <div class="card-header">
+    </div>
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="page-title">
+                <span class="title">Datatable</span>
+                <div class="description"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
 
-                                    <div class="card-title">
-                                        <div class="title">用户查找</div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="datatable table table-striped" cellspacing="0" width="100%"
-                                           style="table-layout: fixed;word-wrap:break-word;word-break:break-all;">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>用户名</th>
-                                            <th>收货地址</th>
-                                            <th>性别</th>
-                                            <th>手机号</th>
-                                            <th>用户ID</th>
-                                        </tr>
-                                        </thead>
-                                        <tfoot>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>用户名</th>
-                                            <th>收货地址</th>
-                                            <th>性别</th>
-                                            <th>手机号</th>
-                                            <th>用户ID</th>
-                                        </tr>
-                                        </tfoot>
-                                        <tbody>
-                                        <%--todo:check db--%>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="card-title">
+                                <div class="title">订单查询</div>
                             </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="datatable table table-striped" cellspacing="0" width="100%" style="table-layout: fixed;word-wrap:break-word;word-break:break-all;">
+                                <thead>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>买家账号</th>
+                                    <th>商品名</th>
+                                    <th>状态</th>
+                                    <th>收货人</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>买家账号</th>
+                                    <th>商品名</th>
+                                    <th>状态</th>
+                                    <th>收货人</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <%--todo:check database--%>
+                                <%
+                                    int i = 0;
+                                    for (; i < 50; i++) {
+                                %>
+                                <tr>
+                                    <td>
+                                        <%--todo:跳转到指定商品页--%>
+                                        <a href="">
+                                            Name<%=i%>
+                                        </a>
+                                    </td>
+                                    <td>Image<%=i%>
+                                    </td>
+                                    <td>Producing<%=i%>
+                                    </td>
+                                    <td>Price<%=i%>
+                                    </td>
+                                    <td>Sale<%=i%>
+                                    </td>
+                                    <td>Cate<%=i%>
+                                    </td>
+                                </tr>
+
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="app-footer">
-            <div class="wrapper">
-                <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015
-                Copyright.
-            </div>
-        </footer>
     </div>
-    <!-- Javascript Libs -->
-    <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
-    <script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
-
-    <script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
-    <script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
-    <script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
-    <script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
-    <script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
-    <!-- Javascript -->
-    <script type="text/javascript" src="../../js/app.js"></script>
 </div>
+<footer class="app-footer">
+    <div class="wrapper">
+    </div>
+</footer>
+</div>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
+
+<script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
+<!-- Javascript -->
+<script type="text/javascript" src="../../js/app.js"></script>
 </body>
 
 </html>

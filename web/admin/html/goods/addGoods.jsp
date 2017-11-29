@@ -133,6 +133,22 @@
                             </div>
                         </li>
                         <li class="panel panel-default dropdown">
+                            <a data-toggle="collapse" href="#component-example">
+                                <span class="icon fa fa-cubes"></span><span class="title">订单管理</span>
+                            </a>
+                            <!-- Dropdown level 1 -->
+                            <div id="component-example" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="../bill/billManagement.jsp">订单管理</a>
+                                        </li>
+                                        <li><a href="../bill/findBill.jsp">订单查询</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="panel panel-default dropdown">
                             <a data-toggle="collapse" href="#dropdown-form">
                                 <span class="icon fa fa-lock"></span><span class="title">安全设置</span>
                             </a>

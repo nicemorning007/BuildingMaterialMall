@@ -130,6 +130,22 @@
                             </div>
                         </li>
                         <li class="panel panel-default dropdown">
+                            <a data-toggle="collapse" href="#component-example">
+                                <span class="icon fa fa-cubes"></span><span class="title">订单管理</span>
+                            </a>
+                            <!-- Dropdown level 1 -->
+                            <div id="component-example" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="../bill/billManagement.jsp">订单管理</a>
+                                        </li>
+                                        <li><a href="../bill/findBill.jsp">订单查询</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="panel panel-default dropdown">
                             <a data-toggle="collapse" href="#dropdown-form">
                                 <span class="icon fa fa-lock"></span><span class="title">安全设置</span>
                             </a>
@@ -164,11 +180,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="col-sm-4">
-                                    <div class="alert fresh-color alert-warning" role="alert" style="margin-bottom: 0">
+                                    <div class="alert fresh-color alert-warning" role="alert">
                                         <strong>
-                                            <%--todo:show admin name--%>
-                                            Admin
-                                        </strong> 这项设置只影响当前用户的安全性。
+                                            这项设置只影响当前用户的安全性。
+                                        </strong>
                                     </div>
                                     <div class="panel fresh-color panel-warning">
                                         <div class="panel-heading">修改管理员密码</div>
@@ -184,7 +199,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="password2" class="col-sm-2 control-label">确认密码</label>
+                                                        <label for="password2"
+                                                               class="col-sm-2 control-label">确认密码</label>
                                                         <div class="col-sm-10">
                                                             <input type="password" class="form-control"
                                                                    id="password2" placeholder="确认密码">
@@ -206,11 +222,10 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="alert fresh-color alert-danger" role="alert" style="margin-bottom: 0">
+                                    <div class="alert fresh-color alert-danger" role="alert">
                                         <strong>
-                                            <%--todo:show admin name--%>
-                                            Admin
-                                        </strong> 这项设置会影响到整站。切勿随意操作。(仅最高管理员可用)
+                                            这项设置会影响到整站。切勿随意操作。(仅最高管理员可用)
+                                        </strong>
                                     </div>
                                     <div class="panel fresh-color panel-danger">
                                         <div class="panel-heading">全站操作</div>
@@ -278,11 +293,10 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="alert alert-danger" role="alert" style="margin-bottom: 0">
+                                    <div class="alert alert-danger" role="alert">
                                         <strong>
-                                            <%--todo:show admin name--%>
-                                            Admin
-                                        </strong> 这项设置涉及到安全性，请确认后操作。
+                                            这项设置涉及到安全性，请确认后操作。
+                                        </strong>
                                     </div>
                                     <div class="panel panel-danger">
                                         <div class="panel-heading">新增管理员</div>
