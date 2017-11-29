@@ -56,10 +56,11 @@
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>安全设置
+                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
+                                            <a href="../security/profile.jsp">安全设置</a>
                                         </button>
                                         <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            注销
+                                            <a href="../security/logout.jsp">注销</a>
                                         </button>
                                     </div>
                                 </div>
@@ -170,151 +171,83 @@
         <!-- Main Content -->
         <div class="container-fluid">
             <div class="side-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="title">用户管理</div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="panel panel-default">
-                                    <!-- Default panel contents -->
-                                    <div class="panel-heading">挂失与解挂</div>
-                                    <div class="panel-body">
-                                        <form action="" method="post">
-                                            <label class="panel-showright">输入用户名以查找：
-                                                <%--todo:edit action--%>
-                                                <input type="text" class="form-control" style="width: 50%;display: inline-block"/>
-                                                <input type="submit" class="btn btn-sm btn-default"/>
-                                            </label>
-                                        </form>
+                <div class="page-title">
+                    <span class="title">用户管理</span>
+                    <div class="description">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-header">
+
+                                    <div class="card-title">
+                                        <div class="title">挂失与解挂</div>
                                     </div>
                                 </div>
-                                <!-- Table -->
-                                <table class="table table-checkbox">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>用户名</th>
-                                        <th>昵称</th>
-                                        <th>最后登录时间</th>
-                                        <th>挂失？</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%--todo:show detail--%>
-                                    <s:form name="test" action="checkboxCheckAction" theme="simple">
-                                        <%--todo:分页显示用户 get获取page值--%>
-                                        <%
-                                            String state;
-                                            int i = 0;
-                                            for (; i < 6; i++){
-                                                state = "";
-                                            if (i % 2 == 0) {
-                                                state = "checked='checked'";
-                                            } else {
-                                                state = "";
-                                            }
-                                        %>
+                                <div class="card-body">
+                                    <table class="datatable table table-striped" cellspacing="0" width="100%"
+                                           style="table-layout: fixed;word-wrap:break-word;word-break:break-all;">
+                                        <thead>
                                         <tr>
-
-                                            <th scope="row">
-                                                <%--todo:show id--%>
-                                                id
-                                            </th>
-                                            <td>
-                                                    <%--todo:show username--%>
-                                                <%="username" + i%>
-                                            </td>
-                                            <td>
-                                                    <%--todo:show nickname--%>
-                                                <%="nickname" + i%>
-                                            </td>
-                                            <td>
-                                                    <%--todo:show last login time--%>
-                                                <%="lastlogintime" + i%>
-                                            </td>
-                                            <td>
-                                                <%--todo:check loss if--%>
-                                                <input type="checkbox" name="forb" value="<%="forb"+i%>" <%=state%>>
-                                            </td>
+                                            <th>#</th>
+                                            <th>用户名</th>
+                                            <th>昵称</th>
+                                            <th>最后登录时间</th>
+                                            <th>挂失？</th>
                                         </tr>
-
-                                        <%
-                                            }
-                                        %>
+                                        </thead>
+                                        <tfoot>
                                         <tr>
-                                            <%
-                                                int i2;
-                                                if (request.getParameter("page") != null) {
-                                                    String nowPage = request.getParameter("page");
-                                                    i2 = Integer.parseInt(nowPage);
-                                                } else {
-                                                    i2=1;
-                                                }
-                                            %>
-                                            <td></td>
-                                            <td>
-                                                <div align="right">
-                                                    <%
-                                                        if (i2 > 1) {
-                                                    %>
-                                                    <a href="lossReporting.jsp?page=<%=i2-1%>">上一页</a>
-                                                    <%
-                                                        }
-                                                    %>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div align="center">
-                                                        <%--todo:show all pages--%>
-                                                    1 2 3 4 5 6 7 8 9
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div align="left">
-                                                    <a href="./lossReporting.jsp?page=<%=i2+1%>">
-                                                        下一页
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <s:submit value="操作" cssClass="btn btn-sm btn-default"/>
-                                            </td>
+                                            <th>#</th>
+                                            <th>用户名</th>
+                                            <th>昵称</th>
+                                            <th>最后登录时间</th>
+                                            <th>挂失？</th>
                                         </tr>
-                                    </s:form>
-                                    </tbody>
-                                </table>
+                                        </tfoot>
+                                        <tbody>
+                                        <%--todo:check db--%>
+                                        <s:form action="" method="POST" theme="simple">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>
+                                                    <s:submit value="操作" cssClass="btn btn-warning" cssStyle="width: 40%"/>
+                                                </td>
+                                            </tr>
+                                        </s:form>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="app-footer">
+            <div class="wrapper">
+            </div>
+        </footer>
     </div>
-</div>
-<footer class="app-footer">
-    <div class="wrapper">
-    </div>
-</footer>
-</div>
-<!-- Javascript Libs -->
-<script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
-<script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
 
-<script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
-<script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
-<!-- Javascript -->
-<script type="text/javascript" src="../../js/app.js"></script>
+    <script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
+    <script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
+    <script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" src="../../js/app.js"></script>
+</div>
 </body>
 
 </html>

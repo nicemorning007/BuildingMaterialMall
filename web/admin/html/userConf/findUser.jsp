@@ -55,10 +55,11 @@
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>安全设置
+                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
+                                            <a href="../security/profile.jsp">安全设置</a>
                                         </button>
                                         <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            注销
+                                            <a href="../security/logout.jsp">注销</a>
                                         </button>
                                     </div>
                                 </div>
@@ -226,8 +227,6 @@
         </div>
         <footer class="app-footer">
             <div class="wrapper">
-                <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015
-                Copyright.
             </div>
         </footer>
     </div>
