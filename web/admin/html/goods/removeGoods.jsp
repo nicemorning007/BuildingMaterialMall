@@ -1,8 +1,9 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -150,68 +151,89 @@
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        <!-- Main Content -->
-        <div class="container-fluid">
-            <div class="side-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="title">Panel with Table</div>
-                                </div>
+    </div>
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="page-title">
+                <span class="title">Datatable</span>
+                <div class="description"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <div class="card-title">
+                                <div class="title">移除商品</div>
                             </div>
-                            <div class="card-body">
-                                <div class="panel panel-default">
-                                    <!-- Default panel contents -->
-                                    <div class="panel-heading">Panel heading</div>
-                                    <div class="panel-body">
-                                        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                    </div>
-                                    <!-- Table -->
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="datatable table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>商品名称</th>
+                                    <th>预览图</th>
+                                    <th>产地</th>
+                                    <th>单价</th>
+                                    <th>销量</th>
+                                    <th>分类</th>
+                                    <th>编辑?</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>商品名称</th>
+                                    <th>预览图</th>
+                                    <th>产地</th>
+                                    <th>单价</th>
+                                    <th>销量</th>
+                                    <th>分类</th>
+                                    <th>移除?</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <%--todo:check database--%>
+                                <%
+                                    int i = 0;
+                                    for (; i < 50; i++) {
+                                %>
+                                <tr>
+                                    <%--todo:action--%>
+                                    <s:form action="" method="POST" theme="simple">
+                                        <td>中文<%=i%>
+                                        </td>
+                                        <td>Image<%=i%>
+                                        </td>
+                                        <td>Producing<%=i%>
+                                        </td>
+                                        <td>Price<%=i%>
+                                        </td>
+                                        <td>Sale<%=i%>
+                                        </td>
+                                        <td>Cate<%=i%>
+                                        </td>
+                                        <td>
+                                            <s:submit value="移除" cssClass="btn btn-sm btn-default"/>
+                                        </td>
+                                    </s:form>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="app-footer">
-        <div class="wrapper">
-            <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
-        </div>
-    </footer>
+</div>
+<footer class="app-footer">
+    <div class="wrapper">
+    </div>
+</footer>
 </div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="../../lib/js/jquery.min.js"></script>

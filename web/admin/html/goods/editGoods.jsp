@@ -1,4 +1,8 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 
 <head>
@@ -150,78 +154,142 @@
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-    </div>
-    <!-- Main Content -->
-    <div class="container-fluid">
-        <div class="side-body">
-            <div class="page-title">
-                <span class="title">Datatable</span>
-                <div class="description"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="card">
-                        <div class="card-header">
-
-                            <div class="card-title">
-                                <div class="title">商品查找</div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="page-title">
+                    <span class="title">商品管理</span>
+                </div>
+                <%--todo: form action--%>
+                <s:form class="form-inline" action="addGoodsTest" method="post" theme="simple">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <div class="title">新增商品</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="sub-title">商品名称</div>
+                                    <div>
+                                        <s:textfield name="name" cssClass="form-control" style="width:100%" placeholder="<%=name%>"/>
+                                    </div>
+                                    <div class="sub-title">商品属性<span class="description">(支持html标签)</span></div>
+                                    <div>
+                                        <s:textarea name="info" cssClass="form-control" rows="15" cssStyle="resize: none;width: 100%" placeholder="<%=info%>"/>
+                                    </div>
+                                    <div class="sub-title">单价<span class="description">(只允许输入数字)</span></div>
+                                    <div>
+                                        <s:textfield name="price" cssClass="form-control" style="width:10%" onkeyup="value=value.replace(/[^\d\.]/g,'')" maxlength="8" placeholder="<%=price%>"/>
+                                    </div>
+                                        <%--todo:tag--%>
+                                    <div class="sub-title">参加活动</div>
+                                    <div>
+                                        <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
+                                            <input type="checkbox" id="checkbox-fa-light-1" name="tag" value="促销折扣" <%=tag1%>>
+                                            <label for="checkbox-fa-light-1">
+                                                促销折扣
+                                            </label>
+                                        </div>
+                                        <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
+                                            <input type="checkbox" id="checkbox-fa-light-2" name="tag" value="批发优惠" <%=tag2%>>
+                                            <label for="checkbox-fa-light-2">
+                                                批发优惠
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="sub-title">选择分类 <span class="description">(新增分类请在分类管理处理)</span></div>
+                                    <div>
+                                    </div>
+                                    <select name="cate" style="width: 10%">
+                                        <%
+                                            List<String> list = new ArrayList<>();
+                                            String s1 = "s1";
+                                            String s2 = "s2";
+                                            String s3 = "s3";
+                                            String s4 = "s4";
+                                            String s5 = "s5";
+                                            list.add(s1);
+                                            list.add(s2);
+                                            list.add(s3);
+                                            list.add(s4);
+                                            list.add(s5);
+                                            for (String s:list){
+                                        %>
+                                        <option value="<%=s%>" <%=selected%>><%=s%></option>
+                                            <%--<option value="HI">Hawaii</option>--%>
+                                            <%--<option value="AK" selected="selected">Alaska</option>--%>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <table class="datatable table table-striped" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>商品名称</th>
-                                    <th>预览图</th>
-                                    <th>产地</th>
-                                    <th>单价</th>
-                                    <th>销量</th>
-                                    <th>分类</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>商品名称</th>
-                                    <th>预览图</th>
-                                    <th>产地</th>
-                                    <th>单价</th>
-                                    <th>销量</th>
-                                    <th>分类</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <%--todo:check database--%>
-                                <%
-                                    int i = 0;
-                                    for (; i < 50; i++) {
-                                %>
-                                <tr>
-                                    <td>
-                                        <%--todo:跳转到指定商品页--%>
-                                        <a href="">
-                                            Name<%=i%>
-                                        </a>
-                                    </td>
-                                    <td>Image<%=i%>
-                                    </td>
-                                    <td>Producing<%=i%>
-                                    </td>
-                                    <td>Price<%=i%>
-                                    </td>
-                                    <td>Sale<%=i%>
-                                    </td>
-                                    <td>Cate<%=i%>
-                                    </td>
-                                </tr>
-
-                                <%
-                                    }
-                                %>
-                                </tbody>
-                            </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <div class="title">产地</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>厂商</label>
+                                        <input type="text" class="form-control" name="manufacturer"
+                                               placeholder="<%=manufacturer%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>产地</label>
+                                        <input type="text" class="form-control" id="producing"
+                                               placeholder="<%=producing%>">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-body">
+                                        <%--todo:file upload--%>
+                                    <div class="form-group">
+                                        <label>上传商品大图</label>
+                                        <input type="file" name="exampleInputFile">
+                                        <p class="help-block">显示在商品预览页的图</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">上传</button>
+                                    <%
+                                        int i = 0;
+                                        for (; i < 6; i++) {
+                                    %>
+                                    <div class="form-group">
+                                        <label>上传商品图片<%=i + 1%>
+                                        </label>
+                                        <input type="file" name="exampleInputFile">
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">上传</button>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <s:submit value="提交修改" cssClass="btn btn-success"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </s:form>
             </div>
         </div>
     </div>

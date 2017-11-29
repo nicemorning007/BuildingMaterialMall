@@ -187,22 +187,39 @@
                                             for (int i = 0; i < 6; i++) {
                                         %>
                                         <tr>
-                                            <s:form method="POST" action="checkboxCheckAction" theme="simple">
-
-                                            <th scope="row"><%=i%>
-                                            </th>
-                                            <td>Mark<%=i%></td>
-                                            <td>
-                                                <s:textfield cssClass="form-control"/>
-                                            </td>
-                                            <td>
-                                                <s:submit name="修改" cssClass="btn btn-sm btn-default"/>
-                                            </td>
+                                            <%--todo:edit categorization--%>
+                                            <s:form method="POST" action="" theme="simple">
+                                                <th scope="row"><%=i%>
+                                                </th>
+                                                <td>Mark<%=i%>
+                                                </td>
+                                                <td>
+                                                    <s:textfield name="cateName" cssClass="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <s:submit cssClass="btn btn-sm btn-default" value="修改"/>
+                                                </td>
                                             </s:form>
                                         </tr>
                                         <%
                                             }
                                         %>
+                                        <tr>
+                                            <td colspan="2">
+                                                <span style="float: right">
+                                                    新增分类
+                                                </span>
+                                            </td>
+                                            <%--todo:add cate--%>
+                                            <s:form action="" method="POST" theme="simple">
+                                                <td>
+                                                    <s:textfield name="newCate" cssClass="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <s:submit value="新增" cssClass="btn btn-sm btn-default"/>
+                                                </td>
+                                            </s:form>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>

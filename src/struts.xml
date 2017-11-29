@@ -21,6 +21,9 @@
         <action name="checkboxCheckAction" class="test.CheckboxValueTest">
             <result name="success">/showResult.jsp</result>
         </action>
+        <action name="addGoodsTest" class="test.addGoodsTest">
+            <result name="success">/showResult.jsp</result>
+        </action>
         <!--管理层结束-->
 
     </package>

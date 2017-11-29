@@ -8,6 +8,8 @@ public class GoodsbaseEntity {
     private int id;
     private String name;
     private double price;
+    private String producing;
+    private String manufacturer;
     private Integer pictureArray;
     private int sale;
     private String info;
@@ -92,6 +94,26 @@ public class GoodsbaseEntity {
 
     public void setCate(int cate) {
         this.cate = cate;
+    }
+
+    @Basic
+    @Column(name = "producing")
+    public String getProducing() {
+        return producing;
+    }
+
+    @Basic
+    @Column(name = "manufacturer")
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setProducing(String producing) {
+        this.producing = producing;
     }
 
     @Override
