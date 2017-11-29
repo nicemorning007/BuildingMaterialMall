@@ -96,7 +96,7 @@
                         <form>
                             <div class="control">
                                 <a>Administrator:</a>
-                                <input type="text" class="form-control"/>
+                                <input type="text" class="form-control">
                             </div>
                             <div class="control">
                                 <a>password:</a>

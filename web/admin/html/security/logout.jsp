@@ -34,7 +34,7 @@
                 </div>
                 <div class="text-center" style="font-size: 20px">
                     <script language="JavaScript">
-                        setTimeout(window.location.href='../../../index.jsp',3);
+                        window.setTimeout("window.location='../../../index.jsp'",3000);
                     </script>
                 </div>
             </div>
