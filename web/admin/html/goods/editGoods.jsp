@@ -219,7 +219,7 @@
                                     <div class="sub-title">选择分类 <span class="description">(新增分类请在分类管理处理)</span></div>
                                     <div>
                                     </div>
-                                    <select name="cate" style="width: 10%">
+                                    <select name="cate" style="width: 150px">
                                         <%
                                             List<String> list = new ArrayList<>();
                                             String s1 = "s1";
@@ -264,6 +264,22 @@
                                         <input type="text" class="form-control" id="producing"
                                                placeholder="<%=producing%>">
                                     </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>规格</label>
+                                            <input type="text" class="form-control" name="manufacturer"
+                                                   placeholder="<%=format%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>计量单位</label>
+                                            <input type="text" class="form-control" name="manufacturer"
+                                                   placeholder="<%=units%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>起售数量</label>
+                                            <input type="text" class="form-control" name="manufacturer"
+                                                   placeholder="<%=begin%>">
+                                        </div>
                                 </div>
                             </div>
                         </div>

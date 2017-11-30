@@ -220,7 +220,7 @@
                                     <div>
                                     </div>
                                     <%--todo:show cate--%>
-                                    <select name="cate" style="width: 10%">
+                                    <select name="cate" style="width: 150px">
                                         <%
                                             List<String> list = new ArrayList<>();
                                             String s1 = "s1";
@@ -251,19 +251,34 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <div class="title">产地</div>
+                                        <div class="title">商品属性</div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>厂商</label>
                                         <input type="text" class="form-control" name="manufacturer"
-                                               placeholder="厂商">
+                                               placeholder="厂商品牌名">
                                     </div>
                                     <div class="form-group">
                                         <label>产地</label>
                                         <input type="text" class="form-control" id="producing"
-                                               placeholder="产地">
+                                               placeholder="省市">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>规格</label>
+                                        <input type="text" class="form-control" name="manufacturer"
+                                               placeholder="如：mm/cm/m">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>计量单位</label>
+                                        <input type="text" class="form-control" name="manufacturer"
+                                               placeholder="如：百件/百个/件/个/吨">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>起售数量</label>
+                                        <input type="text" class="form-control" name="manufacturer"
+                                               placeholder="如：百件/百个/件/个/吨">
                                     </div>
                                 </div>
                             </div>
