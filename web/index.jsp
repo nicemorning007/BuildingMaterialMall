@@ -1,25 +1,14 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%--suppress ALL --%>
-<%--suppress HtmlUnknownTarget --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home</title>
+    <title>建材网上商城</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Nuevo Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
     <script type="applijegleryion/x-javascript">
          addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-
-
-
-
-
-
-
-
-
 
 
     </script>
@@ -63,9 +52,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul>
                     <li><a href="#">欢迎来到建材商城</a></li>
                     <%--todo:check if login--%>
-                    <s:if test="false">
-                        <li><a href="contact.jsp">登陆</a></li>
-                        <li><a href="#">注册</a></li>
+                    <s:if test="true">
+                        <li><a href="login.jsp">登陆</a></li>
+                        <li><a href="register.jsp">注册</a></li>
                     </s:if><s:else>
                     <li><a href="contact.jsp">个人中心</a></li>
                 </s:else>
@@ -340,8 +329,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--start-footer-->
-<div class="footer" style="background-color: #e4e4e4">
-    <div class="container">
+<div class="container">
+    <div class="footer" style="background-color: #e4e4e4">
         <div class="footer-top">
             <div class="col-md-2 footer-left">
                 <h3>装饰结构</h3>
@@ -395,7 +384,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         var defaults = {
             containerID: 'toTop', // fading element id
             containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 3200,
+            scrollSpeed: 1200,
             easingType: 'linear'
         };
 
