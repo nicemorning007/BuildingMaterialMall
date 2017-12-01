@@ -96,14 +96,14 @@
                         <form>
                             <div class="control">
                                 <a>Administrator:</a>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" placeholder="管理员账户名"/>
                             </div>
                             <div class="control">
                                 <a>password:</a>
                                 <input type="password" id="form-control"/>
                             </div>
                             <div class="login-button text-center">
-                                <input type="submit" class="btn btn-primary" value="Login">
+                                <input type="submit" class="btn btn-primary" value="Login" placeholder="管理员密码"/>
                             </div>
                         </form>
                     </div>

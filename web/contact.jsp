@@ -17,6 +17,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
+
+
+
+
     </script>
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
@@ -36,7 +40,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700' rel='stylesheet' type='text/css'>
     <!--//web-fonts-->
     <script src="js/scripts.js" type="text/javascript"></script>
-    <script src="js/modernizr.custom.js"></script>
     <script type="text/javascript" src="js/move-top.js"></script>
     <script type="text/javascript" src="js/easing.js"></script>
     <!--/script-->
@@ -152,6 +155,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </li>
                 <li><a class="color4" href="#">联系我们</a></li>
+
+                <li><a href="./admin/index.jsp" class="color4">管理员</a></li>
             </ul>
             <div class="row">
                 <div class="col2"></div>
@@ -163,108 +168,153 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <div class="copyrights"></div>
+<!--start-content-->
 <!--account-->
-<div class="account">
+<div class="contact">
     <div class="container">
-        <div class="account-bottom">
-            <div class="col-md-6 account-left">
-                <%--todo--%>
+        <h3 class="tittle con">Contact</h3>
+        <div class="lcontact span_1_of_contact">
+            <div class="contact-form">
+                <%--todo: add to message table--%>
                 <s:form theme="simple" method="POST">
-                    <div class="account-top heading">
-                        <h3>忘记密码</h3>
-                    </div>
-                    <div class="address">
-                        <span>用户名</span>
-                        <s:textfield type="text" name="username"/>
-                    </div>
-                    <div class="address">
-                        <span>手机号</span>
-                        <s:password name="password"/>
-                    </div>
-                    <div class="address">
-                        <span>默认签收人姓名</span>
-                        <s:password name="confirmPassword"/>
-                    </div>
-                    <div class="address">
-                        <span>昵称</span>
-                        <s:textfield name="phone"/>
-                    </div>
-                    <div class="address new">
-                        <a class="forgot" href="./contact.jsp">无法回忆？人工找回。</a>
-                        <s:submit value="找回"/>
-                    </div>
+                    <p class="comment-form-author"><label>你的联系方式</label>
+                        <s:textfield name="contact" cssClass="textbox" placeholder="输入你的联系方式"/>
+                    </p>
+                    <p class="comment-form-author"><label>你的姓名</label>
+                        <s:textfield name="name" cssClass="textbox" placeholder="输入你的姓名"/>
+                    </p>
+                    <p class="comment-form-author"><label>问题描述</label>
+                        <s:textarea name="message" cssClass="textbox" placeholder="输入你的问题描述"/>
+                    </p>
+                    <s:submit value="提交反馈"/>
                 </s:form>
+            </div>
+        </div>
+        <div class="contact_grid span_2_of_contact_right">
+            <h3>撰写邮件</h3>
+            <div class="address">
+                <i class="pin_icon"></i>
+                <div class="contact_address">
+                    将你的问题撰写一份邮件发送给我们，请附上联系电话，我们将与您电话沟通确认身份，帮助您找回密码
+                    或者是其他涉及用户安全的操作（例如注销、挂失）。
+                    请在邮件主题中写上问题类型。
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="address">
+                <i class="phone"></i>
+                <div class="contact_address">
+                    您也可以在左侧填写快速邮件发送给我们。
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="address">
+                <i class="mail"></i>
+                <div class="contact_email">
+                    <a href="mailto:example@.qq.com">example@.qq.com</a>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
         <div class="clearfix"></div>
     </div>
 </div>
 <!-- checkout -->
-<!--start-bottom-->
-<!--start-image-cursuals-->
+<!--start-image-->
+<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+<!--//end-->
+<script type="text/javascript">
+    $(window).load(function () {
+        $(".flexiselDemo3").flexisel({
+            visibleItems: 5,
+            animationSpeed: 1000,
+            autoPlay: true,
+            autoPlaySpeed: 3000,
+            pauseOnHover: true,
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: {
+                portrait: {
+                    changePoint: 480,
+                    visibleItems: 2
+                },
+                landscape: {
+                    changePoint: 640,
+                    visibleItems: 3
+                },
+                tablet: {
+                    changePoint: 768,
+                    visibleItems: 3
+                }
+            }
+        });
+    });
+</script>
+<!---->
+<!--//end-bottom-->
+<!--start-footer-->
 <div class="scroll-slider">
     <div class="container">
-        <!--start-footer-->
         <div style="background-color: #e4e4e4">
-            <div class="container">
-                <div class="footer-top">
-                    <div class="col-md-2 footer-left">
-                        <h3>装饰结构</h3>
-                        <ul>
-                            <li><a href="product.jsp">结构料件</a></li>
-                            <li><a href="product.jsp">门窗楼梯</a></li>
-                            <li><a href="product.jsp">装饰装潢</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 footer-left">
-                        <h3>水电防护</h3>
-                        <ul>
-                            <li><a href="product.jsp">电工电气</a></li>
-                            <li><a href="product.jsp">照明电气</a></li>
-                            <li><a href="product.jsp">给排水</a></li>
-                            <li><a href="product.jsp">消防安防</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 footer-left">
-                        <h3>化工洁具</h3>
-                        <ul>
-                            <li><a href="account.jsp">油漆化工</a></li>
-                            <li><a href="account.jsp">厨卫洁具</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 footer-left ">
-                        <h3>机械设备</h3>
-                        <ul>
-                            <li><a href="product.jsp">机械设备</a></li>
-                            <li><a href="product.jsp">工程工具</a></li>
-                            <li><a href="product.jsp">工程辅料</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 footer-left lost">
-                        <h3>冷暖器具</h3>
-                        <ul>
-                            <li><a href="product.jsp">暖通</a></li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
 
+            <div class="footer-top">
+                <div class="col-md-2 footer-left">
+                    <h3>装饰结构</h3>
+                    <ul>
+                        <li><a href="product.jsp">结构料件</a></li>
+                        <li><a href="product.jsp">门窗楼梯</a></li>
+                        <li><a href="product.jsp">装饰装潢</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 footer-left">
+                    <h3>水电防护</h3>
+                    <ul>
+                        <li><a href="product.jsp">电工电气</a></li>
+                        <li><a href="product.jsp">照明电气</a></li>
+                        <li><a href="product.jsp">给排水</a></li>
+                        <li><a href="product.jsp">消防安防</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 footer-left">
+                    <h3>化工洁具</h3>
+                    <ul>
+                        <li><a href="account.jsp">油漆化工</a></li>
+                        <li><a href="account.jsp">厨卫洁具</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 footer-left ">
+                    <h3>机械设备</h3>
+                    <ul>
+                        <li><a href="product.jsp">机械设备</a></li>
+                        <li><a href="product.jsp">工程工具</a></li>
+                        <li><a href="product.jsp">工程辅料</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 footer-left lost">
+                    <h3>冷暖器具</h3>
+                    <ul>
+                        <li><a href="product.jsp">暖通</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
             </div>
+
         </div>
-        <!--start-smooth-scrolling-->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var defaults = {
-                    containerID: 'toTop', // fading element id
-                    containerHoverID: 'toTopHover', // fading element hover id
-                    scrollSpeed: 1200,
-                    easingType: 'linear'
-                };
-                $().UItoTop({easingType: 'easeOutQuart'});
-            });
-        </script>
-        <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
-                                                                                 style="opacity: 1;"> </span></a>
+    </div>
+</div>
+<!--start-smooth-scrolling-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        $().UItoTop({easingType: 'easeOutQuart'});
+    });
+</script>
+<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                         style="opacity: 1;"> </span></a>
 
 
 </body>
