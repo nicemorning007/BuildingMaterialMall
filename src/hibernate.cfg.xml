@@ -7,8 +7,6 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/bmm</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">mulin458267139</property>
         <mapping class="bmm.entity.AdminbaseEntity"/>
         <mapping resource="bmm/entity/AdminbaseEntity.hbm.xml"/>
         <mapping class="bmm.entity.BalanceEntity"/>
@@ -27,6 +25,8 @@
         <mapping resource="bmm/entity/UserinfoEntity.hbm.xml"/>
         <mapping class="bmm.entity.UserloginEntity"/>
         <mapping resource="bmm/entity/UserloginEntity.hbm.xml"/>
+        <mapping resource="bmm/entity/MessageEntity.hbm.xml"/>
+        <mapping class="bmm.entity.MessageEntity"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>
