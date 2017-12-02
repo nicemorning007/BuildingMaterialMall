@@ -10,6 +10,11 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
     <script type="applijegleryion/x-javascript">
          addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+
+
+
+
+
     </script>
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
@@ -103,6 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </s:if>
                 </div>
                 <div class="clearfix"></div>
+                1
             </div>
             <!--start-header-menu-->
             <ul class="megamenu skyblue">
@@ -228,6 +234,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="col-md-5 grid-single">
                     <div class="flexslider">
                         <ul class="slides">
+                            <%--todo:show images--%>
                             <li data-thumb="images/z1.jpg">
                                 <div class="thumb-image"><img src="images/z1.jpg" data-imagezoom="true"
                                                               class="img-responsive" alt=""/></div>
@@ -258,48 +265,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="col-md-7 single-text">
                     <div class="details-left-info simpleCart_shelfItem">
-                        <h3>Accessories Latest</h3>
-                        <p class="availability">Availability: <span class="color">In stock</span></p>
+                        <%--todo:--%>
+                        <h3>产品名</h3>
                         <div class="price_single">
-                            <span class="reducedfrom">$800.00</span>
-                            <span class="actual item_price">$600.00</span><a href="#">click for offer</a>
+                            <%--todo:显示价格。--%>
+                            <span class="actual item_price">￥200.00</span>
                         </div>
-                        <h2 class="quick">Quick Overview</h2>
-                        <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                            doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                        <h3>available Colors</h3>
-                        <ul class="product-colors">
-                            <li><a class="color1" href="#"><span> </span></a></li>
-                            <li><a class="color2" href="#"><span> </span></a></li>
-                            <li><a class="color3" href="#"><span> </span></a></li>
-                            <li><a class="color4" href="#"><span> </span></a></li>
-                            <li><a class="color5" href="#"><span> </span></a></li>
-                            <li><a class="color6" href="#"><span> </span></a></li>
-                            <li><a class="color7" href="#"><span> </span></a></li>
-                            <li><a class="color8" href="#"><span> </span></a></li>
-                        </ul>
-                        <h3>Length</h3>
+                        <h2 class="quick">商品简介</h2>
+                        <p class="quick_desc">
+                            <%--todo:显示商品详情前60字--%>
+                            这里是一些商品简介
+                        </p>
+                        </h3>
+                        <h3>单位：</h3>
+                        <%--todo--%>
                         <ul class="size">
-                            <li><a href="#">7</a></li>
-                            <li><a href="#">6</a></li>
+                            <li>100件</li>
+                            <li>起售</li>
                         </ul>
-                        <div class="quantity_box">
-                            <span>Quantity:</span>
-                            <div class="product-qty">
-                                <select>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                </select>
+                        <s:form method="POST" theme="simple">
+                            <div class="quantity_box">
+                                <span>购买量:</span>
+                                <div class="product-qty">
+                                        <%--todo--%>
+                                    <input type="number" value="100"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="single-but item_add">
-                            <input type="submit" value="add to cart"/>
-                        </div>
+                            <div class="clearfix"></div>
+                            <div class="single-but">
+                                <input type="submit" value="add to cart"/>
+                            </div>
+                        </s:form>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -326,21 +322,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </section>
-                    <section class="sky-form">
-                        <h4>排序规则</h4>
-                        <div class="row1 scroll-pane" style="height: 217px">
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>时间升序</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>时间降序</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>价格升序</label>
-                            </div>
-                            <div class="col col-4">
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>价格降序</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>销量升序</label>
-                                <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>销量降序</label>
-                            </div>
-                        </div>
-                    </section>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -351,20 +332,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                                aria-expanded="true" aria-controls="collapseOne">
-                                Description
+                                详情
                             </a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
                          aria-labelledby="headingOne">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
+                            <%--todo:show detils--%>
+                            这里显示商品详情
                         </div>
                     </div>
                 </div>
@@ -373,109 +349,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <h4 class="panel-title">
                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                                href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                additional information
+                                商品参数
                             </a>
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                reviews(5)
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-                         aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingFour">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                help
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
-                         aria-labelledby="headingFour">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
+                            <%--todo:show detils--%>
+                            显示厂商产地等参数
                         </div>
                     </div>
                 </div>
             </div>
             <!-- collapse -->
-            <!--/start-latest-->
-            <div class="collection-section">
-                <h3 class="tittle">Related Products</h3>
-
-                <div class="fashion-info">
-                    <div class="col-md-4 fashion-grids">
-                        <figure class="effect-bubba">
-                            <img src="images/f4.jpg" alt=""/>
-                            <figcaption>
-                                <h4>Nuevo Shop</h4>
-                                <p class="cart"><a href="#">Shop</a></p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-4 fashion-grids">
-                        <figure class="effect-bubba">
-                            <img src="images/f5.jpg" alt=""/>
-                            <figcaption>
-                                <h4>Nuevo Shop</h4>
-                                <p class="cart"><a href="#">Shop</a></p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-4 fashion-grids">
-                        <figure class="effect-bubba">
-                            <img src="images/f6.jpg" alt=""/>
-                            <figcaption>
-                                <h4>Nuevo Shop</h4>
-                                <p class="cart"><a href="#">Shop</a></p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
         </div>
-        <!--//latest-->
     </div>
-</div>
-<!-- //products -->
-<!--start-footer-->
+    <!-- //products -->
+    <!--start-footer-->
     <div class="container">
         <div class="footer" style="background-color: #e4e4e4">
 
@@ -521,28 +411,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"></div>
             </div>
         </div>
+    </div>
+    <!--end-footer-->
+    <!--//end-content-->
+    <!--start-smooth-scrolling-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+            var defaults = {
+                  containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+             };
+            */
+
+            $().UItoTop({easingType: 'easeOutQuart'});
+
+        });
+    </script>
+    <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                             style="opacity: 1;"> </span></a>
 </div>
-<!--end-footer-->
-<!--//end-content-->
-<!--start-smooth-scrolling-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        /*
-        var defaults = {
-              containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-         };
-        */
-
-        $().UItoTop({easingType: 'easeOutQuart'});
-
-    });
-</script>
-<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
-                                                                         style="opacity: 1;"> </span></a>
-
 
 </body>
 </html>
