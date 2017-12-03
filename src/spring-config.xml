@@ -37,14 +37,11 @@
     </bean>
 
     <!--配置service-->
-    <bean id="userloginService" class="bmm.service.impl.UserloginEntityServiceImpl">
+    <bean id="userloginService" class="bmm.service.impl.UserloginServiceImpl">
         <property name="userloginDAO" ref="userloginDao"/>
     </bean>
 
     <!--配置Action-->
-    <bean id="getUsernameAction" class="bmm.service.UserloginAction">
-        <property name="userloginEntityService" ref="userloginService"/>
-    </bean>
 
     <!-- 配置Spring事务管理器 -->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

@@ -93,7 +93,7 @@
                                 Log In...
                             </div>
                         </div>
-                        <form>
+                        <s:form>
                             <div class="control">
                                 <a>Administrator:</a>
                                 <input type="text" class="form-control" placeholder="管理员账户名"/>
@@ -105,7 +105,7 @@
                             <div class="login-button text-center">
                                 <input type="submit" class="btn btn-primary" value="Login" placeholder="管理员密码"/>
                             </div>
-                        </form>
+                        </s:form>
                     </div>
                 </div>
             </div>
