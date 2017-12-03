@@ -10,6 +10,9 @@
       <root url="jar://$PROJECT_DIR$/lib/freemarker.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/struts2-core.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/struts2-spring-plugin-2.5.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-commons-5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-tree-5.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

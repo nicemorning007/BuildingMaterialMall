@@ -4,8 +4,6 @@ import bmm.dao.UserloginDAO;
 import bmm.entity.UserloginEntity;
 import bmm.service.UserloginEntityService;
 
-import java.util.List;
-
 public class UserloginEntityServiceImpl implements UserloginEntityService {
     private UserloginDAO userloginDAO;
 
