@@ -31,10 +31,30 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <!--配置DAO-->
+    <bean id="userloginDao" class="bmm.dao.impl.UserloginDAOImpl">
+        <property name="hibernateTemplate" ref="ht"/>
+    </bean>
+
+    <!--配置service-->
+    <bean id="userloginService" class="bmm.service.impl.UserloginEntityServiceImpl">
+        <property name="userloginDAO" ref="userloginDao"/>
+    </bean>
+
+    <!--配置Action-->
+    <bean id="getUsernameAction" class="bmm.service.UserloginAction">
+        <property name="userloginEntityService" ref="userloginService"/>
+    </bean>
+
     <!-- 配置Spring事务管理器 -->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <tx:annotation-driven transaction-manager="txManager"/>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="login*"/>
+        </tx:attributes>
+    </tx:advice>
 
 </beans>

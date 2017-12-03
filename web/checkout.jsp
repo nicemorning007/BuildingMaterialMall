@@ -281,8 +281,6 @@
 
     </div>
 </div>
-<!--/start-copyright-->
-<!--//end-copyright-->
 <!--end-footer-->
 <!--//end-content-->
 <!--start-smooth-scrolling-->

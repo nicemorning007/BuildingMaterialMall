@@ -4,27 +4,41 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
-    <constant name="struts.objectFactory" value="struts"/>
+    <constant name="struts.devMode" value="true"/>
+
+    <!--  Make the Spring object factory the automatic default -->
+    <constant name="struts.objectFactory" value="spring"/>
+
+    <package name="spring-default">
+        <interceptors>
+            <interceptor name="autowiring"
+                         class="com.opensymphony.xwork2.spring.interceptor.ActionAutowiringInterceptor"/>
+        </interceptors>
+    </package>
     <package name="sturts2" extends="struts-default" namespace="/">
         <!--用户层-->
         <!--登陆注册-->
-        <action name="codingAction" class="bmm.action.LoginControlAction" method="singup">
-            <result name="success">/index.jsp</result>
-        </action>
-        <action name="loginAction" class="bmm.action.LoginControlAction" method="login">
-            <result name="success">/index.jsp</result>
-        </action>
+        <!--<action name="codingAction" class="bmm.action.LoginControlAction" method="singup">-->
+            <!--<result name="success">/index.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="loginAction" class="bmm.action.LoginControlAction" method="login">-->
+            <!--<result name="success">/index.jsp</result>-->
+        <!--</action>-->
         <!--登陆注册结束-->
         <!--用户层结束-->
 
         <!--管理层-->
-        <action name="checkboxCheckAction" class="test.CheckboxValueTest">
-            <result name="success">/showResult.jsp</result>
-        </action>
-        <action name="addGoodsTest" class="test.addGoodsTest">
-            <result name="success">/showResult.jsp</result>
-        </action>
+        <!--<action name="checkboxCheckAction" class="test.CheckboxValueTest">-->
+            <!--<result name="success">/showResult.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="addGoodsTest" class="test.addGoodsTest">-->
+            <!--<result name="success">/showResult.jsp</result>-->
+        <!--</action>-->
         <!--管理层结束-->
+
+        <action name="getUsernameAction" class="bmm.service.UserloginAction">
+            <result name="login">/showResult.jsp</result>
+        </action>
 
     </package>
 </struts>

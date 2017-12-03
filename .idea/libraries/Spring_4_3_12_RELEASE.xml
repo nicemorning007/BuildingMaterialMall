@@ -21,6 +21,8 @@
       <root url="jar://$PROJECT_DIR$/lib/spring-orm-4.3.12.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-core-4.3.12.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../Resources/lib/SSH/Spring4.1/spring-web-4.1.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/spring-web-4.0.3.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/spring-webmvc-4.0.3.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

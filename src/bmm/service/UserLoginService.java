@@ -61,9 +61,10 @@ public class UserLoginService {
 
     /**
      * 验证用户登陆
+     *
      * @param username 用户登录时输入的用户名
      * @param password 用户登录时输入的密码(应传入加密后的文本)
-     * @return
+     * @return <b>true</b> 如果用户登陆成功，否则返回<b>false</b>
      */
     public boolean loginCheck(String username, String password) {
         boolean flag = false;
@@ -76,7 +77,7 @@ public class UserLoginService {
         criteria.add(criterion);
         List<UserloginEntity> userloginEntities = criteria.list();
         if (userloginEntities.size() >= 1) {
-            for (UserloginEntity userloginEntity:userloginEntities) {
+            for (UserloginEntity userloginEntity : userloginEntities) {
                 if (username.equals(userloginEntity.getUsername())) {
                     if (password.equals(userloginEntity.getPassword())) {
                         flag = true;
