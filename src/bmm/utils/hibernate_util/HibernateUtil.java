@@ -1,4 +1,4 @@
-package bmm.utils;
+package bmm.utils.hibernate_util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -11,6 +11,9 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.util.Map;
 
+/**
+ * Hibernate工具类，提供SessionFactory.openSession()方法的直接获取
+ */
 public class HibernateUtil {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
@@ -27,26 +30,12 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * 用于SessionFactory.openSession()方法的直接获取
+     * @return session对象
+     * @throws HibernateException 如果 SessionFactory 对象创建失败会抛出该异常
+     */
     public static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
-    }
-
-    public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        try {
-            System.out.println("querying all the managed entities...");
-            final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
-            for (Object key : metadataMap.keySet()) {
-                final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
-                final String entityName = classMetadata.getEntityName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
-        } finally {
-            session.close();
-        }
     }
 }

@@ -1,6 +1,6 @@
 package test;
 
-import md5.Md5Util;
+import bmm.utils.md5_util.Md5Util;
 import org.junit.jupiter.api.Test;
 
 public class TestMd5 {

@@ -4,8 +4,6 @@ import bmm.dao.UserloginDAO;
 import bmm.entity.UserloginEntity;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
-import java.util.List;
-
 public class UserloginDAOImpl implements UserloginDAO {
 
     private HibernateTemplate hibernateTemplate;

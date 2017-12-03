@@ -8,6 +8,7 @@
 
     <!--  Make the Spring object factory the automatic default -->
     <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.ui.theme" value="simple"/>
 
     <package name="spring-default">
         <interceptors>

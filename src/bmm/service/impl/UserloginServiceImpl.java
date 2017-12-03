@@ -2,8 +2,8 @@ package bmm.service.impl;
 
 import bmm.entity.UserloginEntity;
 import bmm.service.UserloginService;
-import bmm.utils.HibernateUtil;
-import md5.Md5Util;
+import bmm.utils.hibernate_util.HibernateUtil;
+import bmm.utils.md5_util.Md5Util;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -23,7 +23,7 @@ public class UserloginServiceImpl implements UserloginService {
      * 检查用户名是否存在
      *
      * @param username 用户登陆时输入的用户名
-     * @return true当用户名存在；false当用户名不存在
+     * @return <b>true</b> 当用户名存在；<b>false</b> 当用户名不存在
      */
     public boolean isHeExist(String username) {
         boolean flag = false;
@@ -65,7 +65,7 @@ public class UserloginServiceImpl implements UserloginService {
      *
      * @param username 用户登录时输入的用户名
      * @param password 用户登录时输入的密码(应传入加密后的文本)
-     * @return <b>true</b> 如果用户登陆成功，否则返回<b>false</b>
+     * @return <b>true</b> 如果用户登陆成功，否则返回 <b>false</b>
      */
     public boolean loginCheck(String username, String password) {
         boolean flag = false;

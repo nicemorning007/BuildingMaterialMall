@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -93,14 +94,14 @@
                                 Log In...
                             </div>
                         </div>
-                        <s:form>
+                        <s:form action="">
                             <div class="control">
                                 <a>Administrator:</a>
-                                <input type="text" class="form-control" placeholder="管理员账户名"/>
+                                <s:textfield name="username" type="text" class="form-control" placeholder="管理员账户名"/>
                             </div>
                             <div class="control">
                                 <a>password:</a>
-                                <input type="password" id="form-control"/>
+                                <s:password name="password" id="form-control"/>
                             </div>
                             <div class="login-button text-center">
                                 <input type="submit" class="btn btn-primary" value="Login" placeholder="管理员密码"/>
