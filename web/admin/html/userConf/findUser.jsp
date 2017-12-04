@@ -56,10 +56,10 @@
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
-                                            <a href="../security/profile.jsp">安全设置</a>
+                                            <a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">安全设置</a>
                                         </button>
                                         <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            <a href="../security/logout.jsp">注销</a>
+                                            <a href="${pageContext.request.contextPath}/admin/html/security/logout.jsp">注销</a>
                                         </button>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="../index.jsp">
+                            <a href="${pageContext.request.contextPath}/admin/html/index.jsp">
                                 <span class="icon fa fa-calendar"></span><span class="title">统计</span>
                             </a>
                         </li>
@@ -95,13 +95,13 @@
                             <div id="dropdown-element" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../userConf/UserForbidden.jsp">用户注销</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
                                         </li>
-                                        <li><a href="../userConf/lossReporting.jsp">挂失与解挂</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
                                         </li>
-                                        <li><a href="../userConf/passwordReset.jsp">重置密码</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
                                         </li>
-                                        <li><a href="../userConf/findUser.jsp">用户查询</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -115,15 +115,15 @@
                             <div id="dropdown-table" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../goods/categorization.jsp">分类管理</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
                                         </li>
-                                        <li><a href="../goods/attribute.jsp">属性设置</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/attribute.jsp">属性设置</a>
                                         </li>
-                                        <li><a href="../goods/addGoods.jsp">新增商品</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/addGoods.jsp">新增商品</a>
                                         </li>
-                                        <li><a href="../goods/removeGoods.jsp">移除商品</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
                                         </li>
-                                        <li><a href="../goods/findGoods.jsp">商品查询</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/findGoods.jsp">商品查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -137,9 +137,9 @@
                             <div id="component-example" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../bill/billManagement.jsp">订单管理</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
                                         </li>
-                                        <li><a href="../bill/findBill.jsp">订单查询</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">订单查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -153,7 +153,7 @@
                             <div id="dropdown-form" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="../security/profile.jsp">
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
                                             <%--todo:show administrator`s name--%>
                                             占位
                                         </a>

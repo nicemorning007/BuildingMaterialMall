@@ -1,4 +1,3 @@
-</div>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -10,33 +9,28 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
     <script type="applijegleryion/x-javascript">
          addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-
-
-
-
-
     </script>
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
-    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="${pageContext.request.contextPath}/css/style.css" rel='stylesheet' type='text/css'/>
     <script src="js/jquery-1.11.1.min.js"></script>
     <!-- start menu -->
-    <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
-    <script type="text/javascript" src="js/megamenu.js"></script>
+    <link href="${pageContext.request.contextPath}/css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/megamenu.js"></script>
     <script>$(document).ready(function () {
         $(".megamenu").megamenu();
     });</script>
-    <script src="js/menu_jquery.js"></script>
-    <script src="js/simpleCart.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/js/menu_jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/simpleCart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <!--web-fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,700' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700' rel='stylesheet' type='text/css'>
     <!--//web-fonts-->
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen"/>
 
     <!--/script-->
     <script type="text/javascript">
@@ -48,7 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- the jScrollPane script -->
-    <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.jscrollpane.min.js"></script>
     <script type="text/javascript" id="sourcecode">
         $(function () {
             $('.scroll-pane').jScrollPane();
@@ -67,10 +61,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><a href="#">欢迎来到建材商城</a></li>
                     <%--todo:check if login--%>
                     <s:if test="false">
-                        <li><a href="contact.jsp">登陆</a></li>
-                        <li><a href="#">注册</a></li>
+                        <li><a href="${pageContext.request.contextPath}/contact.jsp">登陆</a></li>
+                        <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
                     </s:if><s:else>
-                    <li><a href="contact.jsp">个人中心</a></li>
+                    <li><a href="${pageContext.request.contextPath}/contact.jsp">个人中心</a></li>
                 </s:else>
                 </ul>
             </div>
@@ -86,7 +80,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="logo" style="">
                     <a href="index.jsp">
                         <h1>建 <span>材</span>
-                            <img src="/images/logo.png" alt="" width="48px" height="48px"/>
+                            <img src="${pageContext.request.contextPath}/images/logo.png" alt="" width="48px"
+                                 height="48px"/>
                         </h1>
                     </a>
                 </div>
@@ -112,7 +107,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!--start-header-menu-->
             <ul class="megamenu skyblue">
-                <li class="active grid"><a class="color1" href="index.jsp">首页</a></li>
+                <li class="active grid"><a class="color1" href="${pageContext.request.contextPath}/index.jsp">首页</a>
+                </li>
                 <li class="grid"><a class="color2" href="#">分类栏目</a>
                     <div class="megapanel">
                         <div class="row">
@@ -120,9 +116,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="h_nav">
                                     <h4>装饰结构</h4>
                                     <ul>
-                                        <li><a href="product.jsp">结构料件</a></li>
-                                        <li><a href="product.jsp">门窗楼梯</a></li>
-                                        <li><a href="product.jsp">装饰装潢</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">结构料件</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">门窗楼梯</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">装饰装潢</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -130,10 +126,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="h_nav">
                                     <h4>水电防护</h4>
                                     <ul>
-                                        <li><a href="product.jsp">电工电气</a></li>
-                                        <li><a href="product.jsp">照明电气</a></li>
-                                        <li><a href="product.jsp">给排水</a></li>
-                                        <li><a href="product.jsp">消防安防</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">电工电气</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">照明电气</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">给排水</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">消防安防</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -150,9 +146,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="h_nav">
                                     <h4>机械设备</h4>
                                     <ul>
-                                        <li><a href="product.jsp">机械设备</a></li>
-                                        <li><a href="product.jsp">工程工具</a></li>
-                                        <li><a href="product.jsp">工程辅料</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">机械设备</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">工程工具</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">工程辅料</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -160,7 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="h_nav">
                                     <h4>冷暖器具</h4>
                                     <ul>
-                                        <li><a href="product.jsp">暖通</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">暖通</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -206,8 +202,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <li><a href="account.jsp">个人中心</a></li>
                                         <li><a href="account.jsp">安全中心</a></li>
                                         <li><a href="account.jsp">购物车</a></li>
-                                        <li><a href="product.jsp">订单查询</a></li>
-                                        <li><a href="product.jsp">退出</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">订单查询</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/product.jsp">退出</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -236,22 +232,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="slides">
                             <%--todo:show images--%>
                             <li data-thumb="images/z1.jpg">
-                                <div class="thumb-image"><img src="images/z1.jpg" data-imagezoom="true"
+                                <div class="thumb-image"><img src="${pageContext.request.contextPath}/images/z1.jpg"
+                                                              data-imagezoom="true"
                                                               class="img-responsive" alt=""/></div>
                             </li>
                             <li data-thumb="images/z2.jpg">
-                                <div class="thumb-image"><img src="images/z2.jpg" data-imagezoom="true"
+                                <div class="thumb-image"><img src="${pageContext.request.contextPath}/images/z2.jpg"
+                                                              data-imagezoom="true"
                                                               class="img-responsive" alt=""/></div>
                             </li>
                             <li data-thumb="images/z4.jpg">
-                                <div class="thumb-image"><img src="images/z4.jpg" data-imagezoom="true"
+                                <div class="thumb-image"><img src="${pageContext.request.contextPath}/images/z4.jpg"
+                                                              data-imagezoom="true"
                                                               class="img-responsive" alt=""/></div>
                             </li>
                         </ul>
                     </div>
                     <!-- FlexSlider -->
-                    <script src="js/imagezoom.js"></script>
-                    <script defer src="js/jquery.flexslider.js"></script>
+                    <script src="${pageContext.request.contextPath}/js/imagezoom.js"></script>
+                    <script defer src="${pageContext.request.contextPath}/js/jquery.flexslider.js"></script>
                     <script>
                         // Can also be used with $(document).ready()
                         $(window).load(function () {
@@ -368,23 +367,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--start-footer-->
     <div class="container">
         <div class="footer" style="background-color: #e4e4e4">
-
             <div class="footer-top">
                 <div class="col-md-2 footer-left">
                     <h3>装饰结构</h3>
                     <ul>
-                        <li><a href="#">结构料件</a></li>
-                        <li><a href="#">门窗楼梯</a></li>
-                        <li><a href="#">装饰装潢</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">结构料件</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">门窗楼梯</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">装饰装潢</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 footer-left">
                     <h3>水电防护</h3>
                     <ul>
-                        <li><a href="#">电工电气</a></li>
-                        <li><a href="#">照明电气</a></li>
-                        <li><a href="#">给排水</a></li>
-                        <li><a href="#">消防安防</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">电工电气</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">照明电气</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">给排水</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">消防安防</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 footer-left">
@@ -397,19 +395,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="col-md-2 footer-left ">
                     <h3>机械设备</h3>
                     <ul>
-                        <li><a href="#">机械设备</a></li>
-                        <li><a href="#">工程工具</a></li>
-                        <li><a href="#">工程辅料</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">机械设备</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">工程工具</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">工程辅料</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 footer-left lost">
                     <h3>冷暖器具</h3>
                     <ul>
-                        <li><a href="#">暖通</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product.jsp">暖通</a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
             </div>
+
         </div>
     </div>
     <!--end-footer-->

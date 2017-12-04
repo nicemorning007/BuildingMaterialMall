@@ -61,7 +61,7 @@
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <a href="./security/profile.jsp">
+                                        <a href="${pageContext.request.contextPath}/admin/security/profile.jsp">
                                             <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
                                                 安全设置
                                             </button>
@@ -105,13 +105,17 @@
                             <div id="dropdown-element" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="userConf/UserForbidden.jsp">用户注销</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
                                         </li>
-                                        <li><a href="userConf/lossReporting.jsp">挂失与解挂</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
                                         </li>
-                                        <li><a href="userConf/passwordReset.jsp">重置密码</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
                                         </li>
-                                        <li><a href="userConf/findUser.jsp">用户查询</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -125,15 +129,17 @@
                             <div id="dropdown-table" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="goods/categorization.jsp">分类管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
                                         </li>
-                                        <li><a href="goods/attribute.jsp">属性设置</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/attribute.jsp">属性设置</a>
                                         </li>
-                                        <li><a href="goods/addGoods.jsp">新增商品</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/addGoods.jsp">新增商品</a>
                                         </li>
-                                        <li><a href="goods/removeGoods.jsp">移除商品</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
                                         </li>
-                                        <li><a href="goods/findGoods.jsp">商品查询</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/findGoods.jsp">商品查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -147,9 +153,10 @@
                             <div id="component-example" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="./bill/billManagement.jsp">订单管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
                                         </li>
-                                        <li><a href="./bill/findBill.jsp">订单查询</a>
+                                        <li><a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">订单查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -163,9 +170,10 @@
                             <div id="dropdown-form" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="security/profile.jsp">
-                                            <%=username%>
-                                        </a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
+                                                <%=username%>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -278,8 +286,7 @@
                                                     <%--todo:显示创建订单的用户--%>
                                                     yonghu
                                                 </span>
-                                                    <span
-                                                            class="message-datetime">
+                                                    <span class="message-datetime">
                                                 </span>
                                                 </div>
                                                 <div class="message">
