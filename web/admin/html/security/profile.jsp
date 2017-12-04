@@ -1,6 +1,10 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
+<%
+    String username = CookieUtil.getCookiesValue(request, "isLogin");
+%>
 <head>
     <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,17 +12,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
     <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="../../lib/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/checkbox3.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/select2.min.css">
     <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../../css/themes/flat-blue.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/themes/flat-blue.css">
 </head>
 
 <body class="flat-blue">
@@ -40,27 +44,29 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <%--todo:显示管理员名字--%>
-                            占位
+                            <%=username%>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
-                                <img src="../../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                             </li>
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">
-                                        <%--todo:显示管理员名字--%>
-                                        占位
+                                        <%=username%>
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
-                                            <a href="#">安全设置</a>
-                                        </button>
-                                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            <a href="./logout.jsp">注销</a>
-                                        </button>
+                                        <a href="#">
+                                            <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
+                                                安全设置
+                                            </button>
+                                        </a>
+                                        <a href="/adminControlAction_logout.action">
+                                            <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
+                                                注销
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </li>
@@ -154,9 +160,9 @@
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
                                         <li><a href="../security/profile.jsp">
-                                            <%--todo:show administrator`s name--%>
-                                            占位
-                                        </a>
+                                            <%=username%>
+                                        </>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -186,37 +192,44 @@
                                         </strong>
                                     </div>
                                     <div class="panel fresh-color panel-warning">
-                                        <div class="panel-heading">修改管理员密码</div>
+                                        <div class="panel-heading">修改管理员密码
+                                            <span style="background-color: #00FF7F">
+                                                <s:property value="info"/>
+                                            </span>
+                                        </div>
                                         <div class="panel-body" style="padding: 0;">
                                             <div class="card-body">
-                                                <form class="form-horizontal">
+                                                <s:form class="form-horizontal"
+                                                        action="adminControlAction_changePassword" method="POST">
+                                                    <input type="hidden" value="<%=username%>"/>
                                                     <div class="form-group">
                                                         <label for="password1"
                                                                class="col-sm-2 control-label">密码</label>
                                                         <div class="col-sm-10">
-                                                            <input type="password" class="form-control" id="password1"
-                                                                   placeholder="密码">
+                                                            <s:password name="password" class="form-control"
+                                                                        id="password1"
+                                                                        placeholder="密码"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="password2"
                                                                class="col-sm-2 control-label">确认密码</label>
                                                         <div class="col-sm-10">
-                                                            <input type="password" class="form-control"
-                                                                   id="password2" placeholder="确认密码">
+                                                            <s:password name="confirmPassword" class="form-control"
+                                                                        id="password2" placeholder="确认密码"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-default"
-                                                                    style="width: 150px;float: left">确认
-                                                            </button>
-                                                            <button type="reset" class="btn btn-default"
-                                                                    style="width: 150px;float: right">重置
-                                                            </button>
+                                                            <s:submit cssClass="btn btn-default"
+                                                                      cssStyle="width: 40%;float: left" value="确认">
+                                                            </s:submit>
+                                                            <s:reset cssClass="btn btn-default"
+                                                                     cssStyle="width: 40%;float: right" value="重置">
+                                                            </s:reset>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </s:form>
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +243,7 @@
                                     <div class="panel fresh-color panel-danger">
                                         <div class="panel-heading">全站操作</div>
                                         <%
-                                            if (true) {
+                                            if (!username.equals("root")) {
                                         %>
                                         <div class="panel-body" style="padding: 0">
                                             <%--todo:--%>
@@ -328,10 +341,10 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-10">
                                                         <button type="submit" class="btn btn-default"
-                                                                style="width: 150px;float: left">注册
+                                                                style="width: 40%;float: left">注册
                                                         </button>
                                                         <button type="reset" class="btn btn-default"
-                                                                style="width: 150px;float: right">重置
+                                                                style="width: 40%;float: right">重置
                                                         </button>
                                                     </div>
                                                 </div>
@@ -352,20 +365,20 @@
     </footer>
 </div>
 <!-- Javascript Libs -->
-<script type="text/javascript" src="../../lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="../../lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/js/Chart.min.js"></script>
-<script type="text/javascript" src="../../lib/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/bootstrap-switch.min.js"></script>
 
-<script type="text/javascript" src="../../lib/js/jquery.matchHeight-min.js"></script>
-<script type="text/javascript" src="../../lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../lib/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/js/select2.full.min.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/ace.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/mode-html.js"></script>
-<script type="text/javascript" src="../../lib/js/ace/theme-github.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/theme-github.js"></script>
 <!-- Javascript -->
-<script type="text/javascript" src="../../js/app.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/app.js"></script>
 </body>
 
 </html>

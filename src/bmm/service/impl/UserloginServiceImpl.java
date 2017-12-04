@@ -1,5 +1,6 @@
 package bmm.service.impl;
 
+import bmm.dao.UserloginDAO;
 import bmm.entity.UserloginEntity;
 import bmm.service.UserloginService;
 import bmm.utils.hibernate_util.HibernateUtil;
@@ -18,6 +19,15 @@ import java.util.List;
 
 public class UserloginServiceImpl implements UserloginService {
 
+    private UserloginDAO userloginDAO;
+
+    public UserloginDAO getUserloginDAO() {
+        return userloginDAO;
+    }
+
+    public void setUserloginDAO(UserloginDAO userloginDAO) {
+        this.userloginDAO = userloginDAO;
+    }
 
     /**
      * 检查用户名是否存在
@@ -52,11 +62,7 @@ public class UserloginServiceImpl implements UserloginService {
      */
     public String encryptPassword(String password) {
         String pa = null;
-        try {
-            pa = Md5Util.md5Encode(password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        pa = Md5Util.md5Encode(password);
         return pa;
     }
 

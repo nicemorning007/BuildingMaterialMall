@@ -1,6 +1,14 @@
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String isLogin = CookieUtil.getCookiesValue(request, "isLogin");
+    if (isLogin != null && StringUtils.isNotBlank(isLogin)) {
+        response.sendRedirect("/admin/html/index.jsp");
+    }
+%>
 <head>
     <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,6 +92,7 @@
                 <div class="col-sm-12 text-center">
                     <i class="login-logo fa fa-connectdevelop fa-5x"></i>
                     <h4>建材商城后台管理系统</h4>
+                    <h4><s:property value="info"/></h4>
                 </div>
                 <div class="col-sm-12">
                     <div class="login-body">
@@ -94,7 +103,7 @@
                                 Log In...
                             </div>
                         </div>
-                        <s:form action="">
+                        <s:form action="adminControlAction_login" method="POST">
                             <div class="control">
                                 <a>Administrator:</a>
                                 <s:textfield name="username" type="text" class="form-control" placeholder="管理员账户名"/>
@@ -104,7 +113,7 @@
                                 <s:password name="password" id="form-control"/>
                             </div>
                             <div class="login-button text-center">
-                                <input type="submit" class="btn btn-primary" value="Login" placeholder="管理员密码"/>
+                                <s:submit cssClass="btn btn-primary" value="Login" placeholder="管理员密码"/>
                             </div>
                         </s:form>
                     </div>

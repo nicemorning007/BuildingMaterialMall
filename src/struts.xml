@@ -5,27 +5,40 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
     <constant name="struts.devMode" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 
     <!--  Make the Spring object factory the automatic default -->
     <constant name="struts.objectFactory" value="spring"/>
     <constant name="struts.ui.theme" value="simple"/>
 
-    <package name="spring-default">
+    <package name="spring-default" namespace="/">
         <interceptors>
             <interceptor name="autowiring"
                          class="com.opensymphony.xwork2.spring.interceptor.ActionAutowiringInterceptor"/>
         </interceptors>
     </package>
-    <package name="sturts2" extends="struts-default" namespace="/">
-        <!--用户层-->
-        <!--登陆注册-->
 
-        <!--登陆注册结束-->
-        <!--用户层结束-->
+    <!--struts action-->
+    <!--用户层-->
+    <package name="struts" namespace="/" extends="struts-default">
+        <!--登陆登陆注册-->
 
-        <!--管理层-->
-
-        <!--管理层结束-->
-
+        <!--结束登陆登陆注册-->
     </package>
+    <!--结束用户层-->
+
+    <!--管理层-->
+    <package name="adminPackage" namespace="/" extends="struts-default">
+        <!--管理员账户登陆注册相关-->
+        <action name="adminControlAction_*" class="adminControlAction" method="{1}">
+            <result name="login" type="redirect">/admin/html/index.jsp</result>
+            <result name="input" type="redirect">/admin/index.jsp</result>
+            <result name="logout" type="redirect">/admin/html/security/logout.jsp</result>
+            <result name="changePassword">/admin/html/security/profile.jsp</result>
+            <allowed-methods>login,logout,changePassword</allowed-methods>
+        </action>
+        <!--结束管理员账户登陆注册相关-->
+    </package>
+    <!--结束管理层-->
+    <!--end of struts action-->
 </struts>

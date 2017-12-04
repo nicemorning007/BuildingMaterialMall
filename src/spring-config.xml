@@ -35,13 +35,25 @@
     <bean id="userloginDao" class="bmm.dao.impl.UserloginDAOImpl">
         <property name="hibernateTemplate" ref="ht"/>
     </bean>
+    <bean id="adminControlDao" class="bmm.dao.impl.AdminControlDAOImpl">
+        <property name="hibernateTemplate" ref="ht"/>
+    </bean>
+    <!--结束配置DAO-->
 
     <!--配置service-->
     <bean id="userloginService" class="bmm.service.impl.UserloginServiceImpl">
         <property name="userloginDAO" ref="userloginDao"/>
     </bean>
+    <bean id="adminControlService" class="bmm.service.impl.AdminControlServiceImpl">
+        <property name="adminControlDAO" ref="adminControlDao"/>
+    </bean>
+    <!--结束配置service-->
 
     <!--配置Action-->
+    <bean id="adminControlAction" class="bmm.struts.action.AdminControlAction">
+        <property name="adminControlService" ref="adminControlService"/>
+    </bean>
+    <!--结束配置Action-->
 
     <!-- 配置Spring事务管理器 -->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -50,7 +62,7 @@
     <tx:annotation-driven transaction-manager="txManager"/>
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="login*"/>
+            <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
 

@@ -4,14 +4,10 @@ import bmm.service.AdminControlService;
 import bmm.service.impl.AdminControlServiceImpl;
 import org.junit.jupiter.api.Test;
 
-public class TranscationTest {
+public class HibernateTest {
     @Test
-    public void getUsername() {
+    public void updateTest() {
         AdminControlService adminControlService = new AdminControlServiceImpl();
-        if (adminControlService.isExist("root")) {
-            System.out.println("true");
-        } else {
-            System.out.println("false");
-        }
+        adminControlService.changePassword("root", "aaa");
     }
 }

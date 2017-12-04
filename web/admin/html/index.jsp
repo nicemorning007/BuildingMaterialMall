@@ -1,6 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-
+<%
+    String username = CookieUtil.getCookiesValue(request, "isLogin");
+%>
 <head>
     <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,8 +44,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <%--todo:显示管理员名字--%>
-                            占位
+                            <%=username%>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
@@ -50,16 +53,15 @@
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">
-                                        <%--todo:显示管理员名字--%>
-                                        占位
+                                        <%=username%>
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
-                                            <a href="./admin/html/security/profile.jsp">安全设置</a>
+                                            <a href="./security/profile.jsp">安全设置</a>
                                         </button>
                                         <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            <a href="./admin/html/security/logout.jsp">注销</a>
+                                            <a href="/adminControlAction_logout.action">注销</a>
                                         </button>
                                     </div>
                                 </div>
@@ -154,8 +156,7 @@
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
                                         <li><a href="security/profile.jsp">
-                                            <%--todo:show administrator`s name--%>
-                                            占位
+                                            <%=username%>
                                         </a>
                                         </li>
                                     </ul>

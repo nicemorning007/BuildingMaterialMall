@@ -1,5 +1,6 @@
 package bmm.utils.md5_util;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 
 /**
@@ -13,7 +14,7 @@ public class Md5Util {
      * @return 返回32位md5码
      * @throws Exception 如果需要加密的字符串为 null 时将会抛出异常
      */
-    public static String md5Encode(String inStr) throws Exception {
+    public static String md5Encode(String inStr) {
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
@@ -22,7 +23,12 @@ public class Md5Util {
             return "";
         }
 
-        byte[] byteArray = inStr.getBytes("UTF-8");
+        byte[] byteArray = new byte[0];
+        try {
+            byteArray = inStr.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         byte[] md5Bytes = md5.digest(byteArray);
         StringBuffer hexValue = new StringBuffer();
         for (int i = 0; i < md5Bytes.length; i++) {

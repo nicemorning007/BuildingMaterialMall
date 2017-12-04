@@ -1,9 +1,6 @@
 package bmm.utils.hibernate_util;
 
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.Query;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
@@ -32,6 +29,7 @@ public class HibernateUtil {
 
     /**
      * 用于SessionFactory.openSession()方法的直接获取
+     *
      * @return session对象
      * @throws HibernateException 如果 SessionFactory 对象创建失败会抛出该异常
      */
