@@ -15,10 +15,13 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/select2.min.css">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/style.css">
@@ -48,7 +51,8 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
-                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"
+                                     class="profile-img">
                             </li>
                             <li>
                                 <div class="profile-info">
@@ -101,13 +105,17 @@
                             <div id="dropdown-element" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -121,13 +129,15 @@
                             <div id="dropdown-table" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/attribute.jsp">属性设置</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/addGoods.jsp">新增商品</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/findGoods.jsp">商品查询</a>
                                         </li>
@@ -143,7 +153,8 @@
                             <div id="component-example" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">订单查询</a>
                                         </li>
@@ -159,9 +170,9 @@
                             <div id="dropdown-form" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
-                                            <%=username%>
-                                        </>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
+                                                <%=username%>
                                             </a>
                                         </li>
                                     </ul>
@@ -181,7 +192,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
-                                    <div class="title">安全设置</div>
+                                    <div class="title">安全设置&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span style="background-color: #00FF7F">
+                                                <s:property value="info"/>
+                                            </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -192,11 +207,7 @@
                                         </strong>
                                     </div>
                                     <div class="panel fresh-color panel-warning">
-                                        <div class="panel-heading">修改管理员密码
-                                            <span style="background-color: #00FF7F">
-                                                <s:property value="info"/>
-                                            </span>
-                                        </div>
+                                        <div class="panel-heading">修改管理员密码</div>
                                         <div class="panel-body" style="padding: 0;">
                                             <div class="card-body">
                                                 <s:form class="form-horizontal"
@@ -246,7 +257,6 @@
                                             if (!username.equals("root")) {
                                         %>
                                         <div class="panel-body" style="padding: 0">
-                                            <%--todo:--%>
                                             <div class="pricing-table red">
                                                 <div class="pt-header">
                                                     <div class="plan-pricing">
@@ -270,7 +280,8 @@
                                         %>
                                         <div class="panel-body">
                                             <form class="form-horizontal">
-                                                <%--todo:--%>
+                                                <input type="hidden" value="<%=username%>"/>
+                                            <%--todo:--%>
                                                 <div align="center">
                                                     <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
                                                         <input type="checkbox" id="checkbox-fa-light-1">
@@ -315,40 +326,42 @@
                                         <div class="panel-heading">新增管理员</div>
                                         <div class="panel-body">
                                             <%--todo:新增管理员--%>
-                                            <form class="form-horizontal">
+                                            <s:form cssClass="form-horizontal" action="adminControlAction_addAdmin"
+                                                    method="POST">
                                                 <div class="form-group">
                                                     <label for="username" class="col-sm-2 control-label">用户名</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" class="form-control" id="username"
-                                                               placeholder="用户名">
+                                                        <s:textfield cssClass="form-control" id="username"
+                                                                     name="username"
+                                                                     placeholder="用户名"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="password4" class="col-sm-2 control-label">密码</label>
                                                     <div class="col-sm-10">
-                                                        <input type="password" class="form-control" id="password4"
-                                                               placeholder="密码">
+                                                        <s:password cssClass="form-control" id="password4"
+                                                                    name="password"
+                                                                    placeholder="密码"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="confirmPassword"
                                                            class="col-sm-2 control-label">确认密码</label>
                                                     <div class="col-sm-10">
-                                                        <input type="password" class="form-control" id="confirmPassword"
-                                                               placeholder="确认密码">
+                                                        <s:password class="form-control" id="confirmPassword"
+                                                                    name="confirmPassword"
+                                                                    placeholder="确认密码"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-default"
-                                                                style="width: 40%;float: left">注册
-                                                        </button>
-                                                        <button type="reset" class="btn btn-default"
-                                                                style="width: 40%;float: right">重置
-                                                        </button>
+                                                        <s:submit cssClass="btn btn-default"
+                                                                  cssStyle="width: 40%;float: left" value="注册"/>
+                                                        <s:reset cssClass="btn btn-default"
+                                                                 cssStyle="width: 40%;float: right" value="重置"/>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </s:form>
                                         </div>
                                     </div>
                                 </div>
@@ -372,7 +385,8 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.matchHeight-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/select2.full.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/ace.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/mode-html.js"></script>

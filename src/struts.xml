@@ -21,23 +21,29 @@
     <!--struts action-->
     <!--用户层-->
     <package name="struts" namespace="/" extends="struts-default">
-        <!--登陆登陆注册-->
-
-        <!--结束登陆登陆注册-->
+        <!--用户相关-->
+        <action name="userControlAction_*" class="userControlAction" method="{1}">
+            <result name="login" type="redirect">/index.jsp</result>
+            <result name="input">/login.jsp</result>
+            <result name="register">/register.jsp</result>
+            <allowed-methods>login,register</allowed-methods>
+        </action>
+        <!--结束用户相关-->
     </package>
     <!--结束用户层-->
 
     <!--管理层-->
     <package name="adminPackage" namespace="/" extends="struts-default">
-        <!--管理员账户登陆注册相关-->
+        <!--管理员账户相关-->
         <action name="adminControlAction_*" class="adminControlAction" method="{1}">
-            <result name="login">/admin/html/index.jsp</result>
+            <result name="login" type="redirect">/admin/html/index.jsp</result>
             <result name="input">/admin/index.jsp</result>
             <result name="logout">/admin/html/security/logout.jsp</result>
             <result name="changePassword">/admin/html/security/profile.jsp</result>
-            <allowed-methods>login,logout,changePassword</allowed-methods>
+            <result name="addAdmin">/admin/html/security/profile.jsp</result>
+            <allowed-methods>login,logout,changePassword,addAdmin</allowed-methods>
         </action>
-        <!--结束管理员账户登陆注册相关-->
+        <!--结束管理员账户相关-->
     </package>
     <!--结束管理层-->
     <!--end of struts action-->

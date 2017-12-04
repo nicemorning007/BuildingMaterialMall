@@ -48,7 +48,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="top_right">
                 <ul>
                     <li><a href="#">欢迎来到建材商城</a></li>
-                    <%--todo:check if login--%>
                     <s:if test="true">
                         <li><a href="${pageContext.request.contextPath}/login.jsp">登陆</a></li>
                         <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
@@ -159,10 +158,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="account-bottom">
             <div class="col-md-6 account-left">
-                <%--todo--%>
-                <s:form theme="simple" method="POST">
+                <s:form action="userControlAction_register" method="POST">
                     <div class="account-top heading">
                         <h3>成为新用户</h3>
+                        <span><s:property value="info"/></span>
                     </div>
                     <div class="address">
                         <span>用户名</span>
@@ -178,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="address">
                         <span>手机号</span>
-                        <s:textfield name="phone"/>
+                        <s:textfield name="phoneNum"/>
                     </div>
                     <div class="address new">
                         <s:submit value="注册"/>
@@ -241,6 +240,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             </div>
         </div>
+    </div>
+</div>
         <!--start-smooth-scrolling-->
         <script type="text/javascript">
             $(document).ready(function () {

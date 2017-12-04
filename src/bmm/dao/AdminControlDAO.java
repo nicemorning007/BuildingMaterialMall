@@ -30,6 +30,14 @@ public interface AdminControlDAO {
     boolean changePassword(String username, String newPassword);
 
     /**
+     * 用于新增管理员账户
+     * @param username 新的管理员帐户名
+     * @param password 加密好的密码
+     * @return 如果添加成功返回 <b>true</b> 否则返回 <b>false</b>
+     */
+    boolean addAdmin(String username, String password);
+
+    /**
      * 用于清除 Hibernate 的缓存
      */
     void clearCache();

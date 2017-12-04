@@ -61,12 +61,12 @@
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <a href="${pageContext.request.contextPath}/admin/security/profile.jsp">
+                                        <a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
                                             <button type="button" class="btn btn-default"><i class="fa fa-user"></i>
                                                 安全设置
                                             </button>
                                         </a>
-                                        <a href="/adminControlAction_logout.action">
+                                        <a href="/adminControlAction_logout.action"/>">
                                             <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
                                                 注销
                                             </button>

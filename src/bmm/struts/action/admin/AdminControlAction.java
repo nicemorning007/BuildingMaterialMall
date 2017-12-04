@@ -1,4 +1,4 @@
-package bmm.struts.action;
+package bmm.struts.action.admin;
 
 import bmm.service.AdminControlService;
 import bmm.service.impl.AdminControlServiceImpl;
@@ -17,10 +17,6 @@ public class AdminControlAction extends ActionSupport {
     private String confirmPassword;
     private String info;
     private AdminControlService adminControlService;
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
@@ -58,9 +54,14 @@ public class AdminControlAction extends ActionSupport {
         this.password = password;
     }
 
+    /**
+     * 仅用于将管理员账户登陆信息存储到浏览器中。cookie存在时间仅为30分钟
+     *
+     * @param value 需要存储的cookie的value
+     */
     private void setIsLoginCookie(String value) {
         //添加cookie到客户端，[name,value]
-        Cookie cookie = CookieUtil.addCookie("isLogin", value, "/");
+        Cookie cookie = CookieUtil.addCookie("isLogin", value, 60 * 30, "/");
         HttpServletResponse httpServletResponse = ServletActionContext.getResponse();
         httpServletResponse.addCookie(cookie);
     }
@@ -70,23 +71,19 @@ public class AdminControlAction extends ActionSupport {
      *
      * @return 如果登陆成功返回通知字符串 <b>login</b> ，否则返回 <b>input</b>
      */
-    public String login(){
-        String flag = "input";
-        if (adminControlService.isExist(username)) {
-            if (adminControlService.isCorrectPassword(username, Md5Util.md5Encode(password))) {
-                flag = "login";
-                //将用户名存储到cookie中
-                setIsLoginCookie(username);
-            }
+    public String login() {
+        if (adminControlService.login(username, Md5Util.md5Encode(password))) {
+            setIsLoginCookie(username);
+            return "login";
         }
         info = "用户名或密码错误";
-        return flag;
+        return "input";
     }
 
     /**
      * 管理员账户退出操作方法，将会删除name为<b>isLogin</b>的cookie
      *
-     * @return 返回通知字符串 <b>logout</b>
+     * @return 返回字符串 <b>logout</b>
      */
     public String logout() {
         HttpServletRequest request = ServletActionContext.getRequest();
@@ -97,14 +94,36 @@ public class AdminControlAction extends ActionSupport {
         return "logout";
     }
 
+    /**
+     * 用于修改管理员账户密码
+     *
+     * @return 返回字符串 <b>changePassword</b>
+     */
     public String changePassword() {
         if (password.trim().equals(confirmPassword.trim())) {
-            if (adminControlService.changePassword(username, confirmPassword)) {
+            if (adminControlService.changePassword(username, Md5Util.md5Encode(confirmPassword))) {
                 info = "修改成功";
                 return "changePassword";
+            } else {
+                info = "操作失败请重试";
             }
+        } else {
+            info = "两次密码不匹配";
         }
-        info = "操作失败请重试";
         return "changePassword";
+    }
+
+    /**
+     * 用于新增管理员账户
+     *
+     * @return 返回字符串 <b>addAdmin</b>
+     */
+    public String addAdmin() {
+        if (adminControlService.addAdmin(username, Md5Util.md5Encode(password)) == 1) {
+            info = "添加成功";
+        } else {
+            info = "操作失败请重试";
+        }
+        return "addAdmin";
     }
 }

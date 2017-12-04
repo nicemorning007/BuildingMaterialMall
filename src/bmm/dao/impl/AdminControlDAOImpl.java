@@ -3,7 +3,6 @@ package bmm.dao.impl;
 import bmm.dao.AdminControlDAO;
 import bmm.entity.AdminbaseEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import bmm.utils.md5_util.Md5Util;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -98,13 +97,38 @@ public class AdminControlDAOImpl implements AdminControlDAO {
         String hql = "update AdminbaseEntity as adminbaseEntity " +
                 "set adminbaseEntity.password=:password where adminbaseEntity.username=:username";
         Query query = session.createQuery(hql);
-        query.setParameter("password", Md5Util.md5Encode(newPassword));
+        query.setParameter("password", newPassword);
         query.setParameter("username", username);
         int row = query.executeUpdate();
         if (row > 0) {
             flag = true;
         }
         transaction.commit();
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 用于新增管理员账户
+     * @param username 新的管理员帐户名
+     * @param password 加密好的密码
+     * @return 如果添加成功返回 <b>true</b> 否则返回 <b>false</b>
+     */
+    @Override
+    public boolean addAdmin(String username, String password) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        AdminbaseEntity adminbaseEntity = new AdminbaseEntity();
+        adminbaseEntity.setUsername(username);
+        adminbaseEntity.setPassword(password);
+        try {
+            session.save(adminbaseEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         session.close();
         return flag;
     }

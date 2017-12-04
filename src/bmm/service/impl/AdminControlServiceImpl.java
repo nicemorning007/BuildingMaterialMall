@@ -3,7 +3,6 @@ package bmm.service.impl;
 import bmm.dao.AdminControlDAO;
 import bmm.dao.impl.AdminControlDAOImpl;
 import bmm.service.AdminControlService;
-import bmm.utils.md5_util.Md5Util;
 
 /**
  * 关于管理员账户的操作接口的实现
@@ -30,25 +29,21 @@ public class AdminControlServiceImpl implements AdminControlService {
     }
 
     /**
-     * 用于判断用户输入的管理员账户是否存在
+     * 用于处理管理员登陆请求
      *
-     * @param username 用户输入的管理员账号
-     * @return <b>true</b> 如果该账号存在，否则返回 <b>false</b>
+     * @param username 用户输入的用户名
+     * @param password 加密后的用户输入的密码
+     * @return 如果登陆成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean isExist(String username) {
-        return adminControlDAO.isExist(username);
-    }
-
-    /**
-     * 用于判断用户输入的管理员账户的密码是否正确
-     *
-     * @param password 加密后的用户输入的管理员账户的密码
-     * @return <b>true</b> 如果该账号的密码正确，否则返回 <b>false</b>
-     */
-    @Override
-    public boolean isCorrectPassword(String username, String password) {
-        return adminControlDAO.isCorrectPassword(username, password);
+    public boolean login(String username, String password) {
+        boolean flag = false;
+        if (adminControlDAO.isExist(username)) {
+            if (adminControlDAO.isCorrectPassword(username, password)) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     /**
@@ -69,7 +64,25 @@ public class AdminControlServiceImpl implements AdminControlService {
      * @return <b>true</b> 如果该账号密码修改成功，否则返回<b>false</b>
      */
     @Override
-    public boolean changePassword(String username, String newPassword){
+    public boolean changePassword(String username, String newPassword) {
         return adminControlDAO.changePassword(username, newPassword);
+    }
+
+    /**
+     * 用于新增管理员账户
+     *
+     * @param username 新的管理员帐户名
+     * @param password 加密好的密码
+     * @return 如果添加成功返回 <b>1</b>；如果用户名已存在则返回 <b>0</b>；如果是未知错误则返回 <b>-1</b>
+     */
+    @Override
+    public int addAdmin(String username, String password) {
+        int flag = -1;
+        if (!adminControlDAO.isExist(username)) {
+            adminControlDAO.addAdmin(username, password);
+        } else {
+            flag = 0;
+        }
+        return flag;
     }
 }

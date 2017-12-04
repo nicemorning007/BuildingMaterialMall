@@ -8,8 +8,7 @@
     <meta name="keywords" content="Nuevo Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
     <script type="applijegleryion/x-javascript">
-         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-    </script>
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }    </script>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel='stylesheet' type='text/css'/>
@@ -70,7 +69,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="logo" style="">
                     <a href="index.jsp">
                         <h1>建 <span>材</span>
-                            <img src="${pageContext.request.contextPath}/images/logo.png" alt="" width="48px" height="48px"/>
+                            <img src="${pageContext.request.contextPath}/images/logo.png" alt="" width="48px"
+                                 height="48px"/>
                         </h1>
                     </a>
                 </div>
@@ -80,7 +80,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!--start-header-menu-->
             <ul class="megamenu skyblue">
-                <li class="active grid"><a class="color1" href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
+                <li class="active grid"><a class="color1" href="${pageContext.request.contextPath}/index.jsp">首页</a>
+                </li>
                 <li class="grid"><a class="color2" href="#">分类栏目</a>
                     <div class="megapanel">
                         <div class="row">
@@ -143,6 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </li>
                 <li><a class="color4" href="#">联系我们</a></li>
+                <li><a class="color4" href="${pageContext.request.contextPath}/admin/index.jsp">管理员</a></li>
             </ul>
             <div class="row">
                 <div class="col2"></div>
@@ -160,10 +162,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="account-bottom">
             <div class="col-md-6 account-left second">
-                <%--todo--%>
-                <s:form action="loginAction" theme="simple" method="POST">
+                <s:form action="userControlAction_login" method="POST">
                     <div class="account-top heading">
                         <h3>登陆</h3>
+                        <span><s:property value="info"/></span>
                     </div>
                     <div class="address">
                         <span>用户名</span>
@@ -268,20 +270,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-    <!--start-smooth-scrolling-->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var defaults = {
-                  containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-             };
-            $().UItoTop({easingType: 'easeOutQuart'});
-        });
-    </script>
-    <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
-                                                                             style="opacity: 1;"> </span></a>
+<!--start-smooth-scrolling-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        $().UItoTop({easingType: 'easeOutQuart'});
+    });
+</script>
+<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                         style="opacity: 1;"> </span></a>
 
 
 </body>

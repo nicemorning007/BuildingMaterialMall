@@ -34,7 +34,7 @@
                 </div>
                 <div class="text-center" style="font-size: 20px">
                     <script language="JavaScript">
-                        window.setTimeout("window.location='${pageContext.request.contextPath}/admin/${pageContext.request.contextPath}/admin/html/index.jsp'",1500);
+                        window.setTimeout("window.location='/admin/index.jsp'",1500);
                     </script>
                 </div>
             </div>
