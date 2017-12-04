@@ -31,9 +31,9 @@
     <package name="adminPackage" namespace="/" extends="struts-default">
         <!--管理员账户登陆注册相关-->
         <action name="adminControlAction_*" class="adminControlAction" method="{1}">
-            <result name="login" type="redirect">/admin/html/index.jsp</result>
-            <result name="input" type="redirect">/admin/index.jsp</result>
-            <result name="logout" type="redirect">/admin/html/security/logout.jsp</result>
+            <result name="login">/admin/html/index.jsp</result>
+            <result name="input">/admin/index.jsp</result>
+            <result name="logout">/admin/html/security/logout.jsp</result>
             <result name="changePassword">/admin/html/security/profile.jsp</result>
             <allowed-methods>login,logout,changePassword</allowed-methods>
         </action>
