@@ -28,6 +28,75 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     }
 
     /**
+     * 根据指定的用户名获取对应的ID号
+     * @param username 要查询的用户名
+     * @return 如果查询到则返回该用户名对应的ID号，否则返回 <b>0</b>
+     */
+    @Override
+    public int getIdByUsername(String username) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "select ae.id from AdminbaseEntity ae where ae.username=:username";
+        Query query = session.createQuery(hql);
+        query.setParameter("username", username);
+        List<AdminbaseEntity> list = query.list();
+        if (list.size() > 0) {
+            for (AdminbaseEntity adminbaseEntity : list) {
+                return adminbaseEntity.getId();
+            }
+        }
+        transaction.commit();
+        session.close();
+        return 0;
+    }
+
+    /**
+     * 根据ID号获取对应的用户名
+     * @param id 要查询的ID号
+     * @return 如果查询到则返回该ID号对应的用户名，否则返回 <b>null</b>
+     */
+    @Override
+    public String getUsernameById(int id) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "select ae.username from AdminbaseEntity ae where ae.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<AdminbaseEntity> list = query.list();
+        if (list.size() > 0) {
+            for (AdminbaseEntity adminbaseEntity : list) {
+                return adminbaseEntity.getUsername();
+            }
+        }
+        transaction.commit();
+        session.close();
+        return null;
+    }
+
+    /**
+     * 根据ID号获取对应的用户的密码
+     * @param id 要查询的ID号
+     * @return 如果查询到则返回该ID号对应的密码，否则返回 <b>null</b>
+     */
+    @Override
+    public String getPasswordById(int id) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "select ae.password from AdminbaseEntity ae where ae.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<AdminbaseEntity> list = query.list();
+        if (list.size() > 0) {
+            for (AdminbaseEntity adminbaseEntity : list) {
+                return adminbaseEntity.getPassword();
+            }
+        }
+        transaction.commit();
+        session.close();
+        return null;
+    }
+
+    /**
      * 用于判断用户输入的管理员账户是否存在
      *
      * @param username 用户输入的管理员账号
@@ -45,34 +114,6 @@ public class AdminControlDAOImpl implements AdminControlDAO {
         if (list.size() >= 1) {
             for (AdminbaseEntity adminbaseEntity : list) {
                 if (adminbaseEntity.getUsername().equals(username)) {
-                    flag = true;
-                }
-            }
-        }
-        transaction.commit();
-        session.close();
-        return flag;
-    }
-
-    /**
-     * 用于判断用户输入的管理员账户的密码是否正确
-     *
-     * @param password 加密后的用户输入的管理员账户的密码
-     * @return <b>true</b> 如果该账号的密码正确，否则返回 <b>false</b>
-     */
-    @Override
-    public boolean isCorrectPassword(String username, String password) {
-        boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
-        Criterion criterion = Restrictions.and(Restrictions.eq("username", username),
-                Restrictions.eq("password", password));
-        criteria.add(criterion);
-        List<AdminbaseEntity> list = criteria.list();
-        if (list.size() >= 1) {
-            for (AdminbaseEntity adminbaseEntity : list) {
-                if (adminbaseEntity.getPassword().equals(password)) {
                     flag = true;
                 }
             }

@@ -1,0 +1,100 @@
+package bmm.service.impl;
+
+import bmm.dao.UserControlDAO;
+import bmm.service.UserControlService;
+
+/**
+ * 对用户登陆和注册做查询判断处理的方法的实现均在此类下
+ */
+
+public class UserlControlServiceImpl implements UserControlService {
+    private UserControlDAO userControlDAO;
+
+    public UserControlDAO getUserControlDAO() {
+        return userControlDAO;
+    }
+
+    public void setUserControlDAO(UserControlDAO userControlDAO) {
+        this.userControlDAO = userControlDAO;
+    }
+
+    /**
+     * 用于处理用户登陆请求
+     *
+     * @param username 用户输入的用户名
+     * @param password 加密后的用户输入的密码
+     * @return 如果登陆成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean login(String username, String password) {
+        boolean flag = false;
+        if (userControlDAO.isExist(username)) {
+            if (userControlDAO.getUserState(userControlDAO.getUserIdByName(username)) == 0) {
+                if (userControlDAO.getPasswordById(userControlDAO.getUserIdByName(username)).equals(password)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 用于处理用户账户的退出
+     *
+     * @return <b>true</b>如果该账号退出操作成功，否则返回<b>false</b>
+     */
+    @Override
+    public void exitAdmin() {
+        userControlDAO.clearCache();
+    }
+
+    /**
+     * 用于修改指定用户的密码
+     *
+     * @param username    需要修改密码的用户名
+     * @param newPassword 加密好的密码
+     * @return <b>true</b> 如果该账号密码修改成功，否则返回<b>false</b>
+     */
+    @Override
+    public boolean changePassword(String username, String newPassword) {
+        return userControlDAO.changePassword(username, newPassword);
+    }
+
+    /**
+     * 用于新增用户账户
+     *
+     * @param username 新的用户帐户名
+     * @param password 加密好的密码
+     * @return 如果添加成功返回 <b>1</b>；如果用户名已存在则返回 <b>0</b>；
+     * 如果是未知因素导致操作失败则返回 <b>-1</b>
+     */
+    @Override
+    public int register(String username, String password) {
+        int flag = -1;
+        if (!userControlDAO.isExist(username)) {
+            if (userControlDAO.register(username, password)) {
+                return flag;
+            }
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        return flag;
+    }
+
+    /**
+     * 用于修改指定id的用户的状态值
+     *
+     * @param id    要注销的用户的id
+     * @param state 要修改的状态值
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean changeUserStateById(int id, int state) {
+        boolean flag = false;
+        if (userControlDAO.chageUserstate(id, state)) {
+            flag = true;
+        }
+        return flag;
+    }
+}

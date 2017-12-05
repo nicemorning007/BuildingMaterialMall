@@ -15,6 +15,7 @@ public class UserControlAction extends ActionSupport {
     private String confirmPassword;
     private String phoneNum;
     private String info;
+    private String id;
     private UserControlService userControlService;
 
     public UserControlService getUserControlService() {
@@ -65,6 +66,14 @@ public class UserControlAction extends ActionSupport {
         this.info = info;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     /**
      * 用于用户登陆的操作方法
      *
@@ -72,7 +81,7 @@ public class UserControlAction extends ActionSupport {
      */
     public String login() {
         if (!userControlService.login(username, Md5Util.md5Encode(this.password))) {
-            info = "用户名或密码错误";
+            info = "用户名或密码错误或已被注销或挂失";
             return "input";
         } else {
             HttpServletResponse response = ServletActionContext.getResponse();
@@ -82,6 +91,11 @@ public class UserControlAction extends ActionSupport {
         return "login";
     }
 
+    /**
+     * 用于用户注册的操作方法
+     *
+     * @return 返回"register"字符串
+     */
     public String register() {
         int flag = userControlService.register(username, Md5Util.md5Encode(this.password));
         if (flag == 1) {
@@ -92,5 +106,28 @@ public class UserControlAction extends ActionSupport {
             info = "发生未知错误";
         }
         return "register";
+    }
+
+    /**
+     * 用于用户注销的方法
+     *
+     * @return 返回"userForbidden"字符串
+     */
+    public String userForbidden() {
+        if (userControlService.changeUserStateById(Integer.parseInt(this.id), 1)) {
+            info = "操作成功";
+        } else {
+            info = "发生未知错误";
+        }
+        return "userForbidden";
+    }
+
+    public String unUserForbidden() {
+        if (userControlService.changeUserStateById(Integer.parseInt(this.id), 0)) {
+            info = "操作成功";
+        } else {
+            info = "发生未知错误";
+        }
+        return "unUserForbidden";
     }
 }

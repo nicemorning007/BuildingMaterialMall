@@ -39,7 +39,7 @@ public class AdminControlServiceImpl implements AdminControlService {
     public boolean login(String username, String password) {
         boolean flag = false;
         if (adminControlDAO.isExist(username)) {
-            if (adminControlDAO.isCorrectPassword(username, password)) {
+            if (adminControlDAO.getPasswordById(adminControlDAO.getIdByUsername(username)).equals(password)) {
                 flag = true;
             }
         }
