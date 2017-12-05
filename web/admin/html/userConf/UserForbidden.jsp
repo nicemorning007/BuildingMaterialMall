@@ -1,11 +1,8 @@
-<%@ page import="bmm.dao.UserinfoDAO" %>
-<%@ page import="bmm.dao.impl.UserinfoDAOImpl" %>
-<%@ page import="bmm.entity.UserinfoEntity" %>
-<%@ page import="java.util.List" %>
-<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
-<%@ page import="bmm.struts.action.user.UserControlAction" %>
 <%@ page import="bmm.dao.UserControlDAO" %>
 <%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
+<%@ page import="bmm.entity.UserinfoEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -230,11 +227,10 @@
                                         </tfoot>
                                         <tbody>
                                         <%
-                                            UserinfoDAO userinfoDAO = new UserinfoDAOImpl();
                                             UserControlDAO userControlDAO = new UserControlDAOImpl();
-                                            List<UserinfoEntity> list = userinfoDAO.showAllInfo();
+                                            List<UserinfoEntity> list = userControlDAO.showAllUserInfo();
                                             for (UserinfoEntity userinfoEntity : list) {
-                                                if (userControlDAO.getUserState(userinfoEntity.getId()) == 0) {
+                                                if (userControlDAO.getUserState(userinfoEntity.getId()) != 1 && userControlDAO.getUserState(userinfoEntity.getId()) != 3) {
                                         %>
                                         <tr>
                                             <s:form action="userControlAction_userForbidden" method="POST">

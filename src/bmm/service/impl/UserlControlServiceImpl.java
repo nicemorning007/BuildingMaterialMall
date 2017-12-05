@@ -2,6 +2,11 @@ package bmm.service.impl;
 
 import bmm.dao.UserControlDAO;
 import bmm.service.UserControlService;
+import bmm.utils.md5_util.Md5Util;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * 对用户登陆和注册做查询判断处理的方法的实现均在此类下
@@ -29,8 +34,12 @@ public class UserlControlServiceImpl implements UserControlService {
     public boolean login(String username, String password) {
         boolean flag = false;
         if (userControlDAO.isExist(username)) {
-            if (userControlDAO.getUserState(userControlDAO.getUserIdByName(username)) == 0) {
-                if (userControlDAO.getPasswordById(userControlDAO.getUserIdByName(username)).equals(password)) {
+            if (userControlDAO.getUserState(userControlDAO.getIdByName(username)) == 0) {
+                if (userControlDAO.getPasswordById(userControlDAO.getIdByName(username)).equals(password)) {
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                    userControlDAO.setLatestLoginTimeById(userControlDAO.getIdByName(username),
+                            format.format(calendar.getTime()));
                     flag = true;
                 }
             }
@@ -57,7 +66,7 @@ public class UserlControlServiceImpl implements UserControlService {
      */
     @Override
     public boolean changePassword(String username, String newPassword) {
-        return userControlDAO.changePassword(username, newPassword);
+        return userControlDAO.changePasswordById(userControlDAO.getIdByName(username), newPassword);
     }
 
     /**
@@ -96,5 +105,30 @@ public class UserlControlServiceImpl implements UserControlService {
             flag = true;
         }
         return flag;
+    }
+
+    /**
+     * 用于查询该用户是否被注销或挂失
+     *
+     * @param id 要查询的用户的id
+     * @return 如果未查到数据则返回 <b>-1</b>；
+     * 如果已被注销则返回 <b>1</b>；
+     * 如果已被挂失则返回 <b>2</b>；
+     * 否则返回 <b>0</b>
+     */
+    @Override
+    public int getUserStateById(int id) {
+        return userControlDAO.getUserState(id);
+    }
+
+    /**
+     * 用于重置用户密码
+     *
+     * @param id 要重置的用户ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean resetPasswordById(int id) {
+        return userControlDAO.changePasswordById(id, Md5Util.md5Encode("aaa111"));
     }
 }

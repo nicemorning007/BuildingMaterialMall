@@ -114,20 +114,99 @@ public class UserControlAction extends ActionSupport {
      * @return 返回"userForbidden"字符串
      */
     public String userForbidden() {
-        if (userControlService.changeUserStateById(Integer.parseInt(this.id), 1)) {
-            info = "操作成功";
-        } else {
-            info = "发生未知错误";
+        if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 0) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 1)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        } else if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 2) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 3)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
         }
         return "userForbidden";
     }
 
+    /**
+     * 用于用户解除注销的方法
+     *
+     * @return 返回"unUserForbidden"字符串
+     */
     public String unUserForbidden() {
-        if (userControlService.changeUserStateById(Integer.parseInt(this.id), 0)) {
+        if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 1) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 0)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        } else if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 3) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 2)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        }
+        return "unUserForbidden";
+    }
+
+    /**
+     * 用于用户挂失操作
+     *
+     * @return 返回字符串 <b>lossReporting</b>
+     */
+    public String lossReporting() {
+        if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 0) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 2)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        } else if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 1) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 3)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        }
+        return "lossReporting";
+    }
+
+    /**
+     * 用于解除用户挂失操作
+     *
+     * @return 返回字符串 <b>lossReporting</b>
+     */
+    public String unLossReporting() {
+        if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 2) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 0)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        } else if (userControlService.getUserStateById(Integer.parseInt(this.id)) == 3) {
+            if (userControlService.changeUserStateById(Integer.parseInt(this.id), 1)) {
+                info = "操作成功";
+            } else {
+                info = "发生未知错误";
+            }
+        }
+        return "unLossReporting";
+    }
+
+    /**
+     * 用于重置用户密码操作
+     *
+     * @return 返回字符串 <b>resetPassword</b>
+     */
+    public String resetPassword() {
+        if (userControlService.resetPasswordById(Integer.parseInt(this.id))) {
             info = "操作成功";
         } else {
             info = "发生未知错误";
         }
-        return "unUserForbidden";
+        return "resetPassword";
     }
 }

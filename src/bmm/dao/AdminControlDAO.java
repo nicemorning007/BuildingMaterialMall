@@ -33,14 +33,6 @@ public interface AdminControlDAO {
      */
     boolean isExist(String username);
 
-//    /**
-//     * 用于判断用户输入的管理员账户的密码是否正确
-//     *
-//     * @param password 加密后的用户输入的管理员账户的密码
-//     * @return <b>true</b> 如果该账号的密码正确，否则返回 <b>false</b>
-//     */
-//    boolean isCorrectPassword(String username, String password);
-
     /**
      * 用于修改指定用户的密码
      *

@@ -3,6 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <!--coustomer filter-->
+    <!--<filter>-->
+        <!--<filter-name>adminFilter</filter-name>-->
+        <!--<filter-class>filter.AdminFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>adminFilter</filter-name>-->
+        <!--<url-pattern>/admin/html/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
     <!--Hibernate Configuration-->
     <filter>
@@ -39,18 +48,6 @@
         </listener-class>
     </listener>
 
-    <!--error filter-->
-    <filter>
-        <filter-name>adminFilter</filter-name>
-        <filter-class>filter.AdminFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>adminFilter</filter-name>
-        <url-pattern>/admin</url-pattern>
-    </filter-mapping>
-
-    <!--error-->
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>

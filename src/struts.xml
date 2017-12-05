@@ -19,7 +19,6 @@
     </package>
 
     <!--struts action-->
-    <!--用户层-->
     <package name="struts" namespace="/" extends="struts-default">
         <!--用户相关-->
         <action name="userControlAction_*" class="userControlAction" method="{1}">
@@ -28,13 +27,15 @@
             <result name="register">/register.jsp</result>
             <result name="userForbidden">/admin/html/userConf/UserForbidden.jsp</result>
             <result name="unUserForbidden">/admin/html/userConf/UserForbidden.jsp</result>
-            <allowed-methods>login,register,userForbidden,unUserForbidden</allowed-methods>
+            <result name="lossReporting">/admin/html/userConf/lossReporting.jsp</result>
+            <result name="unLossReporting">/admin/html/userConf/lossReporting.jsp</result>
+            <result name="resetPassword">/admin/html/userConf/passwordReset.jsp</result>
+            <allowed-methods>login,register,userForbidden,unUserForbidden,lossReporting,unLossReporting,resetPassword
+            </allowed-methods>
         </action>
         <!--结束用户相关-->
     </package>
-    <!--结束用户层-->
 
-    <!--管理层-->
     <package name="adminPackage" namespace="/" extends="struts-default">
         <!--管理员账户相关-->
         <action name="adminControlAction_*" class="adminControlAction" method="{1}">
@@ -47,6 +48,5 @@
         </action>
         <!--结束管理员账户相关-->
     </package>
-    <!--结束管理层-->
     <!--end of struts action-->
 </struts>

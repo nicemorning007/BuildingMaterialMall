@@ -11,6 +11,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class AdminControlDAOImpl implements AdminControlDAO {
 
     /**
      * 根据指定的用户名获取对应的ID号
+     *
      * @param username 要查询的用户名
      * @return 如果查询到则返回该用户名对应的ID号，否则返回 <b>0</b>
      */
@@ -36,14 +38,12 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public int getIdByUsername(String username) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "select ae.id from AdminbaseEntity ae where ae.username=:username";
-        Query query = session.createQuery(hql);
-        query.setParameter("username", username);
-        List<AdminbaseEntity> list = query.list();
-        if (list.size() > 0) {
-            for (AdminbaseEntity adminbaseEntity : list) {
-                return adminbaseEntity.getId();
-            }
+        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
+        Criterion criterion = Restrictions.eq("username", username);
+        criteria.add(criterion);
+        List<AdminbaseEntity> list = criteria.list();
+        for (AdminbaseEntity adminbaseEntity : list) {
+            return adminbaseEntity.getId();
         }
         transaction.commit();
         session.close();
@@ -52,6 +52,7 @@ public class AdminControlDAOImpl implements AdminControlDAO {
 
     /**
      * 根据ID号获取对应的用户名
+     *
      * @param id 要查询的ID号
      * @return 如果查询到则返回该ID号对应的用户名，否则返回 <b>null</b>
      */
@@ -59,14 +60,12 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public String getUsernameById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "select ae.username from AdminbaseEntity ae where ae.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<AdminbaseEntity> list = query.list();
-        if (list.size() > 0) {
-            for (AdminbaseEntity adminbaseEntity : list) {
-                return adminbaseEntity.getUsername();
-            }
+        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
+        Criterion criterion = Restrictions.eq("id", id);
+        criteria.add(criterion);
+        List<AdminbaseEntity> list = criteria.list();
+        for (AdminbaseEntity adminbaseEntity : list) {
+            return adminbaseEntity.getUsername();
         }
         transaction.commit();
         session.close();
@@ -75,6 +74,7 @@ public class AdminControlDAOImpl implements AdminControlDAO {
 
     /**
      * 根据ID号获取对应的用户的密码
+     *
      * @param id 要查询的ID号
      * @return 如果查询到则返回该ID号对应的密码，否则返回 <b>null</b>
      */
@@ -82,14 +82,12 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public String getPasswordById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "select ae.password from AdminbaseEntity ae where ae.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<AdminbaseEntity> list = query.list();
-        if (list.size() > 0) {
-            for (AdminbaseEntity adminbaseEntity : list) {
-                return adminbaseEntity.getPassword();
-            }
+        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
+        Criterion criterion = Restrictions.eq("id", id);
+        criteria.add(criterion);
+        List<AdminbaseEntity> list = criteria.list();
+        for (AdminbaseEntity adminbaseEntity : list) {
+            return adminbaseEntity.getPassword();
         }
         transaction.commit();
         session.close();
@@ -131,7 +129,7 @@ public class AdminControlDAOImpl implements AdminControlDAO {
      * @return <b>true</b> 如果该账号密码修改成功，否则返回<b>false</b>
      */
     @Override
-    public boolean changePassword(String username, String newPassword){
+    public boolean changePassword(String username, String newPassword) {
         boolean flag = false;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -151,6 +149,7 @@ public class AdminControlDAOImpl implements AdminControlDAO {
 
     /**
      * 用于新增管理员账户
+     *
      * @param username 新的管理员帐户名
      * @param password 加密好的密码
      * @return 如果添加成功返回 <b>true</b> 否则返回 <b>false</b>

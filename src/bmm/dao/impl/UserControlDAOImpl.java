@@ -1,6 +1,7 @@
 package bmm.dao.impl;
 
 import bmm.dao.UserControlDAO;
+import bmm.entity.UserinfoEntity;
 import bmm.entity.UserloginEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
 import org.hibernate.Criteria;
@@ -11,6 +12,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class UserControlDAOImpl implements UserControlDAO {
@@ -19,6 +21,24 @@ public class UserControlDAOImpl implements UserControlDAO {
 
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
+    }
+
+    /**
+     * 查询所有用户的所有信息
+     *
+     * @return 所有用户的所有信息的list列表
+     */
+    @Override
+    public List<UserinfoEntity> showAllUserInfo() {
+        List<UserinfoEntity> list = null;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from UserinfoEntity ";
+        Query query = session.createQuery(hql);
+        list = query.list();
+        transaction.commit();
+        session.close();
+        return list;
     }
 
     /**
@@ -31,14 +51,12 @@ public class UserControlDAOImpl implements UserControlDAO {
     public String getUsernameById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "select ue.username from UserloginEntity ue where ue.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<UserloginEntity> list = query.list();
-        if (list.size() > 0) {
-            for (UserloginEntity userloginEntity : list) {
-                return userloginEntity.getUsername();
-            }
+        Criteria criteria = session.createCriteria(UserloginEntity.class);
+        Criterion criterion = Restrictions.eq("id", id);
+        criteria.add(criterion);
+        List<UserloginEntity> list = criteria.list();
+        for (UserloginEntity userloginEntity : list) {
+            return userloginEntity.getUsername();
         }
         transaction.commit();
         session.close();
@@ -47,21 +65,20 @@ public class UserControlDAOImpl implements UserControlDAO {
 
     /**
      * 通过用户名查找对应的ID号
+     *
      * @param username 要查询的用户名
      * @return 如果查询成功返回该用户名对应的ID号，否则返回 <b>0</b>
      */
     @Override
-    public int getUserIdByName(String username) {
+    public int getIdByName(String username) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "select ue.id from UserloginEntity ue where ue.username=:username";
-        Query query = session.createQuery(hql);
-        query.setParameter("username", username);
-        List<UserloginEntity> list = query.list();
-        if (list.size() > 0) {
-            for (UserloginEntity userloginEntity : list) {
-                return userloginEntity.getId();
-            }
+        Criteria criteria = session.createCriteria(UserloginEntity.class);
+        Criterion criterion = Restrictions.eq("username", username);
+        criteria.add(criterion);
+        List<UserloginEntity> list = criteria.list();
+        for (UserloginEntity userloginEntity : list) {
+            return userloginEntity.getId();
         }
         transaction.commit();
         session.close();
@@ -96,7 +113,57 @@ public class UserControlDAOImpl implements UserControlDAO {
     }
 
     /**
+     * 根据ID号查询对应用户的最近登陆时间
+     *
+     * @param id 要查询的ID号
+     * @return 返回最近登陆的时间
+     */
+    @Override
+    public String getLatestLoginTimeById(int id) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "select ue.lastLoginTime from UserinfoEntity ue where ue.userId=:userId";
+        Query query = session.createQuery(hql);
+        query.setParameter("userId", id);
+        List<Object> list = query.list();
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Object object = (Object) iterator.next();
+            return object.toString();
+        }
+        transaction.commit();
+        session.close();
+        return null;
+    }
+
+    /**
+     * 更新指定ID对应的用户的登陆时间
+     *
+     * @param id   要更新的用户ID
+     * @param time 更新的时间
+     * @return 如果更新成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean setLatestLoginTimeById(int id, String time) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update UserinfoEntity as ue set ue.lastLoginTime=:time where ue.userId=:userId";
+        Query query = session.createQuery(hql);
+        query.setParameter("time", time);
+        query.setParameter("userId", id);
+        int row = query.executeUpdate();
+        if (row > 0) {
+            flag = true;
+        }
+        transaction.commit();
+        session.close();
+        return flag;
+    }
+
+    /**
      * 通过ID号获取指定用户的密码
+     *
      * @param id 要查询的用户的ID
      * @return 如果查询到则返回该用户的密码，否则返回 <b>null</b>
      */
@@ -104,14 +171,12 @@ public class UserControlDAOImpl implements UserControlDAO {
     public String getPasswordById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "select ue.password from UserloginEntity ue where ue.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<UserloginEntity> list = query.list();
-        if (list.size() > 0) {
-            for (UserloginEntity userloginEntity : list) {
-                return userloginEntity.getPassword();
-            }
+        Criteria criteria = session.createCriteria(UserloginEntity.class);
+        Criterion criterion = Restrictions.eq("id", id);
+        criteria.add(criterion);
+        List<UserloginEntity> list = criteria.list();
+        for (UserloginEntity userloginEntity : list) {
+            return userloginEntity.getPassword();
         }
         transaction.commit();
         session.close();
@@ -121,20 +186,20 @@ public class UserControlDAOImpl implements UserControlDAO {
     /**
      * 用于修改指定用户的密码
      *
-     * @param username    需要修改密码的用户名
+     * @param id          需要修改密码的用户的ID号
      * @param newPassword 加密好的密码
      * @return <b>true</b> 如果该账号密码修改成功，否则返回<b>false</b>
      */
     @Override
-    public boolean changePassword(String username, String newPassword) {
+    public boolean changePasswordById(int id, String newPassword) {
         boolean flag = false;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         String hql = "update UserloginEntity as userloginEntity " +
-                "set userloginEntity.password=:password where userloginEntity.username=:username";
+                "set userloginEntity.password=:password where userloginEntity.id=:id";
         Query query = session.createQuery(hql);
         query.setParameter("password", newPassword);
-        query.setParameter("username", username);
+        query.setParameter("id", id);
         int row = query.executeUpdate();
         if (row > 0) {
             flag = true;

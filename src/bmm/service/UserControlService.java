@@ -46,4 +46,22 @@ public interface UserControlService {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     boolean changeUserStateById(int id, int state);
+
+    /**
+     * 用于查询该用户是否被注销或挂失
+     *
+     * @param id 要查询的用户的id
+     * @return 如果未查到数据则返回 <b>-1</b>；
+     * 如果已被注销则返回 <b>1</b>；
+     * 如果已被挂失则返回 <b>2</b>；
+     * 否则返回 <b>0</b>
+     */
+    int getUserStateById(int id);
+
+    /**
+     * 用于重置用户密码
+     * @param id 要重置的用户ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean resetPasswordById(int id);
 }
