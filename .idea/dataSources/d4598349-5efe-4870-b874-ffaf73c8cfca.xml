@@ -183,8 +183,6 @@
     <column id="52" parent="16" name="price">
       <Position>3</Position>
       <DataType>double(10,2)|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>&apos;0.00&apos;</DefaultExpression>
     </column>
     <column id="53" parent="16" name="manufacturer">
       <Position>4</Position>
@@ -201,7 +199,6 @@
     <column id="56" parent="16" name="sale">
       <Position>7</Position>
       <DataType>int(10)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="57" parent="16" name="info">
       <Position>8</Position>
@@ -214,7 +211,6 @@
     <column id="59" parent="16" name="cate">
       <Position>10</Position>
       <DataType>int(3)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="60" parent="16" name="unit">
       <Position>11</Position>

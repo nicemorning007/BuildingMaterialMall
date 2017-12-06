@@ -21,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/themes/flat-blue.css">
 </head>
-
 <body class="flat-blue">
 <div class="app-container">
     <div class="row content-container">

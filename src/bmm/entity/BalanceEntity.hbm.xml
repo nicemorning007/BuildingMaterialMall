@@ -4,9 +4,4 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="bmm.entity.BalanceEntity" table="balance" schema="bmm">
-        <id name="id" column="id"/>
-        <property name="userId" column="userId"/>
-        <property name="balance" column="balance"/>
-    </class>
 </hibernate-mapping>

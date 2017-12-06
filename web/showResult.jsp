@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+<s:form action="userControlAction_testHiber" method="POST">
+    <s:textfield name="id"/>
+    <s:submit/>
+</s:form>
 <s:property value="info"/>
 </body>
 </html>

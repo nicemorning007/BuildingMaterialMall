@@ -1,4 +1,8 @@
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="bmm.dao.CategorizationControlDAO" %>
+<%@ page import="bmm.dao.impl.CategorizationControlDAOImpl" %>
+<%@ page import="java.util.List" %>
+<%@ page import="bmm.entity.CategorizationEntity" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -194,9 +198,13 @@
                             <div class="card-body">
                                 <div class="panel panel-default">
                                     <!-- Default panel contents -->
-                                    <div class="panel-heading">分类管理</div>
+                                    <div class="panel-heading">分类管理
+                                        <span style="background-color: #93D52D">
+                                            <s:property value="info"/>
+                                        </span>
+                                    </div>
                                     <div class="panel-body">
-                                        目前商品所有分类
+                                        目前商品所有分类;输入空白即可删除该分类
                                     </div>
                                 </div>
                                 <!-- Table -->
@@ -212,19 +220,23 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <%--todo:show tabels--%>
                                         <%
-                                            for (int i = 0; i < 6; i++) {
+                                            CategorizationControlDAO categorizationControlDAO =
+                                                    new CategorizationControlDAOImpl();
+                                            List<CategorizationEntity> list = categorizationControlDAO.showAllCate();
+                                            for (CategorizationEntity c : list) {
                                         %>
                                         <tr>
-                                            <%--todo:edit categorization--%>
-                                            <s:form method="POST" action="" theme="simple">
-                                                <th scope="row"><%=i%>
+                                            <s:form method="POST" action="cateEditAction_editCate">
+                                                <th scope="row">
+                                                    <%=c.getId()%>
+                                                    <input type="hidden" name="id" value="<%=c.getId()%>"/>
                                                 </th>
-                                                <td>Mark<%=i%>
+                                                <td><%=c.getName()%>
                                                 </td>
                                                 <td>
-                                                    <s:textfield name="cateName" cssClass="form-control"/>
+                                                    <s:textfield name="cateName" cssClass="form-control"
+                                                                 value=""/>
                                                 </td>
                                                 <td>
                                                     <s:submit cssClass="btn btn-sm btn-default" value="修改"/>
@@ -241,9 +253,9 @@
                                                 </span>
                                             </td>
                                             <%--todo:add cate--%>
-                                            <s:form action="" method="POST" theme="simple">
+                                            <s:form action="cateEditAction_addCate" method="POST">
                                                 <td>
-                                                    <s:textfield name="newCate" cssClass="form-control"/>
+                                                    <s:textfield name="cateName" cssClass="form-control" value=""/>
                                                 </td>
                                                 <td>
                                                     <s:submit value="新增" cssClass="btn btn-sm btn-default"/>

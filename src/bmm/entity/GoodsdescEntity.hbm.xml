@@ -4,4 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
+    <class name="bmm.entity.GoodsdescEntity" table="goodsdesc" schema="bmm">
+        <id name="id" column="id"/>
+        <property name="goodsId" column="goodsId"/>
+        <property name="cate" column="cate"/>
+    </class>
 </hibernate-mapping>

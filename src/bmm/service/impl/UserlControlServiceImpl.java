@@ -131,4 +131,9 @@ public class UserlControlServiceImpl implements UserControlService {
     public boolean resetPasswordById(int id) {
         return userControlDAO.changePasswordById(id, Md5Util.md5Encode("aaa111"));
     }
+
+    @Override
+    public String getUsernameById(int id) {
+        return userControlDAO.getUsernameById(id);
+    }
 }

@@ -18,7 +18,7 @@ public class GoodsbaseEntity {
     private String unit;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -28,7 +28,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 100)
     public String getName() {
         return name;
     }
@@ -38,7 +38,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = true, precision = 2)
     public double getPrice() {
         return price;
     }
@@ -48,7 +48,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "pictureArray")
+    @Column(name = "pictureArray", nullable = true)
     public Integer getPictureArray() {
         return pictureArray;
     }
@@ -58,7 +58,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "sale")
+    @Column(name = "sale", nullable = true)
     public int getSale() {
         return sale;
     }
@@ -68,7 +68,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "info")
+    @Column(name = "info", nullable = true, length = 1000)
     public String getInfo() {
         return info;
     }
@@ -78,7 +78,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "tag")
+    @Column(name = "tag", nullable = true, length = 200)
     public String getTag() {
         return tag;
     }
@@ -88,7 +88,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "cate")
+    @Column(name = "cate", nullable = true)
     public int getCate() {
         return cate;
     }
@@ -98,7 +98,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "producing")
+    @Column(name = "producing", nullable = true, length = 100)
     public String getProducing() {
         return producing;
     }
@@ -108,7 +108,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "manufacturer")
+    @Column(name = "manufacturer", nullable = true, length = 50)
     public String getManufacturer() {
         return manufacturer;
     }
@@ -118,7 +118,7 @@ public class GoodsbaseEntity {
     }
 
     @Basic
-    @Column(name = "unit")
+    @Column(name = "unit", nullable = true, length = 10)
     public String getUnit() {
         return unit;
     }

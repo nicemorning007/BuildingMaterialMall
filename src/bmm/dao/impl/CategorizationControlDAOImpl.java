@@ -6,10 +6,21 @@ import bmm.utils.hibernate_util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.util.List;
 
-public class CategorizationDAOImpl implements CategorizationControlDAO {
+public class CategorizationControlDAOImpl implements CategorizationControlDAO {
+    private HibernateTemplate hibernateTemplate;
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+
     /**
      * 通过类别ID号获得对应的名称
      *
@@ -86,7 +97,7 @@ public class CategorizationDAOImpl implements CategorizationControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean changeCateNameById(int id, String newName) {
+    public boolean setCateNameById(int id, String newName) {
         boolean flag = false;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -110,7 +121,7 @@ public class CategorizationDAOImpl implements CategorizationControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean deeleteCateNameById(int id) {
+    public boolean deleteCateNameById(int id) {
         boolean flag = false;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -125,4 +136,23 @@ public class CategorizationDAOImpl implements CategorizationControlDAO {
         session.close();
         return flag;
     }
+
+    /**
+     * 查询所有的分类信息
+     *
+     * @return 如果查询成功则返回一个 <b>list</b>；否则返回 <b>null</b>
+     */
+    @Override
+    public List<CategorizationEntity> showAllCate() {
+        List<CategorizationEntity> list = null;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from CategorizationEntity ";
+        Query query = session.createQuery(hql);
+        list = query.list();
+        transaction.commit();
+        session.close();
+        return list;
+    }
+
 }

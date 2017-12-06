@@ -209,4 +209,9 @@ public class UserControlAction extends ActionSupport {
         }
         return "resetPassword";
     }
+
+    public String testHiber() {
+        info = userControlService.getUsernameById(Integer.parseInt(this.id));
+        return "test";
+    }
 }

@@ -30,7 +30,9 @@
             <result name="lossReporting">/admin/html/userConf/lossReporting.jsp</result>
             <result name="unLossReporting">/admin/html/userConf/lossReporting.jsp</result>
             <result name="resetPassword">/admin/html/userConf/passwordReset.jsp</result>
-            <allowed-methods>login,register,userForbidden,unUserForbidden,lossReporting,unLossReporting,resetPassword
+            <result name="test">/showResult.jsp</result>
+            <allowed-methods>
+                login,register,userForbidden,unUserForbidden,lossReporting,unLossReporting,resetPassword,testHiber
             </allowed-methods>
         </action>
         <!--结束用户相关-->
@@ -48,5 +50,16 @@
         </action>
         <!--结束管理员账户相关-->
     </package>
+
+    <package name="catePackage" namespace="/" extends="struts-default">
+        <!--结束商品管理相关-->
+        <action name="cateEditAction_*" class="cateControlAction" method="{1}">
+            <result name="editCate">/admin/html/goods/categorization.jsp</result>
+            <result name="addCate">/admin/html/goods/categorization.jsp</result>
+            <allowed-methods>editCate,addCate</allowed-methods>
+        </action>
+        <!--结束商品管理相关-->
+    </package>
+
     <!--end of struts action-->
 </struts>

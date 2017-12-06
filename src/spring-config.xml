@@ -26,7 +26,6 @@
         <property name="configLocation" value="classpath:/hibernate.cfg.xml"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
     <bean id="ht" class="org.springframework.orm.hibernate4.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -38,6 +37,12 @@
     <bean id="adminControlDao" class="bmm.dao.impl.AdminControlDAOImpl">
         <property name="hibernateTemplate" ref="ht"/>
     </bean>
+    <bean id="cateControlDao" class="bmm.dao.impl.CategorizationControlDAOImpl">
+        <property name="hibernateTemplate" ref="ht"/>
+    </bean>
+    <bean id="goodsControlDao" class="bmm.dao.impl.GoodsControlDAOImpl">
+        <property name="hibernateTemplate" ref="ht"/>
+    </bean>
     <!--结束配置DAO-->
 
     <!--配置service-->
@@ -46,6 +51,9 @@
     </bean>
     <bean id="adminControlService" class="bmm.service.impl.AdminControlServiceImpl">
         <property name="adminControlDAO" ref="adminControlDao"/>
+    </bean>
+    <bean id="cateControlService" class="bmm.service.impl.CateControlServiceImpl">
+        <property name="categorizationControlDAO" ref="cateControlDao"/>
     </bean>
     <!--结束配置service-->
 
@@ -56,6 +64,9 @@
     <bean id="adminControlAction" class="bmm.struts.action.admin.AdminControlAction">
         <property name="adminControlService" ref="adminControlService"/>
     </bean>
+    <bean id="cateControlAction" class="bmm.struts.action.goods.CateAction">
+        <property name="cateControlService" ref="cateControlService"/>
+    </bean>
     <!--结束配置Action-->
 
     <!-- 配置Spring事务管理器 -->
@@ -65,7 +76,7 @@
     <tx:annotation-driven transaction-manager="txManager"/>
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="*"/>
+            <tx:method name="*" read-only="false"/>
         </tx:attributes>
     </tx:advice>
 

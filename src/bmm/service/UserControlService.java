@@ -64,4 +64,6 @@ public interface UserControlService {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     boolean resetPasswordById(int id);
+
+    String getUsernameById(int id);
 }

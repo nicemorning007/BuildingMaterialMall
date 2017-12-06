@@ -49,19 +49,24 @@ public class UserControlDAOImpl implements UserControlDAO {
      */
     @Override
     public String getUsernameById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ue.username from UserloginEntity ue where ue.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
+//        Session session = HibernateUtil.getSession();
+//        Transaction transaction = session.beginTransaction();
+//        String hql = "select ue.username from UserloginEntity ue where ue.id=:id";
+//        Query query = session.createQuery(hql);
+//        query.setParameter("id", id);
+//        List<Object> list = query.list();
+//        for (Object o : list) {
+//            if (o != null) {
+//                return o.toString();
+//            }
+//        }
+//        transaction.commit();
+//        session.close();
+//        return null;
+        List<?> list=hibernateTemplate.find("select ue.username from UserloginEntity ue where ue.id=?",id);
         for (Object o : list) {
-            if (o != null) {
-                return o.toString();
-            }
+            return o.toString();
         }
-        transaction.commit();
-        session.close();
         return null;
     }
 

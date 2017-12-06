@@ -1,8 +1,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%
+    String username = CookieUtil.getCookiesValue(request,"isLogin");
+%>
 <html>
 
 <head>
@@ -44,8 +47,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <%--todo:显示管理员名字--%>
-                            占位
+                            <%=username%>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
@@ -54,8 +56,7 @@
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">
-                                        <%--todo:显示管理员名字--%>
-                                        占位
+                                        <%=username%>
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
@@ -158,8 +159,7 @@
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
                                         <li><a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
-                                            <%--todo:show administrator`s name--%>
-                                            占位
+                                            <%=username%>
                                         </a>
                                         </li>
                                     </ul>
@@ -178,7 +178,7 @@
                     <span class="title">商品管理</span>
                 </div>
                 <%--todo: form action--%>
-                <s:form class="form-inline" action="addGoodsTest" method="post" theme="simple">
+                <s:form class="form-inline" action="addGoodsTest" method="post">
                 <div class="row">
                         <div class="col-xs-12">
                             <div class="card">
