@@ -1,8 +1,10 @@
 package test;
 
 import bmm.dao.AdminControlDAO;
+import bmm.dao.CategorizationControlDAO;
 import bmm.dao.UserControlDAO;
 import bmm.dao.impl.AdminControlDAOImpl;
+import bmm.dao.impl.CategorizationDAOImpl;
 import bmm.dao.impl.UserControlDAOImpl;
 import bmm.service.AdminControlService;
 import bmm.service.impl.AdminControlServiceImpl;
@@ -36,5 +38,11 @@ public class HibernateTest {
     public void getLastestTime() {
         UserControlDAO userControlDAO = new UserControlDAOImpl();
         System.out.println(userControlDAO.getLatestLoginTimeById(3));
+    }
+
+    @Test
+    public void cateTest() {
+        CategorizationControlDAO categorizationControlDAO = new CategorizationDAOImpl();
+        System.out.println(categorizationControlDAO.GetIdByCateName("结构料件"));
     }
 }
