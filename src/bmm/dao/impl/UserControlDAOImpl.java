@@ -51,12 +51,14 @@ public class UserControlDAOImpl implements UserControlDAO {
     public String getUsernameById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(UserloginEntity.class);
-        Criterion criterion = Restrictions.eq("id", id);
-        criteria.add(criterion);
-        List<UserloginEntity> list = criteria.list();
-        for (UserloginEntity userloginEntity : list) {
-            return userloginEntity.getUsername();
+        String hql = "select ue.username from UserloginEntity ue where ue.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
         }
         transaction.commit();
         session.close();
@@ -73,12 +75,14 @@ public class UserControlDAOImpl implements UserControlDAO {
     public int getIdByName(String username) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(UserloginEntity.class);
-        Criterion criterion = Restrictions.eq("username", username);
-        criteria.add(criterion);
-        List<UserloginEntity> list = criteria.list();
-        for (UserloginEntity userloginEntity : list) {
-            return userloginEntity.getId();
+        String hql = "select ue.id from UserloginEntity ue where ue.username=:username";
+        Query query = session.createQuery(hql);
+        query.setParameter("username", username);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return Integer.parseInt(o.toString());
+            }
         }
         transaction.commit();
         session.close();
@@ -171,12 +175,14 @@ public class UserControlDAOImpl implements UserControlDAO {
     public String getPasswordById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(UserloginEntity.class);
-        Criterion criterion = Restrictions.eq("id", id);
-        criteria.add(criterion);
-        List<UserloginEntity> list = criteria.list();
-        for (UserloginEntity userloginEntity : list) {
-            return userloginEntity.getPassword();
+        String hql = "select ue.password from UserloginEntity ue where ue.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
         }
         transaction.commit();
         session.close();
@@ -249,16 +255,17 @@ public class UserControlDAOImpl implements UserControlDAO {
         int flag = -1;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(UserloginEntity.class);
-        Criterion criterion = Restrictions.eq("id", id);
-        criteria.add(criterion);
-        List<UserloginEntity> list = criteria.list();
-        if (list.size() > 0) {
-            for (UserloginEntity userloginEntity : list) {
-                return userloginEntity.getState();
+        String hql = "select ue.state from UserloginEntity ue where ue.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return Integer.parseInt(o.toString());
             }
         }
         transaction.commit();
+        session.close();
         return flag;
     }
 

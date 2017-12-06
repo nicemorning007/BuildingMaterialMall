@@ -38,12 +38,14 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public int getIdByUsername(String username) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
-        Criterion criterion = Restrictions.eq("username", username);
-        criteria.add(criterion);
-        List<AdminbaseEntity> list = criteria.list();
-        for (AdminbaseEntity adminbaseEntity : list) {
-            return adminbaseEntity.getId();
+        String hql = "select ae.id from AdminbaseEntity ae where ae.username=:username";
+        Query query = session.createQuery(hql);
+        query.setParameter("username", username);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return Integer.parseInt(o.toString());
+            }
         }
         transaction.commit();
         session.close();
@@ -60,12 +62,14 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public String getUsernameById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
-        Criterion criterion = Restrictions.eq("id", id);
-        criteria.add(criterion);
-        List<AdminbaseEntity> list = criteria.list();
-        for (AdminbaseEntity adminbaseEntity : list) {
-            return adminbaseEntity.getUsername();
+        String hql = "select ae.username from AdminbaseEntity ae where ae.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
         }
         transaction.commit();
         session.close();
@@ -82,12 +86,14 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public String getPasswordById(int id) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(AdminbaseEntity.class);
-        Criterion criterion = Restrictions.eq("id", id);
-        criteria.add(criterion);
-        List<AdminbaseEntity> list = criteria.list();
-        for (AdminbaseEntity adminbaseEntity : list) {
-            return adminbaseEntity.getPassword();
+        String hql = "select ae.password from AdminbaseEntity ae where ae.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Object> list = query.list();
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
         }
         transaction.commit();
         session.close();
