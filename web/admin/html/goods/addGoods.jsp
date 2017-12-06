@@ -176,9 +176,10 @@
             <div class="side-body">
                 <div class="page-title">
                     <span class="title">商品管理</span>
+                    <span style="background-color: #93D52D"><s:property value="message"/> </span>
                 </div>
                 <%--todo: form action--%>
-                <s:form class="form-inline" action="addGoodsTest" method="post">
+                <s:form class="form-inline" action="goodsControlAction_addGoods" method="post">
                 <div class="row">
                         <div class="col-xs-12">
                             <div class="card">

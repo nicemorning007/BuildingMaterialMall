@@ -55,6 +55,9 @@
     <bean id="cateControlService" class="bmm.service.impl.CateControlServiceImpl">
         <property name="categorizationControlDAO" ref="cateControlDao"/>
     </bean>
+    <bean id="goodsControlService" class="bmm.service.impl.GoodsControlServiceImpl">
+        <property name="goodsControlDAO" ref="goodsControlDao"/>
+    </bean>
     <!--结束配置service-->
 
     <!--配置Action-->
@@ -67,6 +70,9 @@
     <bean id="cateControlAction" class="bmm.struts.action.goods.CateAction">
         <property name="cateControlService" ref="cateControlService"/>
     </bean>
+    <bean id="goodsControlAction" class="bmm.struts.action.goods.GoodsControlAction">
+        <property name="goodsControlService" ref="goodsControlService"/>
+    </bean>
     <!--结束配置Action-->
 
     <!-- 配置Spring事务管理器 -->
@@ -76,7 +82,7 @@
     <tx:annotation-driven transaction-manager="txManager"/>
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="*" read-only="false"/>
+            <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
 

@@ -49,8 +49,6 @@ public class UserlControlServiceImpl implements UserControlService {
 
     /**
      * 用于处理用户账户的退出
-     *
-     * @return <b>true</b>如果该账号退出操作成功，否则返回<b>false</b>
      */
     @Override
     public void exitAdmin() {

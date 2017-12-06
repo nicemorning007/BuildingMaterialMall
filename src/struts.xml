@@ -58,6 +58,11 @@
             <result name="addCate">/admin/html/goods/categorization.jsp</result>
             <allowed-methods>editCate,addCate</allowed-methods>
         </action>
+
+        <action name="goodsControlAction_*" class="goodsControlAction" method="{1}">
+            <result name="addGoods">/admin/html/goods/addGoods.jsp</result>
+            <allowed-methods>addGoods</allowed-methods>
+        </action>
         <!--结束商品管理相关-->
     </package>
 

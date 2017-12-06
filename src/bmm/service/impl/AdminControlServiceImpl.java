@@ -48,8 +48,6 @@ public class AdminControlServiceImpl implements AdminControlService {
 
     /**
      * 用于处理管理员账户的退出
-     *
-     * @return <b>true</b>如果该账号退出操作成功，否则返回<b>false</b>
      */
     @Override
     public void exitAdmin() {

@@ -12,7 +12,6 @@ public class Md5Util {
      * MD5加密 生成32位md5码
      * @param inStr 待加密字符串
      * @return 返回32位md5码
-     * @throws Exception 如果需要加密的字符串为 null 时将会抛出异常
      */
     public static String md5Encode(String inStr) {
         MessageDigest md5 = null;
