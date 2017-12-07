@@ -1,6 +1,7 @@
 package bmm.dao;
 
 import bmm.entity.GoodsbaseEntity;
+import bmm.entity.GoodspicarrayEntity;
 
 import java.util.List;
 
@@ -232,7 +233,7 @@ public interface GoodsControlDAO {
      * @param start 起售数量
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
-    public boolean addGoods(String name, String info, double price, String tag, String manu, String produ, String norms, String unit, int start);
+     boolean addGoods(String name, String info, double price, String tag, String manu, String produ, String norms, String unit, int start);
 
     /**
      * 查询商品总数
@@ -240,4 +241,72 @@ public interface GoodsControlDAO {
      * @return 返回商品总数
      */
     int getGoodsCount();
+
+    /**
+     * 添加商品与分类的关联信息到关联表中
+     *
+     * @param goodsId 要添加的商品ID
+     * @param cate    要添加的分类ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean descIntoGoodsDesc(int goodsId, int cate);
+
+    /**
+     * 根据关联表ID号从商品与分类关联表中获取到商品ID
+     *
+     * @param id 要查询的关联表ID号
+     * @return 如果操作成功则返回该商品的 <b>ID</b>；否则返回 <b>0</b>
+     */
+    int getGoodsIdFromGoodsDescByCateId(int id);
+
+    /**
+     * 根据商品ID号从商品与分类关联表中获取到分类ID
+     *
+     * @param id 要查询的商品ID号
+     * @return 如果操作成功则返回该商品的分类 <b>ID</b>；否则返回 <b>0</b>
+     */
+    int getCateIdFromGoodsDescByGoodsId(int id);
+
+    /**
+     * 添加商品图片信息到商品图片表中
+     *
+     * @param goodsId 对应的商品ID号
+     * @param pic1    图片1的地址
+     * @param pic2    图片2的地址
+     * @param pic3    图片3的地址
+     * @param pic4    图片4的地址
+     * @param pic5    图片5的地址
+     * @param pic6    图片6的地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6);
+
+    /**
+     * 根据商品ID号从商品图片信息表中获取指定商品的全部图片信息
+     *
+     * @param goodsId 要查询的商品ID号
+     * @return 如果操作成功则返回该商品的 <b>GoodspicarrayEntity</b>对象；否则返回 <b>null</b>
+     */
+    GoodspicarrayEntity getOneAllInfoPicByGoodsId(int goodsId);
+
+    /**
+     * 根据ID号从商品图片信息表中获取指定行的全部图片信息
+     *
+     * @param id 要查询的图片表ID
+     * @return 如果操作成功则返回该ID对应的商品的 <b>GoodspicarrayEntity</b>对象；否则返回 <b>null</b>
+     */
+    GoodspicarrayEntity getOneAllInfoPicById(int id);
+
+    /**
+     * 获取商品图片表的全部信息
+     *
+     * @return 如果操作成功则返回 <b>List&lt;GoodspicarrayEntity&gt;</b>对象；否则返回 <b>null</b>
+     */
+    List<GoodspicarrayEntity> getAllInfoFromGoodsPicArray();
+
+    /**
+     * 用于推测新商品的ID号
+     * @return 返回下一商品的ID号，如果数据库访问失败将返回 <b>0</b>
+     */
+    int guessGoodsId();
 }

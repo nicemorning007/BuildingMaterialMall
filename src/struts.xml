@@ -61,6 +61,7 @@
 
         <action name="goodsControlAction_*" class="goodsControlAction" method="{1}">
             <result name="addGoods">/admin/html/goods/addGoods.jsp</result>
+            <result name="input">/admin/html/goods/addGoods.jsp</result>
             <allowed-methods>addGoods</allowed-methods>
         </action>
         <!--结束商品管理相关-->

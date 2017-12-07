@@ -18,7 +18,7 @@
         <property name="password" value="${db.password}"/>
         <property name="initialPoolSize" value="2"/>
         <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="10"/>
+        <property name="maxPoolSize" value="30"/>
     </bean>
 
     <!-- session工厂 -->

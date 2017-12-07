@@ -1,10 +1,8 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
-<%@ page import="bmm.entity.CategorizationEntity" %>
 <%@ page import="bmm.dao.CategorizationControlDAO" %>
 <%@ page import="bmm.dao.impl.CategorizationControlDAOImpl" %>
-<%@ page import="javafx.beans.binding.ObjectExpression" %>
+<%@ page import="bmm.entity.CategorizationEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -192,9 +190,10 @@
             <div class="side-body">
                 <div class="page-title">
                     <span class="title">商品管理</span>
-                    <span style="background-color: #93D52D"><s:property value="message"/> </span>
+                    <span style="background-color: #93D52D"><s:property value="message"/></span>
                 </div>
-                <s:form class="form-inline" action="goodsControlAction_addGoods" method="post" enctype="multipart/form-data">
+                <s:form class="form-inline" action="goodsControlAction_addGoods" method="post"
+                        enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="card">
@@ -256,22 +255,22 @@
                                     <div class="form-group">
                                         <label>厂商</label>
                                         <s:textfield type="text" cssClass="form-control" name="manu"
-                                               placeholder="厂商品牌名"/>
+                                                     placeholder="厂商品牌名"/>
                                     </div>
                                     <div class="form-group">
                                         <label>产地</label>
                                         <s:textfield type="text" cssClass="form-control" id="producing"
-                                               placeholder="省市"/>
+                                                     placeholder="省市"/>
                                     </div>
                                     <div class="form-group">
                                         <label>规格</label>
                                         <s:textfield type="text" cssClass="form-control" name="norms"
-                                               placeholder="如：mm/cm/m"/>
+                                                     placeholder="如：mm/cm/m"/>
                                     </div>
                                     <div class="form-group">
                                         <label>计量单位</label>
                                         <s:textfield type="text" cssClass="form-control" name="unit"
-                                               placeholder="如：百件/百个/件/个/吨"/>
+                                                     placeholder="如：百件/百个/件/个/吨"/>
                                     </div>
                                     <div class="form-group">
                                         <label>起售数量</label>
@@ -285,28 +284,48 @@
                         <div class="col-xs-12">
                             <div class="card">
                                 <div class="card-body">
-                                        <%--todo:file upload--%>
                                     <div class="form-group">
-                                        <label>上传商品大图</label>
-                                        <%--<input type="file" name="exampleInputFile">--%>
-                                        <s:file name="headImage"/>
+                                        <label>上传商品大图
+                                        </label>
+                                        <s:file name="pic1"/>
                                         <p class="help-block">显示在商品预览页的图</p>
                                     </div>
                                     <button type="submit" class="btn btn-default">上传</button>
-                                    <%
-                                        int i = 0;
-                                        for (; i < 6; i++) {
-                                    %>
                                     <div class="form-group">
-                                        <label>上传商品图片<%=i + 1%>
+                                        <label>上传商品详情图片1
                                         </label>
-                                        <input type="file" name="exampleInputFile">
+                                        <s:file name="pic2"/>
                                         <p class="help-block">显示在商品详情页的图</p>
                                     </div>
                                     <button type="submit" class="btn btn-default">上传</button>
-                                    <%
-                                        }
-                                    %>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片2
+                                        </label>
+                                        <s:file name="pic3"/>
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">上传</button>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片3
+                                        </label>
+                                        <s:file name="pic4"/>
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">上传</button>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片4
+                                        </label>
+                                        <s:file name="pic5"/>
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">上传</button>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片5
+                                        </label>
+                                        <s:file name="pic6"/>
+                                        <p class="help-block">显示在商品预览页的图</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">上传</button>
                                 </div>
                             </div>
                         </div>

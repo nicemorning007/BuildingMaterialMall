@@ -2,11 +2,13 @@ package bmm.dao.impl;
 
 import bmm.dao.GoodsControlDAO;
 import bmm.entity.GoodsbaseEntity;
+import bmm.entity.GoodsdescEntity;
+import bmm.entity.GoodspicarrayEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.util.List;
@@ -594,5 +596,184 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
                 .createQuery("select count(*) from GoodsbaseEntity ")
                 .uniqueResult();
         return (int) count;
+    }
+
+    /**
+     * 添加商品与分类的关联信息到关联表中
+     *
+     * @param goodsId 要添加的商品ID
+     * @param cate    要添加的分类ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean descIntoGoodsDesc(int goodsId, int cate) {
+        boolean flag = false;
+        GoodsdescEntity goodsdescEntity = new GoodsdescEntity();
+        goodsdescEntity.setGoodsId(goodsId);
+        goodsdescEntity.setCate(cate);
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(goodsdescEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 根据关联表ID号从商品与分类关联表中获取到商品ID
+     *
+     * @param id 要查询的关联表ID号
+     * @return 如果操作成功则返回该商品的 <b>ID</b>；否则返回 <b>0</b>
+     */
+    @Override
+    public int getGoodsIdFromGoodsDescByCateId(int id) {
+        String hql = "select gd.goodsId from GoodsdescEntity gd where gd.cate=?";
+        List<?> list = hibernateTemplate.find(hql, id);
+        for (Object o : list) {
+            if (o != null) {
+                return Integer.parseInt(o.toString());
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 根据商品ID号从商品与分类关联表中获取到分类ID
+     *
+     * @param id 要查询的商品ID号
+     * @return 如果操作成功则返回该商品的分类 <b>ID</b>；否则返回 <b>0</b>
+     */
+    @Override
+    public int getCateIdFromGoodsDescByGoodsId(int id) {
+        String hql = "select gd.cate from GoodsdescEntity gd where gd.goodsId=?";
+        List<?> list = hibernateTemplate.find(hql, id);
+        for (Object o : list) {
+            if (o != null) {
+                return Integer.parseInt(o.toString());
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 添加商品图片信息到商品图片表中
+     *
+     * @param goodsId 对应的商品ID号
+     * @param pic1    图片1的地址
+     * @param pic2    图片2的地址
+     * @param pic3    图片3的地址
+     * @param pic4    图片4的地址
+     * @param pic5    图片5的地址
+     * @param pic6    图片6的地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
+        boolean flag = false;
+        GoodspicarrayEntity goodspicarrayEntity = new GoodspicarrayEntity();
+        goodspicarrayEntity.setGoodsId(goodsId);
+        if (pic1 != null) {
+            goodspicarrayEntity.setPic1(pic1);
+        }
+        if (pic2 != null) {
+            goodspicarrayEntity.setPic2(pic2);
+        }
+        if (pic3 != null) {
+            goodspicarrayEntity.setPic3(pic3);
+        }
+        if (pic4 != null) {
+            goodspicarrayEntity.setPic4(pic4);
+        }
+        if (pic5 != null) {
+            goodspicarrayEntity.setPic5(pic5);
+
+        }
+        if (pic6 != null) {
+            goodspicarrayEntity.setPic6(pic6);
+        }
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(goodspicarrayEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 根据商品ID号从商品图片信息表中获取指定商品的全部图片信息
+     *
+     * @param goodsId 要查询的商品ID号
+     * @return 如果操作成功则返回该商品的 <b>GoodspicarrayEntity</b>对象；否则返回 <b>null</b>
+     */
+    @Override
+    public GoodspicarrayEntity getOneAllInfoPicByGoodsId(int goodsId) {
+        String hql = "select gp from GoodspicarrayEntity gp where gp.goodsId=?";
+        List<?> list = hibernateTemplate.find(hql, goodsId);
+        for (Object o : list) {
+            if (o != null) {
+                return (GoodspicarrayEntity) o;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据ID号从商品图片信息表中获取指定行的全部图片信息
+     *
+     * @param id 要查询的图片表ID
+     * @return 如果操作成功则返回该ID对应的商品的 <b>GoodspicarrayEntity</b>对象；否则返回 <b>null</b>
+     */
+    @Override
+    public GoodspicarrayEntity getOneAllInfoPicById(int id) {
+        GoodspicarrayEntity goodspicarrayEntity = null;
+        goodspicarrayEntity = hibernateTemplate.get(GoodspicarrayEntity.class, id);
+        return goodspicarrayEntity;
+    }
+
+    /**
+     * 获取商品图片表的全部信息
+     *
+     * @return 如果操作成功则返回 <b>List&lt;GoodspicarrayEntity&gt;</b>对象；否则返回 <b>null</b>
+     */
+    @Override
+    public List<GoodspicarrayEntity> getAllInfoFromGoodsPicArray() {
+        String hql = "from GoodspicarrayEntity ";
+        List<GoodspicarrayEntity> list = (List<GoodspicarrayEntity>) hibernateTemplate.find(hql);
+        if (list.size() > 0) {
+            return list;
+        }
+        return null;
+    }
+
+    /**
+     * 用于推测新商品的ID号
+     *
+     * @return 返回下一商品的ID号，如果数据库访问失败将返回 <b>0</b>
+     */
+    @Override
+    public int guessGoodsId() {
+        int lastRow = this.getGoodsCount();
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria criteria = session.createCriteria(GoodsbaseEntity.class);
+        criteria.setFirstResult(lastRow - 1);
+        criteria.setMaxResults(1);
+        List<GoodsbaseEntity> list = criteria.list();
+        for (GoodsbaseEntity goodsbaseEntity : list) {
+            return goodsbaseEntity.getId() + 1;
+        }
+        transaction.commit();
+        session.close();
+        return 0;
     }
 }
