@@ -5,7 +5,7 @@ import bmm.entity.UserinfoEntity;
 import java.util.List;
 
 /**
- * 关于用户账户登陆的操作接口
+ * 关于用户账户登陆的数据库操作接口
  */
 public interface UserControlDAO {
 

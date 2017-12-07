@@ -10,6 +10,9 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.util.List;
 
+/**
+ * 有关分类数据库操作的数据库接口的实现
+ */
 public class CategorizationControlDAOImpl implements CategorizationControlDAO {
     private HibernateTemplate hibernateTemplate;
 

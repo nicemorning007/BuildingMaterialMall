@@ -4,6 +4,9 @@ import bmm.entity.GoodsbaseEntity;
 
 import java.util.List;
 
+/**
+ * 关于商品属性的数据库操作接口
+ */
 public interface GoodsControlDAO {
     /**
      * 根据商品名称获取对应的ID号
@@ -181,4 +184,60 @@ public interface GoodsControlDAO {
      */
     GoodsbaseEntity getOneAllInfo(int id);
 
+    /**
+     * 根据商品ID号获取对应的商品的规格
+     *
+     * @param id 要查询的商品ID号
+     * @return 如果查询到则返回该商品规格，否则返回 <b>null</b>
+     */
+    String getNormsById(int id);
+
+    /**
+     * 根据商品ID号设置相应的销售规格
+     *
+     * @param id    要设置的ID号
+     * @param norms 要设置的销售规格
+     * @return 如果操作成功返回 <b>true</b>；否则返回<b>false</b>
+     */
+    boolean setNormsById(int id, String norms);
+
+    /**
+     * 根据商品ID号获取对应的商品的起售数量
+     *
+     * @param id 要查询的商品ID号
+     * @return 如果查询到则返回该商品起售数量，否则返回 <b>0</b>
+     */
+    int getStartById(int id);
+
+    /**
+     * 根据商品ID号设置相应的销售起售数量
+     *
+     * @param id    要设置的ID号
+     * @param start 要设置的销售起售数量
+     * @return 如果操作成功返回 <b>true</b>；否则返回<b>false</b>
+     */
+    boolean setStartById(int id, int start);
+
+    /**
+     * 用于新增商品
+     *
+     * @param name  商品名称
+     * @param info  商品属性
+     * @param price 单价
+     * @param tag   标签（参与的活动）
+     * @param manu  产地
+     * @param produ 厂商
+     * @param norms 规格
+     * @param unit  单位
+     * @param start 起售数量
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    public boolean addGoods(String name, String info, double price, String tag, String manu, String produ, String norms, String unit, int start);
+
+    /**
+     * 查询商品总数
+     *
+     * @return 返回商品总数
+     */
+    int getGoodsCount();
 }

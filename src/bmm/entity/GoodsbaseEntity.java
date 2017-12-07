@@ -16,6 +16,8 @@ public class GoodsbaseEntity {
     private String tag;
     private int cate;
     private String unit;
+    private String norms;
+    private int start;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -125,6 +127,26 @@ public class GoodsbaseEntity {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    @Basic
+    @Column(name = "norms")
+    public String getNorms() {
+        return norms;
+    }
+
+    public void setNorms(String norms) {
+        this.norms = norms;
+    }
+
+    @Basic
+    @Column(name = "start")
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
     }
 
     @Override

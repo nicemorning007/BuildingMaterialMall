@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import java.util.Map;
 
 /**
- * Hibernate工具类，提供SessionFactory.openSession()方法的直接获取
+ * Hibernate工具类，提供Session的直接获取
  */
 public class HibernateUtil {
     private static final SessionFactory ourSessionFactory;

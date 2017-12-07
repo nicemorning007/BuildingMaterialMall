@@ -7,9 +7,9 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/bmm</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.autocommit">true</property>
         <property name="connection.username">root</property>
         <property name="connection.password">mulin458267139</property>
-        <property name="hibernate.connection.autocommit">true</property>
         <mapping class="bmm.entity.AdminbaseEntity"/>
         <mapping resource="bmm/entity/AdminbaseEntity.hbm.xml"/>
         <mapping class="bmm.entity.BalanceEntity"/>

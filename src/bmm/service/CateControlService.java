@@ -1,5 +1,8 @@
 package bmm.service;
 
+/**
+ * 关于分类的操作接口
+ */
 public interface CateControlService {
     /**
      * 根据指定的ID号编辑分类名

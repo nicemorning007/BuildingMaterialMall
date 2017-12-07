@@ -11,6 +11,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 管理层的业务请求
+ */
 public class AdminControlAction extends ActionSupport {
     private String username;
     private String password;

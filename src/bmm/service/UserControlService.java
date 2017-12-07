@@ -1,9 +1,8 @@
 package bmm.service;
 
 /**
- * 对用户登陆和注册做查询判断处理的方法均在此类下
+ * 关于用户管理的操作接口
  */
-
 public interface UserControlService {
     /**
      * 用于处理用户登陆请求

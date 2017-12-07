@@ -3,6 +3,9 @@ package bmm.service.impl;
 import bmm.dao.CategorizationControlDAO;
 import bmm.service.CateControlService;
 
+/**
+ * 关于分类的操作接口的实现
+ */
 public class CateControlServiceImpl implements CateControlService {
     private CategorizationControlDAO categorizationControlDAO;
 

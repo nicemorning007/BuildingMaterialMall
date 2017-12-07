@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * 后台管理过滤器，防止未登录进入后台管理页面
+ */
 public class AdminFilter implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -1,7 +1,7 @@
 package bmm.dao;
 
 /**
- * 关于管理员账户的操作接口
+ * 关于管理员账户数据库的操作接口
  */
 public interface AdminControlDAO {
     /**

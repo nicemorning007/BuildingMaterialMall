@@ -9,6 +9,9 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 用户管理的业务请求
+ */
 public class UserControlAction extends ActionSupport {
     private String username;
     private String password;

@@ -3,6 +3,7 @@ package bmm.dao.impl;
 import bmm.dao.GoodsControlDAO;
 import bmm.entity.GoodsbaseEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,6 +11,9 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.util.List;
 
+/**
+ * 关于商品属性的数据库操作接口的实现
+ */
 public class GoodsControlDAOImpl implements GoodsControlDAO {
     private HibernateTemplate hibernateTemplate;
 
@@ -450,5 +454,145 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         GoodsbaseEntity goodsbaseEntity = null;
         goodsbaseEntity = (GoodsbaseEntity) hibernateTemplate.get(GoodsbaseEntity.class, 1);
         return goodsbaseEntity;
+    }
+
+    /**
+     * 根据商品ID号获取对应的商品的规格
+     *
+     * @param id 要查询的商品ID号
+     * @return 如果查询到则返回该商品规格，否则返回 <b>null</b>
+     */
+    @Override
+    public String getNormsById(int id) {
+        String hql = "select ge.norms from GoodsbaseEntity ge where ge.id=?";
+        List<?> list = hibernateTemplate.find(hql, id);
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据商品ID号设置相应的销售规格
+     *
+     * @param id    要设置的ID号
+     * @param norms 要设置的销售规格
+     * @return 如果操作成功返回 <b>true</b>；否则返回<b>false</b>
+     */
+    @Override
+    public boolean setNormsById(int id, String norms) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update GoodsbaseEntity ge set ge.norms=:norms where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("norms", norms);
+        query.setParameter("id", id);
+        int row = query.executeUpdate();
+        if (row > 0) {
+            flag = true;
+        }
+        transaction.commit();
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 根据商品ID号获取对应的商品的起售数量
+     *
+     * @param id 要查询的商品ID号
+     * @return 如果查询到则返回该商品起售数量，否则返回 <b>0</b>
+     */
+    @Override
+    public int getStartById(int id) {
+        String hql = "select ge.start from GoodsbaseEntity ge where ge.id=?";
+        List<?> list = hibernateTemplate.find(hql, id);
+        for (Object o : list) {
+            if (o != null) {
+                return Integer.parseInt(o.toString());
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 根据商品ID号设置相应的销售起售数量
+     *
+     * @param id    要设置的ID号
+     * @param start 要设置的销售起售数量
+     * @return 如果操作成功返回 <b>true</b>；否则返回<b>false</b>
+     */
+    @Override
+    public boolean setStartById(int id, int start) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update GoodsbaseEntity ge set ge.start=:start where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("start", start);
+        query.setParameter("id", id);
+        int row = query.executeUpdate();
+        if (row > 0) {
+            flag = true;
+        }
+        transaction.commit();
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 用于新增商品
+     *
+     * @param name  商品名称
+     * @param info  商品属性
+     * @param price 单价
+     * @param tag   标签（参与的活动）
+     * @param manu  产地
+     * @param produ 厂商
+     * @param norms 规格
+     * @param unit  单位
+     * @param start 起售数量
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean addGoods(String name, String info, double price, String tag, String manu, String produ, String norms, String unit, int start) {
+        boolean flag = false;
+        GoodsbaseEntity goodsbaseEntity = new GoodsbaseEntity();
+        goodsbaseEntity.setName(name);
+        goodsbaseEntity.setInfo(info);
+        goodsbaseEntity.setPrice(price);
+        goodsbaseEntity.setTag(tag);
+        goodsbaseEntity.setManufacturer(manu);
+        goodsbaseEntity.setProducing(produ);
+        goodsbaseEntity.setNorms(norms);
+        goodsbaseEntity.setUnit(unit);
+        goodsbaseEntity.setStart(start);
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(goodsbaseEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 查询商品总数
+     *
+     * @return 返回商品总数
+     */
+    @Override
+    public int getGoodsCount() {
+        long count = 0;
+        count = (long) HibernateUtil.getSession()
+                .createQuery("select count(*) from GoodsbaseEntity ")
+                .uniqueResult();
+        return (int) count;
     }
 }

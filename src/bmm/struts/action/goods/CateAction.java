@@ -4,6 +4,9 @@ import bmm.service.CateControlService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 分类管理的业务请求
+ */
 public class CateAction extends ActionSupport {
     private String cateName;
     private int id;

@@ -15,6 +15,9 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 关于用户账户登陆的数据库操作接口的实现
+ */
 public class UserControlDAOImpl implements UserControlDAO {
 
     private HibernateTemplate hibernateTemplate;

@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 关于管理员账户的操作接口的实现
+ * 关于管理员账户的数据库操作接口的实现
  */
 public class AdminControlDAOImpl implements AdminControlDAO {
     private HibernateTemplate hibernateTemplate;
