@@ -252,7 +252,6 @@
                                                     新增分类
                                                 </span>
                                             </td>
-                                            <%--todo:add cate--%>
                                             <s:form action="cateEditAction_addCate" method="POST">
                                                 <td>
                                                     <s:textfield name="cateName" cssClass="form-control" value=""/>

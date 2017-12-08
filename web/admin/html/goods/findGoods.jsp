@@ -10,9 +10,6 @@
 <html>
 <%
     String username = CookieUtil.getCookiesValue(request, "isLogin");
-    GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
-    List<GoodsbaseEntity> list = goodsControlDAO.showAllGoods();
-    CategorizationControlDAO categorizationControlDAO = new CategorizationControlDAOImpl();
 %>
 <head>
     <title>建材商城后台管理系统</title>
@@ -219,16 +216,22 @@
                                 </tfoot>
                                 <tbody>
                                 <%
-                                    String path;
-                                    for (GoodsbaseEntity goodsbaseEntity : list) {
-                                        if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {
-                                            path = goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1);
-                                        } else {
-                                            path = "localhost:8080/admin/img/profile/profile-1.jpg";
-                                        }
+                                    GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
+                                    CategorizationControlDAO categorizationControlDAO = null;
+                                    List<GoodsbaseEntity> list = null;
+                                    if (goodsControlDAO.showAllGoods() != null) {
+                                        list = goodsControlDAO.showAllGoods();
+                                        categorizationControlDAO = new CategorizationControlDAOImpl();
+                                        String path;
+                                        for (GoodsbaseEntity goodsbaseEntity : list) {
+                                            if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {
+                                                path = goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1);
+                                            } else {
+                                                path = "localhost:8080/admin/img/profile/profile-1.jpg";
+                                            }
                                 %>
                                 <tr>
-                                    <s:form action="goodsControlAction_gotoEditGoods" method="POST">
+                                    <s:form action="goodsControlAction_deleteGoods" method="POST">
                                         <input type="hidden" name="goodsId" value="<%=goodsbaseEntity.getId()%>"/>
                                         <td><%=goodsbaseEntity.getName()%>
                                         </td>
@@ -252,6 +255,21 @@
                                 </tr>
                                 <%
                                     }
+                                } else {
+                                %>
+                                <tr>
+                                    <s:form action="goodsControlAction_deleteGoods" method="POST">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </s:form>
+                                </tr>
+                                <%
+                                    }
                                 %>
                                 </tbody>
                             </table>
@@ -266,7 +284,6 @@
     <div class="wrapper">
     </div>
 </footer>
-</div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/bootstrap.min.js"></script>
