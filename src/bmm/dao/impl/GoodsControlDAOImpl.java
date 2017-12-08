@@ -843,38 +843,55 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
     @Override
     public String getPicPathByGoodsId(int id, int pic) {
         String hql;
-        List<?> list = null;
+        List<String> list = null;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Query query;
         switch (pic) {
             case 1:
-                hql = "select pe.pic1 from GoodspicarrayEntity pe where pe.goodsId=?";
-                list = hibernateTemplate.find(hql, id);
+                hql="select pe.pic1 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                query = session.createQuery(hql);
+                query.setParameter("goodsId", id);
+                list = query.list();
                 break;
             case 2:
-                hql = "select pe.pic2 from GoodspicarrayEntity pe where pe.goodsId=?";
-                list = hibernateTemplate.find(hql, id);
+                hql="select pe.pic2 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                query = session.createQuery(hql);
+                query.setParameter("goodsId", id);
+                list = query.list();
                 break;
             case 3:
-                hql = "select pe.pic3 from GoodspicarrayEntity pe where pe.goodsId=?";
-                list = hibernateTemplate.find(hql, id);
+                hql="select pe.pic3 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                query = session.createQuery(hql);
+                query.setParameter("goodsId", id);
+                list = query.list();
                 break;
             case 4:
-                hql = "select pe.pic4 from GoodspicarrayEntity pe where pe.goodsId=?";
-                list = hibernateTemplate.find(hql, id);
+                hql="select pe.pic4 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                query = session.createQuery(hql);
+                query.setParameter("goodsId", id);
+                list = query.list();
                 break;
             case 5:
-                hql = "select pe.pic5 from GoodspicarrayEntity pe where pe.goodsId=?";
-                list = hibernateTemplate.find(hql, id);
+                hql="select pe.pic5 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                query = session.createQuery(hql);
+                query.setParameter("goodsId", id);
+                list = query.list();
                 break;
             case 6:
-                hql = "select pe.pic6 from GoodspicarrayEntity pe where pe.goodsId=?";
-                list = hibernateTemplate.find(hql, id);
+                hql="select pe.pic6 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                query = session.createQuery(hql);
+                query.setParameter("goodsId", id);
+                list = query.list();
                 break;
         }
-        for (Object o : list) {
+        for (String o : list) {
             if (o != null) {
                 return o.toString();
             }
         }
+        transaction.commit();
+        session.close();
         return null;
     }
 

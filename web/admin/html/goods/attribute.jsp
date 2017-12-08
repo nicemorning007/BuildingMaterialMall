@@ -239,15 +239,16 @@
                                 <%
                                     String path = "localhost:8080/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg";
                                     for (GoodsbaseEntity goodsbaseEntity : list) {
+                                        if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {
+                                            path = goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1);
+                                        }
                                 %>
                                 <tr>
                                     <s:form action="goodsControlAction_editGoods" method="POST" theme="simple">
-                                        <td><%=goodsbaseEntity.getName()%>
+                                        <td><%=goodsbaseEntity.getId()%>
                                         </td>
                                         <td>
                                             <div style="width: 170px;height: 180px">
-                                                    <%--<img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"--%>
-                                                    <%--style="width: 100%;height: 100%">--%>
                                                 <img src="<%="http://"+path%>" style="width: 100%;height: 100%">
                                             </div>
                                         </td>
