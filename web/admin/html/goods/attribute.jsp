@@ -237,6 +237,7 @@
                                 </tfoot>
                                 <tbody>
                                 <%
+                                    String path = "localhost:8080/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg";
                                     for (GoodsbaseEntity goodsbaseEntity : list) {
                                 %>
                                 <tr>
@@ -245,9 +246,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 170px;height: 180px">
-                                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"
-                                                     style="width: 100%;height: 100%">
-                                                    <%--<img src="<%=path%>" style="width: 100%;height: 100%">--%>
+                                                    <%--<img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"--%>
+                                                    <%--style="width: 100%;height: 100%">--%>
+                                                <img src="<%="http://"+path%>" style="width: 100%;height: 100%">
                                             </div>
                                         </td>
                                         <td><%=goodsbaseEntity.getProducing()%>
