@@ -1,8 +1,13 @@
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="bmm.dao.CategorizationControlDAO" %>
+<%@ page import="bmm.dao.impl.CategorizationControlDAOImpl" %>
+<%@ page import="bmm.entity.CategorizationEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%
+    String username = CookieUtil.getCookiesValue(request, "isLogin");
+%>
 <html>
 
 <head>
@@ -15,10 +20,13 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/select2.min.css">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/style.css">
@@ -44,18 +52,17 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <%--todo:显示管理员名字--%>
-                            占位
+                            <%=username%>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
-                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"
+                                     class="profile-img">
                             </li>
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">
-                                        <%--todo:显示管理员名字--%>
-                                        占位
+                                        <%=username%>
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
@@ -99,13 +106,17 @@
                             <div id="dropdown-element" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -119,13 +130,15 @@
                             <div id="dropdown-table" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/attribute.jsp">属性设置</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/addGoods.jsp">新增商品</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/findGoods.jsp">商品查询</a>
                                         </li>
@@ -141,7 +154,8 @@
                             <div id="component-example" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">订单查询</a>
                                         </li>
@@ -157,10 +171,10 @@
                             <div id="dropdown-form" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
-                                            <%--todo:show administrator`s name--%>
-                                            占位
-                                        </a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
+                                                <%=username%>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -176,67 +190,55 @@
             <div class="side-body">
                 <div class="page-title">
                     <span class="title">商品管理</span>
+                    <span style="background-color: #93D52D"><s:property value="message"/></span>
                 </div>
-                <%--todo: form action--%>
-                <s:form class="form-inline" action="addGoodsTest" method="post" theme="simple">
+                <s:form class="form-inline" action="goodsControlAction_editGoods" method="post"
+                        enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <div class="title">新增商品</div>
+                                        <div class="title">编辑商品
+                                            <span style="background-color: #93D52D">
+                                                <s:property value="message"/>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="sub-title">商品名称</div>
                                     <div>
-                                        <s:textfield name="name" cssClass="form-control" style="width:100%" placeholder="<%=name%>"/>
+                                        <s:textfield name="name" cssClass="form-control" style="width:100%"/>
                                     </div>
                                     <div class="sub-title">商品属性<span class="description">(支持html标签)</span></div>
                                     <div>
-                                        <s:textarea name="info" cssClass="form-control" rows="15" cssStyle="resize: none;width: 100%" placeholder="<%=info%>"/>
+                                        <s:textarea name="info" cssClass="form-control" rows="15"
+                                                    cssStyle="resize: none;width: 100%"/>
                                     </div>
                                     <div class="sub-title">单价<span class="description">(只允许输入数字)</span></div>
                                     <div>
-                                        <s:textfield name="price" cssClass="form-control" style="width:10%" onkeyup="value=value.replace(/[^\d\.]/g,'')" maxlength="8" placeholder="<%=price%>"/>
+                                        <s:textfield name="price" cssClass="form-control" style="width:10%"
+                                                     onkeyup="value=value.replace(/[^\d\.]/g,'')" maxlength="8"/>
                                     </div>
-                                        <%--todo:tag--%>
                                     <div class="sub-title">参加活动</div>
                                     <div>
                                         <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
-                                            <input type="checkbox" id="checkbox-fa-light-1" name="tag" value="促销折扣" <%=tag1%>>
-                                            <label for="checkbox-fa-light-1">
-                                                促销折扣
-                                            </label>
-                                        </div>
-                                        <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
-                                            <input type="checkbox" id="checkbox-fa-light-2" name="tag" value="批发优惠" <%=tag2%>>
-                                            <label for="checkbox-fa-light-2">
-                                                批发优惠
-                                            </label>
+                                            <s:checkboxlist list="{'促销折扣','批发优惠','不参与活动'}" name="tags"
+                                                            id="checkbox-fa-light-1"/>
                                         </div>
                                     </div>
                                     <div class="sub-title">选择分类 <span class="description">(新增分类请在分类管理处理)</span></div>
                                     <div>
                                     </div>
-                                    <select name="cate" style="width: 150px">
+                                    <select name="selectCate" style="width: 150px" title="">
                                         <%
-                                            List<String> list = new ArrayList<>();
-                                            String s1 = "s1";
-                                            String s2 = "s2";
-                                            String s3 = "s3";
-                                            String s4 = "s4";
-                                            String s5 = "s5";
-                                            list.add(s1);
-                                            list.add(s2);
-                                            list.add(s3);
-                                            list.add(s4);
-                                            list.add(s5);
-                                            for (String s:list){
+                                            CategorizationControlDAO categorizationControlDAO = new CategorizationControlDAOImpl();
+                                            List<CategorizationEntity> selectList = categorizationControlDAO.showAllCate();
+                                            for (CategorizationEntity categorizationEntity : selectList) {
                                         %>
-                                        <option value="<%=s%>" <%=selected%>><%=s%></option>
-                                            <%--<option value="HI">Hawaii</option>--%>
-                                            <%--<option value="AK" selected="selected">Alaska</option>--%>
+                                        <option value="<%=categorizationEntity.getId()%>"><%=categorizationEntity.getName()%>
+                                        </option>
                                         <%
                                             }
                                         %>
@@ -250,36 +252,34 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <div class="title">产地</div>
+                                        <div class="title">商品属性</div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>厂商</label>
-                                        <input type="text" class="form-control" name="manufacturer"
-                                               placeholder="<%=manufacturer%>">
+                                        <s:textfield cssClass="form-control" name="manu"
+                                                     placeholder="厂商品牌名"/>
                                     </div>
                                     <div class="form-group">
                                         <label>产地</label>
-                                        <input type="text" class="form-control" id="producing"
-                                               placeholder="<%=producing%>">
+                                        <s:textfield cssClass="form-control" name="produ"
+                                                     placeholder="省市"/>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>规格</label>
-                                            <input type="text" class="form-control" name="manufacturer"
-                                                   placeholder="<%=format%>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>计量单位</label>
-                                            <input type="text" class="form-control" name="manufacturer"
-                                                   placeholder="<%=units%>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>起售数量</label>
-                                            <input type="text" class="form-control" name="manufacturer"
-                                                   placeholder="<%=begin%>">
-                                        </div>
+                                    <div class="form-group">
+                                        <label>规格</label>
+                                        <s:textfield cssClass="form-control" name="norms"
+                                                     placeholder="如：mm/cm/m"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>计量单位</label>
+                                        <s:textfield cssClass="form-control" name="unit"
+                                                     placeholder="如：百件/百个/件/个/吨"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>起售数量</label>
+                                        <s:textfield cssClass="form-control" name="start"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -288,27 +288,42 @@
                         <div class="col-xs-12">
                             <div class="card">
                                 <div class="card-body">
-                                        <%--todo:file upload--%>
                                     <div class="form-group">
-                                        <label>上传商品大图</label>
-                                        <input type="file" name="exampleInputFile">
+                                        <label>上传商品大图
+                                        </label>
+                                        <s:file name="pic1"/>
                                         <p class="help-block">显示在商品预览页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
-                                    <%
-                                        int i = 0;
-                                        for (; i < 6; i++) {
-                                    %>
                                     <div class="form-group">
-                                        <label>上传商品图片<%=i + 1%>
+                                        <label>上传商品详情图片1
                                         </label>
-                                        <input type="file" name="exampleInputFile">
+                                        <s:file name="pic2"/>
                                         <p class="help-block">显示在商品详情页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
-                                    <%
-                                        }
-                                    %>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片2
+                                        </label>
+                                        <s:file name="pic3"/>
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片3
+                                        </label>
+                                        <s:file name="pic4"/>
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片4
+                                        </label>
+                                        <s:file name="pic5"/>
+                                        <p class="help-block">显示在商品详情页的图</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>上传商品详情图片5
+                                        </label>
+                                        <s:file name="pic6"/>
+                                        <p class="help-block">显示在商品预览页的图</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +332,7 @@
                         <div class="col-xs-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <s:submit value="提交修改" cssClass="btn btn-success"/>
+                                    <s:submit value="提交新增" cssClass="btn btn-success"/>
                                 </div>
                             </div>
                         </div>
@@ -331,7 +346,6 @@
     <div class="wrapper">
     </div>
 </footer>
-</div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/bootstrap.min.js"></script>
@@ -340,7 +354,8 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.matchHeight-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/select2.full.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/ace.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/mode-html.js"></script>

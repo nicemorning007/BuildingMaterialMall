@@ -102,7 +102,7 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         List<?> list = hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
-                return Integer.parseInt(o.toString());
+                return Double.parseDouble(o.toString());
             }
         }
         return 0;
@@ -597,6 +597,54 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
     }
 
     /**
+     * 用于修改商品
+     *
+     * @param id       商品ID号
+     * @param name     商品名称
+     * @param info     商品属性
+     * @param price    单价
+     * @param tag      标签（参与的活动）
+     * @param cate     分类
+     * @param manu     产地
+     * @param produ    厂商
+     * @param picArray 图片表ID
+     * @param norms    规格
+     * @param unit     单位
+     * @param start    起售数量
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean editGoods(int id, String name, String info, double price, String tag, int cate, String manu, String produ, int picArray, String norms, String unit, int start) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        GoodsbaseEntity goodsbaseEntity = (GoodsbaseEntity) session.get(GoodsbaseEntity.class, id);
+        if (goodsbaseEntity == null) {
+            return false;
+        }
+        goodsbaseEntity.setName(name);
+        goodsbaseEntity.setPrice(price);
+        goodsbaseEntity.setManufacturer(manu);
+        goodsbaseEntity.setProducing(produ);
+        goodsbaseEntity.setPictureArray(picArray);
+        goodsbaseEntity.setInfo(info);
+        goodsbaseEntity.setTag(tag);
+        goodsbaseEntity.setCate(cate);
+        goodsbaseEntity.setUnit(unit);
+        goodsbaseEntity.setNorms(norms);
+        goodsbaseEntity.setStart(start);
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.update(goodsbaseEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return flag;
+    }
+
+    /**
      * 查询商品总数
      *
      * @return 返回商品总数
@@ -849,37 +897,37 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         Query query;
         switch (pic) {
             case 1:
-                hql="select pe.pic1 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                hql = "select pe.pic1 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
                 query = session.createQuery(hql);
                 query.setParameter("goodsId", id);
                 list = query.list();
                 break;
             case 2:
-                hql="select pe.pic2 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                hql = "select pe.pic2 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
                 query = session.createQuery(hql);
                 query.setParameter("goodsId", id);
                 list = query.list();
                 break;
             case 3:
-                hql="select pe.pic3 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                hql = "select pe.pic3 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
                 query = session.createQuery(hql);
                 query.setParameter("goodsId", id);
                 list = query.list();
                 break;
             case 4:
-                hql="select pe.pic4 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                hql = "select pe.pic4 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
                 query = session.createQuery(hql);
                 query.setParameter("goodsId", id);
                 list = query.list();
                 break;
             case 5:
-                hql="select pe.pic5 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                hql = "select pe.pic5 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
                 query = session.createQuery(hql);
                 query.setParameter("goodsId", id);
                 list = query.list();
                 break;
             case 6:
-                hql="select pe.pic6 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
+                hql = "select pe.pic6 from GoodspicarrayEntity pe where pe.goodsId=:goodsId";
                 query = session.createQuery(hql);
                 query.setParameter("goodsId", id);
                 list = query.list();
@@ -938,5 +986,76 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
             }
         }
         return null;
+    }
+
+    /**
+     * 通过ID号获取指定商品的产地
+     *
+     * @param id 要查询的ID号
+     * @return 如果操作成功则返回该商品的产地；否则返回 <b>null</b>
+     */
+    @Override
+    public String getProduById(int id) {
+        String hql = "select ge.producing from GoodsbaseEntity ge where ge.id=?";
+        List<?> list = hibernateTemplate.find(hql, id);
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 通过指定的ID号设置该商品的产地
+     *
+     * @param id    要设置的ID号
+     * @param produ 要设置的产地
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean setProduById(int id, String produ) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update GoodsbaseEntity ge set ge.producing=:producing where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("producing", produ);
+        query.setParameter("id", id);
+        int row = query.executeUpdate();
+        if (row > 0) {
+            flag = true;
+        }
+        transaction.commit();
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 根据ID号删除指定的商品
+     *
+     * @param id 要删除的商品的ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean deleteGoodsById(int id) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        GoodsbaseEntity goodsbaseEntity = (GoodsbaseEntity) session.get(GoodsbaseEntity.class, id);
+        if (goodsbaseEntity == null) {
+            return false;
+        }
+        try {
+            session.delete(goodsbaseEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+        return flag;
     }
 }

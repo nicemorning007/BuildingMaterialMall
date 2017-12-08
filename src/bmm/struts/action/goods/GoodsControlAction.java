@@ -45,6 +45,7 @@ public class GoodsControlAction extends ActionSupport {
     private String pic5FileName;
     private String pic5ContentType;
     private List<CategorizationEntity> list;
+    private String goodsId;
 
     public List<CategorizationEntity> getList() {
         return list;
@@ -311,6 +312,14 @@ public class GoodsControlAction extends ActionSupport {
         this.pic6ContentType = pic6ContentType;
     }
 
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
+    }
+
     /**
      * 用于添加商品的操作方法
      *
@@ -444,6 +453,124 @@ public class GoodsControlAction extends ActionSupport {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    /**
+     * 用于将商品ID转发并跳转到商品编辑页面
+     *
+     * @return 返回字符串"gotoEditGoods"
+     */
+    public String gotoEditGoods() {
+        HttpServletRequest httpServletRequest = ServletActionContext.getRequest();
+        this.goodsId = httpServletRequest.getParameter("goodsId");
+        message = null;
+        this.name = goodsControlService.getGoodsControlDAO().getNameById(Integer.parseInt(this.goodsId));
+        this.info = goodsControlService.getGoodsControlDAO().getInfoById(Integer.parseInt(this.goodsId));
+        this.price = String.valueOf(goodsControlService.getGoodsControlDAO().getPriceById(Integer.parseInt(this.goodsId)));
+        this.manu = goodsControlService.getGoodsControlDAO().getManuById(Integer.parseInt(this.goodsId));
+        this.produ = goodsControlService.getGoodsControlDAO().getProduById(Integer.parseInt(this.goodsId));
+        this.norms = goodsControlService.getGoodsControlDAO().getNormsById(Integer.parseInt(this.goodsId));
+        this.unit = goodsControlService.getGoodsControlDAO().getUnitById(Integer.parseInt(this.goodsId));
+        this.start = String.valueOf(goodsControlService.getGoodsControlDAO().getStartById(Integer.parseInt(this.goodsId)));
+        this.cate = goodsControlService.getGoodsControlDAO().getCateById(Integer.parseInt(this.goodsId));
+        CategorizationControlDAO categorizationControlDAO = new CategorizationControlDAOImpl();
+        this.tags = new String[]{categorizationControlDAO.getCateNameById(cate)};
+        return "gotoEditGoods";
+    }
+
+    /**
+     * 用于商品信息的编辑
+     *
+     * @return 返回字符串"editGoods"
+     */
+    public String editGoods() {
+        String goodsId = String.valueOf(goodsControlService.guessGoodsId());
+
+        this.cate = getCateValue();
+
+        //获取checkbox tag
+        this.setTagValue();
+
+        //获取文件
+        String pic1Path = null;
+        String pic2Path = null;
+        String pic3Path = null;
+        String pic4Path = null;
+        String pic5Path = null;
+        String pic6Path = null;
+
+        if (pic1 != null) {
+            if (!this.upLoadImage(pic1, pic1FileName, goodsId)) {
+                message = "操作失败请重试";
+                return "editGoods";
+            }
+            pic1Path = "localhost:8080/images/goods/" + goodsId + "/" + pic1FileName;
+        }
+        if (pic2 != null) {
+            if (!this.upLoadImage(pic2, pic2FileName, goodsId)) {
+                message = "操作失败请重试";
+                return "editGoods";
+            }
+            pic2Path = "localhost:8080/images/goods/" + goodsId + "/" + pic2FileName;
+        }
+        if (pic3 != null) {
+            if (!this.upLoadImage(pic3, pic3FileName, goodsId)) {
+                message = "操作失败请重试";
+                return "editGoods";
+            }
+            pic3Path = "localhost:8080/images/goods/" + goodsId + "/" + pic3FileName;
+        }
+        if (pic4 != null) {
+            if (!this.upLoadImage(pic4, pic4FileName, goodsId)) {
+                message = "操作失败请重试";
+                return "editGoods";
+            }
+            pic4Path = "localhost:8080/images/goods/" + goodsId + "/" + pic4FileName;
+        }
+        if (pic5 != null) {
+            if (!this.upLoadImage(pic5, pic5FileName, goodsId)) {
+                message = "操作失败请重试";
+                return "editGoods";
+            }
+            pic5Path = "localhost:8080/images/goods/" + goodsId + "/" + pic5FileName;
+        }
+        if (pic6 != null) {
+            if (!this.upLoadImage(pic6, pic6FileName, goodsId)) {
+                message = "操作失败请重试";
+                return "editGoods";
+            }
+            pic6Path = "localhost:8080/images/goods/" + goodsId + "/" + pic6FileName;
+        }
+        if (!goodsControlService.descIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path,
+                pic2Path, pic3Path, pic4Path, pic5Path, pic6Path)) {
+            message = "操作失败请重试";
+            return "editGoods";
+        }
+
+        //提交
+        int picArray = goodsControlService.guessPicId();
+        if (goodsControlService.editGoodsById(Integer.parseInt(this.goodsId), this.name, this.info,
+                Double.parseDouble(this.price), this.tag.toString().trim(), this.cate,
+                this.manu, this.produ, picArray - 1, this.norms, this.unit, Integer.parseInt(this.start))) {
+            this.message = "操作成功";
+        } else {
+            this.message = "操作失败请重试";
+        }
+        return "editGoods";
+    }
+
+    /**
+     * 用于商品信息的删除
+     *
+     * @return 返回字符串"deleteGoods"
+     */
+    public String deleteGoods() {
+        if (goodsControlService.deleteGoodsById(Integer.parseInt(this.goodsId))) {
+            this.message = "操作成功";
+        } else {
+            this.message = "操作失败请重试";
+        }
+        return "deleteGoods";
     }
 
 }

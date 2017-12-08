@@ -237,15 +237,18 @@
                                 </tfoot>
                                 <tbody>
                                 <%
-                                    String path = "localhost:8080/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg";
+                                    String path;
                                     for (GoodsbaseEntity goodsbaseEntity : list) {
                                         if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {
                                             path = goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1);
+                                        } else {
+                                            path = "localhost:8080/admin/img/profile/profile-1.jpg";
                                         }
                                 %>
                                 <tr>
-                                    <s:form action="goodsControlAction_editGoods" method="POST" theme="simple">
-                                        <td><%=goodsbaseEntity.getId()%>
+                                    <s:form action="goodsControlAction_gotoEditGoods" method="POST">
+                                        <input type="hidden" name="goodsId" value="<%=goodsbaseEntity.getId()%>"/>
+                                        <td><%=goodsbaseEntity.getName()%>
                                         </td>
                                         <td>
                                             <div style="width: 170px;height: 180px">

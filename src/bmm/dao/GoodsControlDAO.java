@@ -238,6 +238,26 @@ public interface GoodsControlDAO {
     boolean addGoods(String name, String info, double price, String tag, int cate, String manu, String produ, int picArray, String norms, String unit, int start);
 
     /**
+     * 用于修改商品
+     *
+     * @param id       商品ID号
+     * @param name     商品名称
+     * @param info     商品属性
+     * @param price    单价
+     * @param tag      标签（参与的活动）
+     * @param cate     分类
+     * @param manu     产地
+     * @param produ    厂商
+     * @param picArray 图片表ID
+     * @param norms    规格
+     * @param unit     单位
+     * @param start    起售数量
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean editGoods(int id, String name, String info, double price, String tag, int cate, String manu,
+                      String produ, int picArray, String norms, String unit, int start);
+
+    /**
      * 查询商品总数
      *
      * @return 返回商品总数
@@ -345,4 +365,27 @@ public interface GoodsControlDAO {
      */
     String getPicPathById(int id, int pic);
 
+    /**
+     * 通过ID号获取指定商品的产地
+     *
+     * @param id 要查询的ID号
+     * @return 如果操作成功则返回该商品的产地；否则返回 <b>null</b>
+     */
+    String getProduById(int id);
+
+    /**
+     * 通过指定的ID号设置该商品的产地
+     *
+     * @param id    要设置的ID号
+     * @param produ 要设置的产地
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean setProduById(int id, String produ);
+
+    /**
+     * 根据ID号删除指定的商品
+     * @param id 要删除的商品的ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean deleteGoodsById(int id);
 }

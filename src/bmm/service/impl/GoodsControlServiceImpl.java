@@ -10,6 +10,11 @@ import bmm.utils.hibernate_util.HibernateUtil;
 public class GoodsControlServiceImpl implements GoodsControlService {
     private GoodsControlDAO goodsControlDAO;
 
+    /**
+     * 获取GoodsControlDAO对象
+     *
+     * @return 如果操作成功则返回 <b>GoodsControlDAO</b> 对象；否则返回 <b>null</b>
+     */
     public GoodsControlDAO getGoodsControlDAO() {
         return goodsControlDAO;
     }
@@ -37,6 +42,28 @@ public class GoodsControlServiceImpl implements GoodsControlService {
     @Override
     public boolean addGoods(String name, String info, double price, String tag, int cate, String manu, String produ, int picArray, String norms, String unit, int start) {
         return goodsControlDAO.addGoods(name, info, price, tag, cate, manu, produ, picArray, norms, unit, start);
+    }
+
+    /**
+     * 用于修改商品
+     *
+     * @param id       商品ID号
+     * @param name     商品名称
+     * @param info     商品属性
+     * @param price    单价
+     * @param tag      标签（参与的活动）
+     * @param cate     分类
+     * @param manu     产地
+     * @param produ    厂商
+     * @param picArray 图片表ID
+     * @param norms    规格
+     * @param unit     单位
+     * @param start    起售数量
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean editGoodsById(int id, String name, String info, double price, String tag, int cate, String manu, String produ, int picArray, String norms, String unit, int start) {
+        return goodsControlDAO.editGoods(id, name, info, price, tag, cate, manu, produ, picArray, norms, unit, start);
     }
 
     /**
@@ -112,5 +139,16 @@ public class GoodsControlServiceImpl implements GoodsControlService {
     @Override
     public String getPicPathById(int id, int pic) {
         return goodsControlDAO.getPicPathById(id, pic);
+    }
+
+    /**
+     * 根据ID号删除指定的商品
+     *
+     * @param id 要删除的商品的ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean deleteGoodsById(int id) {
+        return goodsControlDAO.deleteGoodsById(id);
     }
 }

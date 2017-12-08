@@ -1,5 +1,7 @@
 package bmm.service;
 
+import bmm.dao.GoodsControlDAO;
+
 /**
  * 关于商品管理的接口
  */
@@ -22,6 +24,26 @@ public interface GoodsControlService {
      */
     boolean addGoods(String name, String info, double price, String tag, int cate, String manu,
                      String produ, int picArray, String norms, String unit, int start);
+
+    /**
+     * 用于修改商品
+     *
+     * @param id       商品ID号
+     * @param name     商品名称
+     * @param info     商品属性
+     * @param price    单价
+     * @param tag      标签（参与的活动）
+     * @param cate     分类
+     * @param manu     产地
+     * @param produ    厂商
+     * @param picArray 图片表ID
+     * @param norms    规格
+     * @param unit     单位
+     * @param start    起售数量
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean editGoodsById(int id, String name, String info, double price, String tag, int cate, String manu,
+                      String produ, int picArray, String norms, String unit, int start);
 
     /**
      * 预测下一商品的ID号
@@ -77,4 +99,18 @@ public interface GoodsControlService {
      * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
      */
     String getPicPathById(int id, int pic);
+
+    /**
+     * 获取GoodsControlDAO对象
+     *
+     * @return 如果操作成功则返回 <b>GoodsControlDAO</b> 对象；否则返回 <b>null</b>
+     */
+    GoodsControlDAO getGoodsControlDAO();
+
+    /**
+     * 根据ID号删除指定的商品
+     * @param id 要删除的商品的ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean deleteGoodsById(int id);
 }

@@ -16,16 +16,7 @@ public class HibernateTest {
     public void allTest() {
         ClassPathXmlApplicationContext resource = new ClassPathXmlApplicationContext("spring-config.xml");
         GoodsControlDAO dao = (GoodsControlDAO) resource.getBean("goodsControlDao");
-        List<GoodsbaseEntity> list = dao.showAllGoods();
-        System.out.println(list.size());
-        for (GoodsbaseEntity o : list) {
-            if (o != null) {
-                System.out.println(o.getId());
-                System.out.println(dao.getPicPathByGoodsId(o.getId(),1));
-            } else {
-                System.out.println("object is null");
-            }
-        }
+        dao.deleteGoodsById(28);
     }
 
     @Test

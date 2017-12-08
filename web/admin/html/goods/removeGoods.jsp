@@ -1,7 +1,19 @@
+<%@ page import="bmm.dao.CategorizationControlDAO" %>
+<%@ page import="bmm.dao.GoodsControlDAO" %>
+<%@ page import="bmm.dao.impl.CategorizationControlDAOImpl" %>
+<%@ page import="bmm.dao.impl.GoodsControlDAOImpl" %>
+<%@ page import="bmm.entity.GoodsbaseEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
+<%
+    String username = CookieUtil.getCookiesValue(request, "isLogin");
+    GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
+    List<GoodsbaseEntity> list = goodsControlDAO.showAllGoods();
+    CategorizationControlDAO categorizationControlDAO = new CategorizationControlDAOImpl();
+%>
 <head>
     <title>建材商城后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,8 +52,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <%--todo:显示管理员名字--%>
-                            占位
+                            <%=username%>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
@@ -50,8 +61,7 @@
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">
-                                        <%--todo:显示管理员名字--%>
-                                        占位
+                                        <%=username%>
                                     </h4>
                                     <p>建材商城网——管理员</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
@@ -154,8 +164,7 @@
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
                                         <li><a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
-                                            <%--todo:show administrator`s name--%>
-                                            占位
+                                            <%=username%>
                                         </a>
                                         </li>
                                     </ul>
@@ -209,29 +218,32 @@
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <%--todo:check database--%>
                                 <%
-                                    int i = 0;
-                                    for (; i < 50; i++) {
+                                    String path;
+                                    for (GoodsbaseEntity goodsbaseEntity : list) {
+                                        if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {
+                                            path = goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1);
+                                        } else {
+                                            path = "localhost:8080/admin/img/profile/profile-1.jpg";
+                                        }
                                 %>
                                 <tr>
-                                    <%--todo:action--%>
-                                    <s:form action="" method="POST" theme="simple">
-                                        <td>中文<%=i%>
+                                    <s:form action="goodsControlAction_deleteGoods" method="POST">
+                                        <input type="hidden" name="goodsId" value="<%=goodsbaseEntity.getId()%>"/>
+                                        <td><%=goodsbaseEntity.getName()%>
                                         </td>
                                         <td>
                                             <div style="width: 170px;height: 180px">
-                                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"
-                                                     style="width: 100%;height: 100%">
+                                                <img src="<%="http://"+path%>" style="width: 100%;height: 100%">
                                             </div>
                                         </td>
-                                        <td>Producing<%=i%>
+                                        <td><%=goodsbaseEntity.getProducing()%>
                                         </td>
-                                        <td>Price<%=i%>
+                                        <td><%=goodsbaseEntity.getPrice()%>
                                         </td>
-                                        <td>Sale<%=i%>
+                                        <td><%=goodsbaseEntity.getSale()%>
                                         </td>
-                                        <td>Cate<%=i%>
+                                        <td><%=categorizationControlDAO.getCateNameById(goodsbaseEntity.getCate())%>
                                         </td>
                                         <td>
                                             <s:submit value="移除" cssClass="btn btn-sm btn-default"/>
@@ -254,7 +266,6 @@
     <div class="wrapper">
     </div>
 </footer>
-</div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/bootstrap.min.js"></script>
