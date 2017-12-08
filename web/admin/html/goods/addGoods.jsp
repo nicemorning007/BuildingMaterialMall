@@ -220,7 +220,7 @@
                                     <div class="sub-title">参加活动</div>
                                     <div>
                                         <div class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
-                                            <s:checkboxlist list="{'促销折扣','批发优惠'}" name="tags"
+                                            <s:checkboxlist list="{'促销折扣','批发优惠','不参与活动'}" name="tags"
                                                             id="checkbox-fa-light-1"/>
                                         </div>
                                     </div>
@@ -290,42 +290,36 @@
                                         <s:file name="pic1"/>
                                         <p class="help-block">显示在商品预览页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
                                     <div class="form-group">
                                         <label>上传商品详情图片1
                                         </label>
                                         <s:file name="pic2"/>
                                         <p class="help-block">显示在商品详情页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
                                     <div class="form-group">
                                         <label>上传商品详情图片2
                                         </label>
                                         <s:file name="pic3"/>
                                         <p class="help-block">显示在商品详情页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
                                     <div class="form-group">
                                         <label>上传商品详情图片3
                                         </label>
                                         <s:file name="pic4"/>
                                         <p class="help-block">显示在商品详情页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
                                     <div class="form-group">
                                         <label>上传商品详情图片4
                                         </label>
                                         <s:file name="pic5"/>
                                         <p class="help-block">显示在商品详情页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
                                     <div class="form-group">
                                         <label>上传商品详情图片5
                                         </label>
                                         <s:file name="pic6"/>
                                         <p class="help-block">显示在商品预览页的图</p>
                                     </div>
-                                    <button type="submit" class="btn btn-default">上传</button>
                                 </div>
                             </div>
                         </div>

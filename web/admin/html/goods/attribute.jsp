@@ -1,9 +1,18 @@
+<%@ page import="bmm.dao.CategorizationControlDAO" %>
+<%@ page import="bmm.dao.GoodsControlDAO" %>
+<%@ page import="bmm.dao.impl.CategorizationControlDAOImpl" %>
+<%@ page import="bmm.dao.impl.GoodsControlDAOImpl" %>
+<%@ page import="bmm.entity.GoodsbaseEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
     String username = CookieUtil.getCookiesValue(request, "isLogin");
+    GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
+    List<GoodsbaseEntity> list = goodsControlDAO.showAllGoods();
+    CategorizationControlDAO categorizationControlDAO = new CategorizationControlDAOImpl();
 %>
 <head>
     <title>建材商城后台管理系统</title>
@@ -15,10 +24,13 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/select2.min.css">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/style.css">
@@ -48,7 +60,8 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
-                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
+                                <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"
+                                     class="profile-img">
                             </li>
                             <li>
                                 <div class="profile-info">
@@ -97,13 +110,17 @@
                             <div id="dropdown-element" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/UserForbidden.jsp">用户注销</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/lossReporting.jsp">挂失与解挂</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/passwordReset.jsp">重置密码</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/userConf/findUser.jsp">用户查询</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -117,13 +134,15 @@
                             <div id="dropdown-table" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/categorization.jsp">分类管理</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/attribute.jsp">属性设置</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/addGoods.jsp">新增商品</a>
                                         </li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/goods/removeGoods.jsp">移除商品</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/goods/findGoods.jsp">商品查询</a>
                                         </li>
@@ -139,7 +158,8 @@
                             <div id="component-example" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/bill/billManagement.jsp">订单管理</a>
                                         </li>
                                         <li><a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">订单查询</a>
                                         </li>
@@ -155,9 +175,10 @@
                             <div id="dropdown-form" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
-                                            <%=username%>
-                                        </a>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/admin/html/security/profile.jsp">
+                                                <%=username%>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -182,7 +203,11 @@
                         <div class="card-header">
 
                             <div class="card-title">
-                                <div class="title">商品属性</div>
+                                <div class="title">商品属性
+                                    <span style="background-color: #93D52D">
+                                        <s:property value="message"/>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -211,29 +236,27 @@
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <%--todo:check database--%>
                                 <%
-                                    int i = 0;
-                                    for (; i < 50; i++) {
+                                    for (GoodsbaseEntity goodsbaseEntity : list) {
                                 %>
                                 <tr>
-                                    <%--todo:action--%>
-                                    <s:form action="" method="POST" theme="simple">
-                                        <td>中文<%=i%>
+                                    <s:form action="goodsControlAction_editGoods" method="POST" theme="simple">
+                                        <td><%=goodsbaseEntity.getName()%>
                                         </td>
                                         <td>
                                             <div style="width: 170px;height: 180px">
                                                 <img src="${pageContext.request.contextPath}/admin/img/profile/picjumbo.com_HNCK4153_resize.jpg"
                                                      style="width: 100%;height: 100%">
+                                                    <%--<img src="<%=path%>" style="width: 100%;height: 100%">--%>
                                             </div>
                                         </td>
-                                        <td>Producing<%=i%>
+                                        <td><%=goodsbaseEntity.getProducing()%>
                                         </td>
-                                        <td>Price<%=i%>
+                                        <td><%=goodsbaseEntity.getPrice()%>
                                         </td>
-                                        <td>Sale<%=i%>
+                                        <td><%=goodsbaseEntity.getSale()%>
                                         </td>
-                                        <td>Cate<%=i%>
+                                        <td><%=categorizationControlDAO.getCateNameById(goodsbaseEntity.getCate())%>
                                         </td>
                                         <td>
                                             <s:submit value="编辑" cssClass="btn btn-sm btn-default"/>
@@ -264,7 +287,8 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.matchHeight-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/admin/lib/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/select2.full.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/ace.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/ace/mode-html.js"></script>

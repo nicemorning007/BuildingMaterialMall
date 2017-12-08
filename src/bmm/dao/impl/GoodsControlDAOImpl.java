@@ -441,7 +441,14 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
      */
     @Override
     public List<GoodsbaseEntity> showAllGoods() {
-        List<GoodsbaseEntity> list = (List<GoodsbaseEntity>) hibernateTemplate.find("from GoodsbaseEntity ");
+        List<GoodsbaseEntity> list = null;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from GoodsbaseEntity ";
+        Query query = session.createQuery(hql);
+        list = query.list();
+        transaction.commit();
+        session.close();
         return list;
     }
 
