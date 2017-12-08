@@ -59,4 +59,22 @@ public interface GoodsControlService {
      * @return 返回下一商品的图片表ID号，如果数据库访问失败将返回 <b>0</b>
      */
     int guessPicId();
+
+    /**
+     * 通过商品ID获得指定图片的路径
+     *
+     * @param id  要查询的商品ID
+     * @param pic 要获取的图片序号
+     * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
+     */
+    String getPicPathByGoodsId(int id, int pic);
+
+    /**
+     * 通过图片表ID号获取指定图的路径
+     *
+     * @param id  要查询的ID号
+     * @param pic 要获取的图片序号
+     * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
+     */
+    String getPicPathById(int id, int pic);
 }

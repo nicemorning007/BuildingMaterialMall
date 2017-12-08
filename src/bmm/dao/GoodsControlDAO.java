@@ -326,4 +326,23 @@ public interface GoodsControlDAO {
      * @return 返回商品图片表总数
      */
     int getPicCount();
+
+    /**
+     * 通过商品ID获得指定图片的路径
+     *
+     * @param id  要查询的商品ID
+     * @param pic 要获取的图片序号
+     * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
+     */
+    String getPicPathByGoodsId(int id, int pic);
+
+    /**
+     * 通过图片表ID号获取指定图的路径
+     *
+     * @param id  要查询的ID号
+     * @param pic 要获取的图片序号
+     * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
+     */
+    String getPicPathById(int id, int pic);
+
 }

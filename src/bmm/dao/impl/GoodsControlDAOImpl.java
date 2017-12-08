@@ -825,4 +825,94 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
                 .uniqueResult();
         return (int) count;
     }
+
+    /**
+     * 通过商品ID获得指定图片的路径
+     *
+     * @param id  要查询的商品ID
+     * @param pic 要获取的图片序号
+     * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
+     */
+    @Override
+    public String getPicPathByGoodsId(int id, int pic) {
+        String hql;
+        List<?> list = null;
+        switch (pic) {
+            case 1:
+                hql = "select pe.pic1 from GoodspicarrayEntity pe where pe.goodsId=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 2:
+                hql = "select pe.pic2 from GoodspicarrayEntity pe where pe.goodsId=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 3:
+                hql = "select pe.pic3 from GoodspicarrayEntity pe where pe.goodsId=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 4:
+                hql = "select pe.pic4 from GoodspicarrayEntity pe where pe.goodsId=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 5:
+                hql = "select pe.pic5 from GoodspicarrayEntity pe where pe.goodsId=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 6:
+                hql = "select pe.pic6 from GoodspicarrayEntity pe where pe.goodsId=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+        }
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 通过图片表ID号获取指定图的路径
+     *
+     * @param id  要查询的ID号
+     * @param pic 要获取的图片序号
+     * @return 如果操作成功则返回该图片的路径；否则返回 <b>null</b>
+     */
+    @Override
+    public String getPicPathById(int id, int pic) {
+        String hql;
+        List<?> list = null;
+        switch (pic) {
+            case 1:
+                hql = "select pe.pic1 from GoodspicarrayEntity pe where pe.id=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 2:
+                hql = "select pe.pic2 from GoodspicarrayEntity pe where pe.id=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 3:
+                hql = "select pe.pic3 from GoodspicarrayEntity pe where pe.id=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 4:
+                hql = "select pe.pic4 from GoodspicarrayEntity pe where pe.id=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 5:
+                hql = "select pe.pic5 from GoodspicarrayEntity pe where pe.id=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+            case 6:
+                hql = "select pe.pic6 from GoodspicarrayEntity pe where pe.id=?";
+                list = hibernateTemplate.find(hql, id);
+                break;
+        }
+        for (Object o : list) {
+            if (o != null) {
+                return o.toString();
+            }
+        }
+        return null;
+    }
 }
