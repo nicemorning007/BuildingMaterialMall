@@ -21,20 +21,22 @@ public class GoodsControlServiceImpl implements GoodsControlService {
     /**
      * 用于新增商品
      *
-     * @param name  商品名称
-     * @param info  商品属性
-     * @param price 单价
-     * @param tag   标签（参与的活动）
-     * @param manu  产地
-     * @param produ 厂商
-     * @param norms 规格
-     * @param unit  单位
-     * @param start 起售数量
+     * @param name     商品名称
+     * @param info     商品属性
+     * @param price    单价
+     * @param tag      标签（参与的活动）
+     * @param cate     分类
+     * @param manu     产地
+     * @param produ    厂商
+     * @param picArray 图片表ID
+     * @param norms    规格
+     * @param unit     单位
+     * @param start    起售数量
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean addGoods(String name, String info, double price, String tag, String manu, String produ, String norms, String unit, int start) {
-        return goodsControlDAO.addGoods(name, info, price, tag, manu, produ, norms, unit, start);
+    public boolean addGoods(String name, String info, double price, String tag, int cate, String manu, String produ, int picArray, String norms, String unit, int start) {
+        return goodsControlDAO.addGoods(name, info, price, tag, cate, manu, produ, picArray, norms, unit, start);
     }
 
     /**
@@ -43,9 +45,11 @@ public class GoodsControlServiceImpl implements GoodsControlService {
      * @return 返回下一商品的ID号，如果数据库访问失败将返回 <b>0</b>
      */
     @Override
-    public int guessGoodsId(){
+    public int guessGoodsId() {
         return goodsControlDAO.guessGoodsId();
-    };
+    }
+
+    ;
 
     /**
      * 添加商品与分类的关联信息到关联表中
@@ -74,5 +78,15 @@ public class GoodsControlServiceImpl implements GoodsControlService {
     @Override
     public boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
         return goodsControlDAO.descIntoGoodsPicArrayByGoodsId(goodsId, pic1, pic2, pic3, pic4, pic5, pic6);
+    }
+
+    /**
+     * 用于推测新商品的图片表ID号
+     *
+     * @return 返回下一商品的图片表ID号，如果数据库访问失败将返回 <b>0</b>
+     */
+    @Override
+    public int guessPicId() {
+        return goodsControlDAO.guessPicId();
     }
 }

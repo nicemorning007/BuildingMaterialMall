@@ -254,27 +254,27 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>厂商</label>
-                                        <s:textfield type="text" cssClass="form-control" name="manu"
+                                        <s:textfield cssClass="form-control" name="manu"
                                                      placeholder="厂商品牌名"/>
                                     </div>
                                     <div class="form-group">
                                         <label>产地</label>
-                                        <s:textfield type="text" cssClass="form-control" id="producing"
+                                        <s:textfield cssClass="form-control" name="produ"
                                                      placeholder="省市"/>
                                     </div>
                                     <div class="form-group">
                                         <label>规格</label>
-                                        <s:textfield type="text" cssClass="form-control" name="norms"
+                                        <s:textfield cssClass="form-control" name="norms"
                                                      placeholder="如：mm/cm/m"/>
                                     </div>
                                     <div class="form-group">
                                         <label>计量单位</label>
-                                        <s:textfield type="text" cssClass="form-control" name="unit"
+                                        <s:textfield cssClass="form-control" name="unit"
                                                      placeholder="如：百件/百个/件/个/吨"/>
                                     </div>
                                     <div class="form-group">
                                         <label>起售数量</label>
-                                        <s:textfield type="text" cssClass="form-control" name="start"/>
+                                        <s:textfield cssClass="form-control" name="start"/>
                                     </div>
                                 </div>
                             </div>

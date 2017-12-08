@@ -547,29 +547,34 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
     /**
      * 用于新增商品
      *
-     * @param name  商品名称
-     * @param info  商品属性
-     * @param price 单价
-     * @param tag   标签（参与的活动）
-     * @param manu  产地
-     * @param produ 厂商
-     * @param norms 规格
-     * @param unit  单位
-     * @param start 起售数量
+     * @param name     商品名称
+     * @param info     商品属性
+     * @param price    单价
+     * @param tag      标签（参与的活动）
+     * @param cate     分类
+     * @param manu     产地
+     * @param produ    厂商
+     * @param picArray 图片表ID
+     * @param norms    规格
+     * @param unit     单位
+     * @param start    起售数量
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean addGoods(String name, String info, double price, String tag, String manu, String produ, String norms, String unit, int start) {
+    public boolean addGoods(String name, String info, double price, String tag, int cate, String manu, String produ, int picArray, String norms, String unit, int start) {
         boolean flag = false;
         GoodsbaseEntity goodsbaseEntity = new GoodsbaseEntity();
         goodsbaseEntity.setName(name);
-        goodsbaseEntity.setInfo(info);
         goodsbaseEntity.setPrice(price);
-        goodsbaseEntity.setTag(tag);
         goodsbaseEntity.setManufacturer(manu);
         goodsbaseEntity.setProducing(produ);
-        goodsbaseEntity.setNorms(norms);
+        goodsbaseEntity.setPictureArray(picArray);
+        goodsbaseEntity.setSale(0);
+        goodsbaseEntity.setInfo(info);
+        goodsbaseEntity.setTag(tag);
+        goodsbaseEntity.setCate(cate);
         goodsbaseEntity.setUnit(unit);
+        goodsbaseEntity.setNorms(norms);
         goodsbaseEntity.setStart(start);
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -769,11 +774,55 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         criteria.setFirstResult(lastRow - 1);
         criteria.setMaxResults(1);
         List<GoodsbaseEntity> list = criteria.list();
-        for (GoodsbaseEntity goodsbaseEntity : list) {
-            return goodsbaseEntity.getId() + 1;
+        if (list.size() > 0) {
+            for (GoodsbaseEntity goodsbaseEntity : list) {
+                return goodsbaseEntity.getId() + 1;
+            }
+        } else {
+            return 1;
         }
         transaction.commit();
         session.close();
         return 0;
+    }
+
+    /**
+     * 用于推测新商品的图片表ID号
+     *
+     * @return 返回下一商品的图片表ID号，如果数据库访问失败将返回 <b>0</b>
+     */
+    @Override
+    public int guessPicId() {
+        int lastRow = this.getPicCount();
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria criteria = session.createCriteria(GoodspicarrayEntity.class);
+        criteria.setFirstResult(lastRow - 1);
+        criteria.setMaxResults(1);
+        List<GoodspicarrayEntity> list = criteria.list();
+        if (list.size() > 0) {
+            for (GoodspicarrayEntity goodspicarrayEntity : list) {
+                return goodspicarrayEntity.getId() + 1;
+            }
+        } else {
+            return 1;
+        }
+        transaction.commit();
+        session.close();
+        return 0;
+    }
+
+    /**
+     * 查询商品图片表总数
+     *
+     * @return 返回商品图片表总数
+     */
+    @Override
+    public int getPicCount() {
+        long count = 0;
+        count = (long) HibernateUtil.getSession()
+                .createQuery("select count(*) from GoodspicarrayEntity ")
+                .uniqueResult();
+        return (int) count;
     }
 }

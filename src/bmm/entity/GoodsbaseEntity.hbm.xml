@@ -16,5 +16,7 @@
         <property name="tag" column="tag"/>
         <property name="cate" column="cate"/>
         <property name="unit" column="unit"/>
+        <property name="norms" column="norms"/>
+        <property name="start" column="start"/>
     </class>
 </hibernate-mapping>

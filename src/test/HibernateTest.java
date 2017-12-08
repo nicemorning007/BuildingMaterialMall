@@ -14,9 +14,7 @@ public class HibernateTest {
     public void allTest() {
         ClassPathXmlApplicationContext resource = new ClassPathXmlApplicationContext("spring-config.xml");
         GoodsControlDAO dao = (GoodsControlDAO) resource.getBean("goodsControlDao");
-        dao.descIntoGoodsPicArrayByGoodsId(1, "", "", "", "", "", null);
-        System.out.println(dao.guessGoodsId());
-        System.out.println(dao.getGoodsCount());
+        System.out.println(dao.showAllGoods().size());
     }
 
     @Test

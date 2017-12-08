@@ -317,11 +317,9 @@ public class GoodsControlAction extends ActionSupport {
      * @return 返回字符串"addGoods"
      */
     public String addGoods() {
-        //获取select cate
         String goodsId = String.valueOf(goodsControlService.guessGoodsId());
 
-        //        cate = this.getCateValue();
-        goodsControlService.descIntoGoodsDesc(Integer.parseInt(goodsId), this.cate);
+        this.cate = getCateValue();
 
         //获取checkbox tag
         this.setTagValue();
@@ -382,8 +380,10 @@ public class GoodsControlAction extends ActionSupport {
         }
 
         //提交
+        int picArray = goodsControlService.guessPicId();
         if (goodsControlService.addGoods(this.name, this.info, Double.parseDouble(this.price),
-                this.tag.toString().trim(), this.manu, this.produ, this.norms, this.unit, Integer.parseInt(this.start))) {
+                this.tag.toString().trim(), this.cate, this.manu, this.produ,
+                picArray - 1, this.norms, this.unit, Integer.parseInt(this.start))) {
             this.message = "操作成功";
         } else {
             this.message = "操作失败请重试";
@@ -396,12 +396,11 @@ public class GoodsControlAction extends ActionSupport {
      *
      * @return 返回对应选项的 <b>value</b>值
      */
-//    TODO:
-//    private int getCateValue() {
-//        HttpServletRequest request = ServletActionContext.getRequest();
-//        String[] strings = request.getParameterValues("selectCate");
-//        return Integer.parseInt(strings[0]);
-//    }
+    private int getCateValue() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String[] strings = request.getParameterValues("selectCate");
+        return Integer.parseInt(strings[0]);
+    }
 
     /**
      * 用于获取checkbox中选中的值
