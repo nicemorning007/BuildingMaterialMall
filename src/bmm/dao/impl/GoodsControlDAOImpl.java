@@ -5,6 +5,7 @@ import bmm.entity.GoodsbaseEntity;
 import bmm.entity.GoodsdescEntity;
 import bmm.entity.GoodspicarrayEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
@@ -733,7 +734,8 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
+    public boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2,
+                                                  String pic3, String pic4, String pic5, String pic6) {
         boolean flag = false;
         GoodspicarrayEntity goodspicarrayEntity = new GoodspicarrayEntity();
         goodspicarrayEntity.setGoodsId(goodsId);
@@ -760,6 +762,64 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         Transaction transaction = session.beginTransaction();
         try {
             session.save(goodspicarrayEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return flag;
+    }
+
+    /**
+     * 修改商品图片信息
+     *
+     * @param goodsId 对应的商品ID号
+     * @param pic1    图片1的地址
+     * @param pic2    图片2的地址
+     * @param pic3    图片3的地址
+     * @param pic4    图片4的地址
+     * @param pic5    图片5的地址
+     * @param pic6    图片6的地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean editIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2,
+                                                  String pic3, String pic4, String pic5, String pic6) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from GoodspicarrayEntity gp where gp.goodsId=:goodsId";
+        Query query = session.createQuery(hql);
+        query.setParameter("goodsId", goodsId);
+        List<GoodspicarrayEntity> list = query.list();
+        if (list.size() == 0) {
+            session.close();
+            descIntoGoodsPicArrayByGoodsId(goodsId, pic1, pic2, pic3, pic4, pic5, pic6);
+            return true;
+        }
+        GoodspicarrayEntity goodspicarrayEntity = list.get(0);
+        if (pic1 != null) {
+            goodspicarrayEntity.setPic1(pic1);
+        }
+        if (pic2 != null) {
+            goodspicarrayEntity.setPic2(pic2);
+        }
+        if (pic3 != null) {
+            goodspicarrayEntity.setPic3(pic3);
+        }
+        if (pic4 != null) {
+            goodspicarrayEntity.setPic4(pic4);
+        }
+        if (pic5 != null) {
+            goodspicarrayEntity.setPic5(pic5);
+
+        }
+        if (pic6 != null) {
+            goodspicarrayEntity.setPic6(pic6);
+        }
+        try {
+            session.update(goodspicarrayEntity);
             transaction.commit();
             flag = true;
         } catch (Exception e) {
@@ -1053,7 +1113,7 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
-        }finally {
+        } finally {
             session.close();
         }
         return flag;

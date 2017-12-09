@@ -43,7 +43,7 @@ public interface GoodsControlService {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     boolean editGoodsById(int id, String name, String info, double price, String tag, int cate, String manu,
-                      String produ, int picArray, String norms, String unit, int start);
+                          String produ, int picArray, String norms, String unit, int start);
 
     /**
      * 预测下一商品的ID号
@@ -73,7 +73,23 @@ public interface GoodsControlService {
      * @param pic6    图片6的地址
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
-    boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6);
+    boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2,
+                                           String pic3, String pic4, String pic5, String pic6);
+
+    /**
+     * 修改商品图片信息
+     *
+     * @param goodsId 对应的商品ID号
+     * @param pic1    图片1的地址
+     * @param pic2    图片2的地址
+     * @param pic3    图片3的地址
+     * @param pic4    图片4的地址
+     * @param pic5    图片5的地址
+     * @param pic6    图片6的地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean editIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2,
+                                           String pic3, String pic4, String pic5, String pic6);
 
     /**
      * 用于推测新商品的图片表ID号
@@ -109,6 +125,7 @@ public interface GoodsControlService {
 
     /**
      * 根据ID号删除指定的商品
+     *
      * @param id 要删除的商品的ID
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */

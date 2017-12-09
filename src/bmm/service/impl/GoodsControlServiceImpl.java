@@ -103,8 +103,27 @@ public class GoodsControlServiceImpl implements GoodsControlService {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3, String pic4, String pic5, String pic6) {
+    public boolean descIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3,
+                                                  String pic4, String pic5, String pic6) {
         return goodsControlDAO.descIntoGoodsPicArrayByGoodsId(goodsId, pic1, pic2, pic3, pic4, pic5, pic6);
+    }
+
+    /**
+     * 修改商品图片信息
+     *
+     * @param goodsId 对应的商品ID号
+     * @param pic1    图片1的地址
+     * @param pic2    图片2的地址
+     * @param pic3    图片3的地址
+     * @param pic4    图片4的地址
+     * @param pic5    图片5的地址
+     * @param pic6    图片6的地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean editIntoGoodsPicArrayByGoodsId(int goodsId, String pic1, String pic2, String pic3,
+                                                  String pic4, String pic5, String pic6) {
+        return goodsControlDAO.editIntoGoodsPicArrayByGoodsId(goodsId, pic1, pic2, pic3, pic4, pic5, pic6);
     }
 
     /**

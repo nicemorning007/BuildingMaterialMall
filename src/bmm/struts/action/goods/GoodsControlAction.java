@@ -553,7 +553,7 @@ public class GoodsControlAction extends ActionSupport {
             pic6Path = "/images/goods/" + goodsId + "/" + pic6FileName;
         }
         resetFile();
-        if (!goodsControlService.descIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path,
+        if (!goodsControlService.editIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path,
                 pic2Path, pic3Path, pic4Path, pic5Path, pic6Path)) {
             message = "操作失败请重试";
             return "editGoods";

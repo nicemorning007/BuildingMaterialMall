@@ -166,11 +166,11 @@ public class AdminControlAction extends ActionSupport {
                         adminControlService.resetUser();
                         info = "操作成功";
                         break;
-                    case "清除所有数据":
+                    case "清除所有商品":
                         adminControlService.resetGoods();
                         info = "操作成功";
                         break;
-                    case "清除所有商品":
+                    case "清除所有数据":
                         adminControlService.resetAll();
                         info = "操作成功";
                         break;
