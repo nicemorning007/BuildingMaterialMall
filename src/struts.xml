@@ -49,7 +49,8 @@
             <result name="logout">/admin/html/security/logout.jsp</result>
             <result name="changePassword">/admin/html/security/profile.jsp</result>
             <result name="addAdmin">/admin/html/security/profile.jsp</result>
-            <allowed-methods>login,logout,changePassword,addAdmin</allowed-methods>
+            <result name="dangerSelect">/admin/html/security/profile.jsp</result>
+            <allowed-methods>login,logout,changePassword,addAdmin,dangerSelect</allowed-methods>
         </action>
         <!--结束管理员账户相关-->
     </package>

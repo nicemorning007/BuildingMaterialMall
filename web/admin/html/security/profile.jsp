@@ -279,37 +279,22 @@
                                         } else {
                                         %>
                                         <div class="panel-body">
-                                            <form class="form-horizontal">
+                                            <s:form action="adminControlAction_dangerSelect" method="POST" class="form-horizontal">
                                                 <input type="hidden" value="<%=username%>"/>
-                                            <%--todo:--%>
                                                 <div align="center">
-                                                    <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
-                                                        <input type="checkbox" id="checkbox-fa-light-1">
-                                                        <label for="checkbox-fa-light-1">
-                                                            <strong>清除所有用户</strong>
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
-                                                        <input type="checkbox" id="checkbox-fa-light-2">
-                                                        <label for="checkbox-fa-light-2">
-                                                            <strong>清除所有商品</strong>
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox3 checkbox-danger checkbox-inline checkbox-check  checkbox-circle checkbox-light">
-                                                        <input type="checkbox" id="checkbox-fa-light-3">
-                                                        <label for="checkbox-fa-light-3">
-                                                            <strong>清除所有数据</strong>
-                                                        </label>
+                                                    <div class="checkbox3 checkbox-danger checkbox-inline
+                                                    checkbox-check checkbox-circle checkbox-light">
+                                                        <s:checkboxlist list="{'清除所有用户','清除所有商品','清除所有数据'}"
+                                                                        name="dangerSelect" id="checkbox-fa-light-1"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-inline" style="padding-top: 20px">
-                                                    <input type="password" class="form-control" id="password3"
-                                                           placeholder="管理员密码" style="width: 80%"/>
-                                                    <button type="button" class="btn btn-danger" style="width:auto;">
-                                                        确认
-                                                    </button>
+                                                    <s:password name="password" cssClass="form-control" id="password3"
+                                                                placeholder="管理员密码" cssStyle="width: 80%"/>
+                                                    <s:submit value="确认" cssClass="btn btn-danger"
+                                                              cssStyle="width:auto;"/>
                                                 </div>
-                                            </form>
+                                            </s:form>
                                         </div>
                                         <%
                                             }
@@ -325,7 +310,6 @@
                                     <div class="panel panel-danger">
                                         <div class="panel-heading">新增管理员</div>
                                         <div class="panel-body">
-                                            <%--todo:新增管理员--%>
                                             <s:form cssClass="form-horizontal" action="adminControlAction_addAdmin"
                                                     method="POST">
                                                 <div class="form-group">

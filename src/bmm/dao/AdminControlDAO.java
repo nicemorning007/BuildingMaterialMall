@@ -6,6 +6,7 @@ package bmm.dao;
 public interface AdminControlDAO {
     /**
      * 根据指定的用户名获取对应的ID号
+     *
      * @param username 要查询的用户名
      * @return 如果查询到则返回该用户名对应的ID号，否则返回 <b>0</b>
      */
@@ -13,6 +14,7 @@ public interface AdminControlDAO {
 
     /**
      * 根据ID号获取对应的用户名
+     *
      * @param id 要查询的ID号
      * @return 如果查询到则返回该ID号对应的用户名，否则返回 <b>null</b>
      */
@@ -20,6 +22,7 @@ public interface AdminControlDAO {
 
     /**
      * 根据ID号获取对应的用户的密码
+     *
      * @param id 要查询的ID号
      * @return 如果查询到则返回该ID号对应的密码，否则返回 <b>null</b>
      */
@@ -55,4 +58,19 @@ public interface AdminControlDAO {
      * 用于清除 Hibernate 的缓存
      */
     void clearCache();
+
+    /**
+     * 重置用户表
+     */
+    void resetUser();
+
+    /**
+     * 重置商品表
+     */
+    void resetGoods();
+
+    /**
+     * 重置全部表
+     */
+    void resetAll();
 }

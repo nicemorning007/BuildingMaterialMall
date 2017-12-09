@@ -35,4 +35,25 @@ public interface AdminControlService {
      * @return 如果添加成功返回 <b>1</b>；如果用户名已存在则返回 <b>0</b>；如果是未知错误则返回 <b>-1</b>
      */
     int addAdmin(String username, String password);
+
+    /**
+     * 重置用户表
+     *
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    void resetUser();
+
+    /**
+     * 重置商品表
+     *
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    void resetGoods();
+
+    /**
+     * 重置全部表
+     *
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    void resetAll();
 }

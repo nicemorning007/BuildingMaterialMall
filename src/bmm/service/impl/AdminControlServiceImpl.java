@@ -77,10 +77,42 @@ public class AdminControlServiceImpl implements AdminControlService {
     public int addAdmin(String username, String password) {
         int flag = -1;
         if (!adminControlDAO.isExist(username)) {
-            adminControlDAO.addAdmin(username, password);
+            if (adminControlDAO.addAdmin(username, password)) {
+                flag = 1;
+            }
         } else {
             flag = 0;
         }
         return flag;
+    }
+
+    /**
+     * 重置用户表
+     *
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public void resetUser() {
+        adminControlDAO.resetUser();
+    }
+
+    /**
+     * 重置商品表
+     *
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public void resetGoods() {
+        adminControlDAO.resetGoods();
+    }
+
+    /**
+     * 重置全部表
+     *
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public void resetAll() {
+        adminControlDAO.resetAll();
     }
 }

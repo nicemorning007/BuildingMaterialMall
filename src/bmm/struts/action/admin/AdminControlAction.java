@@ -19,6 +19,7 @@ public class AdminControlAction extends ActionSupport {
     private String password;
     private String confirmPassword;
     private String info;
+    private String[] dangerSelect;
     private AdminControlService adminControlService;
 
     public void setConfirmPassword(String confirmPassword) {
@@ -55,6 +56,22 @@ public class AdminControlAction extends ActionSupport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public String[] getDangerSelect() {
+        return dangerSelect;
+    }
+
+    public void setDangerSelect(String dangerSelect[]) {
+        this.dangerSelect = dangerSelect;
+    }
+
+    public void setAdminControlService(AdminControlService adminControlService) {
+        this.adminControlService = adminControlService;
     }
 
     /**
@@ -128,5 +145,43 @@ public class AdminControlAction extends ActionSupport {
             info = "操作失败请重试";
         }
         return "addAdmin";
+    }
+
+    /**
+     * 用于全站操作的处理
+     *
+     * @return 返回字符串 <b>dangerSelect</b>
+     */
+    public String dangerSelect() {
+        if (adminControlService.login("root", Md5Util.md5Encode(this.password))) {
+            StringBuffer select = new StringBuffer();
+            for (int i = 0; i < dangerSelect.length; i++) {
+                select.append(dangerSelect[i]).append(" ");
+            }
+            String[] action;
+            action = select.toString().trim().split(" ");
+            for (int i = 0; i < action.length; i++) {
+                switch (action[i]) {
+                    case "清除所有用户":
+                        adminControlService.resetUser();
+                        info = "操作成功";
+                        break;
+                    case "清除所有数据":
+                        adminControlService.resetGoods();
+                        info = "操作成功";
+                        break;
+                    case "清除所有商品":
+                        adminControlService.resetAll();
+                        info = "操作成功";
+                        break;
+                    default:
+                        info = "未选择操作";
+                        return "dangerSelect";
+                }
+            }
+        } else {
+            info = "密码错误";
+        }
+        return "dangerSelect";
     }
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class TestMd5 {
     @Test
     public void md5(){
-        System.out.println(Md5Util.md5Encode("ddd"));
+        System.out.println(Md5Util.md5Encode("root"));
     }
 
 }

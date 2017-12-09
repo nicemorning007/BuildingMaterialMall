@@ -3,10 +3,7 @@ package bmm.dao.impl;
 import bmm.dao.AdminControlDAO;
 import bmm.entity.AdminbaseEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -186,5 +183,68 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     public void clearCache() {
         Session session = HibernateUtil.getSession();
         session.clear();
+    }
+
+    /**
+     * 重置用户表
+     */
+    @Override
+    public void resetUser() {
+        boolean flag = false;
+        String sql1 = "TRUNCATE TABLE userlogin";
+        String sql2 = "TRUNCATE TABLE userinfo";
+        Session session = HibernateUtil.getSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql1);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql2);
+        sqlQuery.executeUpdate();
+        session.close();
+    }
+
+    /**
+     * 重置商品表
+     */
+    @Override
+    public void resetGoods() {
+        String sql1 = "TRUNCATE TABLE goodsbase";
+        String sql2 = "TRUNCATE TABLE goodsdesc";
+        String sql3 = "TRUNCATE TABLE goodspicarray";
+        Session session = HibernateUtil.getSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql1);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql2);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql3);
+        sqlQuery.executeUpdate();
+        session.close();
+    }
+
+    /**
+     * 重置全部表
+     */
+    @Override
+    public void resetAll() {
+        resetUser();
+        resetGoods();
+        String sql2 = "TRUNCATE TABLE balance";
+        String sql3 = "TRUNCATE TABLE billbase";
+        String sql4 = "TRUNCATE TABLE categorization";
+        String sql5 = "TRUNCATE TABLE logisticbase";
+        String sql6 = "TRUNCATE TABLE checkout";
+        String sql7 = "TRUNCATE TABLE message";
+        Session session = HibernateUtil.getSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql2);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql3);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql4);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql5);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql6);
+        sqlQuery.executeUpdate();
+        sqlQuery = session.createSQLQuery(sql7);
+        sqlQuery.executeUpdate();
+        session.close();
     }
 }
