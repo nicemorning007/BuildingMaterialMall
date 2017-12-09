@@ -72,7 +72,10 @@
 
         <action name="billControlAction_*" class="billControlAction" method="{1}">
             <result name="manage">/admin/html/bill/editBill.jsp</result>
-            <allowed-methods>manage</allowed-methods>
+            <result name="editState">/admin/html/bill/editBill.jsp</result>
+            <result name="editTotal">/admin/html/bill/editBill.jsp</result>
+            <result name="editReceiver">/admin/html/bill/editBill.jsp</result>
+            <allowed-methods>manage,editState,editTotal,editReceiver</allowed-methods>
         </action>
         <!--结束商品管理相关-->
     </package>

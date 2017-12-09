@@ -300,7 +300,7 @@
                                             </td>
                                             <td>
                                                 <s:form action="billControlAction_editState" method="POST">
-                                                <select title="" style="width: 200px;">
+                                                <select name="state" title="" style="width: 200px;">
                                                     <%
                                                         for (int i = 0; i < 5; i++) {
                                                             if (billControlDAO.getStateById(billId) == i) {
@@ -329,10 +329,11 @@
                                                 <%=billControlDAO.getTotalById(billId)%>
                                             </td>
                                             <td>
-                                                <s:form action="billControlAction_editState" method="POST">
+                                                <s:form action="billControlAction_editTotal" method="POST">
                                                 <input name="total" maxlength="8" class="form-control"
                                                        style="width:30%;"
                                                        onkeyup="value=value.replace(/[^\d\.]/g,'')"/>
+                                                    <s:property value="info"/>
                                             </td>
                                             <td>
                                                 <s:submit value="确认修改" cssClass="btn btn-primary"/>
@@ -351,7 +352,7 @@
                                                 <%=billControlDAO.getReceiverById(billId)%>
                                             </td>
                                             <td>
-                                                <s:form action="billControlAction_editState" method="POST">
+                                                <s:form action="billControlAction_editReceiver" method="POST">
                                                 <input name="receiver" maxlength="8" class="form-control"
                                                        style="width:30%"/>
                                             </td>
