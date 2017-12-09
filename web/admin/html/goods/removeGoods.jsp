@@ -199,7 +199,11 @@
                         <div class="card-header">
 
                             <div class="card-title">
-                                <div class="title">移除商品</div>
+                                <div class="title">移除商品
+                                    <span style="background-color: #93D52D">
+                                        <s:property value="message"/>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">

@@ -26,22 +26,22 @@ public class GoodsControlAction extends ActionSupport {
     private String unit;
     private String start;
     private String message;
-    private File pic6;
+    private File pic6 = null;
     private String pic6FileName;
     private String pic6ContentType;
-    private File pic1;
+    private File pic1 = null;
     private String pic1FileName;
     private String pic1ContentType;
-    private File pic2;
+    private File pic2 = null;
     private String pic2FileName;
     private String pic2ContentType;
-    private File pic3;
+    private File pic3 = null;
     private String pic3FileName;
     private String pic3ontentType;
-    private File pic4;
+    private File pic4 = null;
     private String pic4FileName;
     private String pic4ContentType;
-    private File pic5;
+    private File pic5 = null;
     private String pic5FileName;
     private String pic5ContentType;
     private List<CategorizationEntity> list;
@@ -383,6 +383,7 @@ public class GoodsControlAction extends ActionSupport {
             }
             pic6Path = "/images/goods/" + goodsId + "/" + pic6FileName;
         }
+        resetFile();
         if (!goodsControlService.descIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path, pic2Path, pic3Path, pic4Path, pic5Path, pic6Path)) {
             message = "操作失败请重试";
             return "addGoods";
@@ -398,6 +399,18 @@ public class GoodsControlAction extends ActionSupport {
             this.message = "操作失败请重试";
         }
         return "addGoods";
+    }
+
+    /**
+     * 用于重置File的缓存
+     */
+    private void resetFile() {
+        this.pic1 = null;
+        this.pic2 = null;
+        this.pic3 = null;
+        this.pic4 = null;
+        this.pic5 = null;
+        this.pic6 = null;
     }
 
     /**
@@ -484,8 +497,6 @@ public class GoodsControlAction extends ActionSupport {
      * @return 返回字符串"editGoods"
      */
     public String editGoods() {
-        String goodsId = String.valueOf(goodsControlService.guessGoodsId());
-
         this.cate = getCateValue();
 
         //获取checkbox tag
@@ -541,12 +552,12 @@ public class GoodsControlAction extends ActionSupport {
             }
             pic6Path = "/images/goods/" + goodsId + "/" + pic6FileName;
         }
+        resetFile();
         if (!goodsControlService.descIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path,
                 pic2Path, pic3Path, pic4Path, pic5Path, pic6Path)) {
             message = "操作失败请重试";
             return "editGoods";
         }
-
         //提交
         int picArray = goodsControlService.guessPicId();
         if (goodsControlService.editGoodsById(Integer.parseInt(this.goodsId), this.name, this.info,
