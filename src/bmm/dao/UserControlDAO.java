@@ -107,4 +107,10 @@ public interface UserControlDAO {
      * 用于清除 Hibernate 的缓存
      */
     void clearCache();
+
+    /**
+     * 用于获取总用户数
+     * @return 如果查询成功则返回总用户数；否则返回 <b>0</b>
+     */
+    int getUserCount();
 }

@@ -113,4 +113,18 @@ public interface BillControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     boolean updateReceiverById(int id, String receiver);
+
+    /**
+     * 用于获取总订单数
+     *
+     * @return 如果查询成功则返回总订单数；否则返回 <b>0</b>
+     */
+    int getBillCount();
+
+    /**
+     * 用于统计总成交额
+     *
+     * @return 如果查询成功则返回总成交额；否则返回 <b>0</b>
+     */
+    double getBillTotalCount();
 }

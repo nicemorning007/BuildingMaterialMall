@@ -305,4 +305,18 @@ public class UserControlDAOImpl implements UserControlDAO {
         Session session = HibernateUtil.getSession();
         session.clear();
     }
+
+    /**
+     * 用于获取总用户数
+     *
+     * @return 如果查询成功则返回总用户数；否则返回 <b>0</b>
+     */
+    @Override
+    public int getUserCount() {
+        long count = 0;
+        count = (long) HibernateUtil.getSession()
+                .createQuery("select count(*) from UserloginEntity ")
+                .uniqueResult();
+        return (int) count;
+    }
 }

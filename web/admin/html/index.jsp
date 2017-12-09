@@ -1,5 +1,13 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page import="bmm.dao.BillControlDAO" %>
+<%@ page import="bmm.dao.GoodsControlDAO" %>
+<%@ page import="bmm.dao.UserControlDAO" %>
+<%@ page import="bmm.dao.impl.BillControlDAOImpl" %>
+<%@ page import="bmm.dao.impl.GoodsControlDAOImpl" %>
+<%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="java.util.List" %>
+<%@ page import="bmm.entity.BillbaseEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
@@ -67,9 +75,9 @@
                                             </button>
                                         </a>
                                         <a href="/adminControlAction_logout.action"/>">
-                                            <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                                注销
-                                            </button>
+                                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
+                                            注销
+                                        </button>
                                         </a>
                                     </div>
                                 </div>
@@ -185,6 +193,11 @@
             </nav>
         </div>
         <!-- Main Content -->
+        <%
+            GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
+            UserControlDAO userControlDAO = new UserControlDAOImpl();
+            BillControlDAO billControlDAO = new BillControlDAOImpl();
+        %>
         <div class="container-fluid">
             <div class="side-body padding-top">
                 <div class="row">
@@ -195,7 +208,7 @@
                                     <i class="icon fa fa-inbox fa-4x"></i>
                                     <div class="content">
                                         <div class="title">
-                                            <%--todo:显示总用户数--%>
+                                            <%=userControlDAO.getUserCount()%>
                                         </div>
                                         <div class="sub-title">总用户数</div>
                                     </div>
@@ -211,7 +224,7 @@
                                     <i class="icon fa fa-gift fa-4x"></i>
                                     <div class="content">
                                         <div class="title">
-                                            <%--todo:显示总商品数--%>
+                                            <%=goodsControlDAO.getGoodsCount()%>
                                         </div>
                                         <div class="sub-title">总商品数</div>
                                     </div>
@@ -221,13 +234,13 @@
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <a href="">
+                        <a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">
                             <div class="card green summary-inline">
                                 <div class="card-body">
                                     <i class="icon fa fa-tags fa-4x"></i>
                                     <div class="content">
                                         <div class="title">
-                                            <%--todo:显示总订单数--%>
+                                            <%=billControlDAO.getBillCount()%>
                                         </div>
                                         <div class="sub-title">总订单数</div>
                                     </div>
@@ -237,13 +250,13 @@
                         </a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/admin/html/bill/findBill.jsp">
                             <div class="card blue summary-inline">
                                 <div class="card-body">
                                     <i class="icon fa fa-share-alt fa-4x"></i>
                                     <div class="content">
                                         <div class="title">
-                                            <%--todo:显示成交额--%>
+                                            <%=billControlDAO.getBillTotalCount()%>
                                         </div>
                                         <div class="sub-title">成交额</div>
                                     </div>
@@ -254,55 +267,25 @@
                     </div>
                 </div>
                 <div class="row  no-margin-bottom">
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="card primary">
-                                    <div class="card-jumbotron no-padding">
-                                        <canvas id="jumbotron-line-chart" class="chart no-padding"></canvas>
-                                    </div>
-                                    <div class="card-body half-padding">
-                                        <h4 class="float-left no-margin font-weight-300">成交额</h4>
-                                        <h2 class="float-right no-margin font-weight-300">
-                                            $<%--todo:显示成交额--%>
-                                        </h2>
-                                        <div class="clear-both"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="card card-success">
-                            <div class="card-body no-padding">
-                                <ul class="message-list">
-                                    <a href="#">
-                                        <li>
-                                            <%--todo:添加到下面的for循环中--%>
-                                            <img src="${pageContext.request.contextPath}/admin/img/profile/profile-1.jpg"
-                                                 class="profile-img pull-left">
-                                            <div class="message-block">
-                                                <div><span class="username">
-                                                    <%--todo:显示创建订单的用户--%>
-                                                    yonghu
-                                                </span>
-                                                    <span class="message-datetime">
-                                                </span>
-                                                </div>
-                                                <div class="message">
-                                                    <%--todo:显示最新订单--%>
-                                                    bill
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <%
-                                            for (int i = 0; i < 6; i++) {
-                                                out.print("");
-                                            }
-                                        %>
-                                    </a>
-                                </ul>
-                            </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><%=username%>，欢迎登陆建材商城后台管理系统</div>
+                        <div class="panel-body">
+                            <p>
+                                在建材商城后台管理系统中,可以为用户提供重置密码，注销挂失的涉及安全的操作。
+                            </p>
+                            <p>
+                                对于商品可以为每个商品进行编辑，新增商品和分类的编辑等功能。
+                            </p>
+                            <p>
+                                对于订单可以帮助用户更改收件人和收件地址。但一旦订单已发货将无法修改除交易额外的任何信息。
+                            </p>
+                            <p>
+                                安全设置中，可以修改本账户的登陆密码。并新增管理员。
+                            </p>
+                            <strong>但全站操作中，只允许最高管理员进行操作，如果你不是最高管理员但需要进行此类操作。
+                            <p>
+                                请联系最高管理员进行操作。
+                            </p></strong>
                         </div>
                     </div>
                 </div>

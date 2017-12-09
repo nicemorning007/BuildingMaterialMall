@@ -3,9 +3,8 @@ package bmm.dao.impl;
 import bmm.dao.BillControlDAO;
 import bmm.entity.BillbaseEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
+import org.hibernate.criterion.Order;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.util.List;
@@ -323,5 +322,39 @@ public class BillControlDAOImpl implements BillControlDAO {
         }
         session.close();
         return flag;
+    }
+
+    /**
+     * 用于获取总订单数
+     *
+     * @return 如果查询成功则返回总订单数；否则返回 <b>0</b>
+     */
+    @Override
+    public int getBillCount() {
+        long count = 0;
+        count = (long) HibernateUtil.getSession()
+                .createQuery("select count(*) from BillbaseEntity ")
+                .uniqueResult();
+        return (int) count;
+    }
+
+    /**
+     * 用于统计总成交额
+     *
+     * @return 如果查询成功则返回总成交额；否则返回 <b>0</b>
+     */
+    @Override
+    public double getBillTotalCount() {
+        String sql = "SELECT sum(billbase.total) FROM billbase WHERE state = 3";
+        Session session = HibernateUtil.getSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
+        List<Object> list = sqlQuery.list();
+        for (Object o : list) {
+            if (o != null) {
+                return Double.parseDouble(o.toString());
+            }
+        }
+        session.close();
+        return 0;
     }
 }
