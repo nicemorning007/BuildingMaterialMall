@@ -1,7 +1,10 @@
 package test;
 
+import bmm.dao.BillControlDAO;
 import bmm.dao.GoodsControlDAO;
+import bmm.entity.BillbaseEntity;
 import bmm.entity.GoodsbaseEntity;
+import bmm.utils.hibernate_util.SpringInjectionUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,9 +17,18 @@ import java.util.List;
 public class HibernateTest {
     @Test
     public void allTest() {
-        ClassPathXmlApplicationContext resource = new ClassPathXmlApplicationContext("spring-config.xml");
-        GoodsControlDAO dao = (GoodsControlDAO) resource.getBean("goodsControlDao");
-        dao.deleteGoodsById(28);
+//        ClassPathXmlApplicationContext resource = new ClassPathXmlApplicationContext("spring-config.xml");
+//        BillControlDAO dao = (BillControlDAO) resource.getBean("billControlDao");
+//        List<BillbaseEntity> list = dao.showAllBills();
+//        for (BillbaseEntity billbaseEntity : list) {
+//            System.out.println(billbaseEntity.getReceiver());
+//        }
+
+        BillControlDAO billControlDAO = (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
+        List<BillbaseEntity> list = billControlDAO.showAllBills();
+        for (BillbaseEntity billbaseEntity : list) {
+            System.out.println(billbaseEntity.getReceiver());
+        }
     }
 
     @Test

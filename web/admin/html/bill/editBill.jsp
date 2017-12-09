@@ -205,99 +205,188 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="datatable table table-striped" cellspacing="0" width="100%"
-                                   style="table-layout: fixed;word-wrap:break-word;word-break:break-all;">
-                                <thead>
-                                <tr>
-                                    <th>订单号</th>
-                                    <th>买家账号</th>
-                                    <th>商品名</th>
-                                    <th>状态</th>
-                                    <th>收货人</th>
-                                    <th>创建时间</th>
-                                    <th>编辑?</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>订单号</th>
-                                    <th>买家账号</th>
-                                    <th>商品名</th>
-                                    <th>状态</th>
-                                    <th>收货人</th>
-                                    <th>创建时间</th>
-                                    <th>编辑?</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <%
-                                    BillControlDAO billControlDAO =
-                                            (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
-                                    List<BillbaseEntity> list = null;
-                                    if (billControlDAO.showAllBills() != null) {
-                                        list = billControlDAO.showAllBills();
-                                        UserControlDAO userControlDAO = new UserControlDAOImpl();
-                                        GoodsControlDAO goodsControlDAO =
-                                                (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
-                                        for (BillbaseEntity billbaseEntity : list) {
-                                            request.setAttribute("id", billbaseEntity.getId());
-                                %>
-                                <tr>
-                                    <s:form action="billControlAction_manage" method="POST">
-                                        <input type="hidden" name="billId" value="<%=billbaseEntity.getId()%>"/>
-                                        <td><%=billbaseEntity.getId()%>
-                                        </td>
-                                        <td><%=userControlDAO.getUsernameById(billbaseEntity.getUserId())%>
-                                        </td>
-                                        <td>
-                                            <%=goodsControlDAO.getNameById(billbaseEntity.getGoodsId())%>
-                                        </td>
-                                        <td><%
-                                            switch (billControlDAO.getStateById(billbaseEntity.getId())) {
-                                                case 0:
-                                                    out.print("已下单但未付款");
-                                                    break;
-                                                case 1:
-                                                    out.print("付款成功但未发货");
-                                                    break;
-                                                case 2:
-                                                    out.print("付款成功且已发货");
-                                                    break;
-                                                case 3:
-                                                    out.print("订单已完成");
-                                                    break;
-                                                case 4:
-                                                    out.print("订单已取消");
-                                                    break;
-                                            }%>
-                                        </td>
-                                        <td><%=billbaseEntity.getReceiver()%>
-                                        </td>
-                                        <td><%=billbaseEntity.getTime()%>
-                                        </td>
-                                        <td>
-                                            <s:submit value="编辑" cssClass="btn btn-sm btn-default"/>
-                                        </td>
-                                    </s:form>
-                                </tr>
-                                <%
-                                    }
-                                } else {
-                                %>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <%
-                                    }
-                                %>
-                                </tbody>
-                            </table>
+                            <div>
+                                <p>查看和编辑订单的具体信息
+                                    <span style="background-color: #93D52D">
+                                         <s:property value="info"/>
+                                    </span>
+                                </p>
+                                <div class="table-responsive">
+                                    <%
+                                        BillControlDAO billControlDAO =
+                                                (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
+                                        List<BillbaseEntity> list = null;
+                                        if ((list = billControlDAO.showAllBills()) != null) {
+                                            int billId = Integer.parseInt(request.getAttribute("billId").toString());
+                                            UserControlDAO userControlDAO = new UserControlDAOImpl();
+                                            GoodsControlDAO goodsControlDAO =
+                                                    (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
+                                    %>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                                属性
+                                            </th>
+                                            <th>
+                                                名称
+                                            </th>
+                                            <th>
+                                                编辑
+                                            </th>
+                                            <th>
+                                                确认
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">商品</th>
+                                            <td>
+                                                ID:<%=billControlDAO.getGoodsIdById(billId)%>
+                                            </td>
+                                            <td>
+                                                <%=goodsControlDAO.getNameById(billControlDAO.getGoodsIdById(billId))%>
+                                            </td>
+                                            <td colspan="2">
+                                                <div class="alert alert-danger" role="alert"
+                                                     style="margin-bottom: 0px;width: initial;margin-right: 0;padding-top: 5px;padding-bottom: 5px">
+                                                    <strong>此项内容不允许编辑</strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">用户</th>
+                                            <td>ID:<%=billControlDAO.getUserIdById(billId)%>
+                                            </td>
+                                            <td><%=userControlDAO.getUsernameById(billControlDAO.getUserIdById(billId))%>
+                                            </td>
+                                            <td colspan="2">
+                                                <div class="alert alert-danger" role="alert"
+                                                     style="margin-bottom: 0;width: initial;margin-right: 0;padding-top: 5px;padding-bottom: 5px">
+                                                    <strong>此项内容不允许编辑</strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">订单状态</th>
+                                            <td colspan="2">
+                                                <%
+                                                    String state = "";
+                                                    switch (billControlDAO.getStateById(billId)) {
+                                                        case 0:
+                                                            state = "已下单但未付款";
+                                                            out.print(state);
+                                                            break;
+                                                        case 1:
+                                                            state = "付款成功但未发货";
+                                                            out.print(state);
+                                                            break;
+                                                        case 2:
+                                                            state = "付款成功且已发货";
+                                                            out.print(state);
+                                                            break;
+                                                        case 3:
+                                                            state = "订单已完成";
+                                                            out.print(state);
+                                                            break;
+                                                        case 4:
+                                                            state = "订单已取消";
+                                                            out.print(state);
+                                                            break;
+                                                    }
+                                                %>
+                                            </td>
+                                            <td>
+                                                <s:form action="billControlAction_editState" method="POST">
+                                                <select title="" style="width: 200px;">
+                                                    <%
+                                                        for (int i = 0; i < 5; i++) {
+                                                            if (billControlDAO.getStateById(billId) == i) {
+                                                    %>
+                                                    <option value="<%=i%>" selected="selected"><%=state%>
+                                                    </option>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                                    <option value="<%=i%>"><%=state%>
+                                                    </option>
+                                                    <%
+                                                            }
+                                                        }
+                                                    %>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <s:submit value="确认修改" cssClass="btn btn-primary"/>
+                                            </td>
+                                            </s:form>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">总价</th>
+                                            <td colspan="2">
+                                                <%=billControlDAO.getTotalById(billId)%>
+                                            </td>
+                                            <td>
+                                                <s:form action="billControlAction_editState" method="POST">
+                                                <input name="total" maxlength="8" class="form-control"
+                                                       style="width:30%;"
+                                                       onkeyup="value=value.replace(/[^\d\.]/g,'')"/>
+                                            </td>
+                                            <td>
+                                                <s:submit value="确认修改" cssClass="btn btn-primary"/>
+                                            </td>
+                                            </s:form>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">订单创建时间</th>
+                                            <td colspan="4">
+                                                <%=billControlDAO.getTimeById(billId)%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-nowrap" scope="row">收件人</th>
+                                            <td colspan="2">
+                                                <%=billControlDAO.getReceiverById(billId)%>
+                                            </td>
+                                            <td>
+                                                <s:form action="billControlAction_editState" method="POST">
+                                                <input name="receiver" maxlength="8" class="form-control"
+                                                       style="width:30%"/>
+                                            </td>
+                                            <td>
+                                                <s:submit value="确认修改" cssClass="btn btn-primary"/>
+                                            </td>
+                                            </s:form>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <%
+
+                                    } else {
+
+                                    %>
+                                    <div class="alert fresh-color alert-danger alert-dismissible fade in" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span></button>
+                                        <h4 id="oh-snap!-you-got-an-error!">服务器出错了！<a
+                                                class="anchorjs-link" href="#oh-snap!-you-got-an-error!"><span
+                                                class="anchorjs-icon"></span></a></h4>
+                                        <p>如果你是系统管理员，可检查服务器日志确定出错原因。或者点击下面的重试按钮再试一次</p>
+                                        <p>
+                                            <button type="button" class="btn btn-default"
+                                                    onclick="window.history.go(-1)">重试
+                                            </button>
+                                        </p>
+                                    </div>
+                                    <%
+
+                                        }
+
+                                    %>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

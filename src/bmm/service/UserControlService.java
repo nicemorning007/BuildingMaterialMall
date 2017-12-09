@@ -64,5 +64,11 @@ public interface UserControlService {
      */
     boolean resetPasswordById(int id);
 
+    /**
+     * 通过ID号获取用户名
+     *
+     * @param id 要查询的ID号
+     * @return 如果查询成功返回该ID号对应的用户名。否则返回 <b>null</b>
+     */
     String getUsernameById(int id);
 }

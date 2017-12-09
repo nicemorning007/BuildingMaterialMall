@@ -346,42 +346,42 @@ public class GoodsControlAction extends ActionSupport {
                 message = "操作失败请重试";
                 return "addGoods";
             }
-            pic1Path = "localhost:8080/images/goods/" + goodsId + "/" + pic1FileName;
+            pic1Path = "/images/goods/" + goodsId + "/" + pic1FileName;
         }
         if (pic2 != null) {
             if (!this.upLoadImage(pic2, pic2FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "addGoods";
             }
-            pic2Path = "localhost:8080/images/goods/" + goodsId + "/" + pic2FileName;
+            pic2Path = "/images/goods/" + goodsId + "/" + pic2FileName;
         }
         if (pic3 != null) {
             if (!this.upLoadImage(pic3, pic3FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "addGoods";
             }
-            pic3Path = "localhost:8080/images/goods/" + goodsId + "/" + pic3FileName;
+            pic3Path = "/images/goods/" + goodsId + "/" + pic3FileName;
         }
         if (pic4 != null) {
             if (!this.upLoadImage(pic4, pic4FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "addGoods";
             }
-            pic4Path = "localhost:8080/images/goods/" + goodsId + "/" + pic4FileName;
+            pic4Path = "/images/goods/" + goodsId + "/" + pic4FileName;
         }
         if (pic5 != null) {
             if (!this.upLoadImage(pic5, pic5FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "addGoods";
             }
-            pic5Path = "localhost:8080/images/goods/" + goodsId + "/" + pic5FileName;
+            pic5Path = "/images/goods/" + goodsId + "/" + pic5FileName;
         }
         if (pic6 != null) {
             if (!this.upLoadImage(pic6, pic6FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "addGoods";
             }
-            pic6Path = "localhost:8080/images/goods/" + goodsId + "/" + pic6FileName;
+            pic6Path = "/images/goods/" + goodsId + "/" + pic6FileName;
         }
         if (!goodsControlService.descIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path, pic2Path, pic3Path, pic4Path, pic5Path, pic6Path)) {
             message = "操作失败请重试";
@@ -504,42 +504,42 @@ public class GoodsControlAction extends ActionSupport {
                 message = "操作失败请重试";
                 return "editGoods";
             }
-            pic1Path = "localhost:8080/images/goods/" + goodsId + "/" + pic1FileName;
+            pic1Path = "/images/goods/" + goodsId + "/" + pic1FileName;
         }
         if (pic2 != null) {
             if (!this.upLoadImage(pic2, pic2FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "editGoods";
             }
-            pic2Path = "localhost:8080/images/goods/" + goodsId + "/" + pic2FileName;
+            pic2Path = "/images/goods/" + goodsId + "/" + pic2FileName;
         }
         if (pic3 != null) {
             if (!this.upLoadImage(pic3, pic3FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "editGoods";
             }
-            pic3Path = "localhost:8080/images/goods/" + goodsId + "/" + pic3FileName;
+            pic3Path = "/images/goods/" + goodsId + "/" + pic3FileName;
         }
         if (pic4 != null) {
             if (!this.upLoadImage(pic4, pic4FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "editGoods";
             }
-            pic4Path = "localhost:8080/images/goods/" + goodsId + "/" + pic4FileName;
+            pic4Path = "/images/goods/" + goodsId + "/" + pic4FileName;
         }
         if (pic5 != null) {
             if (!this.upLoadImage(pic5, pic5FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "editGoods";
             }
-            pic5Path = "localhost:8080/images/goods/" + goodsId + "/" + pic5FileName;
+            pic5Path = "/images/goods/" + goodsId + "/" + pic5FileName;
         }
         if (pic6 != null) {
             if (!this.upLoadImage(pic6, pic6FileName, goodsId)) {
                 message = "操作失败请重试";
                 return "editGoods";
             }
-            pic6Path = "localhost:8080/images/goods/" + goodsId + "/" + pic6FileName;
+            pic6Path = "/images/goods/" + goodsId + "/" + pic6FileName;
         }
         if (!goodsControlService.descIntoGoodsPicArrayByGoodsId(Integer.parseInt(goodsId), pic1Path,
                 pic2Path, pic3Path, pic4Path, pic5Path, pic6Path)) {

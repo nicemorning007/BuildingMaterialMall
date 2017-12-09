@@ -66,9 +66,13 @@
             <result name="addGoods">/admin/html/goods/addGoods.jsp</result>
             <result name="gotoEditGoods">/admin/html/goods/editGoods.jsp</result>
             <result name="editGoods">/admin/html/goods/editGoods.jsp</result>
-            <result name="input">/admin/html/goods/addGoods.jsp</result>
             <result name="deleteGoods">/admin/html/goods/removeGoods.jsp</result>
             <allowed-methods>addGoods,editGoods,gotoEditGoods,deleteGoods</allowed-methods>
+        </action>
+
+        <action name="billControlAction_*" class="billControlAction" method="{1}">
+            <result name="manage">/admin/html/bill/editBill.jsp</result>
+            <allowed-methods>manage</allowed-methods>
         </action>
         <!--结束商品管理相关-->
     </package>

@@ -245,17 +245,18 @@
                                             if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {
                                                 path = goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1);
                                             } else {
-                                                path = "localhost:8080/admin/img/profile/profile-1.jpg";
+                                                path = "/images/nopre.jpg";
                                             }
                                 %>
                                 <tr>
-                                    <s:form action="goodsControlAction_deleteGoods" method="POST">
+                                    <s:form action="goodsControlAction_gotoEditGoods" method="POST">
                                         <input type="hidden" name="goodsId" value="<%=goodsbaseEntity.getId()%>"/>
                                         <td><%=goodsbaseEntity.getName()%>
                                         </td>
                                         <td>
                                             <div style="width: 170px;height: 180px">
-                                                <img src="<%="http://"+path%>" style="width: 100%;height: 100%">
+                                                <img src="<%=request.getScheme()+"://"+request.getServerName()+":"
+                                                +request.getServerPort()+path%>" style="width: 100%;height: 100%">
                                             </div>
                                         </td>
                                         <td><%=goodsbaseEntity.getProducing()%>
@@ -276,15 +277,13 @@
                                 } else {
                                 %>
                                 <tr>
-                                    <s:form action="goodsControlAction_deleteGoods" method="POST">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </s:form>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <%
                                     }

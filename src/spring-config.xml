@@ -43,6 +43,9 @@
     <bean id="goodsControlDao" class="bmm.dao.impl.GoodsControlDAOImpl">
         <property name="hibernateTemplate" ref="ht"/>
     </bean>
+    <bean id="billControlDao" class="bmm.dao.impl.BillControlDAOImpl">
+        <property name="hibernateTemplate" ref="ht"/>
+    </bean>
     <!--结束配置DAO-->
 
     <!--配置service-->
@@ -58,6 +61,9 @@
     <bean id="goodsControlService" class="bmm.service.impl.GoodsControlServiceImpl">
         <property name="goodsControlDAO" ref="goodsControlDao"/>
     </bean>
+    <bean id="billControlService" class="bmm.service.impl.BillControlServiceImpl">
+        <property name="billControlDAO" ref="billControlDao"/>
+    </bean>
     <!--结束配置service-->
 
     <!--配置Action-->
@@ -72,6 +78,9 @@
     </bean>
     <bean id="goodsControlAction" class="bmm.struts.action.goods.GoodsControlAction">
         <property name="goodsControlService" ref="goodsControlService"/>
+    </bean>
+    <bean id="billControlAction" class="bmm.struts.action.bill.BillControlAction">
+        <property name="billControlService" ref="billControlService"/>
     </bean>
     <!--结束配置Action-->
 

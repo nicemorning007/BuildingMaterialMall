@@ -130,6 +130,12 @@ public class UserlControlServiceImpl implements UserControlService {
         return userControlDAO.changePasswordById(id, Md5Util.md5Encode("aaa111"));
     }
 
+    /**
+     * 通过ID号获取用户名
+     *
+     * @param id 要查询的ID号
+     * @return 如果查询成功返回该ID号对应的用户名。否则返回 <b>null</b>
+     */
     @Override
     public String getUsernameById(int id) {
         return userControlDAO.getUsernameById(id);
