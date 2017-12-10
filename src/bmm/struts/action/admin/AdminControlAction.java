@@ -170,8 +170,8 @@ public class AdminControlAction extends ActionSupport {
                         adminControlService.resetGoods();
                         info = "操作成功";
                         break;
-                    case "清除所有数据":
-                        adminControlService.resetAll();
+                    case "清除所有订单":
+                        adminControlService.resetBills();
                         info = "操作成功";
                         break;
                     default:

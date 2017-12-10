@@ -88,8 +88,6 @@ public class AdminControlServiceImpl implements AdminControlService {
 
     /**
      * 重置用户表
-     *
-     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
     public void resetUser() {
@@ -98,8 +96,6 @@ public class AdminControlServiceImpl implements AdminControlService {
 
     /**
      * 重置商品表
-     *
-     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
     public void resetGoods() {
@@ -107,12 +103,10 @@ public class AdminControlServiceImpl implements AdminControlService {
     }
 
     /**
-     * 重置全部表
-     *
-     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     * 重置订单
      */
     @Override
-    public void resetAll() {
-        adminControlDAO.resetAll();
+    public void resetBills() {
+        adminControlDAO.resetBills();
     }
 }

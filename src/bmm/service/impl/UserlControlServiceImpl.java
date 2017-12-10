@@ -2,6 +2,7 @@ package bmm.service.impl;
 
 import bmm.dao.UserControlDAO;
 import bmm.service.UserControlService;
+import bmm.utils.cookie_util.CookieUtil;
 import bmm.utils.md5_util.Md5Util;
 
 import java.text.SimpleDateFormat;
@@ -36,6 +37,7 @@ public class UserlControlServiceImpl implements UserControlService {
         if (userControlDAO.isExist(username)) {
             if (userControlDAO.getUserState(userControlDAO.getIdByName(username)) == 0) {
                 if (userControlDAO.getPasswordById(userControlDAO.getIdByName(username)).equals(password)) {
+                    CookieUtil.addCookie("userLogin", username, 60 * 60);
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
                     userControlDAO.setLatestLoginTimeById(userControlDAO.getIdByName(username),
@@ -80,9 +82,9 @@ public class UserlControlServiceImpl implements UserControlService {
         int flag = -1;
         if (!userControlDAO.isExist(username)) {
             if (userControlDAO.register(username, password)) {
+                flag = 1;
                 return flag;
             }
-            flag = 1;
         } else {
             flag = 0;
         }

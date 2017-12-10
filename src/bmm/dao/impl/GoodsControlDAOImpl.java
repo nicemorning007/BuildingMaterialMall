@@ -1118,4 +1118,69 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         }
         return flag;
     }
+
+    /**
+     * 随机取得一条商品记录
+     *
+     * @return 如果查询成功则返回该商品的 <b>GoodsbaseEntity</b> 对象；否则返回 <b>null</b>
+     */
+    @Override
+    public GoodsbaseEntity getRandomOne() {
+        String sql = "SELECT * FROM goodsbase WHERE goodsbase.id >= ((SELECT MAX(goodsbase.id) FROM goodsbase)-(SELECT MIN(goodsbase.id) FROM goodsbase)) * RAND() + (SELECT MIN(goodsbase.id) FROM goodsbase)  LIMIT 1";
+        Session session = HibernateUtil.getSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql).addEntity(GoodsbaseEntity.class);
+        List<GoodsbaseEntity> list = sqlQuery.list();
+        for (GoodsbaseEntity goodsbaseEntity : list) {
+            if (goodsbaseEntity != null) {
+                return goodsbaseEntity;
+            }
+        }
+        session.flush();
+        session.close();
+        return null;
+    }
+
+    /**
+     * 查询指定数量的最新商品
+     *
+     * @param i 指定要查询的数量
+     * @return 如果查询成功则返回 <b>List&lt;GoodsbaseEntity&gt;</b>；否则返回 <b>null</b>
+     */
+    @Override
+    public List<GoodsbaseEntity> getXNewest(int i) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("from GoodsbaseEntity ge order by ge.id desc");
+        query.setFirstResult(0);
+        query.setMaxResults(i);
+        List<GoodsbaseEntity> list = query.list();
+        transaction.commit();
+        session.close();
+        if (list.size() > 0) {
+            return list;
+        }
+        return null;
+    }
+
+    /**
+     * 查询指定数量的热销商品
+     *
+     * @param i 指定要查询的数量
+     * @return 如果查询成功则返回 <b>List&lt;GoodsbaseEntity&gt;</b>；否则返回 <b>null</b>
+     */
+    @Override
+    public List<GoodsbaseEntity> getBestSealXGoods(int i) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("from GoodsbaseEntity ge order by ge.sale desc");
+        query.setFirstResult(0);
+        query.setMaxResults(i);
+        List<GoodsbaseEntity> list = query.list();
+        transaction.commit();
+        session.close();
+        if (list.size() > 0) {
+            return list;
+        }
+        return null;
+    }
 }

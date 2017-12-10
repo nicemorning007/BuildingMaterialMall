@@ -70,7 +70,7 @@ public interface AdminControlDAO {
     void resetGoods();
 
     /**
-     * 重置全部表
+     * 重置全部订单
      */
-    void resetAll();
+    void resetBills();
 }

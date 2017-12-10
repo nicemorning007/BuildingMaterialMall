@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -216,5 +217,17 @@ public class UserControlAction extends ActionSupport {
     public String testHiber() {
         info = userControlService.getUsernameById(Integer.parseInt(this.id));
         return "test";
+    }
+
+    /**
+     * 用于用户的退出
+     *
+     * @return 返回字符串 <b>logout</b>
+     */
+    public String logout() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.addCookie(CookieUtil.delCookie(request, "userLogin"));
+        return "logout";
     }
 }

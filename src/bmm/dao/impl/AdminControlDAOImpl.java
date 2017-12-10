@@ -219,50 +219,13 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     }
 
     /**
-     * 重置全部表
+     * 重置全部订单
      */
     @Override
-    public void resetAll() {
-        resetUser();
-        resetGoods();
-        String usql1 = "TRUNCATE TABLE userlogin";
-        String usql2 = "TRUNCATE TABLE userinfo";
+    public void resetBills() {
+        String sql1 = "TRUNCATE TABLE billbase";
         Session session = HibernateUtil.getSession();
-        SQLQuery sqlQuery = session.createSQLQuery(usql1);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(usql2);
-        sqlQuery.executeUpdate();
-        String gsql1 = "TRUNCATE TABLE goodsbase";
-        String gsql2 = "TRUNCATE TABLE goodsdesc";
-        String gsql3 = "TRUNCATE TABLE goodspicarray";
-        session = HibernateUtil.getSession();
-        sqlQuery = session.createSQLQuery(gsql1);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(gsql2);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(gsql3);
-        sqlQuery.executeUpdate();
-        String sql2 = "TRUNCATE TABLE balance";
-        String sql3 = "TRUNCATE TABLE billbase";
-        String sql4 = "TRUNCATE TABLE categorization";
-        String sql5 = "TRUNCATE TABLE logisticbase";
-        String sql6 = "TRUNCATE TABLE checkout";
-        String sql7 = "TRUNCATE TABLE message";
-        sqlQuery = session.createSQLQuery(sql2);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(sql3);
-        sqlQuery.executeUpdate();
-        session.close();
-        session = HibernateUtil.getSession();
-        sqlQuery = session.createSQLQuery(sql4);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(sql5);
-        sqlQuery.executeUpdate();
-        session.close();
-        session = HibernateUtil.getSession();
-        sqlQuery = session.createSQLQuery(sql6);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(sql7);
+        SQLQuery sqlQuery = session.createSQLQuery(sql1);
         sqlQuery.executeUpdate();
         session.close();
     }

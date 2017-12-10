@@ -18,8 +18,8 @@ import java.util.List;
 public class HibernateTest {
     @Test
     public void allTest() {
-        BillControlDAO billControlDAO = (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
-        System.out.println(billControlDAO.getBillTotalCount());
+        GoodsControlDAO billControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
+        System.out.println(billControlDAO.getRandomOne().getName());
     }
 
     @Test

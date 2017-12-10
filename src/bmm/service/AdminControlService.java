@@ -38,22 +38,16 @@ public interface AdminControlService {
 
     /**
      * 重置用户表
-     *
-     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     void resetUser();
 
     /**
      * 重置商品表
-     *
-     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     void resetGoods();
 
     /**
-     * 重置全部表
-     *
-     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     * 重置全部订单
      */
-    void resetAll();
+    void resetBills();
 }
