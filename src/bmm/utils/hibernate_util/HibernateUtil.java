@@ -36,4 +36,12 @@ public class HibernateUtil {
     public static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
     }
+
+    /**
+     * 用于关闭Session对象
+     */
+    public static void closeSession() {
+        ourSessionFactory.close();
+    }
+
 }

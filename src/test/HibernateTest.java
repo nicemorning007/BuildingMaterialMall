@@ -19,7 +19,10 @@ public class HibernateTest {
     @Test
     public void allTest() {
         GoodsControlDAO billControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
-        System.out.println(billControlDAO.getRandomOne().getName());
+        List<GoodsbaseEntity> list = billControlDAO.getGoodsDependByCateByPage(1, 1);
+        for (GoodsbaseEntity g : list) {
+            System.out.println(g.getName());
+        }
     }
 
     @Test

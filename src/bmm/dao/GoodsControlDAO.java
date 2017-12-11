@@ -430,4 +430,12 @@ public interface GoodsControlDAO {
      */
     List<GoodsbaseEntity> getBestSealXGoods(int i);
 
+    /**
+     * 根据指定的页数进行分类查询指定类别的商品。一次只返回12个商品。
+     * @param page 要查询的页数
+     * @param cate 要查询的商品的分类
+     * @return 如果查询成功则返回 <b>List&lt;GoodsbaseEntity&gt;</b>；否则返回 <b>null</b>
+     */
+    List<GoodsbaseEntity> getGoodsDependByCateByPage(int page, int cate);
+
 }

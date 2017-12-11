@@ -1,18 +1,16 @@
-<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
-<%@ page import="bmm.dao.GoodsControlDAO" %>
-<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
-<%@ page import="bmm.dao.BillControlDAO" %>
 <%@ page import="bmm.dao.CategorizationControlDAO" %>
+<%@ page import="bmm.dao.GoodsControlDAO" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
-<%@ page import="java.util.List" %>
 <%@ page import="bmm.entity.GoodsbaseEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
     String username = CookieUtil.getCookiesValue(request, "userLogin");
     GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
-    BillControlDAO billControlDAO = (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
     CategorizationControlDAO categorizationControlDAO = (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
     GoodsbaseEntity randomGoods;
 %>
@@ -77,6 +75,24 @@
                     </a>
                 </div>
                 <div class="header_right">
+                    <%
+                        if (username != null) {
+                    %>
+                    <div class="cart box_1">
+                        <a href="checkout.jsp">
+                            <div class="total">
+                                <%--todo:show total an count--%>
+                                <span class="simpleCart_total"></span> (<span id="simpleCart_quantity"
+                                                                              class="simpleCart_quantity"></span>
+                                项商品)
+                            </div>
+                            <i class="glyphicon glyphicon-shopping-cart"></i></a>
+                        <p><a href="javascript:" class="simpleCart_empty">购物车</a></p>
+                        <div class="clearfix"></div>
+                    </div>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="clearfix"></div>
             </div>

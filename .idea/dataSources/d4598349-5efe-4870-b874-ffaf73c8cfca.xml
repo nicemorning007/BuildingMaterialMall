@@ -202,7 +202,7 @@
     </column>
     <column id="57" parent="16" name="info">
       <Position>8</Position>
-      <DataType>varchar(1000)|0</DataType>
+      <DataType>varchar(10000)|0</DataType>
     </column>
     <column id="58" parent="16" name="tag">
       <Position>9</Position>

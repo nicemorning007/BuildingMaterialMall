@@ -993,9 +993,11 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
                 list = query.list();
                 break;
         }
-        for (String o : list) {
-            if (o != null) {
-                return o.toString();
+        if (list != null) {
+            for (String o : list) {
+                if (o != null) {
+                    return o.toString();
+                }
             }
         }
         transaction.commit();
@@ -1181,6 +1183,31 @@ public class GoodsControlDAOImpl implements GoodsControlDAO {
         if (list.size() > 0) {
             return list;
         }
+        return null;
+    }
+
+    /**
+     * 根据指定的页数进行分类查询指定类别的商品。一次只返回12个商品。
+     *
+     * @param page 要查询的页数
+     * @param cate 要查询的商品的分类
+     * @return 如果查询成功则返回 <b>List&lt;GoodsbaseEntity&gt;</b>；否则返回 <b>null</b>
+     */
+    @Override
+    public List<GoodsbaseEntity> getGoodsDependByCateByPage(int page, int cate) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria criteria = session.createCriteria(GoodsbaseEntity.class);
+        Criterion criterion = Restrictions.eq("cate", cate);
+        criteria.add(criterion);
+        criteria.setFirstResult((page - 1) * 12);
+        criteria.setMaxResults(5);
+        List<GoodsbaseEntity> list = criteria.list();
+        if (list.size() > 0) {
+            return list;
+        }
+        transaction.commit();
+        session.close();
         return null;
     }
 }
