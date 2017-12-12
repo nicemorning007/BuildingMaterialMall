@@ -179,7 +179,7 @@
                                         src="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(goodsId, i)%>"
                                         data-imagezoom="true"
                                         class="img-responsive" alt=""
-                                        style="width: 305px;height: 400px"/></div>
+                                        style="width: 100%;height: 400px"/></div>
                             </li>
                             <%
                             } else {
@@ -188,7 +188,7 @@
                                 <div class="thumb-image"><img src="${pageContext.request.contextPath}/images/nopre.jpg"
                                                               data-imagezoom="true"
                                                               class="img-responsive" alt=""
-                                                              style="width: 305px;height: 400px"/></div>
+                                                              style="width: 100%;height: 400px"/></div>
                             </li>
                             <%
                                     }
@@ -241,7 +241,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-4 products-grid-right">
-                <div class="col-md-4 products-grid-right">
+                <div class="col-md-4 products-grid-right" style="width: 100%;">
                     <div class="w_sidebar">
                         <section class="sky-form">
                             <h4>分类显示</h4>

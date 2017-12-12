@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.List;
 
+/**
+ * 商品管理的业务请求
+ */
 public class GoodsControlAction extends ActionSupport {
     private GoodsControlService goodsControlService;
     private String name;
