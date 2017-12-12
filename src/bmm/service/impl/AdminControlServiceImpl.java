@@ -3,6 +3,7 @@ package bmm.service.impl;
 import bmm.dao.AdminControlDAO;
 import bmm.dao.impl.AdminControlDAOImpl;
 import bmm.service.AdminControlService;
+import org.springframework.stereotype.Service;
 
 /**
  * 关于管理员账户的操作接口的实现
@@ -103,10 +104,10 @@ public class AdminControlServiceImpl implements AdminControlService {
     }
 
     /**
-     * 重置订单
+     * 重置全部数据
      */
     @Override
-    public void resetBills() {
-        adminControlDAO.resetBills();
+    public void resetAll() {
+        adminControlDAO.resetAll();
     }
 }

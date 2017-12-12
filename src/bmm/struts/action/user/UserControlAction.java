@@ -89,7 +89,7 @@ public class UserControlAction extends ActionSupport {
             return "input";
         } else {
             HttpServletResponse response = ServletActionContext.getResponse();
-            Cookie cookie = CookieUtil.addCookie("userLogin", username, 60 * 30, "/");
+            Cookie cookie = CookieUtil.addCookie("userLogin", username, 60 * 60 * 2, "/");
             response.addCookie(cookie);
         }
         return "login";

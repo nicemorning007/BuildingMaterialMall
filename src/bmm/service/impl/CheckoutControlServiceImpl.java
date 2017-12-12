@@ -4,9 +4,12 @@ import bmm.dao.CheckoutControlDAO;
 import bmm.dao.GoodsControlDAO;
 import bmm.entity.CheckoutEntity;
 import bmm.service.CheckoutControlService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("checkoutControlService")
 public class CheckoutControlServiceImpl implements CheckoutControlService {
     private CheckoutControlDAO checkoutControlDAO;
     private GoodsControlDAO goodsControlDAO;
@@ -15,6 +18,7 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
         return checkoutControlDAO;
     }
 
+    @Autowired
     public void setCheckoutControlDAO(CheckoutControlDAO checkoutControlDAO) {
         this.checkoutControlDAO = checkoutControlDAO;
     }
@@ -23,6 +27,7 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
         return goodsControlDAO;
     }
 
+    @Autowired
     public void setGoodsControlDAO(GoodsControlDAO goodsControlDAO) {
         this.goodsControlDAO = goodsControlDAO;
     }
@@ -60,5 +65,67 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
             return 0;
         }
         return list.size();
+    }
+
+    /**
+     * 用于将商品添加到购物车中
+     *
+     * @param goodsId 要添加的商品ID
+     * @param count   要添加的商品数量
+     * @param userId  对应的操作用户
+     * @return 如果操作成功则返回 <b>true</b>；否则返回返回 <b>false</b>
+     */
+    @Override
+    public boolean addTo(int goodsId, int count, int userId) {
+            return checkoutControlDAO.addTo(goodsId, count, userId);
+    }
+
+    /**
+     * 用于查询指定用户的购物车总余额
+     *
+     * @param id 要查询的用户ID号
+     * @return 如果查询成功则返回购物车总余额；否则返回 <b>0</b>
+     */
+    @Override
+    public double getAllTotal(int id) {
+        double total = 0;
+        List<CheckoutEntity> list = checkoutControlDAO.showAll(id);
+        if (list != null) {
+            for (CheckoutEntity checkoutEntity : list) {
+                total += (checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId()));
+            }
+        }
+        return total;
+    }
+
+    /**
+     * 用于移除指定用户的购物车中的指定商品
+     *
+     * @param goodsId 指定的商品的ID
+     * @param userId  指定的用户ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean removeGoods(int goodsId, int userId) {
+        return checkoutControlDAO.removeGoods(goodsId, userId);
+    }
+
+    /**
+     * 用于给指定用户结算购物车
+     *
+     * @param id 指定的用户ID
+     * @return 如果操作成功则返回该用户订单总额；否则返回 <b>0</b>
+     */
+    @Override
+    public double payment(int id) {
+        double total = 0;
+        List<Integer> tableIdList = checkoutControlDAO.getIdByUserId(id);
+        if (tableIdList != null) {
+            for (Integer tableId : tableIdList) {
+                total += checkoutControlDAO.getGoodsCountById(tableId)
+                        * goodsControlDAO.getPriceById(checkoutControlDAO.getGoodsIdById(tableId));
+            }
+        }
+        return total;
     }
 }

@@ -219,13 +219,31 @@ public class AdminControlDAOImpl implements AdminControlDAO {
     }
 
     /**
-     * 重置全部订单
+     * 重置全部数据
      */
     @Override
-    public void resetBills() {
-        String sql1 = "TRUNCATE TABLE billbase";
+    public void resetAll() {
+        resetUser();
+        resetGoods();
         Session session = HibernateUtil.getSession();
-        SQLQuery sqlQuery = session.createSQLQuery(sql1);
+        SQLQuery sqlQuery;
+        String sql1 = "TRUNCATE TABLE billbase";
+        sqlQuery = session.createSQLQuery(sql1);
+        sqlQuery.executeUpdate();
+        String sql2 = "TRUNCATE TABLE balance";
+        sqlQuery = session.createSQLQuery(sql2);
+        sqlQuery.executeUpdate();
+        String sql3 = "TRUNCATE TABLE categorization";
+        sqlQuery = session.createSQLQuery(sql3);
+        sqlQuery.executeUpdate();
+        String sql4 = "TRUNCATE TABLE checkout";
+        sqlQuery = session.createSQLQuery(sql4);
+        sqlQuery.executeUpdate();
+        String sql5 = "TRUNCATE TABLE logisticbase";
+        sqlQuery = session.createSQLQuery(sql5);
+        sqlQuery.executeUpdate();
+        String sql6 = "TRUNCATE TABLE message";
+        sqlQuery = session.createSQLQuery(sql6);
         sqlQuery.executeUpdate();
         session.close();
     }

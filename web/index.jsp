@@ -17,6 +17,7 @@
     GoodsbaseEntity randomGoods;
     CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
     UserControlDAO userControlDAO = (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
+    if (goodsControlDAO.getGoodsCount() > 0) {
 %>
 <head>
     <title>建材网上商城</title>
@@ -86,7 +87,7 @@
                         <a href="checkout.jsp">
                             <div class="total">
                                 <span>
-                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                    ￥<%=checkoutControlService.getAllTotal(userControlDAO.getIdByName(username))%>0
                                 </span> (<span>
                                     <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
                                 </span>
@@ -383,4 +384,12 @@
 <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
                                                                          style="opacity: 1;"> </span></a>
 </body>
+<%
+} else {
+%>
+<h1>请现在后台添加商品</h1>
+<a href="${pageContext.request.contextPath}/admin/index.jsp">点击这里进入后台管理界面</a>
+<%
+    }
+%>
 </html>

@@ -284,7 +284,7 @@
                                                 <div align="center">
                                                     <div class="checkbox3 checkbox-danger checkbox-inline
                                                     checkbox-check checkbox-circle checkbox-light">
-                                                        <s:checkboxlist list="{'清除所有用户','清除所有商品','清除所有订单'}"
+                                                        <s:checkboxlist list="{'清除所有用户','清除所有商品','清除所有数据'}"
                                                                         name="dangerSelect" id="checkbox-fa-light-1"/>
                                                     </div>
                                                 </div>

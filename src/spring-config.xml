@@ -12,14 +12,19 @@
 
     <!-- data connection setting -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-    <!--<bean id="dataSource" class="org.apache.commons.dbcp2.ba" destroy-method="close">-->
         <property name="driverClass" value="${db.driverClassName}"/>
         <property name="jdbcUrl" value="${db.url}"/>
         <property name="user" value="${db.username}"/>
         <property name="password" value="${db.password}"/>
-        <!--<property name="initialPoolSize" value="2"/>-->
+        <property name="initialPoolSize" value="2"/>
         <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="500"/>
+        <property name="maxPoolSize" value="30"/>
+        <property name="acquireRetryAttempts" value="0"/>
+        <property name="acquireRetryDelay" value="1000" />
+        <property name="maxIdleTime" value="60"/>
+        <property name="idleConnectionTestPeriod" value="50"/>
+        <property name="testConnectionOnCheckout" value="true"/>
+        <property name="autoCommitOnClose" value="true"/>
     </bean>
 
     <!-- session工厂 -->
@@ -49,6 +54,7 @@
     </bean>
     <bean id="checkoutControlDao" class="bmm.dao.impl.CheckoutControlDAOImpl">
         <property name="hibernateTemplate" ref="ht"/>
+        <property name="goodsControlDAO" ref="goodsControlDao"/>
     </bean>
     <!--结束配置DAO-->
 
@@ -102,8 +108,14 @@
     <tx:annotation-driven transaction-manager="txManager"/>
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="*"/>
+            <tx:method name="*" read-only="false" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="**" expression="execution(* bmm.service.impl.CheckoutControlServiceImpl.*(..))"/>-->
+        <!--<aop:advisor pointcut-ref="**" advice-ref="txAdvice"/>-->
+
+    <!--</aop:config>-->
+
 
 </beans>

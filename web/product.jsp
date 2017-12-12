@@ -116,7 +116,7 @@
                         <a href="checkout.jsp">
                             <div class="total">
                                 <span>
-                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                    ￥<%=checkoutControlService.getAllTotal(userControlDAO.getIdByName(username))%>0
                                 </span> (<span>
                                     <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
                                 </span>

@@ -41,8 +41,9 @@
         </action>
 
         <action name="checkoutControlAction_*" class="checkoutControlAction" method="{1}">
-            <result></result>
-            <allowed-methods></allowed-methods>
+            <result name="addTo">/single.jsp</result>
+            <result name="remove">/checkout.jsp</result>
+            <allowed-methods>addTo,remove</allowed-methods>
         </action>
         <!--结束用户相关-->
     </package>

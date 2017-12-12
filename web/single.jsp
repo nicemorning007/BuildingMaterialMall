@@ -109,7 +109,7 @@
                         <a href="checkout.jsp">
                             <div class="total">
                                 <span>
-                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                    ￥<%=checkoutControlService.getAllTotal(userControlDAO.getIdByName(username))%>0
                                 </span> (<span>
                                     <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
                                 </span>
@@ -162,6 +162,7 @@
                     </div>
                 </li>
                 <li><a class="color4" href="${pageContext.request.contextPath}/contact.jsp">联系我们</a></li>
+                <li><a style="color: #FF69B4"><s:property value="message"/></a></li>
             </ul>
         </div>
     </div>
@@ -229,17 +230,22 @@
                             <li><%=goodsControlDAO.getStartById(goodsId)%>件</li>
                             <li>起售</li>
                         </ul>
-                        <%--todo--%>
-                        <s:form method="POST" theme="simple">
+                        <div class="quantity_box">
+                            <span>销量:<%=goodsControlDAO.getSaleById(goodsId)%></span>
+                        </div>
+                        <s:form action="checkoutControlAction_addTo" method="POST">
+                            <input type="hidden" name="goodsId" value="<%=goodsId%>">
+                            <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>">
                             <div class="quantity_box">
-                                <span>购买量:<%=goodsControlDAO.getSaleById(goodsId)%></span>
+                                <span>购买量:</span>
                                 <div class="product-qty">
-                                    <input type="number" value="<%=goodsControlDAO.getStartById(goodsId)%>"/>
+                                    <input type="number" name="count"
+                                           value="<%=goodsControlDAO.getStartById(goodsId)%>"/>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="single-but">
-                                <input type="submit" value="添加到购物车"/>
+                                <s:submit value="添加到购物车"/>
                             </div>
                         </s:form>
                     </div>
@@ -250,7 +256,7 @@
                 <div class="col-md-4 products-grid-right" style="width: 100%;">
                     <div class="w_sidebar">
                         <section class="sky-form">
-                            <h4>分类显示</h4>
+                            <h4>查看其他分类</h4>
                             <div class="row1 scroll-pane" style="height: 438px">
                                 <div class="col col-4">
                                     <%
@@ -290,40 +296,37 @@
                                     if (goodsControlDAO.getPicPathByGoodsId(goodsId, i) != null) {
                             %>
                             <img src="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(goodsId, i)%>"
-                                    data-imagezoom="true"
-                                    class="img-responsive" alt=""
-                                    style="width: 305px;height: 400px"/>
-                        </li>
-                        <%
+                                 style="width: 100%"/>
+                            <%
+                                    }
                                 }
-                            }
-                        %>
+                            %>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                商品参数
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            厂商：<%=goodsControlDAO.getProduById(goodsId)%>； 产地：<%=goodsControlDAO.getManuById(goodsId)%>
+                            计量单位：<%=goodsControlDAO.getUnitById(goodsId)%>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            商品参数
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                        厂商：<%=goodsControlDAO.getProduById(goodsId)%>； 产地：<%=goodsControlDAO.getManuById(goodsId)%>
-                        计量单位：<%=goodsControlDAO.getUnitById(goodsId)%>
-                    </div>
-                </div>
-            </div>
+            <!-- collapse -->
         </div>
-        <!-- collapse -->
-    </div>
-</div><!-- //products -->
-<!--start-footer-->
-<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
-                                                                         style="opacity: 1;"> </span></a>
+    </div><!-- //products -->
+    <!--start-footer-->
+    <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                             style="opacity: 1;"> </span></a>
 </div>
 
 </body>

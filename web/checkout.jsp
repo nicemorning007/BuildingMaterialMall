@@ -3,10 +3,10 @@
 <%@ page import="bmm.dao.GoodsControlDAO" %>
 <%@ page import="bmm.dao.UserControlDAO" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
+<%@ page import="bmm.entity.CheckoutEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="bmm.entity.CheckoutEntity" %>
 <%@ page import="bmm.service.CheckoutControlService" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -19,6 +19,7 @@
     }
     GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
     CategorizationControlDAO categorizationControlDAO = (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
+    CheckoutControlDAO checkoutControlDAO = (CheckoutControlDAO) SpringInjectionUtil.getDao("checkoutControlDao");
     CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
     UserControlDAO userControlDAO = (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
 %>
@@ -90,7 +91,7 @@
                         <a href="checkout.jsp">
                             <div class="total">
                                 <span>
-                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                    ￥<%=checkoutControlService.getAllTotal(userControlDAO.getIdByName(username))%>0
                                 </span> (<span>
                                     <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
                                 </span>
@@ -143,6 +144,7 @@
                     </div>
                 </li>
                 <li><a class="color4" href="${pageContext.request.contextPath}/contact.jsp">联系我们</a></li>
+                <li><a style="color: #FF69B4"><s:property value="message"/></a></li>
             </ul>
         </div>
     </div>
@@ -155,47 +157,55 @@
         <h3 class="tittle">我的购物车</h3>
         <div class="cart-header">
             <div class="cart-sec simpleCart_shelfItem">
-                <s:form theme="simple" method="POST">
+                <%
+                    List<CheckoutEntity> checkoutEntityList = checkoutControlDAO.showAll(userControlDAO.getIdByName(username));
+                    if (checkoutEntityList != null) {
+                        for (CheckoutEntity checkoutEntity : checkoutEntityList) {
+                %>
+                <div class="cart-item cyc">
                     <%
-                        List<CheckoutEntity> checkoutEntityList = checkoutControlDAO.showAll(userControlDAO.getIdByName(username));
-                        if (list.size() > 0) {
-                            for (CheckoutEntity checkoutEntity : checkoutEntityList) {
+                        String path = null;
+                        if ((path = goodsControlDAO.getPicPathByGoodsId(checkoutEntity.getGoodsId(), 1)) != null) {
                     %>
-                    <div class="cart-item cyc">
-                        <%
-                            String path = null;
-                            if ((path = goodsControlDAO.getPicPathByGoodsId(checkoutEntity.getGoodsId(), 1)) != null) {
-                        %>
-                        <img src="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(2, 1)%>"
-                             class="img-responsive" alt="" style="width: 200px;height: 165px">
-                        <%
-                        } else {
-                        %>
-                        <img src="${pageContext.request.contextPath}/images/nopre.jpg"
-                             class="img-responsive" alt="" style="width: 200px;height: 165px">
-                        <%
-                            }
-                        %>
-                    </div>
-                    <div class="cart-item-info">
-                        <h3><a href="#">name</a>
-                            <span><a href="">移除</a></span></h3>
-                        <ul class="qty">
-                            <li><p>单价:</p></li>
-                            <li><p>购买数量</p></li>
-                        </ul>
-                        <div class="delivery">
-                            <p>总价为 : $10.00</p>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                    </div>
+                    <img src="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(2, 1)%>"
+                         class="img-responsive" alt="" style="width: 200px;height: 165px">
                     <%
-                            }
+                    } else {
+                    %>
+                    <img src="${pageContext.request.contextPath}/images/nopre.jpg"
+                         class="img-responsive" alt="" style="width: 200px;height: 165px">
+                    <%
                         }
                     %>
-                </s:form>
+                </div>
+                <div class="cart-item-info" style="padding-bottom: 20px">
+                    <h3><a href="#">
+                        <%=checkoutEntity.getGoodsName()%>
+                        <s:form method="POST" action="checkoutControlAction_remove">
+                    </a>
+                        <input type="hidden" name="goodsId" value="<%=checkoutEntity.getGoodsId()%>">
+                        <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>">
+                        <span><s:submit value="移除" cssClass="button"/></span></h3>
+                    </s:form>
+                    <ul class="qty">
+                        <li><p>单价:<%=goodsControlDAO.getPriceById(checkoutEntity.getGoodsId())%>
+                        </p></li>
+                        <li><p>购买数量:<%=checkoutEntity.getGoodsCount()%>
+                        </p></li>
+                    </ul>
+                    <div class="delivery">
+                        <p>总价为
+                            : ￥<%=checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId())%>0
+                        </p>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                </div>
+                <%
+                        }
+                    }
+                %>
             </div>
         </div>
     </div>

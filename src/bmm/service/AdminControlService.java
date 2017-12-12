@@ -47,7 +47,7 @@ public interface AdminControlService {
     void resetGoods();
 
     /**
-     * 重置全部订单
+     * 重置全部数据
      */
-    void resetBills();
+    void resetAll();
 }

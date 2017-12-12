@@ -86,7 +86,7 @@
                         <a href="checkout.jsp">
                             <div class="total">
                                 <span>
-                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                    ￥<%=checkoutControlService.getAllTotal(userControlDAO.getIdByName(username))%>0
                                 </span> (<span>
                                     <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
                                 </span>
@@ -151,7 +151,6 @@
         <h3 class="tittle con">Contact</h3>
         <div class="lcontact span_1_of_contact">
             <div class="contact-form">
-                <%--todo: add to message table--%>
                 <s:form theme="simple" method="POST">
                     <p class="comment-form-author"><label>你的联系方式</label>
                         <s:textfield name="contact" cssClass="textbox" placeholder="输入你的联系方式"/>
