@@ -2,9 +2,11 @@
 <%@ page import="bmm.dao.GoodsControlDAO" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
 <%@ page import="bmm.entity.GoodsbaseEntity" %>
+<%@ page import="bmm.service.CheckoutControlService" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="bmm.dao.UserControlDAO" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
@@ -13,6 +15,8 @@
     GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
     CategorizationControlDAO categorizationControlDAO = (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
     GoodsbaseEntity randomGoods;
+    CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
+    UserControlDAO userControlDAO = (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
 %>
 <head>
     <title>建材网上商城</title>
@@ -81,9 +85,11 @@
                     <div class="cart box_1">
                         <a href="checkout.jsp">
                             <div class="total">
-                                <%--todo:show total an count--%>
-                                <span class="simpleCart_total"></span> (<span id="simpleCart_quantity"
-                                                                              class="simpleCart_quantity"></span>
+                                <span>
+                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                </span> (<span>
+                                    <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
+                                </span>
                                 项商品)
                             </div>
                             <i class="glyphicon glyphicon-shopping-cart"></i></a>

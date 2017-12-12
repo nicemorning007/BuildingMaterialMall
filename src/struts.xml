@@ -39,6 +39,11 @@
                 login,logout,register,userForbidden,unUserForbidden,lossReporting,unLossReporting,resetPassword,testHiber
             </allowed-methods>
         </action>
+
+        <action name="checkoutControlAction_*" class="checkoutControlAction" method="{1}">
+            <result></result>
+            <allowed-methods></allowed-methods>
+        </action>
         <!--结束用户相关-->
     </package>
 

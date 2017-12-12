@@ -1,16 +1,10 @@
 package test;
 
-import bmm.dao.AdminControlDAO;
-import bmm.dao.BillControlDAO;
-import bmm.dao.GoodsControlDAO;
-import bmm.entity.BillbaseEntity;
-import bmm.entity.GoodsbaseEntity;
+import bmm.dao.CheckoutControlDAO;
 import bmm.utils.hibernate_util.SpringInjectionUtil;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.*;
-import java.util.List;
 
 /**
  * 仅供数据库操作测试方法
@@ -18,11 +12,8 @@ import java.util.List;
 public class HibernateTest {
     @Test
     public void allTest() {
-        GoodsControlDAO billControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
-        List<GoodsbaseEntity> list = billControlDAO.getGoodsDependByCateByPage(1, 1);
-        for (GoodsbaseEntity g : list) {
-            System.out.println(g.getName());
-        }
+        CheckoutControlDAO dao = (CheckoutControlDAO) SpringInjectionUtil.getDao("checkoutControlDao");
+        System.out.println(dao.getUserIdById(1));
     }
 
     @Test

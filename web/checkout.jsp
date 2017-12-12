@@ -1,16 +1,26 @@
 <%@ page import="bmm.dao.CategorizationControlDAO" %>
+<%@ page import="bmm.dao.CheckoutControlDAO" %>
 <%@ page import="bmm.dao.GoodsControlDAO" %>
+<%@ page import="bmm.dao.UserControlDAO" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="bmm.entity.CheckoutEntity" %>
+<%@ page import="bmm.service.CheckoutControlService" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
     String username = CookieUtil.getCookiesValue(request, "userLogin");
+    if (username == null) {
+        out.print("您还未登录");
+        response.sendRedirect("/denial.jsp");
+    }
     GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
     CategorizationControlDAO categorizationControlDAO = (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
+    CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
+    UserControlDAO userControlDAO = (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
 %>
 <head>
     <title>建材网上商城</title>
@@ -79,9 +89,11 @@
                     <div class="cart box_1">
                         <a href="checkout.jsp">
                             <div class="total">
-                                <%--todo:show total an count--%>
-                                <span class="simpleCart_total"></span> (<span id="simpleCart_quantity"
-                                                                              class="simpleCart_quantity"></span>
+                                <span>
+                                    ￥<%=checkoutControlService.getTotal(userControlDAO.getIdByName(username))%>0
+                                </span> (<span>
+                                    <%=checkoutControlService.getCount(userControlDAO.getIdByName(username))%>
+                                </span>
                                 项商品)
                             </div>
                             <i class="glyphicon glyphicon-shopping-cart"></i></a>
@@ -144,12 +156,28 @@
         <div class="cart-header">
             <div class="cart-sec simpleCart_shelfItem">
                 <s:form theme="simple" method="POST">
+                    <%
+                        List<CheckoutEntity> checkoutEntityList = checkoutControlDAO.showAll(userControlDAO.getIdByName(username));
+                        if (list.size() > 0) {
+                            for (CheckoutEntity checkoutEntity : checkoutEntityList) {
+                    %>
                     <div class="cart-item cyc">
-                            <%--todo:show images--%>
-                        <img src="images/f4.jpg" class="img-responsive" alt="">
+                        <%
+                            String path = null;
+                            if ((path = goodsControlDAO.getPicPathByGoodsId(checkoutEntity.getGoodsId(), 1)) != null) {
+                        %>
+                        <img src="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(2, 1)%>"
+                             class="img-responsive" alt="" style="width: 200px;height: 165px">
+                        <%
+                        } else {
+                        %>
+                        <img src="${pageContext.request.contextPath}/images/nopre.jpg"
+                             class="img-responsive" alt="" style="width: 200px;height: 165px">
+                        <%
+                            }
+                        %>
                     </div>
                     <div class="cart-item-info">
-                            <%--todo:show name--%>
                         <h3><a href="#">name</a>
                             <span><a href="">移除</a></span></h3>
                         <ul class="qty">
@@ -163,6 +191,10 @@
                     </div>
                     <div class="clearfix">
                     </div>
+                    <%
+                            }
+                        }
+                    %>
                 </s:form>
             </div>
         </div>

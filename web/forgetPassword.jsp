@@ -75,24 +75,6 @@
                     </a>
                 </div>
                 <div class="header_right">
-                    <%
-                        if (username != null) {
-                    %>
-                    <div class="cart box_1">
-                        <a href="checkout.jsp">
-                            <div class="total">
-                                <%--todo:show total an count--%>
-                                <span class="simpleCart_total"></span> (<span id="simpleCart_quantity"
-                                                                              class="simpleCart_quantity"></span>
-                                项商品)
-                            </div>
-                            <i class="glyphicon glyphicon-shopping-cart"></i></a>
-                        <p><a href="javascript:" class="simpleCart_empty">购物车</a></p>
-                        <div class="clearfix"></div>
-                    </div>
-                    <%
-                        }
-                    %>
                 </div>
                 <div class="clearfix"></div>
             </div>
