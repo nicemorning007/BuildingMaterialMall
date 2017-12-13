@@ -119,12 +119,12 @@ public class CheckoutControlDAOImpl implements CheckoutControlDAO {
      */
     @Override
     public int getGoodsCountById(int id) {
-        List<CheckoutEntity> list =
-                (List<CheckoutEntity>) hibernateTemplate.find(
+        List<Integer> list =
+                (List<Integer>) hibernateTemplate.find(
                         "select ce.goodsCount from CheckoutEntity ce where ce.id=?", id);
         if (list.size() > 0) {
-            for (CheckoutEntity checkoutEntity : list) {
-                return checkoutEntity.getGoodsCount();
+            for (Integer integer : list) {
+                return integer;
             }
         }
         return 0;

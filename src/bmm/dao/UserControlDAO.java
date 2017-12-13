@@ -113,4 +113,25 @@ public interface UserControlDAO {
      * @return 如果查询成功则返回总用户数；否则返回 <b>0</b>
      */
     int getUserCount();
+
+    /**
+     * 根据用户ID获取对应的收件人
+     * @param id 要查询的用户ID
+     * @return 如果查询到则返回该用户的收件人，否则返回 <b>null</b>
+     */
+    String getReceiverById(int id);
+
+    /**
+     * 根据用户ID查询对应的手机号
+     * @param id 要查询的用户ID
+     * @return 如果查询到则返回该用户的密码，否则返回 <b>null</b>
+     */
+    String getPhoneById(int id);
+
+    /**
+     * 根据用户ID查询对应的收件地址
+     * @param id 要查询的用户ID
+     * @return 如果查询到则返回该用户的收件地址，否则返回 <b>null</b>
+     */
+    String getAddressById(int id);
 }

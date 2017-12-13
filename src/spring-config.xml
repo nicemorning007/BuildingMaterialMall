@@ -18,7 +18,7 @@
         <property name="password" value="${db.password}"/>
         <property name="initialPoolSize" value="2"/>
         <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="30"/>
+        <property name="maxPoolSize" value="50"/>
         <property name="acquireRetryAttempts" value="0"/>
         <property name="acquireRetryDelay" value="1000" />
         <property name="maxIdleTime" value="60"/>
@@ -77,6 +77,8 @@
     <bean id="checkoutControlService" class="bmm.service.impl.CheckoutControlServiceImpl">
         <property name="goodsControlDAO" ref="goodsControlDao"/>
         <property name="checkoutControlDAO" ref="checkoutControlDao"/>
+        <property name="billControlDAO" ref="billControlDao"/>
+        <property name="userControlDAO" ref="userControlDao"/>
     </bean>
     <!--结束配置service-->
 
@@ -97,6 +99,10 @@
         <property name="billControlService" ref="billControlService"/>
     </bean>
     <bean id="checkoutControlAction" class="bmm.struts.action.checkout.CheckoutControlAction">
+        <property name="checkoutControlService" ref="checkoutControlService"/>
+    </bean>
+    <bean id="billPaymentControlAction" class="bmm.struts.action.user.BillPaymentControlAction">
+        <property name="billControlService" ref="billControlService"/>
         <property name="checkoutControlService" ref="checkoutControlService"/>
     </bean>
     <!--结束配置Action-->

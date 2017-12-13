@@ -7,7 +7,10 @@ import org.hibernate.*;
 import org.hibernate.criterion.Order;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 关于订单的数据库操作接口的实现
@@ -356,5 +359,45 @@ public class BillControlDAOImpl implements BillControlDAO {
         }
         session.close();
         return 0;
+    }
+
+    /**
+     * 向指定ID的用户添加新的订单
+     *
+     * @param userId   用户ID号
+     * @param goodsId  商品ID号
+     * @param state    订单状态码
+     * @param total    订单总价
+     * @param receiver 收件人
+     * @param phone    手机号
+     * @param address  收件地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean addBillById(int userId, int goodsId, int state, double total, String receiver, String phone, String address) {
+        boolean flag = false;
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        BillbaseEntity billbaseEntity = new BillbaseEntity();
+        billbaseEntity.setUserId(userId);
+        billbaseEntity.setGoodsId(goodsId);
+        billbaseEntity.setState(state);
+        billbaseEntity.setTotal(total);
+        billbaseEntity.setReceiver(receiver);
+        billbaseEntity.setPhone(phone);
+        billbaseEntity.setAddress(address);
+        billbaseEntity.setTime(format.format(calendar.getTime()));
+        try {
+            session.save(billbaseEntity);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+        session.close();
+        return flag;
     }
 }

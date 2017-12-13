@@ -319,4 +319,64 @@ public class UserControlDAOImpl implements UserControlDAO {
                 .uniqueResult();
         return (int) count;
     }
+
+    /**
+     * 根据用户ID获取对应的收件人
+     *
+     * @param id 要查询的用户ID
+     * @return 如果查询到则返回该用户的收件人，否则返回 <b>null</b>
+     */
+    @Override
+    public String getReceiverById(int id) {
+        List<String> list = (List<String>) hibernateTemplate.find(
+                "select ue.receiver from UserinfoEntity ue where ue.userId=?", id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (String receiver : list) {
+                    return receiver;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据用户ID查询对应的手机号
+     *
+     * @param id 要查询的用户ID
+     * @return 如果查询到则返回该用户的密码，否则返回 <b>null</b>
+     */
+    @Override
+    public String getPhoneById(int id) {
+        List<String> list = (List<String>) hibernateTemplate.find(
+                "select ue.phone from UserinfoEntity ue where ue.userId=?", id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (String receiver : list) {
+                    return receiver;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据用户ID查询对应的收件地址
+     *
+     * @param id 要查询的用户ID
+     * @return 如果查询到则返回该用户的收件地址，否则返回 <b>null</b>
+     */
+    @Override
+    public String getAddressById(int id) {
+        List<String> list = (List<String>) hibernateTemplate.find(
+                "select ue.address from UserinfoEntity ue where ue.userId=?", id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (String receiver : list) {
+                    return receiver;
+                }
+            }
+        }
+        return null;
+    }
 }

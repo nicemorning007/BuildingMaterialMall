@@ -178,7 +178,7 @@
                     <div class="flexslider">
                         <ul class="slides">
                             <%
-                                for (int i = 0; i < 3; i++) {
+                                for (int i = 1; i <= 3; i++) {
                                     if (goodsControlDAO.getPicPathByGoodsId(goodsId, i) != null) {
                             %>
                             <li data-thumb="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(goodsId, i)%>">
@@ -245,7 +245,18 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="single-but">
+                                <%
+                                    if (username != null) {
+                                %>
                                 <s:submit value="添加到购物车"/>
+                                <%
+                                } else {
+                                %>
+                                <button>请先登陆</button>
+                                <%
+                                    }
+                                %>
+
                             </div>
                         </s:form>
                     </div>

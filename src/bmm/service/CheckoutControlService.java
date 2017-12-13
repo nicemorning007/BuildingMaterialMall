@@ -53,5 +53,5 @@ public interface CheckoutControlService {
      * @param id 指定的用户ID
      * @return 如果操作成功则返回该用户订单总额；否则返回 <b>0</b>
      */
-    double payment(int id);
+    double addToBill(int id);
 }

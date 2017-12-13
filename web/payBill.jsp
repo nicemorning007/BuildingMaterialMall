@@ -154,10 +154,11 @@
 <!-- checkout -->
 <div class="cart-items">
     <div class="container">
-        <h3 class="tittle">我的购物车</h3>
+        <h3 class="tittle">确认支付</h3>
         <div class="cart-header">
             <div class="cart-sec simpleCart_shelfItem">
                 <%
+                    double total = 0;
                     List<CheckoutEntity> checkoutEntityList = checkoutControlDAO.showAll(userControlDAO.getIdByName(username));
                     if (checkoutEntityList != null) {
                         for (CheckoutEntity checkoutEntity : checkoutEntityList) {
@@ -181,12 +182,8 @@
                 <div class="cart-item-info" style="padding-bottom: 20px">
                     <h3><a href="#">
                         <%=checkoutEntity.getGoodsName()%>
-                        <s:form method="POST" action="checkoutControlAction_remove">
                     </a>
-                        <input type="hidden" name="goodsId" value="<%=checkoutEntity.getGoodsId()%>">
-                        <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>">
-                        <span><s:submit value="移除" cssClass="button"/></span></h3>
-                    </s:form>
+                    </h3>
                     <ul class="qty">
                         <li><p>单价:<%=goodsControlDAO.getPriceById(checkoutEntity.getGoodsId())%>
                         </p></li>
@@ -198,6 +195,9 @@
                             :
                             ￥<%=checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId())%>
                             0
+                            <%
+                                total += checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId());
+                            %>
                         </p>
                         <div class="clearfix"></div>
                     </div>
@@ -209,9 +209,11 @@
                     }
                 %>
                 <div class="cart-item-info" style="padding-bottom: 20px">
-                    <s:form method="POST" action="billPaymentControlAction_goTo">
-                        <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>"/>
-                        <s:submit type="button" value="结算"/>
+                    <span>全部总价为：￥<%=total%></span>
+                </div>
+                <div class="cart-item-info" style="padding-bottom: 20px">
+                    <s:form method="POST" action="billPaymentControlAction_payment">
+                        <s:submit type="button" value="支付"/>
                     </s:form>
                 </div>
                 <div class="clearfix">

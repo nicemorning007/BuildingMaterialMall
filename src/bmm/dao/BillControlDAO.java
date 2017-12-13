@@ -127,4 +127,17 @@ public interface BillControlDAO {
      * @return 如果查询成功则返回总成交额；否则返回 <b>0</b>
      */
     double getBillTotalCount();
+
+    /**
+     * 向指定ID的用户添加新的订单
+     * @param userId 用户ID号
+     * @param goodsId 商品ID号
+     * @param state 订单状态码
+     * @param total 订单总价
+     * @param receiver 收件人
+     * @param phone 手机号
+     * @param address 收件地址
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean addBillById(int userId, int goodsId, int state, double total, String receiver, String phone, String address);
 }

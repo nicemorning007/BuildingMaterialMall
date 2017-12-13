@@ -1,7 +1,9 @@
 package bmm.service.impl;
 
+import bmm.dao.BillControlDAO;
 import bmm.dao.CheckoutControlDAO;
 import bmm.dao.GoodsControlDAO;
+import bmm.dao.UserControlDAO;
 import bmm.entity.CheckoutEntity;
 import bmm.service.CheckoutControlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,27 +11,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("checkoutControlService")
 public class CheckoutControlServiceImpl implements CheckoutControlService {
     private CheckoutControlDAO checkoutControlDAO;
     private GoodsControlDAO goodsControlDAO;
+    private BillControlDAO billControlDAO;
+    private UserControlDAO userControlDAO;
 
-    public CheckoutControlDAO getCheckoutControlDAO() {
-        return checkoutControlDAO;
-    }
-
-    @Autowired
     public void setCheckoutControlDAO(CheckoutControlDAO checkoutControlDAO) {
         this.checkoutControlDAO = checkoutControlDAO;
     }
 
-    public GoodsControlDAO getGoodsControlDAO() {
-        return goodsControlDAO;
-    }
-
-    @Autowired
     public void setGoodsControlDAO(GoodsControlDAO goodsControlDAO) {
         this.goodsControlDAO = goodsControlDAO;
+    }
+
+    public void setBillControlDAO(BillControlDAO billControlDAO) {
+        this.billControlDAO = billControlDAO;
+    }
+
+    public void setUserControlDAO(UserControlDAO userControlDAO) {
+        this.userControlDAO = userControlDAO;
     }
 
     /**
@@ -77,7 +78,7 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
      */
     @Override
     public boolean addTo(int goodsId, int count, int userId) {
-            return checkoutControlDAO.addTo(goodsId, count, userId);
+        return checkoutControlDAO.addTo(goodsId, count, userId);
     }
 
     /**
@@ -117,13 +118,16 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
      * @return 如果操作成功则返回该用户订单总额；否则返回 <b>0</b>
      */
     @Override
-    public double payment(int id) {
+    public double addToBill(int id) {
         double total = 0;
         List<Integer> tableIdList = checkoutControlDAO.getIdByUserId(id);
         if (tableIdList != null) {
             for (Integer tableId : tableIdList) {
                 total += checkoutControlDAO.getGoodsCountById(tableId)
                         * goodsControlDAO.getPriceById(checkoutControlDAO.getGoodsIdById(tableId));
+                if (!billControlDAO.addBillById(id, checkoutControlDAO.getGoodsIdById(tableId), 0, (checkoutControlDAO.getGoodsCountById(tableId) * (goodsControlDAO.getPriceById(checkoutControlDAO.getGoodsIdById(tableId)))), userControlDAO.getReceiverById(id), userControlDAO.getPhoneById(id), userControlDAO.getAddressById(id))) {
+                    total = 0;
+                }
             }
         }
         return total;

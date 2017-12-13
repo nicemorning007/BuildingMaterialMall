@@ -398,6 +398,38 @@ public class GoodsControlAction extends ActionSupport {
                 this.tag.toString().trim(), this.cate, this.manu, this.produ,
                 picArray - 1, this.norms, this.unit, Integer.parseInt(this.start))) {
             this.message = "操作成功";
+            this.name = null;
+            this.info = null;
+            this.price = null;
+            this.tags = null;
+            this.tag = null;
+            this.selectCate = null;
+            this.manu = null;
+            this.cate = 0;
+            this.produ = null;
+            this.norms = null;
+            this.unit = null;
+            this.start = null;
+            this.pic6 = null;
+            this.pic6FileName = null;
+            this.pic6ContentType = null;
+            this.pic1 = null;
+            this.pic1FileName = null;
+            this.pic1ContentType = null;
+            this.pic2 = null;
+            this.pic2FileName = null;
+            this.pic2ContentType = null;
+            this.pic3 = null;
+            this.pic3FileName = null;
+            this.pic3ontentType = null;
+            this.pic4 = null;
+            this.pic4FileName = null;
+            this.pic4ContentType = null;
+            this.pic5 = null;
+            this.pic5FileName = null;
+            this.pic5ContentType = null;
+            this.list = null;
+            this.goodsId = null;
         } else {
             this.message = "操作失败请重试";
         }

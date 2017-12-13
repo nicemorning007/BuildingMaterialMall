@@ -2,6 +2,7 @@ package test;
 
 import bmm.dao.CheckoutControlDAO;
 import bmm.dao.GoodsControlDAO;
+import bmm.dao.UserControlDAO;
 import bmm.entity.CheckoutEntity;
 import bmm.service.CheckoutControlService;
 import bmm.utils.hibernate_util.SpringInjectionUtil;
@@ -17,12 +18,8 @@ import java.util.List;
 public class HibernateTest {
     @Test
     public void allTest() {
-        CheckoutControlDAO dao = (CheckoutControlDAO) SpringInjectionUtil.getDao("checkoutControlDao");
-        GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
-        List<CheckoutEntity> list = dao.showAll(2);
-        for (CheckoutEntity checkoutEntity : list) {
-            System.out.println(checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId()));
-        }
+        CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
+        checkoutControlService.addToBill(1);
     }
 
     @Test
