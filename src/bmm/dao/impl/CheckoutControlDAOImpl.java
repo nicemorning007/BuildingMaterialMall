@@ -1,5 +1,6 @@
 package bmm.dao.impl;
 
+import bmm.dao.BillControlDAO;
 import bmm.dao.CheckoutControlDAO;
 import bmm.dao.GoodsControlDAO;
 import bmm.entity.CheckoutEntity;
@@ -20,6 +21,7 @@ import java.util.List;
 public class CheckoutControlDAOImpl implements CheckoutControlDAO {
     private HibernateTemplate hibernateTemplate;
     private GoodsControlDAO goodsControlDAO;
+    private BillControlDAO billControlDAO;
 
     public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
@@ -29,8 +31,8 @@ public class CheckoutControlDAOImpl implements CheckoutControlDAO {
         this.hibernateTemplate = hibernateTemplate;
     }
 
-    public GoodsControlDAO getGoodsControlDAO() {
-        return goodsControlDAO;
+    public void setBillControlDAO(BillControlDAO billControlDAO) {
+        this.billControlDAO = billControlDAO;
     }
 
     public void setGoodsControlDAO(GoodsControlDAO goodsControlDAO) {
@@ -203,18 +205,32 @@ public class CheckoutControlDAOImpl implements CheckoutControlDAO {
         Criteria criteria = session.createCriteria(CheckoutEntity.class);
         Criterion criterion = Restrictions.and(Restrictions.eq("goodsId", goodsId),
                 Restrictions.eq("userId", userId));
+        criteria.add(criterion);
         List<CheckoutEntity> list = criteria.list();
         if (list != null) {
-            CheckoutEntity checkoutEntity = list.get(0);
-            try {
-                session.delete(checkoutEntity);
-                transaction.commit();
-                flag = true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                transaction.rollback();
+            if (list.size() > 0) {
+                CheckoutEntity checkoutEntity = list.get(0);
+                try {
+                    session.delete(checkoutEntity);
+                    transaction.commit();
+                    flag = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    transaction.rollback();
+                }
             }
         }
+        session.close();
+//        List<Integer> billbaseEntities = billControlDAO.getOneUserAllBillIdByUserId(userId);
+//        if (billbaseEntities != null) {
+//            if (list.size() > 0) {
+//                for (Integer integer : billbaseEntities) {
+//                    if (billControlDAO.getGoodsIdById(integer) == goodsId) {
+//                        billControlDAO.updateStateById(integer, 4);
+//                    }
+//                }
+//            }
+//        }
         return flag;
     }
 }

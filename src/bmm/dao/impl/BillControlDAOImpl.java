@@ -4,10 +4,13 @@ import bmm.dao.BillControlDAO;
 import bmm.entity.BillbaseEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
 import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -348,7 +351,7 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public double getBillTotalCount() {
-        String sql = "SELECT sum(billbase.total) FROM billbase WHERE state = 3";
+        String sql = "SELECT sum(billbase.total) FROM billbase WHERE state !=0 AND state !=4";
         Session session = HibernateUtil.getSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object> list = sqlQuery.list();
@@ -399,5 +402,53 @@ public class BillControlDAOImpl implements BillControlDAO {
         }
         session.close();
         return flag;
+    }
+
+    /**
+     * 通过指定的用户ID查找该用户的所有订单ID号
+     *
+     * @param id 要查询的用户ID
+     * @return 如果查询成功则返回该用户对应的所有订单ID的 <b>List&lt;Integer&gt;</b>；否则返回 <b>null</b>
+     */
+    @Override
+    public List<Integer> getOneUserAllBillIdByUserId(int id) {
+        String hql = "select be.id from BillbaseEntity be where be.userId=?";
+        List<Integer> list = (List<Integer>) hibernateTemplate.find(hql);
+        if (list != null) {
+            if (list.size() > 0) {
+                return list;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 通过指定的用户ID查找该用户的所有未支付订单
+     *
+     * @param id 要查询的用户ID号
+     * @return 如果查询成功则返回该用户对应的所有订单ID的 <b>List&lt;Integer&gt;</b>；否则返回 <b>null</b>
+     */
+    @Override
+    public List<Integer> getOneUserAllUnPayBillIdByUserId(int id) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria criteria = session.createCriteria(BillbaseEntity.class);
+        Criterion criterion = Restrictions.and
+                (Restrictions.eq("userId", id),
+                        Restrictions.eq("state", 0));
+        criteria.add(criterion);
+        List<BillbaseEntity> list = criteria.list();
+        transaction.commit();
+        session.close();
+        List<Integer> integerList = new ArrayList<>();
+        if (list != null) {
+            if (list.size() > 0) {
+                for (BillbaseEntity billbaseEntity : list) {
+                    integerList.add(billbaseEntity.getId());
+                }
+                return integerList;
+            }
+        }
+        return null;
     }
 }

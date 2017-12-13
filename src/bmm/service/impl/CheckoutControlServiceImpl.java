@@ -4,6 +4,7 @@ import bmm.dao.BillControlDAO;
 import bmm.dao.CheckoutControlDAO;
 import bmm.dao.GoodsControlDAO;
 import bmm.dao.UserControlDAO;
+import bmm.entity.BillbaseEntity;
 import bmm.entity.CheckoutEntity;
 import bmm.service.CheckoutControlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,5 +132,27 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
             }
         }
         return total;
+    }
+
+    /**
+     * 根据指定的用户ID清除该用户的购物车
+     *
+     * @param id 要操作的用户ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean cleanOneById(int id) {
+        boolean flag = true;
+        List<CheckoutEntity> list = checkoutControlDAO.showAll(id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (CheckoutEntity checkoutEntity : list) {
+                    if (!this.removeGoods(checkoutEntity.getGoodsId(), id)) {
+                        flag = false;
+                    }
+                }
+            }
+        }
+        return flag;
     }
 }

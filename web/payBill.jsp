@@ -168,7 +168,7 @@
                         String path = null;
                         if ((path = goodsControlDAO.getPicPathByGoodsId(checkoutEntity.getGoodsId(), 1)) != null) {
                     %>
-                    <img src="${pageContext.request.contextPath}<%=goodsControlDAO.getPicPathByGoodsId(2, 1)%>"
+                    <img src="${pageContext.request.contextPath}<%=path%>"
                          class="img-responsive" alt="" style="width: 200px;height: 165px">
                     <%
                     } else {

@@ -256,7 +256,7 @@
                                     <i class="icon fa fa-share-alt fa-4x"></i>
                                     <div class="content">
                                         <div class="title">
-                                            <%=billControlDAO.getBillTotalCount()%>
+                                            <%=billControlDAO.getBillTotalCount()%>0
                                         </div>
                                         <div class="sub-title">成交额</div>
                                     </div>

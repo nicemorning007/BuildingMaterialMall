@@ -38,4 +38,12 @@ public interface BillControlService {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     boolean updateReceiverById(int id, String receiver);
+
+    /**
+     * 完成指定ID所对应的用户的支付操作
+     *
+     * @param id 要执行的用户ID
+     * @return 如果操作成功则返回应扣除的总数；否则返回 <b>0</b>
+     */
+    double payMent(int id);
 }

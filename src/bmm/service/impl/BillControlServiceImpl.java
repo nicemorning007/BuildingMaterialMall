@@ -1,5 +1,6 @@
 package bmm.service.impl;
 
+import bmm.dao.BalanceControlDAO;
 import bmm.dao.BillControlDAO;
 import bmm.entity.BillbaseEntity;
 import bmm.service.BillControlService;
@@ -61,5 +62,25 @@ public class BillControlServiceImpl implements BillControlService {
     @Override
     public boolean updateReceiverById(int id, String receiver) {
         return billControlDAO.updateReceiverById(id, receiver);
+    }
+
+    /**
+     * 完成指定ID所对应的用户的支付操作
+     *
+     * @param id 要执行的用户ID
+     * @return 如果操作成功则返回应扣除的总数；否则返回 <b>0</b>
+     */
+    @Override
+    public double payMent(int id) {
+        double total = 0;
+        List<Integer> list = billControlDAO.getOneUserAllUnPayBillIdByUserId(id);
+        if (list != null) {
+            for (Integer integer : list) {
+                billControlDAO.updateStateById(integer, 1);
+                total += billControlDAO.getTotalById(integer);
+            }
+        }
+
+        return total;
     }
 }

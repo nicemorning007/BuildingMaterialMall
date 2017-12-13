@@ -450,5 +450,9 @@
       <Turn>after-row</Turn>
       <Events>I</Events>
     </trigger>
+    <trigger id="111" parent="23" name="add2balance">
+      <Turn>after-row</Turn>
+      <Events>I</Events>
+    </trigger>
   </database-model>
 </dataSource>

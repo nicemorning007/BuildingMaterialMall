@@ -1,5 +1,6 @@
 package test;
 
+import bmm.dao.BillControlDAO;
 import bmm.dao.CheckoutControlDAO;
 import bmm.dao.GoodsControlDAO;
 import bmm.dao.UserControlDAO;
@@ -18,8 +19,8 @@ import java.util.List;
 public class HibernateTest {
     @Test
     public void allTest() {
-        CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
-        checkoutControlService.addToBill(1);
+        CheckoutControlDAO checkoutControlDAO = (CheckoutControlDAO) SpringInjectionUtil.getDao("checkoutControlDao");
+        checkoutControlDAO.removeGoods(3, 1);
     }
 
     @Test

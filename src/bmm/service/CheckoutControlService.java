@@ -54,4 +54,11 @@ public interface CheckoutControlService {
      * @return 如果操作成功则返回该用户订单总额；否则返回 <b>0</b>
      */
     double addToBill(int id);
+
+    /**
+     * 根据指定的用户ID清除该用户的购物车
+     * @param id 要操作的用户ID
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean cleanOneById(int id);
 }

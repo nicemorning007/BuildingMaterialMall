@@ -252,7 +252,8 @@
                                 <%
                                 } else {
                                 %>
-                                <button>请先登陆</button>
+                                <a style="color:#ff70a6;" href="${pageContext.request.contextPath}/login.jsp">
+                                    请先登陆再购买</a>
                                 <%
                                     }
                                 %>

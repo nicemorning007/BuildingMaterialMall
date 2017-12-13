@@ -1,5 +1,6 @@
 package bmm.struts.action.user;
 
+import bmm.service.BalanceControlService;
 import bmm.service.BillControlService;
 import bmm.service.CheckoutControlService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BillPaymentControlAction extends ActionSupport {
     private BillControlService billControlService;
     private CheckoutControlService checkoutControlService;
+    private BalanceControlService balanceControlService;
     private String userId;
     private String message;
     private double total;
@@ -21,12 +23,12 @@ public class BillPaymentControlAction extends ActionSupport {
         this.billControlService = billControlService;
     }
 
-    public BillControlService getBillControlService() {
-        return billControlService;
-    }
-
     public void setCheckoutControlService(CheckoutControlService checkoutControlService) {
         this.checkoutControlService = checkoutControlService;
+    }
+
+    public void setBalanceControlService(BalanceControlService balanceControlService) {
+        this.balanceControlService = balanceControlService;
     }
 
     public String getUserId() {
@@ -51,7 +53,16 @@ public class BillPaymentControlAction extends ActionSupport {
      * @return 返回字符串"payment"
      */
     public String payment() {
-
+        double money = billControlService.payMent(Integer.parseInt(this.userId));
+        if (money > 0) {
+            if (balanceControlService.deductBalanceById(Integer.parseInt(this.userId),
+                    this.total)) {
+                checkoutControlService.cleanOneById(Integer.parseInt(this.userId));
+                this.message = "支付成功";
+            } else {
+                this.message = "支付失败请重试";
+            }
+        }
         return "payment";
     }
 
