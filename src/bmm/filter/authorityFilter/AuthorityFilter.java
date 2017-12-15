@@ -12,17 +12,15 @@ import java.io.IOException;
  */
 public class AuthorityFilter implements Filter {
     private String admin;
-    private String userLogin;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         admin = CookieUtil.getCookiesValue((HttpServletRequest) servletRequest, "isLogin");
-        userLogin = CookieUtil.getCookiesValue((HttpServletRequest) servletRequest, "userLogin");
         if (admin == null) {
             servletRequest.getRequestDispatcher("/403.jsp").forward(servletRequest, servletResponse);
             return;
         }
-        filterChain.doFilter((HttpServletRequest) servletRequest, (HttpServletResponse) servletResponse);
+        filterChain.doFilter(servletRequest,servletResponse);
     }
 
     @Override
@@ -32,6 +30,5 @@ public class AuthorityFilter implements Filter {
     @Override
     public void destroy() {
         admin = null;
-        userLogin = null;
     }
 }
