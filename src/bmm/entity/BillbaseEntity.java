@@ -8,6 +8,7 @@ public class BillbaseEntity {
     private int id;
     private Integer userId;
     private Integer goodsId;
+    private Integer goodsCount;
     private int state;
     private double total;
     private String receiver;
@@ -43,6 +44,16 @@ public class BillbaseEntity {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+    }
+
+    @Basic
+    @Column(name = "goodsCount")
+    public Integer getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(Integer goodsCount) {
+        this.goodsCount = goodsCount;
     }
 
     @Basic

@@ -1,12 +1,14 @@
 package bmm.service.impl;
 
-import bmm.dao.BalanceControlDAO;
 import bmm.dao.BillControlDAO;
 import bmm.entity.BillbaseEntity;
 import bmm.service.BillControlService;
 
 import java.util.List;
 
+/**
+ * 订单的管理操作接口的实现
+ */
 public class BillControlServiceImpl implements BillControlService {
     private BillControlDAO billControlDAO;
 

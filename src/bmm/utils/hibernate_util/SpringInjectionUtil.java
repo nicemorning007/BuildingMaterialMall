@@ -3,7 +3,7 @@ package bmm.utils.hibernate_util;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Spring注入工具类
+ * Spring注入工具类，可提供Spring注入对象的直接获取和使用
  */
 public class SpringInjectionUtil {
 

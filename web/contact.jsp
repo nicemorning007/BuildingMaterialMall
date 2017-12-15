@@ -56,7 +56,7 @@
                     <li><a href="${pageContext.request.contextPath}/login.jsp">登陆</a></li>
                     <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
                     <%} else {%>
-                    <li><a href="${pageContext.request.contextPath}/contact.jsp">个人中心</a></li>
+                    <li><a href="${pageContext.request.contextPath}/userCenter.jsp">个人中心</a></li>
                     <li><a href="/userControlAction_logout.action">退出</a></li>
                     <%}%>
                 </ul>
@@ -139,6 +139,7 @@
                     </div>
                 </li>
                 <li><a class="color4" href="${pageContext.request.contextPath}/contact.jsp">联系我们</a></li>
+                <li><a style="color: #FF69B4"><s:property value="info"/></a></li>
             </ul>
         </div>
     </div>
@@ -151,7 +152,14 @@
         <h3 class="tittle con">Contact</h3>
         <div class="lcontact span_1_of_contact">
             <div class="contact-form">
-                <s:form theme="simple" method="POST">
+                <s:form action="userControlAction_contact" method="POST">
+                    <%
+                        if (username != null) {
+                    %>
+                    <input type="hidden" name="username" value="<%=username%>"/>
+                    <%
+                        }
+                    %>
                     <p class="comment-form-author"><label>你的联系方式</label>
                         <s:textfield name="contact" cssClass="textbox" placeholder="输入你的联系方式"/>
                     </p>
@@ -179,7 +187,7 @@
             <div class="address">
                 <i class="phone"></i>
                 <div class="contact_address">
-                    您也可以在左侧填写快速邮件发送给我们。
+                    您也可以在左侧填写快速站内信发送给我们。如果是账号问题请附带上账号或者登录后再提交。
                 </div>
                 <div class="clearfix"></div>
             </div>

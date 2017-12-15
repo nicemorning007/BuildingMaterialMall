@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
@@ -375,6 +376,233 @@ public class UserControlDAOImpl implements UserControlDAO {
                 for (String receiver : list) {
                     return receiver;
                 }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据用户ID查找对应的昵称
+     *
+     * @param id 要查询的用户ID号
+     * @return 如果查询成功则返回该用户的昵称，否则返回 <b>null</b>
+     */
+    @Override
+    public String getNickNameById(int id) {
+        List<String> list = (List<String>) hibernateTemplate.find(
+                "select ue.nickname from UserinfoEntity ue where ue.userId=?", id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (String receiver : list) {
+                    return receiver;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据用户ID设置对应的昵称
+     *
+     * @param id       要操作的用户ID号
+     * @param nickName 要设置的昵称
+     * @return 如果更改成功返回 <b>true</b> 否则返回 <b>false</b>
+     */
+    @Override
+    @Transactional
+    public boolean setNickNameById(int id, String nickName) {
+        boolean flag = false;
+        String hql = "from UserinfoEntity ue where ue.userId=?";
+        UserinfoEntity userinfoEntity;
+        List<UserinfoEntity> list = (List<UserinfoEntity>) hibernateTemplate.find(
+                hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                userinfoEntity = list.get(0);
+                userinfoEntity.setNickname(nickName);
+                try {
+                    hibernateTemplate.update(userinfoEntity);
+                    flag = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 根据用户ID查找对应的性别
+     *
+     * @param id 要查询的用户ID号
+     * @return 如果查询成功则返回该用户的性别，否则返回 <b>null</b>
+     */
+    @Override
+    public String getGenderById(int id) {
+        List<String> list = (List<String>) hibernateTemplate.find(
+                "select ue.gender from UserinfoEntity ue where ue.userId=?", id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (String receiver : list) {
+                    return receiver;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据用户ID设置对应的性别
+     *
+     * @param id     要操作的用户ID号
+     * @param gender 要设置的性别
+     * @return 如果更改成功返回 <b>true</b> 否则返回 <b>false</b>
+     */
+    @Override
+    @Transactional
+    public boolean setGenderById(int id, String gender) {
+        boolean flag = false;
+        String hql = "from UserinfoEntity ue where ue.userId=?";
+        UserinfoEntity userinfoEntity;
+        List<UserinfoEntity> list = (List<UserinfoEntity>) hibernateTemplate.find(
+                hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                userinfoEntity = list.get(0);
+                userinfoEntity.setGender(gender);
+                try {
+                    hibernateTemplate.update(userinfoEntity);
+                    flag = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 根据指定的用户名查找对应的用户ID号
+     *
+     * @param username 要查找的用户名
+     * @return 如果查询成功则返回该用户名对应的用户ID号，否则返回 <b>0</b>
+     */
+    @Override
+    public int getUserIdByUsername(String username) {
+        String hql = "select ue.id from UserloginEntity ue where ue.username=?";
+        List<Integer> list = (List<Integer>) hibernateTemplate.find(hql, username);
+        if (list != null) {
+            if (list.size() > 0) {
+                return list.get(0);
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 根据指定的用户ID号更新该用户的信息
+     *
+     * @param id       要操作的用户ID号
+     * @param receiver 要更新的收件人
+     * @param adderss  要更新的收件地址
+     * @param phone    要更新的联系方式
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    @Transactional
+    public boolean updateUserInfo(int id, String receiver, String adderss, String phone) {
+        boolean flag = false;
+        String hql = "from UserinfoEntity ue where ue.userId=?";
+        List<UserinfoEntity> userinfoEntityList = (List<UserinfoEntity>) hibernateTemplate.find(hql, id);
+        if (userinfoEntityList != null) {
+            if (userinfoEntityList.size() > 0) {
+                UserinfoEntity userinfoEntity = userinfoEntityList.get(0);
+                userinfoEntity.setReceiver(receiver);
+                userinfoEntity.setAddress(adderss);
+                userinfoEntity.setPhone(phone);
+                try {
+                    hibernateTemplate.save(userinfoEntity);
+                    flag = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 根据指定的用户ID号更改该用户的密码
+     *
+     * @param id       要操作的用户ID号
+     * @param password 要更改的新密码
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    @Transactional
+    public boolean updatePasswordByUserId(int id, String password) {
+        boolean flag = false;
+        String hql = "from UserloginEntity ue where ue.id=?";
+        List<UserloginEntity> userinfoEntityList =
+                (List<UserloginEntity>) hibernateTemplate.find(hql, id);
+        if (userinfoEntityList != null) {
+            if (userinfoEntityList.size() > 0) {
+                UserloginEntity userloginEntity = userinfoEntityList.get(0);
+                userloginEntity.setPassword(password);
+                try {
+                    hibernateTemplate.save(userloginEntity);
+                    flag = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 根据指定的用户ID号更改该用户的基本信息
+     *
+     * @param id       要操作的用户ID号
+     * @param nickname 要更新的昵称
+     * @param gender   要更新的性别
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    @Transactional
+    public boolean updateBaseInfoByUserId(int id, String nickname, String gender) {
+        boolean flag = false;
+        String hql = "from UserinfoEntity ue where ue.userId=?";
+        List<UserinfoEntity> userinfoEntityList = (List<UserinfoEntity>) hibernateTemplate.find(hql, id);
+        if (userinfoEntityList != null) {
+            if (userinfoEntityList.size() > 0) {
+                UserinfoEntity userinfoEntity = userinfoEntityList.get(0);
+                userinfoEntity.setNickname(nickname);
+                userinfoEntity.setGender(gender);
+                try {
+                    hibernateTemplate.save(userinfoEntity);
+                    flag = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 通过指定的ID号获取对应的用户信息
+     *
+     * @param id 要查询的ID号
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public UserinfoEntity getOneById(int id) {
+        String hql = "from UserinfoEntity ue where ue.id=?";
+        List<UserinfoEntity> list = (List<UserinfoEntity>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                return list.get(0);
             }
         }
         return null;

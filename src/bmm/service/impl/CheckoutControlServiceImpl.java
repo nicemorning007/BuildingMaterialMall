@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 关于购物车的操作接口的实现
+ */
 public class CheckoutControlServiceImpl implements CheckoutControlService {
     private CheckoutControlDAO checkoutControlDAO;
     private GoodsControlDAO goodsControlDAO;
@@ -126,7 +129,7 @@ public class CheckoutControlServiceImpl implements CheckoutControlService {
             for (Integer tableId : tableIdList) {
                 total += checkoutControlDAO.getGoodsCountById(tableId)
                         * goodsControlDAO.getPriceById(checkoutControlDAO.getGoodsIdById(tableId));
-                if (!billControlDAO.addBillById(id, checkoutControlDAO.getGoodsIdById(tableId), 0, (checkoutControlDAO.getGoodsCountById(tableId) * (goodsControlDAO.getPriceById(checkoutControlDAO.getGoodsIdById(tableId)))), userControlDAO.getReceiverById(id), userControlDAO.getPhoneById(id), userControlDAO.getAddressById(id))) {
+                if (!billControlDAO.addBillById(id, checkoutControlDAO.getGoodsIdById(tableId), checkoutControlDAO.getGoodsCountById(tableId), 0, (checkoutControlDAO.getGoodsCountById(tableId) * (goodsControlDAO.getPriceById(checkoutControlDAO.getGoodsIdById(tableId)))), userControlDAO.getReceiverById(id), userControlDAO.getPhoneById(id), userControlDAO.getAddressById(id))) {
                     total = 0;
                 }
             }

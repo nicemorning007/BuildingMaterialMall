@@ -1,9 +1,6 @@
 package test;
 
-import bmm.dao.BillControlDAO;
-import bmm.dao.CheckoutControlDAO;
-import bmm.dao.GoodsControlDAO;
-import bmm.dao.UserControlDAO;
+import bmm.dao.*;
 import bmm.entity.CheckoutEntity;
 import bmm.service.CheckoutControlService;
 import bmm.utils.hibernate_util.SpringInjectionUtil;
@@ -19,35 +16,7 @@ import java.util.List;
 public class HibernateTest {
     @Test
     public void allTest() {
-        CheckoutControlDAO checkoutControlDAO = (CheckoutControlDAO) SpringInjectionUtil.getDao("checkoutControlDao");
-        checkoutControlDAO.removeGoods(3, 1);
-    }
-
-    @Test
-    public void fileTest() {
-        try {
-            File file = new File("D:\\OneDrive\\Pictures\\相機相簿\\20170201_154407000_iOS.jpg");
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
-            File toFile = new File("E:/", "20170201_154407000_iOS.jpg");
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(toFile));
-            int len;
-            while ((len = bufferedInputStream.read()) != -1) {
-                bufferedOutputStream.write(len);
-            }
-            bufferedInputStream.close();
-            bufferedOutputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void listTest() {
-        List<String> list = new ArrayList<>();
-        String s0 = "0";
-        String s1 = "1";
-        list.add(s0);
-        list.add(s1);
-        System.out.println(list.get(0));
+        MessageControlDao messageControlDao = (MessageControlDao) SpringInjectionUtil.getDao("messageControlDao");
+        messageControlDao.chageState(1);
     }
 }

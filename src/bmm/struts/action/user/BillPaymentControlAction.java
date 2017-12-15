@@ -53,15 +53,17 @@ public class BillPaymentControlAction extends ActionSupport {
      * @return 返回字符串"payment"
      */
     public String payment() {
-        double money = billControlService.payMent(Integer.parseInt(this.userId));
-        if (money > 0) {
-            if (balanceControlService.deductBalanceById(Integer.parseInt(this.userId),
-                    this.total)) {
+        if (balanceControlService.deductBalanceById(Integer.parseInt(this.userId),
+                this.total)) {
+            double money = billControlService.payMent(Integer.parseInt(this.userId));
+            if (money > 0) {
                 checkoutControlService.cleanOneById(Integer.parseInt(this.userId));
                 this.message = "支付成功";
             } else {
                 this.message = "支付失败请重试";
             }
+        } else {
+            this.message = "余额不足，请充值";
         }
         return "payment";
     }

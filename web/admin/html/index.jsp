@@ -6,8 +6,10 @@
 <%@ page import="bmm.dao.impl.GoodsControlDAOImpl" %>
 <%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="bmm.dao.MessageControlDao" %>
+<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="bmm.entity.BillbaseEntity" %>
+<%@ page import="bmm.entity.MessageEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
@@ -101,7 +103,7 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="index.jsp">
+                            <a href="#">
                                 <span class="icon fa fa-calendar"></span><span class="title">统计</span>
                             </a>
                         </li>
@@ -283,12 +285,50 @@
                                 安全设置中，可以修改本账户的登陆密码。并新增管理员。
                             </p>
                             <strong>但全站操作中，只允许最高管理员进行操作，如果你不是最高管理员但需要进行此类操作。
-                            <p>
-                                请联系最高管理员进行操作。
-                            </p></strong>
+                                <p>
+                                    请联系最高管理员进行操作。
+                                </p></strong>
                         </div>
                     </div>
                 </div>
+                <%
+                    MessageControlDao messageControlDao = (MessageControlDao) SpringInjectionUtil.getDao("messageControlDao");
+                    List<MessageEntity> list = messageControlDao.getAll();
+                    if (list != null) {
+                        if (list.size() > 0) {
+                            for (MessageEntity messageEntity : list) {
+                                if (messageEntity.getState() == 1) {
+                %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><%=messageEntity.getName()%>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <%=messageEntity.getContact()%>
+                    </div>
+                </div>
+                <%
+                } else {
+                %>
+                <s:form action="adminControlAction_message">
+                    <input type="hidden" value="<%=messageEntity.getId()%>" name="messageId"/>
+                    <div class="panel panel-danger">
+                        <div class="panel-heading"><%=messageEntity.getName()%>
+                        </div>
+                        <div class="panel-body">
+                            <%=messageEntity.getContact()%>
+                            <s:submit cssStyle="float: right" cssClass="btn btn-success" value="标记为已处理"/>
+                        </div>
+                    </div>
+                </s:form>
+
+                <%
+                                }
+                            }
+                        }
+                    }
+                %>
             </div>
         </div>
     </div>

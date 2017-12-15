@@ -10,6 +10,7 @@ public class MessageEntity {
     private String name;
     private String message;
     private int state;
+    private int userId;
 
     @Id
     @Column(name = "id")
@@ -59,6 +60,16 @@ public class MessageEntity {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    @Basic
+    @Column(name = "userId")
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override

@@ -3,15 +3,15 @@ package bmm.dao.impl;
 import bmm.dao.BalanceControlDAO;
 import bmm.entity.BalanceEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.util.List;
 
+/**
+ * 关于余额的数据库操作接口的实现
+ */
 public class BalanceControlDAOImpl implements BalanceControlDAO {
     private HibernateTemplate hibernateTemplate;
 
@@ -75,7 +75,8 @@ public class BalanceControlDAOImpl implements BalanceControlDAO {
 
     /**
      * 根据指定的ID号设置用户ID
-     * @param id 要操作的ID号
+     *
+     * @param id     要操作的ID号
      * @param userId 要设置的用户ID号
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
@@ -99,7 +100,8 @@ public class BalanceControlDAOImpl implements BalanceControlDAO {
 
     /**
      * 根据指定的ID号设置余额
-     * @param id 要操作的ID号
+     *
+     * @param id      要操作的ID号
      * @param balance 要设置的余额
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */

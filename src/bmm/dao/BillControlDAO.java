@@ -131,16 +131,17 @@ public interface BillControlDAO {
     /**
      * 向指定ID的用户添加新的订单
      *
-     * @param userId   用户ID号
-     * @param goodsId  商品ID号
-     * @param state    订单状态码
-     * @param total    订单总价
-     * @param receiver 收件人
-     * @param phone    手机号
-     * @param address  收件地址
+     * @param userId     用户ID号
+     * @param goodsId    商品ID号
+     * @param goodsCount 商品总数
+     * @param state      订单状态码
+     * @param total      订单总价
+     * @param receiver   收件人
+     * @param phone      手机号
+     * @param address    收件地址
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
-    boolean addBillById(int userId, int goodsId, int state, double total, String receiver, String phone, String address);
+    boolean addBillById(int userId, int goodsId, int goodsCount, int state, double total, String receiver, String phone, String address);
 
     /**
      * 通过指定的用户ID查找该用户的所有订单ID号
@@ -152,9 +153,17 @@ public interface BillControlDAO {
 
     /**
      * 通过指定的用户ID查找该用户的所有未支付订单
+     *
      * @param id 要查询的用户ID号
      * @return 如果查询成功则返回该用户对应的所有订单ID的 <b>List&lt;Integer&gt;</b>；否则返回 <b>null</b>
      */
     List<Integer> getOneUserAllUnPayBillIdByUserId(int id);
 
+    /**
+     * 根据指定的ID号查找对应的订单的商品总数
+     *
+     * @param id 要查询的ID号
+     * @return 如果查询成功则返回对应的商品总数；否则返回 <b>0</b>
+     */
+    int getGoodsCountById(int id);
 }

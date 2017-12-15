@@ -1,5 +1,6 @@
 package bmm.struts.action.admin;
 
+import bmm.dao.MessageControlDao;
 import bmm.service.AdminControlService;
 import bmm.service.impl.AdminControlServiceImpl;
 import bmm.utils.cookie_util.CookieUtil;
@@ -20,6 +21,7 @@ public class AdminControlAction extends ActionSupport {
     private String confirmPassword;
     private String info;
     private String[] dangerSelect;
+    private MessageControlDao messageControlDao;
     private AdminControlService adminControlService;
 
     public void setConfirmPassword(String confirmPassword) {
@@ -74,6 +76,10 @@ public class AdminControlAction extends ActionSupport {
         this.adminControlService = adminControlService;
     }
 
+    public void setMessageControlDao(MessageControlDao messageControlDao) {
+        this.messageControlDao = messageControlDao;
+    }
+
     /**
      * 仅用于将管理员账户登陆信息存储到浏览器中。cookie存在时间仅为30分钟
      *
@@ -120,6 +126,8 @@ public class AdminControlAction extends ActionSupport {
      * @return 返回字符串 <b>changePassword</b>
      */
     public String changePassword() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String username = request.getParameter("username");
         if (password.trim().equals(confirmPassword.trim())) {
             if (adminControlService.changePassword(username, Md5Util.md5Encode(confirmPassword))) {
                 info = "修改成功";
@@ -183,5 +191,25 @@ public class AdminControlAction extends ActionSupport {
             info = "密码错误";
         }
         return "dangerSelect";
+    }
+
+    /**
+     * 用于消息处理
+     *
+     * @return 返回字符串"message"
+     */
+    public String message() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String messageId = request.getParameter("messageId");
+        if (messageId != null) {
+            if (messageControlDao.chageState(Integer.parseInt(messageId))) {
+                info = "操作成功";
+            } else {
+                info = "操作失败";
+            }
+        } else {
+            info = "操作失败";
+        }
+        return "message";
     }
 }

@@ -367,17 +367,18 @@ public class BillControlDAOImpl implements BillControlDAO {
     /**
      * 向指定ID的用户添加新的订单
      *
-     * @param userId   用户ID号
-     * @param goodsId  商品ID号
-     * @param state    订单状态码
-     * @param total    订单总价
-     * @param receiver 收件人
-     * @param phone    手机号
-     * @param address  收件地址
+     * @param userId     用户ID号
+     * @param goodsId    商品ID号
+     * @param goodsCount 商品总数
+     * @param state      订单状态码
+     * @param total      订单总价
+     * @param receiver   收件人
+     * @param phone      手机号
+     * @param address    收件地址
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
-    public boolean addBillById(int userId, int goodsId, int state, double total, String receiver, String phone, String address) {
+    public boolean addBillById(int userId, int goodsId, int goodsCount, int state, double total, String receiver, String phone, String address) {
         boolean flag = false;
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -386,6 +387,7 @@ public class BillControlDAOImpl implements BillControlDAO {
         BillbaseEntity billbaseEntity = new BillbaseEntity();
         billbaseEntity.setUserId(userId);
         billbaseEntity.setGoodsId(goodsId);
+        billbaseEntity.setGoodsCount(goodsCount);
         billbaseEntity.setState(state);
         billbaseEntity.setTotal(total);
         billbaseEntity.setReceiver(receiver);
@@ -413,7 +415,7 @@ public class BillControlDAOImpl implements BillControlDAO {
     @Override
     public List<Integer> getOneUserAllBillIdByUserId(int id) {
         String hql = "select be.id from BillbaseEntity be where be.userId=?";
-        List<Integer> list = (List<Integer>) hibernateTemplate.find(hql);
+        List<Integer> list = (List<Integer>) hibernateTemplate.find(hql, id);
         if (list != null) {
             if (list.size() > 0) {
                 return list;
@@ -450,5 +452,23 @@ public class BillControlDAOImpl implements BillControlDAO {
             }
         }
         return null;
+    }
+
+    /**
+     * 根据指定的ID号查找对应的订单的商品总数
+     *
+     * @param id 要查询的ID号
+     * @return 如果查询成功则返回对应的商品总数；否则返回 <b>0</b>
+     */
+    @Override
+    public int getGoodsCountById(int id) {
+        List<Integer> list = (List<Integer>) hibernateTemplate.find(
+                "select be.goodsCount from BillbaseEntity be where be.id=?", id);
+        if (list != null) {
+            if (list.size() > 0) {
+                return list.get(0);
+            }
+        }
+        return 0;
     }
 }

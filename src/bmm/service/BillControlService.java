@@ -4,6 +4,9 @@ import bmm.entity.BillbaseEntity;
 
 import java.util.List;
 
+/**
+ * 订单的管理操作接口
+ */
 public interface BillControlService {
     /**
      * 用于查询所有的订单

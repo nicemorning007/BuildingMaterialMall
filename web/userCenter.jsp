@@ -1,25 +1,23 @@
 <%@ page import="bmm.entity.CategorizationEntity" %>
-<%@ page import="bmm.entity.CheckoutEntity" %>
+<%@ page import="bmm.entity.GoodsbaseEntity" %>
+<%@ page import="bmm.service.CheckoutControlService" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="bmm.service.CheckoutControlService" %>
+<%@ page import="bmm.entity.BillbaseEntity" %>
 <%@ page import="bmm.dao.*" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
     String username = CookieUtil.getCookiesValue(request, "userLogin");
-    if (username == null) {
-        out.print("您还未登录");
-        response.sendRedirect("/denial.jsp");
-    }
     GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
     CategorizationControlDAO categorizationControlDAO = (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
-    CheckoutControlDAO checkoutControlDAO = (CheckoutControlDAO) SpringInjectionUtil.getDao("checkoutControlDao");
+    GoodsbaseEntity randomGoods;
     CheckoutControlService checkoutControlService = (CheckoutControlService) SpringInjectionUtil.getDao("checkoutControlService");
     UserControlDAO userControlDAO = (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
     BalanceControlDAO balanceControlDAO = (BalanceControlDAO) SpringInjectionUtil.getDao("balanceControlDao");
+    BillControlDAO billControlDAO = (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
 %>
 <head>
     <title>建材网上商城</title>
@@ -46,6 +44,14 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
     <!--/script-->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 900);
+            });
+        });
+    </script>
 </head>
 <body>
 <!--start-home-->
@@ -113,13 +119,6 @@
                     <div class="megapanel">
                         <div class="row">
                             <div class="col1">
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <ul>
-                                            <li></li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <div class="h_nav">
                                     <h4>商品分类</h4>
                                     <ul>
@@ -142,29 +141,74 @@
                     </div>
                 </li>
                 <li><a class="color4" href="${pageContext.request.contextPath}/contact.jsp">联系我们</a></li>
+                <li><a class="color4" href="${pageContext.request.contextPath}/userCenter.jsp">个人中心</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>商品分类</h4>
+                                    <ul>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/userCenter.jsp">
+                                                修改信息
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/userCenter.jsp?id=1">
+                                                我的订单
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/userCenter.jsp?id=2">
+                                                修改收件信息
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/userCenter.jsp?id=3">
+                                                修改密码
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/userCenter.jsp?id=4">
+                                                余额充值
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
                 <li><a style="color: #FF69B4"><s:property value="message"/></a></li>
             </ul>
+            <div class="row">
+                <div class="col2"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+            </div>
         </div>
     </div>
 </div>
 <div class="copyrights"></div>
-<!--start-content-->
-<!-- checkout -->
-<div class="cart-items">
+<!--account-->
+<div class="account">
     <div class="container">
-        <h3 class="tittle">确认支付</h3>
-        <div class="cart-header">
-            <div class="cart-sec simpleCart_shelfItem">
+        <div class="account-bottom">
+            <div class="col-md-6 account-left">
                 <%
-                    double total = 0;
-                    List<CheckoutEntity> checkoutEntityList = checkoutControlDAO.showAll(userControlDAO.getIdByName(username));
-                    if (checkoutEntityList != null) {
-                        for (CheckoutEntity checkoutEntity : checkoutEntityList) {
+                    List<Integer> billbaseEntityList = billControlDAO.getOneUserAllBillIdByUserId(userControlDAO.getUserIdByUsername(username));
+                    if (request.getParameter("id") != null) {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        switch (id) {
+                            case 1:
+                                if (billbaseEntityList != null) {
+                                    for (int i = billbaseEntityList.size() - 1; i >= 0; i--) {
                 %>
                 <div class="cart-item cyc">
                     <%
                         String path = null;
-                        if ((path = goodsControlDAO.getPicPathByGoodsId(checkoutEntity.getGoodsId(), 1)) != null) {
+                        if ((path = goodsControlDAO.getPicPathByGoodsId(billControlDAO.getGoodsIdById(billbaseEntityList.get(i)), 1)) != null) {
                     %>
                     <img src="${pageContext.request.contextPath}<%=path%>"
                          class="img-responsive" alt="" style="width: 200px;height: 165px">
@@ -179,64 +223,127 @@
                 </div>
                 <div class="cart-item-info" style="padding-bottom: 20px">
                     <h3><a href="#">
-                        <%=checkoutEntity.getGoodsName()%>
-                    </a>
-                    </h3>
+                        <%=goodsControlDAO.getNameById(billControlDAO.getGoodsIdById(billbaseEntityList.get(i)))%>
+                    </a></h3>
                     <ul class="qty">
-                        <li><p>单价:<%=goodsControlDAO.getPriceById(checkoutEntity.getGoodsId())%>
+                        <li><p>
+                            单价:<%=goodsControlDAO.getPriceById(billControlDAO.getGoodsIdById(billbaseEntityList.get(i)))%>
                         </p></li>
-                        <li><p>购买数量:<%=checkoutEntity.getGoodsCount()%>
+                        <li><p>购买数量:<%=billControlDAO.getGoodsCountById(billbaseEntityList.get(i))%>
                         </p></li>
                     </ul>
                     <div class="delivery">
                         <p>总价为
                             :
-                            ￥<%=checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId())%>
-                            0
-                            <%
-                                total += checkoutEntity.getGoodsCount() * goodsControlDAO.getPriceById(checkoutEntity.getGoodsId());
-                            %>
+                            ￥<%=billControlDAO.getTotalById(billbaseEntityList.get(i))%>0
                         </p>
                         <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="clearfix">
                 </div>
+                <% }
+                } else {%>
+                <h1>您还没有任何订单，快去购买吧！</h1>
                 <%
                         }
+                        break;
+                    case 2:
+                %>
+                <s:form method="POST" action="userControlAction_editInfo">
+                    <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>"/>
+                    <div class="address">
+                        <span>收件人</span>
+                        <input name="receiver"
+                               value="<%=userControlDAO.getReceiverById(userControlDAO.getIdByName(username))%>"/>
+                    </div>
+                    <div class="address">
+                        <span>收件地址</span>
+                        <input name="address"
+                               value="<%=userControlDAO.getAddressById(userControlDAO.getIdByName(username))%>"/>
+                    </div>
+                    <div class="address">
+                        <span>联系方式</span>
+                        <input name="phone"
+                               value="<%=userControlDAO.getPhoneById(userControlDAO.getIdByName(username))%>"/>
+                    </div>
+                    <div class="address new">
+                        <s:submit value="修改"/>
+                    </div>
+                </s:form>
+                <%
+                        break;
+                    case 3:
+                %>
+                <s:form action="userControlAction_changePassword" method="POST">
+                    <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>"/>
+                    <div class="address">
+                        <span>修改密码</span>
+                        <s:password name="password"/>
+                    </div>
+                    <div class="address">
+                        <span>确认密码</span>
+                        <s:password name="confirmPassword"/>
+                    </div>
+                    <div class="address new">
+                        <s:submit value="修改"/>
+                    </div>
+                </s:form>
+                <%
+                        break;
+                    case 4:
+                %>
+                <s:form action="userControlAction_reCharge" method="POST">
+                    <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>"/>
+                    <div class="address">
+                        <span>当前余额</span>
+                        <input type="number"
+                               value="<%=balanceControlDAO.getBalanceById(balanceControlDAO.getIdByUserId(userControlDAO.getIdByName(username)))%>"
+                               disabled="disabled"/>
+                    </div>
+                    <div class="address">
+                        <span>充值余额</span>
+                        <s:textfield name="money"/>
+                    </div>
+                    <div class="address new">
+                        <s:submit value="充值"/>
+                    </div>
+                </s:form>
+                <%
+                            break;
+                    }
+                } else {
+                %>
+                <s:form method="POST" action="userControlAction_baseChange">
+                    <input type="hidden" name="userId" value="<%=userControlDAO.getIdByName(username)%>"/>
+                    <div class="address">
+                        <span>昵称</span>
+                        <input name="nickname"
+                               value="<%=userControlDAO.getNickNameById(userControlDAO.getUserIdByUsername(username))%>"/>
+                    </div>
+                    <div class="address">
+                        <span>性别</span>
+                        <select name="selectCate" style="width: 150px" title="">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
+                    <div class="address new">
+                        <s:submit value="修改"/>
+                    </div>
+                </s:form>
+                <%
                     }
                 %>
-                <div class="cart-item-info" style="padding-bottom: 20px">
-                    <span>全部总价为：￥<%=total%></span>
-                    <p>
-                        <span>您的余额：￥<%=balanceControlDAO.getBalanceById(balanceControlDAO.getIdByUserId(userControlDAO.getIdByName(username)))%></span>
-                    </p>
-                    <p>
-                        <span>收货地址：<%=userControlDAO.getAddressById(userControlDAO.getIdByName(username))%></span>
-                    </p>
-                    <p>
-                        <span>收货人：<%=userControlDAO.getReceiverById(userControlDAO.getIdByName(username))%></span>
-                    </p>
-                    <p>
-                        <span><a href="${pageContext.request.contextPath}/userCenter.jsp">修改信息</a></span>
-                    </p>
-                </div>
-                <div class="cart-item-info" style="padding-bottom: 20px">
-                    <s:form method="POST" action="billPaymentControlAction_payment">
-                        <s:submit type="button" value="支付"/>
-                    </s:form>
-                </div>
-                <div class="clearfix">
-                </div>
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
 </div>
-<!--//checkout-->
+<!-- checkout -->
 <!--start-bottom-->
 <!--start-image-cursuals-->
-<!--//end-bottom-->
-<!--start-footer-->
+<!--start-smooth-scrolling-->
 <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
                                                                          style="opacity: 1;"> </span></a>
 

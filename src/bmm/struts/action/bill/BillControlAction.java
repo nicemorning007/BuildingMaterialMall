@@ -5,6 +5,9 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 订单管理的业务请求
+ */
 public class BillControlAction {
     private BillControlService billControlService;
     private String billId;
@@ -90,7 +93,11 @@ public class BillControlAction {
         HttpServletRequest request = ServletActionContext.getRequest();
         String[] strings = request.getParameterValues("state");
         this.state = Integer.parseInt(strings[0]);
-        billControlService.updateStateById(Integer.parseInt(this.billId), this.state);
+        if (billControlService.updateStateById(Integer.parseInt(this.billId), this.state)) {
+            this.info = "操作成功";
+        } else {
+            this.info = "操作失败";
+        }
         return "editState";
     }
 
@@ -102,7 +109,11 @@ public class BillControlAction {
     public String editTotal() {
         HttpServletRequest request = ServletActionContext.getRequest();
         this.total = Double.parseDouble(request.getParameter("total"));
-        billControlService.updateTotalById(Integer.parseInt(this.billId), this.total);
+        if (billControlService.updateTotalById(Integer.parseInt(this.billId), this.total)) {
+            this.info = "操作成功";
+        } else {
+            this.info = "操作失败";
+        }
         return "editTotal";
     }
 
@@ -114,7 +125,11 @@ public class BillControlAction {
     public String editReceiver() {
         HttpServletRequest request = ServletActionContext.getRequest();
         this.receiver = request.getParameter("receiver");
-        billControlService.updateReceiverById(Integer.parseInt(this.billId), this.receiver);
+        if (billControlService.updateReceiverById(Integer.parseInt(this.billId), this.receiver)) {
+            this.info = "操作成功";
+        } else {
+            this.info = "操作失败";
+        }
         return "editReceiver";
     }
 

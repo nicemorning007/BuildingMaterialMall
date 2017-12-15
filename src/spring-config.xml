@@ -18,10 +18,10 @@
         <property name="password" value="${db.password}"/>
         <property name="initialPoolSize" value="2"/>
         <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="20"/>
+        <property name="maxPoolSize" value="50"/>
         <property name="acquireRetryAttempts" value="5"/>
-        <property name="acquireRetryDelay" value="1000" />
-        <property name="acquireIncrement" value="1" />
+        <property name="acquireRetryDelay" value="3000"/>
+        <property name="acquireIncrement" value="1"/>
         <property name="maxIdleTime" value="5"/>
         <property name="checkoutTimeout" value="0"/>
         <property name="idleConnectionTestPeriod" value="3"/>
@@ -61,6 +61,9 @@
     <bean id="balanceControlDao" class="bmm.dao.impl.BalanceControlDAOImpl">
         <property name="hibernateTemplate" ref="ht"/>
     </bean>
+    <bean id="messageControlDao" class="bmm.dao.impl.MessageControlDAOImpl">
+        <property name="hibernateTemplate" ref="ht"/>
+    </bean>
     <!--结束配置DAO-->
 
     <!--配置service-->
@@ -88,14 +91,20 @@
     <bean id="balanceControlService" class="bmm.service.impl.BalanceControlServiceImpl">
         <property name="balanceControlDAO" ref="balanceControlDao"/>
     </bean>
+    <bean id="messageControlService" class="bmm.service.impl.MessageControlServiceImpl">
+        <property name="messageControlDao" ref="messageControlDao"/>
+    </bean>
     <!--结束配置service-->
 
     <!--配置Action-->
     <bean id="userControlAction" class="bmm.struts.action.user.UserControlAction">
         <property name="userControlService" ref="userloginService"/>
+        <property name="balanceControlService" ref="balanceControlService"/>
+        <property name="messageControlService" ref="messageControlService"/>
     </bean>
     <bean id="adminControlAction" class="bmm.struts.action.admin.AdminControlAction">
         <property name="adminControlService" ref="adminControlService"/>
+        <property name="messageControlDao" ref="messageControlDao"/>
     </bean>
     <bean id="cateControlAction" class="bmm.struts.action.goods.CateAction">
         <property name="cateControlService" ref="cateControlService"/>
@@ -117,6 +126,9 @@
     <!--结束配置Action-->
 
     <!-- 配置Spring事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -127,8 +139,8 @@
         </tx:attributes>
     </tx:advice>
     <!--<aop:config>-->
-        <!--<aop:pointcut id="**" expression="execution(* bmm.service.impl.CheckoutControlServiceImpl.*(..))"/>-->
-        <!--<aop:advisor pointcut-ref="**" advice-ref="txAdvice"/>-->
+    <!--<aop:pointcut id="**" expression="execution(* bmm.service.impl.CheckoutControlServiceImpl.*(..))"/>-->
+    <!--<aop:advisor pointcut-ref="**" advice-ref="txAdvice"/>-->
 
     <!--</aop:config>-->
 

@@ -212,7 +212,7 @@
                                             <div class="card-body">
                                                 <s:form class="form-horizontal"
                                                         action="adminControlAction_changePassword" method="POST">
-                                                    <input type="hidden" value="<%=username%>"/>
+                                                    <input type="hidden" name="username" value="<%=username%>"/>
                                                     <div class="form-group">
                                                         <label for="password1"
                                                                class="col-sm-2 control-label">密码</label>

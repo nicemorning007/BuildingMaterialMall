@@ -211,6 +211,7 @@
                                     <th>订单号</th>
                                     <th>买家账号</th>
                                     <th>商品名</th>
+                                    <th>购买总数</th>
                                     <th>状态</th>
                                     <th>收货人</th>
                                     <th>创建时间</th>
@@ -221,6 +222,7 @@
                                     <th>订单号</th>
                                     <th>买家账号</th>
                                     <th>商品名</th>
+                                    <th>购买总数</th>
                                     <th>状态</th>
                                     <th>收货人</th>
                                     <th>创建时间</th>
@@ -247,6 +249,9 @@
                                     </td>
                                     <td>
                                         <%=goodsControlDAO.getNameById(billbaseEntity.getGoodsId())%>
+                                    </td>
+                                    <td>
+                                        <%=billControlDAO.getGoodsCountById(billbaseEntity.getId())%>
                                     </td>
                                     <td><%
                                         switch (billControlDAO.getStateById(billbaseEntity.getId())) {

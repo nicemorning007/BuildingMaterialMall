@@ -1,6 +1,7 @@
 package bmm.service.impl;
 
 import bmm.dao.UserControlDAO;
+import bmm.entity.UserinfoEntity;
 import bmm.service.UserControlService;
 import bmm.utils.cookie_util.CookieUtil;
 import bmm.utils.md5_util.Md5Util;
@@ -141,5 +142,84 @@ public class UserlControlServiceImpl implements UserControlService {
     @Override
     public String getUsernameById(int id) {
         return userControlDAO.getUsernameById(id);
+    }
+
+    /**
+     * 根据指定的用户ID号更新该用户的信息
+     *
+     * @param id       要操作的用户ID号
+     * @param receiver 要更新的收件人
+     * @param adderss  要更新的收件地址
+     * @param phone    要更新的联系方式
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean updateUserInfo(int id, String receiver, String adderss, String phone) {
+        return userControlDAO.updateUserInfo(id, receiver, adderss, phone);
+    }
+
+    /**
+     * 根据指定的用户ID号更改该用户的密码
+     *
+     * @param id       要操作的用户ID号
+     * @param password 要更改的新密码
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean updatePasswordByUserId(int id, String password) {
+        return userControlDAO.updatePasswordByUserId(id, password);
+    }
+
+    /**
+     * 根据指定的用户ID号更改该用户的基本信息
+     *
+     * @param id       要操作的用户ID号
+     * @param nickname 要更新的昵称
+     * @param gender   要更新的性别
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean updateBaseInfoByUserId(int id, String nickname, String gender) {
+        return userControlDAO.updateBaseInfoByUserId(id, nickname, gender);
+    }
+
+    /**
+     * 通过指定的用户名获取对应的ID号
+     *
+     * @param username 要查询的用户名
+     * @return 如果查询成功则返回该用户对应的ID号；否则返回 <b>0</b>
+     */
+    @Override
+    public int getUserIdByUserName(String username) {
+        return userControlDAO.getIdByName(username);
+    }
+
+    /**
+     * 用于找回密码的功能。通过用户名查找到对应的userinfo对象，并检查
+     * 手机号；收件人；昵称是否匹配以确认身份
+     *
+     * @param username 要操作的用户名
+     * @param phoneNum 手机号
+     * @param receiver 收件人
+     * @param nickname 昵称
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    @Override
+    public boolean forgetPassowrd(String username, String phoneNum, String receiver, String nickname) {
+        boolean flag = false;
+        UserinfoEntity userinfoEntity = userControlDAO.getOneById(userControlDAO.getUserIdByUsername(username));
+        if (userinfoEntity != null) {
+            if (userControlDAO.getPhoneById(userinfoEntity.getUserId()).equals(phoneNum)) {
+                if (userControlDAO.getReceiverById(userinfoEntity.getUserId()).equals(receiver)) {
+                    if (userControlDAO.getNickNameById(userinfoEntity.getUserId()).equals(nickname)) {
+                        if (userControlDAO.updatePasswordByUserId(userinfoEntity.getUserId(),
+                                Md5Util.md5Encode("AAA111"))) {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        }
+        return flag;
     }
 }

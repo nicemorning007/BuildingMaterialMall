@@ -110,12 +110,14 @@ public interface UserControlDAO {
 
     /**
      * 用于获取总用户数
+     *
      * @return 如果查询成功则返回总用户数；否则返回 <b>0</b>
      */
     int getUserCount();
 
     /**
      * 根据用户ID获取对应的收件人
+     *
      * @param id 要查询的用户ID
      * @return 如果查询到则返回该用户的收件人，否则返回 <b>null</b>
      */
@@ -123,6 +125,7 @@ public interface UserControlDAO {
 
     /**
      * 根据用户ID查询对应的手机号
+     *
      * @param id 要查询的用户ID
      * @return 如果查询到则返回该用户的密码，否则返回 <b>null</b>
      */
@@ -130,8 +133,89 @@ public interface UserControlDAO {
 
     /**
      * 根据用户ID查询对应的收件地址
+     *
      * @param id 要查询的用户ID
      * @return 如果查询到则返回该用户的收件地址，否则返回 <b>null</b>
      */
     String getAddressById(int id);
+
+    /**
+     * 根据用户ID查找对应的昵称
+     *
+     * @param id 要查询的用户ID号
+     * @return 如果查询成功则返回该用户的昵称，否则返回 <b>null</b>
+     */
+    String getNickNameById(int id);
+
+    /**
+     * 根据用户ID设置对应的昵称
+     *
+     * @param id       要操作的用户ID号
+     * @param nickName 要设置的昵称
+     * @return 如果更改成功返回 <b>true</b> 否则返回 <b>false</b>
+     */
+    boolean setNickNameById(int id, String nickName);
+
+    /**
+     * 根据用户ID查找对应的性别
+     *
+     * @param id 要查询的用户ID号
+     * @return 如果查询成功则返回该用户的性别，否则返回 <b>null</b>
+     */
+    String getGenderById(int id);
+
+    /**
+     * 根据用户ID设置对应的性别
+     *
+     * @param id     要操作的用户ID号
+     * @param gender 要设置的性别
+     * @return 如果更改成功返回 <b>true</b> 否则返回 <b>false</b>
+     */
+    boolean setGenderById(int id, String gender);
+
+    /**
+     * 根据指定的用户名查找对应的用户ID号
+     *
+     * @param username 要查找的用户名
+     * @return 如果查询成功则返回该用户名对应的用户ID号，否则返回 <b>0</b>
+     */
+    int getUserIdByUsername(String username);
+
+    /**
+     * 根据指定的用户ID号更新该用户的信息
+     *
+     * @param id       要操作的用户ID号
+     * @param receiver 要更新的收件人
+     * @param adderss  要更新的收件地址
+     * @param phone    要更新的联系方式
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    public boolean updateUserInfo(int id, String receiver, String adderss, String phone);
+
+    /**
+     * 根据指定的用户ID号更改该用户的密码
+     *
+     * @param id       要操作的用户ID号
+     * @param password 要更改的新密码
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean updatePasswordByUserId(int id, String password);
+
+    /**
+     * 根据指定的用户ID号更改该用户的基本信息
+     *
+     * @param id       要操作的用户ID号
+     * @param nickname 要更新的昵称
+     * @param gender   要更新的性别
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean updateBaseInfoByUserId(int id, String nickname, String gender);
+
+    /**
+     * 通过指定的ID号获取对应的用户信息
+     *
+     * @param id 要查询的ID号
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    UserinfoEntity getOneById(int id);
 }

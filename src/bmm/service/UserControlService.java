@@ -59,6 +59,7 @@ public interface UserControlService {
 
     /**
      * 用于重置用户密码
+     *
      * @param id 要重置的用户ID
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
@@ -71,4 +72,54 @@ public interface UserControlService {
      * @return 如果查询成功返回该ID号对应的用户名。否则返回 <b>null</b>
      */
     String getUsernameById(int id);
+
+    /**
+     * 根据指定的用户ID号更新该用户的信息
+     *
+     * @param id       要操作的用户ID号
+     * @param receiver 要更新的收件人
+     * @param adderss  要更新的收件地址
+     * @param phone    要更新的联系方式
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean updateUserInfo(int id, String receiver, String adderss, String phone);
+
+    /**
+     * 根据指定的用户ID号更改该用户的密码
+     *
+     * @param id       要操作的用户ID号
+     * @param password 要更改的新密码
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean updatePasswordByUserId(int id, String password);
+
+    /**
+     * 根据指定的用户ID号更改该用户的基本信息
+     *
+     * @param id       要操作的用户ID号
+     * @param nickname 要更新的昵称
+     * @param gender   要更新的性别
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean updateBaseInfoByUserId(int id, String nickname, String gender);
+
+    /**
+     * 通过指定的用户名获取对应的ID号
+     *
+     * @param username 要查询的用户名
+     * @return 如果查询成功则返回该用户对应的ID号；否则返回 <b>0</b>
+     */
+    int getUserIdByUserName(String username);
+
+    /**
+     * 用于找回密码的功能。通过用户名查找到对应的userinfo对象，并检查
+     * 手机号；收件人；昵称是否匹配以确认身份
+     *
+     * @param username 要操作的用户名
+     * @param phoneNum 手机号
+     * @param receiver 收件人
+     * @param nickname 昵称
+     * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
+     */
+    boolean forgetPassowrd(String username, String phoneNum, String receiver, String nickname);
 }

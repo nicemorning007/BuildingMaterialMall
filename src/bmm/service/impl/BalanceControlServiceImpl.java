@@ -3,6 +3,9 @@ package bmm.service.impl;
 import bmm.dao.BalanceControlDAO;
 import bmm.service.BalanceControlService;
 
+/**
+ * 余额的业务操作接口的实现
+ */
 public class BalanceControlServiceImpl implements BalanceControlService {
     private BalanceControlDAO balanceControlDAO;
 

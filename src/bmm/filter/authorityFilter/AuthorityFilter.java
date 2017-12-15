@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 用于管理员权限管理的过滤器
+ */
 public class AuthorityFilter implements Filter {
     private String admin;
     private String userLogin;

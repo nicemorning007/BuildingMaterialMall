@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 用于用户权限管理的过滤器
+ */
 public class UserFilter implements Filter {
     private String userLogin;
 

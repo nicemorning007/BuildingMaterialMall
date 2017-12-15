@@ -201,7 +201,9 @@
                         <div class="card-header">
 
                             <div class="card-title">
-                                <div class="title">订单管理</div>
+                                <div class="title">订单管理
+                                    <span style="background-color: #93D52D"><s:property value="info"/></span>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -301,21 +303,11 @@
                                             <td>
                                                 <s:form action="billControlAction_editState" method="POST">
                                                 <select name="state" title="" style="width: 200px;">
-                                                    <%
-                                                        for (int i = 0; i < 5; i++) {
-                                                            if (billControlDAO.getStateById(billId) == i) {
-                                                    %>
-                                                    <option value="<%=i%>" selected="selected"><%=state%>
-                                                    </option>
-                                                    <%
-                                                    } else {
-                                                    %>
-                                                    <option value="<%=i%>"><%=state%>
-                                                    </option>
-                                                    <%
-                                                            }
-                                                        }
-                                                    %>
+                                                    <option value="0">已下单但未付款</option>
+                                                    <option value="1">付款成功但未发货</option>
+                                                    <option value="2">付款成功且已发货</option>
+                                                    <option value="3">订单已完成</option>
+                                                    <option value="4">订单已取消</option>
                                                 </select>
                                             </td>
                                             <td>
@@ -333,7 +325,6 @@
                                                 <input name="total" maxlength="8" class="form-control"
                                                        style="width:30%;"
                                                        onkeyup="value=value.replace(/[^\d\.]/g,'')"/>
-                                                    <s:property value="info"/>
                                             </td>
                                             <td>
                                                 <s:submit value="确认修改" cssClass="btn btn-primary"/>

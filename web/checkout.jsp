@@ -61,7 +61,7 @@
                     <li><a href="${pageContext.request.contextPath}/login.jsp">登陆</a></li>
                     <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
                     <%} else {%>
-                    <li><a href="${pageContext.request.contextPath}/contact.jsp">个人中心</a></li>
+                    <li><a href="${pageContext.request.contextPath}/userCenter.jsp">个人中心</a></li>
                     <li><a href="/userControlAction_logout.action">退出</a></li>
                     <%}%>
                 </ul>

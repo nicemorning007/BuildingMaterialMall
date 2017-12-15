@@ -4,6 +4,7 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
+    <!--todo-->
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 
@@ -34,9 +35,16 @@
             <result name="lossReporting">/admin/html/userConf/lossReporting.jsp</result>
             <result name="unLossReporting">/admin/html/userConf/lossReporting.jsp</result>
             <result name="resetPassword">/admin/html/userConf/passwordReset.jsp</result>
-            <result name="test">/showResult.jsp</result>
+            <result name="contact">/contact.jsp</result>
+            <result name="editInfo">/userCenter.jsp?id=2</result>
+            <result name="changePassword">/userCenter.jsp?id=3</result>
+            <result name="reCharge">/userCenter.jsp?id=4</result>
+            <result name="baseChange">/userCenter.jsp</result>
+            <result name="forgetPassword">/forgetPassword.jsp</result>
             <allowed-methods>
-                login,logout,register,userForbidden,unUserForbidden,lossReporting,unLossReporting,resetPassword,testHiber
+                login,logout,register,userForbidden,unUserForbidden
+                ,lossReporting,unLossReporting,resetPassword,testHiber,contact,editInfo
+                ,changePassword,reCharge,baseChange,forgetPassword
             </allowed-methods>
         </action>
         <!--结束用户相关-->
@@ -66,7 +74,8 @@
             <result name="changePassword">/admin/html/security/profile.jsp</result>
             <result name="addAdmin">/admin/html/security/profile.jsp</result>
             <result name="dangerSelect">/admin/html/security/profile.jsp</result>
-            <allowed-methods>login,logout,changePassword,addAdmin,dangerSelect</allowed-methods>
+            <result name="message">/admin/html/index.jsp</result>
+            <allowed-methods>login,logout,changePassword,addAdmin,dangerSelect,message</allowed-methods>
         </action>
         <!--结束管理员账户相关-->
     </package>

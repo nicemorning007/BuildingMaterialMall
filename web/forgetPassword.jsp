@@ -52,7 +52,7 @@
                     <li><a href="${pageContext.request.contextPath}/login.jsp">登陆</a></li>
                     <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
                     <%} else {%>
-                    <li><a href="${pageContext.request.contextPath}/contact.jsp">个人中心</a></li>
+                    <li><a href="${pageContext.request.contextPath}/userCenter.jsp">个人中心</a></li>
                     <li><a href="/userControlAction_logout.action">退出</a></li>
                     <%}%>
                 </ul>
@@ -115,6 +115,7 @@
                     </div>
                 </li>
                 <li><a class="color4" href="${pageContext.request.contextPath}/contact.jsp">联系我们</a></li>
+                <li><a style="color: #FF69B4"><s:property value="message"/></a></li>
             </ul>
         </div>
     </div>
@@ -125,8 +126,7 @@
     <div class="container">
         <div class="account-bottom">
             <div class="col-md-6 account-left">
-                <%--todo--%>
-                <s:form theme="simple" method="POST">
+                <s:form action="userControlAction_forgetPassword" method="POST">
                     <div class="account-top heading">
                         <h3>忘记密码</h3>
                     </div>
@@ -136,15 +136,15 @@
                     </div>
                     <div class="address">
                         <span>手机号</span>
-                        <s:password name="password"/>
+                        <s:textfield name="phoneNum"/>
                     </div>
                     <div class="address">
                         <span>默认签收人姓名</span>
-                        <s:password name="confirmPassword"/>
+                        <s:textfield name="receiver"/>
                     </div>
                     <div class="address">
                         <span>昵称</span>
-                        <s:textfield name="phone"/>
+                        <s:textfield name="nickname"/>
                     </div>
                     <div class="address new">
                         <a class="forgot" href="./contact.jsp">无法回忆？人工找回。</a>

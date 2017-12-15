@@ -1,7 +1,8 @@
 package bmm.dao;
 
-import java.util.List;
-
+/**
+ * 关于余额的数据库操作接口
+ */
 public interface BalanceControlDAO {
     /**
      * 根据指定的用户ID号获取对应的余额表ID号

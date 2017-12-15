@@ -1,6 +1,9 @@
 package bmm.struts.action.user;
 
+import bmm.service.BalanceControlService;
+import bmm.service.MessageControlService;
 import bmm.service.UserControlService;
+import bmm.service.impl.MessageControlServiceImpl;
 import bmm.utils.cookie_util.CookieUtil;
 import bmm.utils.md5_util.Md5Util;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,14 +23,27 @@ public class UserControlAction extends ActionSupport {
     private String phoneNum;
     private String info;
     private String id;
+    private String contact;
+    private String name;
+    private String message;
+    private String address;
+    private String receiver;
+    private String money;
+    private String nickname;
     private UserControlService userControlService;
+    private BalanceControlService balanceControlService;
+    private MessageControlService messageControlService;
 
-    public UserControlService getUserControlService() {
-        return userControlService;
+    public void setMessageControlService(MessageControlServiceImpl messageControlService) {
+        this.messageControlService = messageControlService;
     }
 
     public void setUserControlService(UserControlService userControlService) {
         this.userControlService = userControlService;
+    }
+
+    public void setBalanceControlService(BalanceControlService balanceControlService) {
+        this.balanceControlService = balanceControlService;
     }
 
     public String getUsername() {
@@ -76,6 +92,62 @@ public class UserControlAction extends ActionSupport {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     /**
@@ -229,5 +301,125 @@ public class UserControlAction extends ActionSupport {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.addCookie(CookieUtil.delCookie(request, "userLogin"));
         return "logout";
+    }
+
+    /**
+     * 用于联系我们功能
+     *
+     * @return 返回字符串"contact"
+     */
+    public String contact() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String username = request.getParameter("username");
+        if (username != null) {
+            if (messageControlService.addNewMessage(userControlService.getUserIdByUserName(username), contact, name, message)) {
+                this.info = "提交成功";
+            } else {
+                this.info = "提交失败请重试";
+            }
+        } else {
+            if (messageControlService.addNewMessage(0, contact, name, message)) {
+                this.info = "提交成功";
+            } else {
+                this.info = "提交失败请重试";
+            }
+        }
+        return "contact";
+    }
+
+    /**
+     * 用于编辑个人信息
+     *
+     * @return 返回字符串"editInfo"
+     */
+    public String editInfo() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String userId = request.getParameter("userId");
+        this.receiver = request.getParameter("receiver");
+        this.address = request.getParameter("address");
+        this.phoneNum = request.getParameter("phone");
+        if (userControlService.updateUserInfo(Integer.parseInt(userId), this.receiver, this.address, this.phoneNum)) {
+            this.message = "操作成功！";
+        } else {
+            this.message = "操作失败";
+        }
+        return "editInfo";
+    }
+
+    /**
+     * 用于更改密码
+     *
+     * @return 返回字符串"changePassword"
+     */
+    public String changePassword() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String userId = request.getParameter("userId");
+        if (password.equals(confirmPassword)) {
+            if (userControlService.updatePasswordByUserId(Integer.parseInt(userId), Md5Util.md5Encode(password))) {
+                this.message = "修改成功！";
+            } else {
+                this.message = "修改失败";
+            }
+        } else {
+            this.message = "两次密码不相同";
+        }
+        return "changePassword";
+    }
+
+    /**
+     * 用于账户充值
+     *
+     * @return 返回字符串"reCharge"
+     */
+    public String reCharge() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String userId = request.getParameter("userId");
+        if (balanceControlService.rechargeById(Integer.parseInt(userId), Double.parseDouble(money))) {
+            this.message = "充值成功";
+        } else {
+            this.message = "充值失败";
+        }
+        return "reCharge";
+    }
+
+    /**
+     * 用于修改性别和昵称
+     *
+     * @return 返回字符串"baseChange"
+     */
+    public String baseChange() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String userId = request.getParameter("userId");
+        String nickname = request.getParameter("nickname");
+        if (userControlService.updateBaseInfoByUserId(Integer.parseInt(userId), nickname, this.getCateValue())) {
+            this.message = "修改成功";
+        } else {
+            this.message = "修改失败";
+        }
+        return "baseChange";
+    }
+
+    /**
+     * 用于获取select下拉框的值
+     *
+     * @return 返回对应选项的 <b>value</b>值
+     */
+    private String getCateValue() {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String[] gender = request.getParameterValues("selectCate");
+        return gender[0];
+    }
+
+    /**
+     * 用于忘记密码功能
+     * @return 返回字符串"forgetPassword"
+     */
+    public String forgetPassword() {
+        if (userControlService.forgetPassowrd(username, phoneNum, receiver, nickname)) {
+            this.message = "密码已重置为AAA111；请尽快修改密码";
+        } else {
+            this.message = "操作失败，请检查";
+        }
+        return "forgetPassword";
     }
 }

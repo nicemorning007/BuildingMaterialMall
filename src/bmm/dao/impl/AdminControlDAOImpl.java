@@ -7,6 +7,7 @@ import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
@@ -189,62 +190,47 @@ public class AdminControlDAOImpl implements AdminControlDAO {
      * 重置用户表
      */
     @Override
+    @Transactional
     public void resetUser() {
         String sql1 = "TRUNCATE TABLE userlogin";
         String sql2 = "TRUNCATE TABLE userinfo";
-        Session session = HibernateUtil.getSession();
-        SQLQuery sqlQuery = session.createSQLQuery(sql1);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(sql2);
-        sqlQuery.executeUpdate();
-        session.close();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql1).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql2).executeUpdate();
     }
 
     /**
      * 重置商品表
      */
     @Override
+    @Transactional
     public void resetGoods() {
         String sql1 = "TRUNCATE TABLE goodsbase";
         String sql2 = "TRUNCATE TABLE goodsdesc";
         String sql3 = "TRUNCATE TABLE goodspicarray";
-        Session session = HibernateUtil.getSession();
-        SQLQuery sqlQuery = session.createSQLQuery(sql1);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(sql2);
-        sqlQuery.executeUpdate();
-        sqlQuery = session.createSQLQuery(sql3);
-        sqlQuery.executeUpdate();
-        session.close();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql1).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql2).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql3).executeUpdate();
     }
 
     /**
      * 重置全部数据
      */
     @Override
+    @Transactional
     public void resetAll() {
         resetUser();
         resetGoods();
-        Session session = HibernateUtil.getSession();
-        SQLQuery sqlQuery;
         String sql1 = "TRUNCATE TABLE billbase";
-        sqlQuery = session.createSQLQuery(sql1);
-        sqlQuery.executeUpdate();
         String sql2 = "TRUNCATE TABLE balance";
-        sqlQuery = session.createSQLQuery(sql2);
-        sqlQuery.executeUpdate();
         String sql3 = "TRUNCATE TABLE categorization";
-        sqlQuery = session.createSQLQuery(sql3);
-        sqlQuery.executeUpdate();
         String sql4 = "TRUNCATE TABLE checkout";
-        sqlQuery = session.createSQLQuery(sql4);
-        sqlQuery.executeUpdate();
         String sql5 = "TRUNCATE TABLE logisticbase";
-        sqlQuery = session.createSQLQuery(sql5);
-        sqlQuery.executeUpdate();
         String sql6 = "TRUNCATE TABLE message";
-        sqlQuery = session.createSQLQuery(sql6);
-        sqlQuery.executeUpdate();
-        session.close();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql1).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql2).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql3).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql4).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql5).executeUpdate();
+        hibernateTemplate.getSessionFactory().openSession().createSQLQuery(sql6).executeUpdate();
     }
 }

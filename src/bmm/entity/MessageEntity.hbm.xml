@@ -6,6 +6,7 @@
 
     <class name="bmm.entity.MessageEntity" table="message" schema="bmm">
         <id name="id" column="id"/>
+        <property name="userId" column="userId"/>
         <property name="contact" column="contact"/>
         <property name="name" column="name"/>
         <property name="message" column="message"/>

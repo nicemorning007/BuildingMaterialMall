@@ -1,5 +1,8 @@
 package bmm.service;
 
+/**
+ * 余额的业务操作接口
+ */
 public interface BalanceControlService {
     /**
      * 根据指定的用户ID号扣除相应金额
