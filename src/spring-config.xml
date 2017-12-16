@@ -111,6 +111,7 @@
     </bean>
     <bean id="goodsControlAction" class="bmm.struts.action.goods.GoodsControlAction">
         <property name="goodsControlService" ref="goodsControlService"/>
+        <property name="categorizationControlDAO" ref="cateControlDao"/>
     </bean>
     <bean id="billControlAction" class="bmm.struts.action.bill.BillControlAction">
         <property name="billControlService" ref="billControlService"/>

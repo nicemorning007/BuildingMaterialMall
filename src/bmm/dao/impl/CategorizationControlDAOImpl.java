@@ -30,9 +30,9 @@ public class CategorizationControlDAOImpl implements CategorizationControlDAO {
     @Override
     public String getCateNameById(int id) {
         String hql = "select ce.name from CategorizationEntity ce where ce.id=?";
-        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
-        for (Object o : list) {
-            return o.toString();
+        List<String> list = (List<String>) hibernateTemplate.find(hql, id);
+        for (String o : list) {
+            return o;
         }
         return null;
     }

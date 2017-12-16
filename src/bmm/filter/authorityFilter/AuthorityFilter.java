@@ -20,7 +20,7 @@ public class AuthorityFilter implements Filter {
             servletRequest.getRequestDispatcher("/403.jsp").forward(servletRequest, servletResponse);
             return;
         }
-        filterChain.doFilter(servletRequest,servletResponse);
+        filterChain.doFilter((HttpServletRequest) servletRequest, (HttpServletResponse) servletResponse);
     }
 
     @Override

@@ -3,6 +3,7 @@
 <%@ page import="bmm.entity.UserinfoEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -227,7 +228,8 @@
                                         </tfoot>
                                         <tbody>
                                         <%
-                                            UserControlDAO userControlDAO = new UserControlDAOImpl();
+                                            UserControlDAO userControlDAO =
+                                                    (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
                                             List<UserinfoEntity> list = userControlDAO.showAllUserInfo();
                                             for (UserinfoEntity userinfoEntity : list) {
                                                 if (userControlDAO.getUserState(userinfoEntity.getId()) != 1 && userControlDAO.getUserState(userinfoEntity.getId()) != 3) {

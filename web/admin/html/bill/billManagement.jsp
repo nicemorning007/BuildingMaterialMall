@@ -233,7 +233,7 @@
                                     BillControlDAO billControlDAO =
                                             (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
                                     List<BillbaseEntity> list = null;
-                                    if (billControlDAO.showAllBills() != null) {
+                                    if (billControlDAO.showAllBills().size() > 0) {
                                         list = billControlDAO.showAllBills();
                                         UserControlDAO userControlDAO =
                                                 (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");

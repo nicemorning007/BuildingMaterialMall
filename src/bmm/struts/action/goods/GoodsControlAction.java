@@ -4,6 +4,7 @@ import bmm.dao.CategorizationControlDAO;
 import bmm.dao.impl.CategorizationControlDAOImpl;
 import bmm.entity.CategorizationEntity;
 import bmm.service.GoodsControlService;
+import bmm.utils.hibernate_util.SpringInjectionUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
@@ -49,6 +50,7 @@ public class GoodsControlAction extends ActionSupport {
     private String pic5ContentType;
     private List<CategorizationEntity> list;
     private String goodsId;
+    private CategorizationControlDAO categorizationControlDAO;
 
     public List<CategorizationEntity> getList() {
         return list;
@@ -65,6 +67,10 @@ public class GoodsControlAction extends ActionSupport {
 
     public void setGoodsControlService(GoodsControlService goodsControlService) {
         this.goodsControlService = goodsControlService;
+    }
+
+    public void setCategorizationControlDAO(CategorizationControlDAO categorizationControlDAO) {
+        this.categorizationControlDAO = categorizationControlDAO;
     }
 
     public String getName() {
@@ -521,7 +527,6 @@ public class GoodsControlAction extends ActionSupport {
         this.unit = goodsControlService.getGoodsControlDAO().getUnitById(Integer.parseInt(this.goodsId));
         this.start = String.valueOf(goodsControlService.getGoodsControlDAO().getStartById(Integer.parseInt(this.goodsId)));
         this.cate = goodsControlService.getGoodsControlDAO().getCateById(Integer.parseInt(this.goodsId));
-        CategorizationControlDAO categorizationControlDAO = new CategorizationControlDAOImpl();
         this.tags = new String[]{categorizationControlDAO.getCateNameById(cate)};
         return "gotoEditGoods";
     }

@@ -3,6 +3,7 @@
 <%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
 <%@ page import="bmm.entity.UserinfoEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
@@ -228,19 +229,28 @@
                                         </tfoot>
                                         <tbody>
                                         <%
-                                            UserControlDAO userControlDAO = new UserControlDAOImpl();
+                                            UserControlDAO userControlDAO =
+                                                    (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
                                             List<UserinfoEntity> list = userControlDAO.showAllUserInfo();
                                             for (UserinfoEntity userinfoEntity : list) {
                                         %>
                                         <tr>
-                                            <td><%=userinfoEntity.getUserId()%></td>
-                                            <td><%=userinfoEntity.getUsername()%></td>
-                                            <td><%=userinfoEntity.getAddress()%></td>
-                                            <td><%=userinfoEntity.getGender()%></td>
-                                            <td><%=userinfoEntity.getPhone()%></td>
-                                            <td><%=userinfoEntity.getLastLoginTime()%></td>
-                                            <td><%=userinfoEntity.getNickname()%></td>
-                                            <td><%=userinfoEntity.getReceiver()%></td>
+                                            <td><%=userinfoEntity.getUserId()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getUsername()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getAddress()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getGender()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getPhone()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getLastLoginTime()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getNickname()%>
+                                            </td>
+                                            <td><%=userinfoEntity.getReceiver()%>
+                                            </td>
                                         </tr>
                                         <%
                                             }
