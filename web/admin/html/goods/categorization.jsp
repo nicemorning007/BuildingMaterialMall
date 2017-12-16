@@ -276,7 +276,6 @@
     <div class="wrapper">
     </div>
 </footer>
-</div>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/lib/js/bootstrap.min.js"></script>

@@ -190,7 +190,7 @@ public interface UserControlDAO {
      * @param phone    要更新的联系方式
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
-    public boolean updateUserInfo(int id, String receiver, String adderss, String phone);
+    boolean updateUserInfo(int id, String receiver, String adderss, String phone);
 
     /**
      * 根据指定的用户ID号更改该用户的密码

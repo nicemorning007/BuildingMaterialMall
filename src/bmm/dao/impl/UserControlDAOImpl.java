@@ -83,7 +83,6 @@ public class UserControlDAOImpl implements UserControlDAO {
         boolean flag = false;
         String hql = "from UserloginEntity ue where ue.username=?";
         List<UserloginEntity> list = (List<UserloginEntity>) hibernateTemplate.find(hql, username);
-        ;
         if (list.size() >= 1) {
             for (UserloginEntity userloginEntity : list) {
                 if (userloginEntity.getUsername().equals(username)) {

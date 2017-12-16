@@ -76,8 +76,6 @@ public class GoodsControlServiceImpl implements GoodsControlService {
         return goodsControlDAO.guessGoodsId();
     }
 
-    ;
-
     /**
      * 添加商品与分类的关联信息到关联表中
      *
