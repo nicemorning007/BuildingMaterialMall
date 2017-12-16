@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * 关于消息的数据库操作接口的实现
  */
+@Transactional
 public class MessageControlDAOImpl implements MessageControlDao {
     private HibernateTemplate hibernateTemplate;
 

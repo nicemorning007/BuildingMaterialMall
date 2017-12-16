@@ -1,11 +1,10 @@
 <%@ page import="bmm.dao.BillControlDAO" %>
+<%@ page import="bmm.dao.GoodsControlDAO" %>
+<%@ page import="bmm.dao.UserControlDAO" %>
 <%@ page import="bmm.entity.BillbaseEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="bmm.dao.UserControlDAO" %>
-<%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
-<%@ page import="bmm.dao.GoodsControlDAO" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -235,7 +234,8 @@
                                     List<BillbaseEntity> list = null;
                                     if (billControlDAO.showAllBills() != null) {
                                         list = billControlDAO.showAllBills();
-                                        UserControlDAO userControlDAO = new UserControlDAOImpl();
+                                        UserControlDAO userControlDAO =
+                                                (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
                                         GoodsControlDAO goodsControlDAO =
                                                 (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
                                         for (BillbaseEntity billbaseEntity : list) {

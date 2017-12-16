@@ -5,6 +5,7 @@
 <%@ page import="bmm.entity.GoodsbaseEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -233,12 +234,15 @@
                                 </tfoot>
                                 <tbody>
                                 <%
-                                    GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
+                                    GoodsControlDAO goodsControlDAO =
+                                            (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
                                     CategorizationControlDAO categorizationControlDAO = null;
                                     List<GoodsbaseEntity> list = null;
                                     if (goodsControlDAO.showAllGoods() != null) {
                                         list = goodsControlDAO.showAllGoods();
-                                        categorizationControlDAO = new CategorizationControlDAOImpl();
+                                        categorizationControlDAO =
+                                                (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
+                                        ;
                                         String path;
                                         for (GoodsbaseEntity goodsbaseEntity : list) {
                                             if (goodsControlDAO.getPicPathByGoodsId(goodsbaseEntity.getId(), 1) != null) {

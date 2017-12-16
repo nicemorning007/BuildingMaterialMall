@@ -3,11 +3,10 @@ package bmm.dao.impl;
 import bmm.dao.BillControlDAO;
 import bmm.entity.BillbaseEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import org.hibernate.*;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,19 +36,14 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public List<Object> getIdByUserId(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.id from BillbaseEntity be where be.userId=:userId";
-        Query query = session.createQuery(hql);
-        query.setParameter("userId", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
-        if (list.size() > 0) {
-            return list;
-        } else {
-            return null;
+        String hql = "select be.id from BillbaseEntity be where be.userId=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                return list;
+            }
         }
+        return null;
     }
 
     /**
@@ -60,14 +54,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public int getUserIdById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.userId from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.userId from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return Integer.parseInt(o.toString());
@@ -84,14 +72,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public int getGoodsIdById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.goodsId from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.goodsId from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return Integer.parseInt(o.toString());
@@ -108,14 +90,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public int getStateById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.state from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.state from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return Integer.parseInt(o.toString());
@@ -132,14 +108,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public double getTotalById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.total from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.total from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return Double.parseDouble(o.toString());
@@ -156,14 +126,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public String getReceiverById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.receiver from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.receiver from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return o.toString();
@@ -180,14 +144,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public String getPhoneById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.phone from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.phone from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return o.toString();
@@ -204,14 +162,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public String getAddressById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.address from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.address from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return o.toString();
@@ -228,14 +180,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public String getTimeById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select be.time from BillbaseEntity be where be.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        transaction.commit();
-        session.close();
+        String hql = "select be.time from BillbaseEntity be where be.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return o.toString();
@@ -263,20 +209,17 @@ public class BillControlDAOImpl implements BillControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean updateStateById(int id, int state) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        BillbaseEntity billbaseEntity = (BillbaseEntity) session.get(BillbaseEntity.class, id);
+        BillbaseEntity billbaseEntity = (BillbaseEntity) hibernateTemplate.get(BillbaseEntity.class, id);
         billbaseEntity.setState(state);
         try {
-            session.update(billbaseEntity);
-            transaction.commit();
+            hibernateTemplate.update(billbaseEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        session.close();
         return flag;
     }
 
@@ -288,20 +231,17 @@ public class BillControlDAOImpl implements BillControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean updateTotalById(int id, double total) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        BillbaseEntity billbaseEntity = (BillbaseEntity) session.get(BillbaseEntity.class, id);
+        BillbaseEntity billbaseEntity = (BillbaseEntity) hibernateTemplate.get(BillbaseEntity.class, id);
         billbaseEntity.setTotal(total);
         try {
-            session.update(billbaseEntity);
-            transaction.commit();
+            hibernateTemplate.update(billbaseEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        session.close();
         return flag;
     }
 
@@ -313,20 +253,17 @@ public class BillControlDAOImpl implements BillControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean updateReceiverById(int id, String receiver) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        BillbaseEntity billbaseEntity = (BillbaseEntity) session.get(BillbaseEntity.class, id);
+        BillbaseEntity billbaseEntity = (BillbaseEntity) hibernateTemplate.get(BillbaseEntity.class, id);
         billbaseEntity.setReceiver(receiver);
         try {
-            session.update(billbaseEntity);
-            transaction.commit();
+            hibernateTemplate.update(billbaseEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        session.close();
         return flag;
     }
 
@@ -337,11 +274,9 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public int getBillCount() {
-        long count = 0;
-        count = (long) HibernateUtil.getSession()
-                .createQuery("select count(*) from BillbaseEntity ")
-                .uniqueResult();
-        return (int) count;
+        String hql = "select count(*) from BillbaseEntity as be";
+        Long count = (Long) getHibernateTemplate().find(hql).listIterator().next();
+        return count.intValue();
     }
 
     /**
@@ -378,10 +313,9 @@ public class BillControlDAOImpl implements BillControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean addBillById(int userId, int goodsId, int goodsCount, int state, double total, String receiver, String phone, String address) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         BillbaseEntity billbaseEntity = new BillbaseEntity();
@@ -395,14 +329,11 @@ public class BillControlDAOImpl implements BillControlDAO {
         billbaseEntity.setAddress(address);
         billbaseEntity.setTime(format.format(calendar.getTime()));
         try {
-            session.save(billbaseEntity);
-            transaction.commit();
+            hibernateTemplate.save(billbaseEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            transaction.rollback();
         }
-        session.close();
         return flag;
     }
 
@@ -432,16 +363,8 @@ public class BillControlDAOImpl implements BillControlDAO {
      */
     @Override
     public List<Integer> getOneUserAllUnPayBillIdByUserId(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(BillbaseEntity.class);
-        Criterion criterion = Restrictions.and
-                (Restrictions.eq("userId", id),
-                        Restrictions.eq("state", 0));
-        criteria.add(criterion);
-        List<BillbaseEntity> list = criteria.list();
-        transaction.commit();
-        session.close();
+        String hql = "from BillbaseEntity be where be.userId=? and be.state=0";
+        List<BillbaseEntity> list = (List<BillbaseEntity>) hibernateTemplate.find(hql, id);
         List<Integer> integerList = new ArrayList<>();
         if (list != null) {
             if (list.size() > 0) {

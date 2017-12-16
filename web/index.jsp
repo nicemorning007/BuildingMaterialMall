@@ -288,6 +288,9 @@
             <%
                 List<GoodsbaseEntity> bestSeal3Goods = goodsControlDAO.getBestSealXGoods(3);
                 for (int i = 0; i < 3; i++) {
+                    if (bestSeal3Goods.size() == i) {
+                        break;
+                    }
             %>
             <div class="col-md-4 fashion-grids">
                 <figure class="effect-bubba">
@@ -331,6 +334,9 @@
             <%
                 List<GoodsbaseEntity> newset3Goods = goodsControlDAO.getXNewest(3);
                 for (int i = 0; i < 3; i++) {
+                    if (newset3Goods.size() == i) {
+                        break;
+                    }
             %>
             <div class="col-md-4 fashion-grids">
                 <figure class="effect-bubba">

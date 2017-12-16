@@ -1,15 +1,12 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page import="bmm.dao.BillControlDAO" %>
 <%@ page import="bmm.dao.GoodsControlDAO" %>
-<%@ page import="bmm.dao.UserControlDAO" %>
-<%@ page import="bmm.dao.impl.BillControlDAOImpl" %>
-<%@ page import="bmm.dao.impl.GoodsControlDAOImpl" %>
-<%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
-<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.dao.MessageControlDao" %>
+<%@ page import="bmm.dao.UserControlDAO" %>
+<%@ page import="bmm.entity.MessageEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="bmm.entity.MessageEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
@@ -196,9 +193,9 @@
         </div>
         <!-- Main Content -->
         <%
-            GoodsControlDAO goodsControlDAO = new GoodsControlDAOImpl();
-            UserControlDAO userControlDAO = new UserControlDAOImpl();
-            BillControlDAO billControlDAO = new BillControlDAOImpl();
+            GoodsControlDAO goodsControlDAO = (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
+            UserControlDAO userControlDAO = (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
+            BillControlDAO billControlDAO = (BillControlDAO) SpringInjectionUtil.getDao("billControlDao");
         %>
         <div class="container-fluid">
             <div class="side-body padding-top">

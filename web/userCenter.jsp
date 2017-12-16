@@ -1,11 +1,10 @@
+<%@ page import="bmm.dao.*" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
 <%@ page import="bmm.entity.GoodsbaseEntity" %>
 <%@ page import="bmm.service.CheckoutControlService" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="bmm.entity.BillbaseEntity" %>
-<%@ page import="bmm.dao.*" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
@@ -146,7 +145,7 @@
                         <div class="row">
                             <div class="col1">
                                 <div class="h_nav">
-                                    <h4>商品分类</h4>
+                                    <h4>个人中心</h4>
                                     <ul>
                                         <li>
                                             <a href="${pageContext.request.contextPath}/userCenter.jsp">

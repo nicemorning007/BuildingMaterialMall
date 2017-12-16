@@ -6,6 +6,7 @@ import bmm.utils.hibernate_util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -81,19 +82,16 @@ public class BalanceControlDAOImpl implements BalanceControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean setUseridById(int id, int userId) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        BalanceEntity balanceEntity = (BalanceEntity) session.get(BalanceEntity.class, id);
+        BalanceEntity balanceEntity = (BalanceEntity) hibernateTemplate.get(BalanceEntity.class, id);
         balanceEntity.setUserId(userId);
         try {
-            session.update(balanceEntity);
-            transaction.commit();
+            hibernateTemplate.update(balanceEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            transaction.rollback();
         }
         return flag;
     }
@@ -106,19 +104,16 @@ public class BalanceControlDAOImpl implements BalanceControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean setBalanceById(int id, double balance) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        BalanceEntity balanceEntity = (BalanceEntity) session.get(BalanceEntity.class, id);
+        BalanceEntity balanceEntity = (BalanceEntity) hibernateTemplate.get(BalanceEntity.class, id);
         balanceEntity.setBalance(balance);
         try {
-            session.update(balanceEntity);
-            transaction.commit();
+            hibernateTemplate.update(balanceEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            transaction.rollback();
         }
         return flag;
     }

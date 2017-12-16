@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,18 +22,9 @@ import java.util.List;
 public class CheckoutControlDAOImpl implements CheckoutControlDAO {
     private HibernateTemplate hibernateTemplate;
     private GoodsControlDAO goodsControlDAO;
-    private BillControlDAO billControlDAO;
-
-    public HibernateTemplate getHibernateTemplate() {
-        return hibernateTemplate;
-    }
 
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
-    }
-
-    public void setBillControlDAO(BillControlDAO billControlDAO) {
-        this.billControlDAO = billControlDAO;
     }
 
     public void setGoodsControlDAO(GoodsControlDAO goodsControlDAO) {
@@ -158,16 +150,12 @@ public class CheckoutControlDAOImpl implements CheckoutControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean addTo(int goodsId, int count, int userId) {
         boolean flag = false;
         CheckoutEntity checkoutEntity;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "from CheckoutEntity ce where ce.goodsId=:goodsId and ce.userId=:userId";
-        Query query = session.createQuery(hql);
-        query.setParameter("goodsId", goodsId);
-        query.setParameter("userId", userId);
-        List<CheckoutEntity> list = (List<CheckoutEntity>) query.list();
+        String hql = "from CheckoutEntity ce where ce.goodsId=? and ce.userId=?";
+        List<CheckoutEntity> list = (List<CheckoutEntity>) hibernateTemplate.find(hql, new Object[]{goodsId, userId});
         if (list.size() > 0) {
             checkoutEntity = list.get(0);
             checkoutEntity.setGoodsCount(checkoutEntity.getGoodsCount() + count);
@@ -179,14 +167,11 @@ public class CheckoutControlDAOImpl implements CheckoutControlDAO {
             checkoutEntity.setUserId(userId);
         }
         try {
-            session.save(checkoutEntity);
-            transaction.commit();
+            hibernateTemplate.save(checkoutEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            transaction.rollback();
         }
-        session.close();
         return flag;
     }
 
@@ -198,39 +183,23 @@ public class CheckoutControlDAOImpl implements CheckoutControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean removeGoods(int goodsId, int userId) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(CheckoutEntity.class);
-        Criterion criterion = Restrictions.and(Restrictions.eq("goodsId", goodsId),
-                Restrictions.eq("userId", userId));
-        criteria.add(criterion);
-        List<CheckoutEntity> list = criteria.list();
+        String hql = "from CheckoutEntity ce where ce.goodsId=? and ce.userId=?";
+        List<CheckoutEntity> list = (List<CheckoutEntity>)
+                hibernateTemplate.find(hql, new Object[]{goodsId, userId});
         if (list != null) {
             if (list.size() > 0) {
                 CheckoutEntity checkoutEntity = list.get(0);
                 try {
-                    session.delete(checkoutEntity);
-                    transaction.commit();
+                    hibernateTemplate.delete(checkoutEntity);
                     flag = true;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    transaction.rollback();
                 }
             }
         }
-        session.close();
-//        List<Integer> billbaseEntities = billControlDAO.getOneUserAllBillIdByUserId(userId);
-//        if (billbaseEntities != null) {
-//            if (list.size() > 0) {
-//                for (Integer integer : billbaseEntities) {
-//                    if (billControlDAO.getGoodsIdById(integer) == goodsId) {
-//                        billControlDAO.updateStateById(integer, 4);
-//                    }
-//                }
-//            }
-//        }
         return flag;
     }
 }

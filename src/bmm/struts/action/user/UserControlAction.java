@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 用户管理的业务请求
@@ -173,13 +174,17 @@ public class UserControlAction extends ActionSupport {
      * @return 返回"register"字符串
      */
     public String register() {
-        int flag = userControlService.register(username, Md5Util.md5Encode(this.password));
-        if (flag == 1) {
-            info = "注册成功";
-        } else if (flag == 0) {
-            info = "用户名已存在";
+        if (password.equals(confirmPassword)) {
+            int flag = userControlService.register(username, Md5Util.md5Encode(this.password));
+            if (flag == 1) {
+                info = "注册成功";
+            } else if (flag == 0) {
+                info = "用户名已存在";
+            } else {
+                info = "发生未知错误";
+            }
         } else {
-            info = "发生未知错误";
+            info = "两次输入的密码不同";
         }
         return "register";
     }
@@ -412,14 +417,38 @@ public class UserControlAction extends ActionSupport {
 
     /**
      * 用于忘记密码功能
+     *
      * @return 返回字符串"forgetPassword"
      */
     public String forgetPassword() {
         if (userControlService.forgetPassowrd(username, phoneNum, receiver, nickname)) {
-            this.message = "密码已重置为AAA111；请尽快修改密码";
+            HttpServletResponse response = ServletActionContext.getResponse();
+            try {
+                response.sendRedirect("/resetPassword.jsp");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             this.message = "操作失败，请检查";
         }
         return "forgetPassword";
+    }
+
+    /**
+     * 用于重置密码
+     *
+     * @return 返回字符串"resetPasswordCon"
+     */
+    public String resetPasswordCon() {
+        if (password.equals(confirmPassword)) {
+            if (userControlService.changePassword(this.username, Md5Util.md5Encode(password))) {
+                info = "密码重设成功";
+            } else {
+                info = "发生错误请重试";
+            }
+        } else {
+            info = "两次密码不匹配。";
+        }
+        return "resetPasswordCon";
     }
 }

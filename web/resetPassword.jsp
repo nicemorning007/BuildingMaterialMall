@@ -1,13 +1,11 @@
 <%@ page import="bmm.dao.CategorizationControlDAO" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
-<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <%
-    String username = CookieUtil.getCookiesValue(request, "userLogin");
     CategorizationControlDAO categorizationControlDAO = (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
 %>
 <head>
@@ -35,6 +33,14 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
     <!--/script-->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 900);
+            });
+        });
+    </script>
 </head>
 <body>
 <!--start-home-->
@@ -44,13 +50,8 @@
             <div class="top_right">
                 <ul>
                     <li><a href="#">欢迎来到建材商城</a></li>
-                    <%if (username == null) {%>
                     <li><a href="${pageContext.request.contextPath}/login.jsp">登陆</a></li>
                     <li><a href="${pageContext.request.contextPath}/register.jsp">注册</a></li>
-                    <%} else {%>
-                    <li><a href="${pageContext.request.contextPath}/userCenter.jsp">个人中心</a></li>
-                    <li><a href="/userControlAction_logout.action">退出</a></li>
-                    <%}%>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -82,13 +83,6 @@
                     <div class="megapanel">
                         <div class="row">
                             <div class="col1">
-                                <div class="col1">
-                                    <div class="h_nav">
-                                        <ul>
-                                            <li></li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <div class="h_nav">
                                     <h4>商品分类</h4>
                                     <ul>
@@ -111,8 +105,14 @@
                     </div>
                 </li>
                 <li><a class="color4" href="${pageContext.request.contextPath}/contact.jsp">联系我们</a></li>
-                <li><a style="color: #FF69B4"><s:property value="message"/></a></li>
+                <li><a class="color4" href="${pageContext.request.contextPath}/admin/index.jsp">管理员</a></li>
             </ul>
+            <div class="row">
+                <div class="col2"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -122,29 +122,21 @@
     <div class="container">
         <div class="account-bottom">
             <div class="col-md-6 account-left">
-                <s:form action="userControlAction_forgetPassword" method="POST">
+                <s:form action="userControlAction_resetPasswordCon" method="POST">
                     <div class="account-top heading">
-                        <h3>忘记密码</h3>
+                        <h3>重置密码</h3>
+                        <span><s:property value="info"/></span>
                     </div>
                     <div class="address">
-                        <span>用户名</span>
-                        <s:textfield type="text" name="username"/>
+                        <span>新密码</span>
+                        <s:password name="password"/>
                     </div>
                     <div class="address">
-                        <span>手机号</span>
-                        <s:textfield name="phoneNum"/>
-                    </div>
-                    <div class="address">
-                        <span>默认签收人姓名</span>
-                        <s:textfield name="receiver"/>
-                    </div>
-                    <div class="address">
-                        <span>昵称</span>
-                        <s:textfield name="nickname"/>
+                        <span>确认新密码</span>
+                        <s:password name="confirmPassword"/>
                     </div>
                     <div class="address new">
-                        <a class="forgot" href="./contact.jsp">无法回忆？人工找回。</a>
-                        <s:submit value="找回"/>
+                        <s:submit value="注册"/>
                     </div>
                 </s:form>
             </div>
@@ -153,9 +145,8 @@
     </div>
 </div>
 <!-- checkout -->
-<!--start-smooth-scrolling-->
 <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
-                                                                                 style="opacity: 1;"> </span></a>
+                                                                         style="opacity: 1;"> </span></a>
 
 
 </body>

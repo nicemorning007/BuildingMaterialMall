@@ -4,21 +4,18 @@ import bmm.dao.UserControlDAO;
 import bmm.entity.UserinfoEntity;
 import bmm.entity.UserloginEntity;
 import bmm.utils.hibernate_util.HibernateUtil;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * 关于用户账户登陆的数据库操作接口的实现
  */
+@Transactional
 public class UserControlDAOImpl implements UserControlDAO {
 
     private HibernateTemplate hibernateTemplate;
@@ -35,13 +32,7 @@ public class UserControlDAOImpl implements UserControlDAO {
     @Override
     public List<UserinfoEntity> showAllUserInfo() {
         List<UserinfoEntity> list = null;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "from UserinfoEntity ";
-        Query query = session.createQuery(hql);
-        list = query.list();
-        transaction.commit();
-        session.close();
+        list = (List<UserinfoEntity>) hibernateTemplate.find("from UserinfoEntity");
         return list;
     }
 
@@ -53,19 +44,13 @@ public class UserControlDAOImpl implements UserControlDAO {
      */
     @Override
     public String getUsernameById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ue.username from UserloginEntity ue where ue.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
+        String hql = "select ue.username from UserloginEntity ue where ue.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return o.toString();
             }
         }
-        transaction.commit();
-        session.close();
         return null;
     }
 
@@ -77,19 +62,13 @@ public class UserControlDAOImpl implements UserControlDAO {
      */
     @Override
     public int getIdByName(String username) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ue.id from UserloginEntity ue where ue.username=:username";
-        Query query = session.createQuery(hql);
-        query.setParameter("username", username);
-        List<Object> list = query.list();
+        String hql = "select ue.id from UserloginEntity ue where ue.username=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, username);
         for (Object o : list) {
             if (o != null) {
                 return Integer.parseInt(o.toString());
             }
         }
-        transaction.commit();
-        session.close();
         return 0;
     }
 
@@ -102,12 +81,9 @@ public class UserControlDAOImpl implements UserControlDAO {
     @Override
     public boolean isExist(String username) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        Criteria criteria = session.createCriteria(UserloginEntity.class);
-        Criterion criterion = Restrictions.eq("username", username);
-        criteria.add(criterion);
-        List<UserloginEntity> list = criteria.list();
+        String hql = "from UserloginEntity ue where ue.username=?";
+        List<UserloginEntity> list = (List<UserloginEntity>) hibernateTemplate.find(hql, username);
+        ;
         if (list.size() >= 1) {
             for (UserloginEntity userloginEntity : list) {
                 if (userloginEntity.getUsername().equals(username)) {
@@ -115,8 +91,6 @@ public class UserControlDAOImpl implements UserControlDAO {
                 }
             }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
@@ -128,19 +102,15 @@ public class UserControlDAOImpl implements UserControlDAO {
      */
     @Override
     public String getLatestLoginTimeById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ue.lastLoginTime from UserinfoEntity ue where ue.userId=:userId";
-        Query query = session.createQuery(hql);
-        query.setParameter("userId", id);
-        List<Object> list = query.list();
-        Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Object object = (Object) iterator.next();
-            return object.toString();
+        String hql = "select ue.lastLoginTime from UserinfoEntity ue where ue.userId=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (Object o : list) {
+                    return o.toString();
+                }
+            }
         }
-        transaction.commit();
-        session.close();
         return null;
     }
 
@@ -152,20 +122,24 @@ public class UserControlDAOImpl implements UserControlDAO {
      * @return 如果更新成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean setLatestLoginTimeById(int id, String time) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "update UserinfoEntity as ue set ue.lastLoginTime=:time where ue.userId=:userId";
-        Query query = session.createQuery(hql);
-        query.setParameter("time", time);
-        query.setParameter("userId", id);
-        int row = query.executeUpdate();
-        if (row > 0) {
-            flag = true;
+        String hql = "from UserinfoEntity as ue where ue.userId=?";
+        List<UserinfoEntity> list = (List<UserinfoEntity>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (UserinfoEntity userinfoEntity : list) {
+                    userinfoEntity.setLastLoginTime(time);
+                    try {
+                        hibernateTemplate.update(userinfoEntity);
+                        flag = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
@@ -177,19 +151,13 @@ public class UserControlDAOImpl implements UserControlDAO {
      */
     @Override
     public String getPasswordById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ue.password from UserloginEntity ue where ue.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
+        String hql = "select ue.password from UserloginEntity ue where ue.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             if (o != null) {
                 return o.toString();
             }
         }
-        transaction.commit();
-        session.close();
         return null;
     }
 
@@ -201,21 +169,24 @@ public class UserControlDAOImpl implements UserControlDAO {
      * @return <b>true</b> 如果该账号密码修改成功，否则返回<b>false</b>
      */
     @Override
+    @Transactional
     public boolean changePasswordById(int id, String newPassword) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "update UserloginEntity as userloginEntity " +
-                "set userloginEntity.password=:password where userloginEntity.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("password", newPassword);
-        query.setParameter("id", id);
-        int row = query.executeUpdate();
-        if (row > 0) {
-            flag = true;
+        String hql = "from UserloginEntity ue where ue.id=?";
+        List<UserloginEntity> list = (List<UserloginEntity>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (UserloginEntity userloginEntity : list) {
+                    userloginEntity.setPassword(newPassword);
+                    try {
+                        hibernateTemplate.update(userloginEntity);
+                        flag = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
@@ -227,21 +198,18 @@ public class UserControlDAOImpl implements UserControlDAO {
      * @return 如果添加成功返回 <b>true</b> 否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean register(String username, String password) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
         UserloginEntity userloginEntity = new UserloginEntity();
         userloginEntity.setUsername(username);
         userloginEntity.setPassword(password);
         try {
-            session.save(userloginEntity);
-            transaction.commit();
+            hibernateTemplate.save(userloginEntity);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        session.close();
         return flag;
     }
 
@@ -257,19 +225,13 @@ public class UserControlDAOImpl implements UserControlDAO {
     @Override
     public int getUserState(int id) {
         int flag = -1;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ue.state from UserloginEntity ue where ue.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
-        for (Object o : list) {
+        String hql = "select ue.state from UserloginEntity ue where ue.id=?";
+        List<Integer> list = (List<Integer>) hibernateTemplate.find(hql, id);
+        for (Integer o : list) {
             if (o != null) {
-                return Integer.parseInt(o.toString());
+                return o;
             }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
@@ -281,20 +243,24 @@ public class UserControlDAOImpl implements UserControlDAO {
      * @return 如果更改成功返回 <b>true</b> 否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean chageUserstate(int id, int state) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "update UserloginEntity as us set us.state = :state where us.id = :id";
-        Query query = session.createQuery(hql);
-        query.setParameter("state", state);
-        query.setParameter("id", id);
-        int row = query.executeUpdate();
-        if (row > 0) {
-            flag = true;
+        String hql = "from UserloginEntity as us where us.id = ?";
+        List<UserloginEntity> list = (List<UserloginEntity>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (UserloginEntity userloginEntity : list) {
+                    userloginEntity.setState(state);
+                    try {
+                        hibernateTemplate.update(userloginEntity);
+                        flag = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
@@ -314,11 +280,9 @@ public class UserControlDAOImpl implements UserControlDAO {
      */
     @Override
     public int getUserCount() {
-        long count = 0;
-        count = (long) HibernateUtil.getSession()
-                .createQuery("select count(*) from UserloginEntity ")
-                .uniqueResult();
-        return (int) count;
+        String hql = "select count(*) from UserloginEntity as ge";
+        Long count = (Long) hibernateTemplate.find(hql).listIterator().next();
+        return count.intValue();
     }
 
     /**

@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,10 +16,6 @@ import java.util.List;
  */
 public class CategorizationControlDAOImpl implements CategorizationControlDAO {
     private HibernateTemplate hibernateTemplate;
-
-    public HibernateTemplate getHibernateTemplate() {
-        return hibernateTemplate;
-    }
 
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
@@ -32,17 +29,11 @@ public class CategorizationControlDAOImpl implements CategorizationControlDAO {
      */
     @Override
     public String getCateNameById(int id) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ce.name from CategorizationEntity ce where ce.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        List<Object> list = query.list();
+        String hql = "select ce.name from CategorizationEntity ce where ce.id=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, id);
         for (Object o : list) {
             return o.toString();
         }
-        transaction.commit();
-        session.close();
         return null;
     }
 
@@ -54,17 +45,11 @@ public class CategorizationControlDAOImpl implements CategorizationControlDAO {
      */
     @Override
     public int GetIdByCateName(String name) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select ce.id from CategorizationEntity ce where ce.name=:name";
-        Query query = session.createQuery(hql);
-        query.setParameter("name", name);
-        List<Object> list = query.list();
+        String hql = "select ce.id from CategorizationEntity ce where ce.name=?";
+        List<Object> list = (List<Object>) hibernateTemplate.find(hql, name);
         for (Object o : list) {
             return Integer.parseInt(o.toString());
         }
-        transaction.commit();
-        session.close();
         return 0;
     }
 
@@ -75,18 +60,15 @@ public class CategorizationControlDAOImpl implements CategorizationControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean addCategorization(String name) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
         CategorizationEntity categorizationEntity = new CategorizationEntity();
         categorizationEntity.setName(name);
         try {
-            session.save(categorizationEntity);
-            transaction.commit();
+            hibernateTemplate.save(categorizationEntity);
             flag = true;
         } catch (Exception e) {
-            transaction.rollback();
             e.printStackTrace();
         }
         return flag;
@@ -100,20 +82,24 @@ public class CategorizationControlDAOImpl implements CategorizationControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean setCateNameById(int id, String newName) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "update CategorizationEntity ce set ce.name=:newName where ce.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("newName", newName);
-        query.setParameter("id", id);
-        int row = query.executeUpdate();
-        if (row > 0) {
-            flag = true;
+        String hql = "update CategorizationEntity ce set ce.name=:newName where ce.id=?";
+        List<CategorizationEntity> list = (List<CategorizationEntity>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (CategorizationEntity categorizationEntity : list) {
+                    categorizationEntity.setName(newName);
+                    try {
+                        hibernateTemplate.update(categorizationEntity);
+                        flag = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
@@ -124,37 +110,35 @@ public class CategorizationControlDAOImpl implements CategorizationControlDAO {
      * @return 如果操作成功则返回 <b>true</b>；否则返回 <b>false</b>
      */
     @Override
+    @Transactional
     public boolean deleteCateNameById(int id) {
         boolean flag = false;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "delete CategorizationEntity ce where ce.id=:id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        int row = query.executeUpdate();
-        if (row > 0) {
-            flag = true;
+        String hql = "from CategorizationEntity ce where ce.id=?";
+        List<CategorizationEntity> list = (List<CategorizationEntity>) hibernateTemplate.find(hql, id);
+        if (list != null) {
+            if (list.size() > 0) {
+                for (CategorizationEntity categorizationEntity : list) {
+                    try {
+                        hibernateTemplate.delete(categorizationEntity);
+                        flag = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        transaction.commit();
-        session.close();
         return flag;
     }
 
     /**
      * 查询所有的分类信息
      *
-     * @return 如果查询成功则返回一个 <b>list</b>；否则返回 <b>null</b>
+     * @return 如果查询成功则返回一个 <b>list</b>；否则返回 <b>null</b>6
      */
     @Override
     public List<CategorizationEntity> showAllCate() {
-        List<CategorizationEntity> list = null;
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "from CategorizationEntity ";
-        Query query = session.createQuery(hql);
-        list = query.list();
-        transaction.commit();
-        session.close();
+        List<CategorizationEntity> list = (List<CategorizationEntity>)
+                hibernateTemplate.find("from CategorizationEntity");
         return list;
     }
 

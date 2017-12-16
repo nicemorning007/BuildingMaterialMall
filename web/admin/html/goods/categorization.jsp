@@ -1,8 +1,8 @@
-<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.dao.CategorizationControlDAO" %>
-<%@ page import="bmm.dao.impl.CategorizationControlDAOImpl" %>
-<%@ page import="java.util.List" %>
 <%@ page import="bmm.entity.CategorizationEntity" %>
+<%@ page import="bmm.utils.cookie_util.CookieUtil" %>
+<%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -222,7 +222,7 @@
                                         <tbody>
                                         <%
                                             CategorizationControlDAO categorizationControlDAO =
-                                                    new CategorizationControlDAOImpl();
+                                                    (CategorizationControlDAO) SpringInjectionUtil.getDao("cateControlDao");
                                             List<CategorizationEntity> list = categorizationControlDAO.showAllCate();
                                             for (CategorizationEntity c : list) {
                                         %>

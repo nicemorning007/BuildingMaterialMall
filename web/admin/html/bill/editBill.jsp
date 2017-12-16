@@ -1,7 +1,6 @@
 <%@ page import="bmm.dao.BillControlDAO" %>
 <%@ page import="bmm.dao.GoodsControlDAO" %>
 <%@ page import="bmm.dao.UserControlDAO" %>
-<%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
 <%@ page import="bmm.entity.BillbaseEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
@@ -220,7 +219,8 @@
                                         List<BillbaseEntity> list = null;
                                         if ((list = billControlDAO.showAllBills()) != null) {
                                             int billId = Integer.parseInt(request.getAttribute("billId").toString());
-                                            UserControlDAO userControlDAO = new UserControlDAOImpl();
+                                            UserControlDAO userControlDAO =
+                                                    (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
                                             GoodsControlDAO goodsControlDAO =
                                                     (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
                                     %>

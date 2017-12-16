@@ -212,10 +212,7 @@ public class UserlControlServiceImpl implements UserControlService {
             if (userControlDAO.getPhoneById(userinfoEntity.getUserId()).equals(phoneNum)) {
                 if (userControlDAO.getReceiverById(userinfoEntity.getUserId()).equals(receiver)) {
                     if (userControlDAO.getNickNameById(userinfoEntity.getUserId()).equals(nickname)) {
-                        if (userControlDAO.updatePasswordByUserId(userinfoEntity.getUserId(),
-                                Md5Util.md5Encode("AAA111"))) {
-                            flag = true;
-                        }
+                        flag = true;
                     }
                 }
             }

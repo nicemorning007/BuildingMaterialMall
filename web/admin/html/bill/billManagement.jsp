@@ -1,7 +1,6 @@
 <%@ page import="bmm.dao.BillControlDAO" %>
 <%@ page import="bmm.dao.GoodsControlDAO" %>
 <%@ page import="bmm.dao.UserControlDAO" %>
-<%@ page import="bmm.dao.impl.UserControlDAOImpl" %>
 <%@ page import="bmm.entity.BillbaseEntity" %>
 <%@ page import="bmm.utils.cookie_util.CookieUtil" %>
 <%@ page import="bmm.utils.hibernate_util.SpringInjectionUtil" %>
@@ -29,7 +28,7 @@
           href="${pageContext.request.contextPath}/admin/lib/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/admin/lib/css/dataTables.bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/lib/css/select2.min.css">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/style.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/css/themes/flat-blue.css">
@@ -236,7 +235,8 @@
                                     List<BillbaseEntity> list = null;
                                     if (billControlDAO.showAllBills() != null) {
                                         list = billControlDAO.showAllBills();
-                                        UserControlDAO userControlDAO = new UserControlDAOImpl();
+                                        UserControlDAO userControlDAO =
+                                                (UserControlDAO) SpringInjectionUtil.getDao("userControlDao");
                                         GoodsControlDAO goodsControlDAO =
                                                 (GoodsControlDAO) SpringInjectionUtil.getDao("goodsControlDao");
                                         for (BillbaseEntity billbaseEntity : list) {

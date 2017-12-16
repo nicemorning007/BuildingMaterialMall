@@ -232,10 +232,6 @@
         </div>
     </div>
 </div>
-<!--//checkout-->
-<!--start-bottom-->
-<!--start-image-cursuals-->
-<!--//end-bottom-->
 <!--start-footer-->
 <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
                                                                          style="opacity: 1;"> </span></a>

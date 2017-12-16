@@ -9,7 +9,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.autocommit">true</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">XXXXXXX</property>
+        <property name="connection.password">mulin458267139</property>
         <mapping class="bmm.entity.AdminbaseEntity"/>
         <mapping resource="bmm/entity/AdminbaseEntity.hbm.xml"/>
         <mapping class="bmm.entity.BalanceEntity"/>
